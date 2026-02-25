@@ -1,17 +1,3 @@
-Perfect 👍 — I’ll upgrade the assessment to **TEACHING + EXAM QUALITY**.
-
-Below are:
-
-✅ **8 MCQs (Medium–Hard level)**
-✔ With clear explanations (so students learn from mistakes)
-✅ **1 Detailed Subjective Question**
-✔ Not vague
-✔ Clear task
-✔ Medium–Hard difficulty
-✔ Includes expected answer outline (for instructor use)
-
----
-
 # 📝 **MCQs (With Explanation)**
 
 ---
