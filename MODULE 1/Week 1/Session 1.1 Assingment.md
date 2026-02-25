@@ -1,108 +1,278 @@
-# 📝 **MCQ Questions (8)**
+Perfect 👍 — I’ll upgrade the assessment to **TEACHING + EXAM QUALITY**.
 
-### **Q1. Which command is used to check whether Python is installed correctly?**
+Below are:
 
-A) `python start`
-B) `check python`
-C) `python --version`
-D) `install python`
-
-✅ **Answer:** C
-
----
-
-### **Q2. Which function is used to display output in Python?**
-
-A) `show()`
-B) `display()`
-C) `print()`
-D) `output()`
-
-✅ **Answer:** C
+✅ **8 MCQs (Medium–Hard level)**
+✔ With clear explanations (so students learn from mistakes)
+✅ **1 Detailed Subjective Question**
+✔ Not vague
+✔ Clear task
+✔ Medium–Hard difficulty
+✔ Includes expected answer outline (for instructor use)
 
 ---
 
-### **Q3. What is the data type of the value returned by `input()`?**
+# 📝 **MCQs (With Explanation)**
+
+---
+
+## **Q1. What will be the output of the following program?**
+
+```python
+age = input("Enter age: ")
+print(type(age))
+```
+
+A) `<class 'int'>`
+B) `<class 'float'>`
+C) `<class 'str'>`
+D) Error
+
+✅ **Correct Answer:** C
+
+**Explanation:**
+`input()` always returns a string value, even if the user enters numbers. Python does not automatically convert it to integer.
+
+---
+
+## **Q2. Which of the following is the correct way to update a variable using an assignment operator?**
+
+A)
+
+```python
+count =+ 5
+```
+
+B)
+
+```python
+count += 5
+```
+
+C)
+
+```python
+count == 5
+```
+
+D)
+
+```python
+count := 5
+```
+
+✅ **Correct Answer:** B
+
+**Explanation:**
+`+=` is a shorthand assignment operator meaning:
+
+```python
+count = count + 5
+```
+
+Option C is comparison, not assignment.
+
+---
+
+## **Q3. What will be the output of the expression below?**
+
+```python
+result = (10 + 5) * 2
+print(result)
+```
+
+A) 20
+B) 25
+C) 30
+D) 40
+
+✅ **Correct Answer:** C
+
+**Explanation:**
+Parentheses change operator precedence:
+
+```
+10 + 5 = 15
+15 * 2 = 30
+```
+
+---
+
+## **Q4. Which data type is used to store decimal numbers in Python?**
 
 A) int
 B) float
-C) bool
-D) str
+C) str
+D) bool
 
-✅ **Answer:** D
+✅ **Correct Answer:** B
 
----
-
-### **Q4. Which of the following is a valid variable declaration in Python?**
-
-A) `int age = 20`
-B) `age := 20`
-C) `age = 20`
-D) `declare age = 20`
-
-✅ **Answer:** C
+**Explanation:**
+`float` represents numbers with decimal values like `10.5`, `99.99`.
 
 ---
 
-### **Q5. What will be the output of the following code?**
+## **Q5. What is the purpose of the terminal when working with Python?**
+
+A) To design UI
+B) To store variables
+C) To execute Python programs and navigate files
+D) To install hardware drivers
+
+✅ **Correct Answer:** C
+
+**Explanation:**
+Developers use terminal to:
+
+* Run scripts
+* Navigate folders
+* Install packages
+* Manage environment
+
+---
+
+## **Q6. Identify the correct logical operator example.**
+
+A)
 
 ```python
-print(5 + 3 * 2)
+print(10 and 5)
 ```
 
-A) 16
-B) 11
-C) 13
-D) 10
+B)
 
-✅ **Answer:** B
-(Explanation: Multiplication happens first.)
+```python
+print(True and False)
+```
 
----
+C)
 
-### **Q6. Which operator is used for comparison?**
+```python
+print(10 ++ 5)
+```
 
-A) `+`
-B) `=`
-C) `==`
-D) `%`
+D)
 
-✅ **Answer:** C
+```python
+print(10 && 5)
+```
 
----
+✅ **Correct Answer:** B
 
-### **Q7. What is the correct command to run a Python file named `app.py` from terminal?**
+**Explanation:**
+Logical operators (`and`, `or`, `not`) work with Boolean values.
 
-A) `run app.py`
-B) `python app.py`
-C) `start python app.py`
-D) `execute app.py`
-
-✅ **Answer:** B
+Python does NOT use `&&`.
 
 ---
 
-### **Q8. Which of the following represents a Boolean value?**
+## **Q7. What will happen when running this code?**
 
-A) `"True"`
-B) `True`
-C) `1.0`
-D) `"False"`
+```python
+num = input("Enter number: ")
+print(num + 5)
+```
 
-✅ **Answer:** B
+A) Prints number + 5
+B) Prints string result
+C) TypeError occurs
+D) SyntaxError occurs
+
+✅ **Correct Answer:** C
+
+**Explanation:**
+`num` is a string. Python cannot add string + integer.
+
+Correct solution:
+
+```python
+num = int(input("Enter number: "))
+```
 
 ---
 
-# ✍️ **Subjective Question (1)**
+## **Q8. Which of the following statements about Python variables is TRUE?**
 
-### **Q9. Explain how to set up a Python development environment and write a simple program that takes user input and prints output.**
+A) Variables must declare data type before assignment
+B) Python uses dynamic typing
+C) Variables cannot change type
+D) Variables require semicolons
 
-Your answer should include:
+✅ **Correct Answer:** B
 
-* Installing Python and verifying installation
-* Using VS Code and terminal
-* Creating variables and using data types
-* Using `input()` and `print()` functions
-* Example program with explanation
+**Explanation:**
+Python is dynamically typed:
 
-* upload txt file containg answer.
+```python
+x = 10
+x = "Hello"
+```
+
+Same variable holds different data types.
+
+---
+
+# ✍️ **SUBJECTIVE QUESTION (Medium–Hard Level)**
+
+## **Q9. Student Registration Program (Input/Output + Operators + Variables)**
+
+### 🔹 Problem Statement
+
+Write a Python program that simulates a simple **Student Registration System**.
+
+Your program should:
+
+1. Take student name as input.
+2. Take student age as input.
+3. Take two subject marks as input.
+4. Calculate total marks and average marks.
+5. Display the following output:
+
+```
+Hello <name>
+Age next year: <age+1>
+Total Marks: <total>
+Average Marks: <average>
+Eligible for Scholarship: <True/False>
+```
+
+### 🔹 Scholarship Rule
+
+A student is eligible if:
+
+* average marks greater than 75 AND
+* age less than 25
+
+You must use:
+
+✅ Variables
+✅ Data types
+✅ Arithmetic operators
+✅ Logical operators
+✅ Expressions
+✅ input() and print()
+
+---
+
+## ✅ **Expected Answer (Reference Solution)**
+
+```python
+name = input("Enter student name: ")
+age = int(input("Enter age: "))
+
+mark1 = float(input("Enter subject 1 marks: "))
+mark2 = float(input("Enter subject 2 marks: "))
+
+total = mark1 + mark2
+average = total / 2
+
+eligible = average > 75 and age < 25
+
+print("Hello", name)
+print("Age next year:", age + 1)
+print("Total Marks:", total)
+print("Average Marks:", average)
+print("Eligible for Scholarship:", eligible)
+```
+
+---
