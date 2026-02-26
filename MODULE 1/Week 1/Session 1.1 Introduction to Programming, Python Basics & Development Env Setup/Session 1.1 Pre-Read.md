@@ -1,12 +1,5 @@
  **Introduction to Programming, Python Basics & Development Environment Setup**
 
-## 🎯 Purpose of This Pre-Read
-
-Before coming to class, you should understand **what programming is** and become familiar with some basic ideas.
-
-⚠️ This is **NOT** the full lesson.
-We will learn everything step-by-step during the lecture.
-
 This pre-read will help you:
 
 * Understand what Python is
@@ -21,9 +14,9 @@ Programming means giving instructions to a computer.
 
 Think of it like writing a recipe:
 
-👉 Step 1 — Take ingredients
-👉 Step 2 — Mix them
-👉 Step 3 — Cook
+ Step 1 — Take ingredients
+ Step 2 — Mix them
+ Step 3 — Cook
 
 Similarly, a program tells the computer:
 
@@ -63,15 +56,15 @@ During the lecture, we will set up a professional coding environment.
 
 You should know the names of these tools:
 
-### 🐍 Python
+### Python
 
 The programming language itself.
 
-### 💻 VS Code
+### VS Code
 
 A code editor where we write programs.
 
-### 🖥️ Terminal
+### Terminal
 
 A command-based interface used by developers to run programs.
 
@@ -130,9 +123,9 @@ print(name)
 
 Before class, you do NOT need to:
 
-❌ Memorize code
-❌ Install advanced tools
-❌ Understand syntax deeply
+- Memorize code
+- Install advanced tools
+- Understand syntax deeply
 
 Just come with curiosity and willingness to learn.
 
@@ -150,15 +143,12 @@ We will discuss these during the session.
 
 ---
 
-# 🚀 What You Will Learn in the Upcoming Lecture
 
-During the class, you will:
-
-✅ Install Python
-✅ Use VS Code like a developer
-✅ Run your first program
-✅ Learn variables and data types
-✅ Use operators and expressions
-✅ Take input from users and print output
+- Install Python
+- Use VS Code like a developer
+- Run your first program
+- Learn variables and data types
+- Use operators and expressions
+- Take input from users and print output
 
 ---
