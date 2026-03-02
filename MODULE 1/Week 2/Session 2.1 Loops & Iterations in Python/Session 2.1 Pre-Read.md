@@ -1,199 +1,156 @@
-# **Pre-Read Material — Conditionals & Logical Thinking in Python**
+# Pre-Read — Loops & Iterations in Python
 
-## 🎯 Purpose of This Pre-Read
+Before the live session, this pre-read will help you:
 
-In the next class, you will learn how programs **make decisions**.
+- Understand **why** we need loops  
+- Get a basic idea of `for` and `while`  
+- Start thinking about problems that require **repetition**  
 
-Before attending the lecture, you should become familiar with:
-
-* How computers check conditions
-* What Boolean logic means
-* How developers think step-by-step when solving problems
-
-This pre-read introduces the ideas so you feel comfortable when we start coding.
+You do **not** need to memorize syntax yet — just understand the ideas.
 
 ---
 
-# 1️⃣ What Are Conditionals?
+## 1. Where Do We See Repetition?
 
-In real life, we make decisions every day.
+In daily life:
 
-Examples:
+- Counting 1 to 100  
+- Calling 10 students one by one  
+- Sending reminder messages to many people  
 
-* If it rains → take an umbrella
-* If marks are above 90 → grade A
-* If age is 18 or more → eligible to vote
+In programming, we also repeat actions:
 
-Programs also follow the same idea.
+- Check every element of a list  
+- Process each line from a file  
+- Print a pattern  
 
-A **conditional statement** allows a program to choose different actions based on a condition.
+Without loops, we would repeat the same code many times.
 
-In Python, we mainly use:
+---
 
-* `if`
-* `elif`
-* `else`
+## 2. Idea of a Loop
 
-Example idea (don’t worry about full syntax yet):
+A **loop** means:
 
-```python
-age = 20
+> “Do this action again and again until we decide to stop.”
 
-if age >= 18:
-    print("Adult")
-else:
-    print("Minor")
+Conceptually:
+
+```text
+Start
+↓
+Do something
+↓
+Check condition
+↓
+Repeat or Stop
 ```
 
-👉 The program checks a condition and decides what to do.
+Python mainly gives us:
+
+- `for` loop  
+- `while` loop  
+
+You will learn when to use each.
 
 ---
 
-# 2️⃣ Boolean Logic — True or False Thinking
+## 3. `for` Loop — Repeat For Each Item
 
-Computers think using **True** and **False** values.
+Think of:
 
-These are called **Boolean values**.
+> “For each student in the class, call their name.”
 
-Examples of conditions:
+In Python idea:
 
 ```python
-10 > 5      # True
-5 == 10     # False
-20 <= 20    # True
+for item in collection:
+    # use item
 ```
 
-Programs use comparison operators like:
+You can loop over:
 
-* `>` greater than
-* `<` less than
-* `==` equal to
-* `!=` not equal to
+- A range of numbers  
+- A list of marks  
+- A string of characters  
 
-Before class, try to notice:
-
-👉 Every decision a program makes is based on something being **True or False**.
+In class, we will convert these ideas into working code.
 
 ---
 
-# 3️⃣ Combining Conditions (Logical Thinking)
+## 4. `while` Loop — Repeat While Condition Is True
 
-Sometimes one condition is not enough.
+Think of:
 
-Example:
+> “While battery is above 20%, keep playing video.”
 
-A student passes if:
-
-* marks > 40 **AND**
-* attendance > 75
-
-This is called **logical thinking** in programming.
-
-Python uses logical operators:
-
-* `and`
-* `or`
-* `not`
-
-Idea example:
+In Python idea:
 
 ```python
-marks = 80
-attendance = 90
-
-print(marks > 40 and attendance > 75)
+while condition_is_true:
+    # repeat this block
 ```
 
-The result will be either True or False.
+This is useful when:
+
+- We **don’t know** how many times we will repeat  
+- We just know when to **stop**  
+
+Example idea (not full code yet):
+
+- Keep asking password **while** it is wrong  
+- Keep asking user for numbers **until** they type 0  
 
 ---
 
-# 4️⃣ Nested Decisions — Decisions Inside Decisions
+## 5. Controlling the Loop: `break` and `continue`
 
-Real life decisions are often layered.
+Sometimes we want more control inside the loop:
 
-Example:
+- **Stop early** when something happens → `break`  
+- **Skip** just one repetition → `continue`  
 
-If weather is rainy
- → If temperature is cold
-  → wear a jacket
+You will see:
 
-Programs can also place one condition inside another.
-This is called **nesting conditionals**.
-
-Concept idea:
-
-```python
-if condition1:
-    if condition2:
-        # action
-```
-
-We will explore this deeply during class.
+- `break` = “I’m done, exit the loop now.”  
+- `continue` = “Skip this one, go to the next.”  
 
 ---
 
-# 5️⃣ Logical Thinking as a Skill
+## 6. Iterative Problem Solving Mindset
 
-Programming is not only about typing code.
-It is about thinking in a structured way.
+Loops are not just syntax — they change how you think.
 
-Before writing code, developers usually:
+When solving a problem:
 
-1. Understand the problem.
-2. Break it into small steps.
-3. Decide conditions.
-4. Write logic step-by-step.
+1. Identify what is **repeating**  
+2. Decide what changes on each step (counter, index, total, etc.)  
+3. Decide when to **stop**  
 
-Example thought process:
+Example problem to think about:
 
-Problem: Give discount if price > 1000
+> “Add numbers from 1 to 10.”
 
-Step-by-step thinking:
+Questions to reflect:
 
-* Take price
-* Check condition
-* Decide output
+- What is repeating?  
+- What value is changing each time?  
+- How do we know we are finished?  
 
-This structured thinking is more important than memorizing syntax.
+We will turn this thought process into Python code in the session.
 
 ---
 
-# 6️⃣ Key Words You Will Hear in Class
+## 7. What You Should Be Comfortable With Before Class
 
-Try to become familiar with these terms:
+Just recognize these words:
 
-* Condition
-* Boolean value
-* Logical operator
-* Decision making
-* Nested logic
-* Step-by-step problem solving
+- Loop  
+- Iteration  
+- `for`  
+- `while`  
+- Condition  
+- `break` / `continue`  
 
-You do not need to fully understand them yet — just recognize the words.
-
----
-
-# 7️⃣ Think About These Before Class
-
-Reflect on these questions:
-
-1. When do you make decisions based on conditions in daily life?
-2. Can a program make more than one decision at a time?
-3. Why is “True or False” important for computers?
-
-We will discuss these ideas during the lecture.
-
----
-
-# 🚀 What You Will Learn in the Upcoming Session
-
-During the class, you will:
-
-✅ Write your first `if`, `elif`, and `else` programs
-✅ Use Boolean logic to control program flow
-✅ Build nested decision structures
-✅ Learn structured logical thinking used by real developers
-
-
+You don’t need to know exact syntax — that’s what we will practice together.
 

@@ -1,371 +1,395 @@
-# **Lecture Script — Conditionals & Logical Thinking in Python**
+## Session Number
+
+2.2
+
+## Title
+
+DSA: Python Lists and Functions for Modular Programming
+
+## Objective
+
+Understand how to work with Python lists and use functions to improve code organization and reusability.
+
+## Topics & Subtopics Covered
+
+- **Lists**
+  - Defining and manipulating Python lists
+  - Using essential list methods
+  - Performing traversals and indexing (positive indexing, negative indexing, slicing)
+- **Functions**
+  - Defining functions using `def`
+  - Understanding the need for functions
+  - Using parameters and return values to write modular and reusable programs
 
 ---
 
-# 🎯 Hook (5 minutes)
+# 🎤 Lecture Script — Lists & Functions for Modular Programming
 
-Start by asking students:
-
-“Can a program make decisions like humans?”
-
-Give real-life examples:
-
-* If rain → carry umbrella
-* If marks ≥ 90 → Grade A
-* If password correct → login
-
-Explain:
-
-👉 Until now, our programs ran line by line.
-👉 Today we teach Python **how to think and decide**.
-
-Key statement to students:
-
-“Conditionals are the brain of your program.”
+⏱️ **Total Duration: ~2 hours 30 minutes**
 
 ---
 
-# Section 1 — Boolean Thinking (True / False) (15 minutes)
+## 🎯 Hook (5 minutes)
 
-Explain:
+Ask:
 
-Computers do not think in emotions or language — they think in:
+> “If a student has 5 subject marks, will you create 5 separate variables, or 1 collection?”
 
-```text
-True or False
-```
-
-Live Demo:
+Show naive approach:
 
 ```python
-print(10 > 5)
-print(5 == 2)
-print(20 <= 20)
+mark1 = 80
+mark2 = 75
+mark3 = 90
+```
+
+Then show list:
+
+```python
+marks = [80, 75, 90]
+```
+
+Explain:
+
+- Lists help us store and process multiple values.  
+- Functions help us **reuse logic** on those values.  
+
+Key line:
+
+> “Today we connect Data Structures (Lists) with modular code (Functions).”
+
+---
+
+## Section 1 — Creating and Accessing Lists (20 minutes)
+
+Create examples live:
+
+```python
+marks = [80, 90, 70]
+names = ["Ali", "Riya", "Sam"]
+mixed = [10, "Python", True]
 ```
 
 Ask students:
 
-“What do you notice?”
+- “Can a list store different types?” (Yes)
 
-Guide them:
+### Positive Indexing
 
-Every comparison produces a Boolean result.
+```python
+fruits = ["apple", "banana", "mango"]
+
+print(fruits[0])
+print(fruits[1])
+print(fruits[2])
+```
+
+Explain:
+
+- Index starts at 0  
+- Accessing invalid index → error  
+
+### Negative Indexing
+
+```python
+print(fruits[-1])  # last item
+print(fruits[-2])
+```
+
+Relate to:
+
+- “Last bench, last-but-one bench” analogy.
 
 ---
 
-## Comparison Operators
+## Section 2 — Slicing (20 minutes)
 
-Write on board:
+Explain:
 
-* `>`
-* `<`
-* `==`
-* `!=`
-* `>=`
-* `<=`
+> “Slicing allows us to take sub-lists from a list.”
+
+Syntax:
+
+```python
+list[start:end]   # end not included
+```
 
 Demo:
 
 ```python
-age = 20
-print(age >= 18)
+numbers = [10, 20, 30, 40, 50]
+
+print(numbers[1:4])   # [20, 30, 40]
+print(numbers[:3])    # [10, 20, 30]
+print(numbers[2:])    # [30, 40, 50]
+print(numbers[-3:])   # [30, 40, 50]
+```
+
+Ask students to predict each output before running.
+
+Teaching point:
+
+- Slicing does **not** change original list (unless reassigned).
+
+---
+
+## Section 3 — Essential List Methods (25 minutes)
+
+Introduce common operations:
+
+```python
+append
+insert
+remove
+pop
+len
+```
+
+### Live Demo
+
+```python
+fruits = ["apple", "banana"]
+
+fruits.append("mango")
+print(fruits)
+
+fruits.insert(1, "orange")
+print(fruits)
+
+fruits.remove("banana")
+print(fruits)
+
+last = fruits.pop()
+print("Popped:", last)
+print(fruits)
+
+print("Length:", len(fruits))
+```
+
+Ask:
+
+- “What happens if we call `remove` with a value that’s not in the list?”  
+- Show the error and explain.
+
+---
+
+## Section 4 — Traversing Lists With Loops (20 minutes)
+
+Reconnect with previous session (loops).
+
+### `for` Loop Over List
+
+```python
+marks = [80, 90, 70]
+
+for m in marks:
+    print("Mark:", m)
 ```
 
 Explain:
 
-👉 This result becomes the foundation of decision making.
+- Easy when we just need values.
+
+### Using Index
+
+```python
+for i in range(len(marks)):
+    print("Index:", i, "Value:", marks[i])
+```
+
+Explain when this is useful:
+
+- When needing positions  
+- When updating items by index  
 
 ---
 
-# Section 2 — Logical Operators (15 minutes)
+## Section 5 — Introduction to Functions (20 minutes)
 
 Explain:
 
-Sometimes one condition is not enough.
+> “A function is a reusable block of code with a name.”
 
-Example story:
-
-“To enter a competition: age < 25 AND marks > 80”
-
-Code:
+Basic syntax:
 
 ```python
-marks = 85
-age = 22
+def greet():
+    print("Hello from function")
 
-print(marks > 80 and age < 25)
+greet()
 ```
 
-Explain operators:
+Emphasize:
 
-* `and` → both must be True
-* `or` → at least one True
-* `not` → reverse result
-
-Demo:
-
-```python
-print(True and False)
-print(True or False)
-print(not True)
-```
-
-Ask class:
-
-“What happens if one condition fails?”
+- `def` keyword  
+- Function name  
+- Parentheses `()`  
+- Indentation  
 
 ---
 
-# Section 3 — The `if` Statement (20 minutes)
-
-Explain structure:
+### Functions With Parameters
 
 ```python
-if condition:
-    action
-```
+def greet(name):
+    print("Hello", name)
 
-Example:
-
-```python
-age = 19
-
-if age >= 18:
-    print("Eligible to vote")
-```
-
-Teaching Point:
-
-👉 Indentation matters in Python.
-
-Show wrong example:
-
-```python
-if age >= 18:
-print("Hello")
+greet("Ali")
+greet("Riya")
 ```
 
 Explain:
 
-Python uses indentation instead of brackets.
+- `name` is a **parameter** inside the function.  
+- `"Ali"` and `"Riya"` are **arguments** passed when calling.
 
 ---
 
-# Section 4 — The `else` Statement (15 minutes)
+### Functions With Return Values
+
+```python
+def add(a, b):
+    result = a + b
+    return result
+
+sum_value = add(3, 5)
+print(sum_value)
+```
+
+Teaching point:
+
+- After `return`, function ends.  
+- If no `return`, function returns `None`.
+
+---
+
+## Section 6 — Using Functions for Modular Programming (25 minutes)
+
+Split a task into multiple functions.
+
+### Example — Student Marks Report
+
+Goal:
+
+> Read 3 marks, calculate average, print report.
+
+Design:
+
+```python
+def read_marks():
+    m1 = int(input("Enter mark 1: "))
+    m2 = int(input("Enter mark 2: "))
+    m3 = int(input("Enter mark 3: "))
+    return [m1, m2, m3]
+
+def average(marks):
+    total = 0
+    for m in marks:
+        total = total + m
+    return total / len(marks)
+
+def print_report(marks, avg):
+    print("Marks:", marks)
+    print("Average:", avg)
+
+marks = read_marks()
+avg = average(marks)
+print_report(marks, avg)
+```
 
 Explain:
 
-Sometimes we want an alternative action.
+- Each function does **one job**.  
+- The main flow uses these building blocks.  
 
-Example:
+---
+
+## Section 7 — Lists + Functions Exercises (20 minutes)
+
+Give students 2–3 tasks:
+
+1. Write a function `sum_list(numbers)` that returns sum.  
+2. Write a function `find_max(numbers)` that returns maximum.  
+3. Write a function `count_above_threshold(numbers, threshold)` that counts numbers greater than `threshold`.  
+
+Walk through one full solution on screen and relate it to:
+
+- Traversal  
+- Parameters  
+- Return values  
+
+---
+
+## Section 8 — Common Mistakes (10 minutes)
+
+Discuss:
+
+- Accessing invalid index → IndexError  
+- Forgetting to call function with `()` (just writing `greet` instead of `greet()`)  
+- Writing `return` but not capturing the result in a variable  
+- Modifying lists unexpectedly in functions (explain by example if time permits)  
+
+Show at least one broken code snippet and fix it with students.
+
+---
+
+## Section 9 — Mini Project (15–20 minutes)
+
+**Mini Project Idea: Simple Analytics on Marks List**
+
+Requirements:
+
+1. Read `n` marks from user into a list.  
+2. Use functions to:
+   - Compute average  
+   - Find highest mark  
+   - Count how many marks are ≥ passing marks (e.g., 40)  
+3. Print a small report.
+
+Skeleton to guide students:
 
 ```python
-age = 15
+def read_marks(n):
+    # TODO
 
-if age >= 18:
-    print("Adult")
-else:
-    print("Minor")
+def average(marks):
+    # TODO
+
+def highest(marks):
+    # TODO
+
+def count_pass(marks, pass_mark):
+    # TODO
+
+n = int(input("How many marks? "))
+marks = read_marks(n)
+
+avg = average(marks)
+high = highest(marks)
+passed = count_pass(marks, 40)
+
+print("Marks:", marks)
+print("Average:", avg)
+print("Highest:", high)
+print("Passed:", passed)
 ```
 
-Teaching Tip:
-
-Ask students:
-
-“What happens if condition is False?”
-
-Make them predict output before running.
+Guide them to fill functions using loops and list operations learned.
 
 ---
 
-# Section 5 — The `elif` Statement (20 minutes)
+## Section 10 — Wrap-Up (5 minutes)
 
-Explain:
+Summarize:
 
-Used when we have multiple conditions.
-
-Example:
-
-```python
-marks = 75
-
-if marks >= 90:
-    print("Grade A")
-elif marks >= 70:
-    print("Grade B")
-else:
-    print("Grade C")
-```
-
-Explain execution order:
-
-Python checks from top to bottom.
-
-Important Teaching Line:
-
-👉 “Order of conditions matters.”
-
-Show incorrect ordering example and ask students to debug.
-
----
-
-# Section 6 — Nested Conditionals (20 minutes)
-
-Explain:
-
-A conditional inside another conditional.
-
-Real-life analogy:
-
-“If user logged in
- → If account active
-  → Show dashboard”
-
-Code:
-
-```python
-age = 22
-citizen = True
-
-if age >= 18:
-    if citizen:
-        print("Eligible to vote")
-```
-
-Ask students:
-
-“Why not combine conditions?”
-
-Then show alternative:
-
-```python
-if age >= 18 and citizen:
-```
-
-Explain difference between nesting vs logical operators.
-
----
-
-# Section 7 — Logical Thinking & Problem Solving (20 minutes)
-
-Pause coding.
-
-Explain mental process developers use:
-
-1. Understand problem
-2. Identify conditions
-3. Decide outcomes
-4. Write logic
-
-Example Problem:
-
-Check if number is positive, negative, or zero.
-
-Ask students to THINK before coding.
-
-Then write:
-
-```python
-num = int(input("Enter number: "))
-
-if num > 0:
-    print("Positive")
-elif num < 0:
-    print("Negative")
-else:
-    print("Zero")
-```
-
-Highlight:
-
-👉 Coding starts with thinking, not typing.
-
----
-
-# Section 8 — Common Mistakes (10 minutes)
-
-Mistake 1 — Using `=` instead of `==`
-
-```python
-if age = 18:
-```
-
-Explain difference between assignment and comparison.
-
----
-
-Mistake 2 — Incorrect indentation.
-
----
-
-Mistake 3 — Logical order mistakes.
-
-Example:
-
-```python
-if marks >= 50:
-elif marks >= 90:
-```
-
-Explain why it fails logically.
-
----
-
-# Section 9 — Guided Practice (20 minutes)
-
-## Practice 1 — Even or Odd
-
-```python
-num = int(input("Enter number: "))
-
-if num % 2 == 0:
-    print("Even")
-else:
-    print("Odd")
-```
-
-Ask students to explain logic verbally.
-
----
-
-## Practice 2 — Scholarship Checker
-
-```python
-marks = int(input("Enter marks: "))
-age = int(input("Enter age: "))
-
-if marks > 80 and age < 25:
-    print("Eligible")
-else:
-    print("Not Eligible")
-```
-
-Encourage prediction before running.
-
----
-
-# Section 10 — Mini Challenge (10 minutes)
-
-Ask students to design logic first:
-
-“Create a program that checks login status and subscription type.”
-
-Let them write pseudocode before coding.
-
----
-
-# 🧠 Wrap-Up (5 minutes)
-
-Key Takeaways:
-
-1. Conditionals allow programs to make decisions.
-2. Boolean logic drives True/False thinking.
-3. `if`, `elif`, `else` control program flow.
-4. Nested logic handles complex decisions.
-5. Good programmers think step-by-step before coding.
+1. Lists store ordered collections and support indexing, slicing, and methods.  
+2. Loops help traverse lists for processing.  
+3. Functions package logic into reusable blocks.  
+4. Combining lists + functions leads to **modular**, maintainable programs.  
 
 End with:
 
-👉 “Programming is not about syntax — it is about logical thinking.”
+> “From now on, when you see repeated data, think **lists**;  
+> when you see repeated logic, think **functions**.”
 
----
+

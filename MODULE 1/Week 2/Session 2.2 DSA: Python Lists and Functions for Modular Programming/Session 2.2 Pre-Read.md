@@ -1,199 +1,180 @@
-# **Pre-Read Material — Conditionals & Logical Thinking in Python**
+## Session Number
 
-## 🎯 Purpose of This Pre-Read
+2.2
 
-In the next class, you will learn how programs **make decisions**.
+## Title
 
-Before attending the lecture, you should become familiar with:
+DSA: Python Lists and Functions for Modular Programming
 
-* How computers check conditions
-* What Boolean logic means
-* How developers think step-by-step when solving problems
+## Objective
 
-This pre-read introduces the ideas so you feel comfortable when we start coding.
+Understand how to work with Python lists and use functions to improve code organization and reusability.
+
+## Topics & Subtopics Covered
+
+- **Lists**
+  - Defining and manipulating Python lists
+  - Using essential list methods
+  - Performing traversals and indexing (positive indexing, negative indexing, slicing)
+- **Functions**
+  - Defining functions using `def`
+  - Understanding the need for functions
+  - Using parameters and return values to write modular and reusable programs
 
 ---
 
-# 1️⃣ What Are Conditionals?
+# 🌱 Pre-Read — Lists & Functions
 
-In real life, we make decisions every day.
+This pre-read prepares you for:
 
-Examples:
+- Working with **lists** (a core data structure in Python)  
+- Understanding why we use **functions** to organize code  
 
-* If it rains → take an umbrella
-* If marks are above 90 → grade A
-* If age is 18 or more → eligible to vote
+You will only see **concepts** here — we will write and run full programs in class.
 
-Programs also follow the same idea.
+---
 
-A **conditional statement** allows a program to choose different actions based on a condition.
+## 1️⃣ What Is a List in Real Life?
 
-In Python, we mainly use:
+In real life, we often use lists:
 
-* `if`
-* `elif`
-* `else`
+- List of students in a class  
+- List of items in a shopping cart  
+- List of marks in different subjects  
 
-Example idea (don’t worry about full syntax yet):
+In Python, a **list** represents exactly this idea — a collection of values.
+
+Example idea (not focusing on syntax details yet):
 
 ```python
-age = 20
-
-if age >= 18:
-    print("Adult")
-else:
-    print("Minor")
+marks = [80, 90, 75]
 ```
 
-👉 The program checks a condition and decides what to do.
+You can:
+
+- Add new marks  
+- Remove marks  
+- Go through each mark with a loop  
+
+We will learn these actions properly in the session.
 
 ---
 
-# 2️⃣ Boolean Logic — True or False Thinking
+## 2️⃣ Why Lists Are Important in DSA
 
-Computers think using **True** and **False** values.
+Lists are:
 
-These are called **Boolean values**.
+- The simplest way to store **multiple values** in a single variable  
+- The base for many Data Structures & Algorithms concepts  
 
-Examples of conditions:
+They allow us to:
+
+- Store data in order  
+- Access by position (index)  
+- Process the entire list using loops  
+
+You will see:
+
+- Positive indexing: starting from 0  
+- Negative indexing: from the end  
+- Slicing: taking parts of the list  
+
+---
+
+## 3️⃣ What Is a Function? (Intuition)
+
+Think of a function as:
+
+> “A small machine that takes input, does some work, and gives output.”
+
+Real life example:
+
+- Mixer:
+  - Inputs: fruits + milk  
+  - Work: blending  
+  - Output: milkshake  
+
+In Python:
 
 ```python
-10 > 5      # True
-5 == 10     # False
-20 <= 20    # True
+def add(a, b):
+    return a + b
 ```
 
-Programs use comparison operators like:
+Here:
 
-* `>` greater than
-* `<` less than
-* `==` equal to
-* `!=` not equal to
-
-Before class, try to notice:
-
-👉 Every decision a program makes is based on something being **True or False**.
+- Inputs → `a`, `b` (parameters)  
+- Work → `a + b`  
+- Output → `return a + b`  
 
 ---
 
-# 3️⃣ Combining Conditions (Logical Thinking)
+## 4️⃣ Why Do We Need Functions?
 
-Sometimes one condition is not enough.
+Without functions, code becomes:
 
-Example:
+- Long  
+- Repetitive  
+- Hard to test  
 
-A student passes if:
+With functions:
 
-* marks > 40 **AND**
-* attendance > 75
+- We can **reuse** logic  
+- We can give each function **one clear job**  
+- We can test each part independently  
 
-This is called **logical thinking** in programming.
+Example idea:
 
-Python uses logical operators:
-
-* `and`
-* `or`
-* `not`
-
-Idea example:
+Instead of writing average calculation code many times, we can write:
 
 ```python
-marks = 80
-attendance = 90
-
-print(marks > 40 and attendance > 75)
+def average(numbers):
+    # logic
 ```
 
-The result will be either True or False.
-
----
-
-# 4️⃣ Nested Decisions — Decisions Inside Decisions
-
-Real life decisions are often layered.
-
-Example:
-
-If weather is rainy
- → If temperature is cold
-  → wear a jacket
-
-Programs can also place one condition inside another.
-This is called **nesting conditionals**.
-
-Concept idea:
+And call:
 
 ```python
-if condition1:
-    if condition2:
-        # action
+average(marks_list)
+average(prices_list)
 ```
 
-We will explore this deeply during class.
+---
+
+## 5️⃣ Lists + Functions = Modular Programming
+
+**Modular programming** means:
+
+> Breaking a big program into smaller, reusable building blocks.
+
+Example structure:
+
+```text
+read data  → process data → print result
+```
+
+We can write:
+
+- `read_data()` function  
+- `process_data()` function  
+- `print_result()` function  
+
+Lists often hold the **data**, and functions implement the **logic**.
 
 ---
 
-# 5️⃣ Logical Thinking as a Skill
+## 6️⃣ What You Should Be Familiar With Before Class
 
-Programming is not only about typing code.
-It is about thinking in a structured way.
+Just recognize these terms:
 
-Before writing code, developers usually:
+- List  
+- Index  
+- Slicing  
+- Method (like `append`, `remove`)  
+- Function  
+- Parameter  
+- Return value  
+- Modular program  
 
-1. Understand the problem.
-2. Break it into small steps.
-3. Decide conditions.
-4. Write logic step-by-step.
-
-Example thought process:
-
-Problem: Give discount if price > 1000
-
-Step-by-step thinking:
-
-* Take price
-* Check condition
-* Decide output
-
-This structured thinking is more important than memorizing syntax.
-
----
-
-# 6️⃣ Key Words You Will Hear in Class
-
-Try to become familiar with these terms:
-
-* Condition
-* Boolean value
-* Logical operator
-* Decision making
-* Nested logic
-* Step-by-step problem solving
-
-You do not need to fully understand them yet — just recognize the words.
-
----
-
-# 7️⃣ Think About These Before Class
-
-Reflect on these questions:
-
-1. When do you make decisions based on conditions in daily life?
-2. Can a program make more than one decision at a time?
-3. Why is “True or False” important for computers?
-
-We will discuss these ideas during the lecture.
-
----
-
-# 🚀 What You Will Learn in the Upcoming Session
-
-During the class, you will:
-
-✅ Write your first `if`, `elif`, and `else` programs
-✅ Use Boolean logic to control program flow
-✅ Build nested decision structures
-✅ Learn structured logical thinking used by real developers
-
-
+You don’t need to master them yet — the goal is to feel comfortable when you first see the full code in the lecture.
 

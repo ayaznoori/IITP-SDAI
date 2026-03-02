@@ -1,369 +1,316 @@
- # **Lecture Notes — Conditionals & Logical Thinking in Python**
+## Session Number
+
+2.2
+
+## Title
+
+DSA: Python Lists and Functions for Modular Programming
+
+## Objective
+
+Understand how to work with Python lists and use functions to improve code organization and reusability.
+
+## Topics & Subtopics Covered
+
+- **Lists**
+  - Defining and manipulating Python lists
+  - Using essential list methods
+  - Performing traversals and indexing (positive indexing, negative indexing, slicing)
+- **Functions**
+  - Defining functions using `def`
+  - Understanding the need for functions
+  - Using parameters and return values to write modular and reusable programs
 
 ---
 
-# 1️⃣ Introduction to Decision Making in Programming
+# 1️⃣ Python Lists — A Flexible Data Structure
 
-So far, programs execute line by line from top to bottom.
-But real-world applications need **decision-making ability**.
+A **list** is an ordered collection of items.
 
-Example:
-
-* If password is correct → login
-* If marks ≥ 90 → Grade A
-* If balance < 0 → show warning
-
-Decision-making in Python is done using **conditional statements**.
-
----
-
-# 2️⃣ Boolean Logic — Foundation of Conditionals
-
-A condition always evaluates to:
-
-```text
-True  or  False
-```
-
-These are Boolean values.
-
-Example:
+Examples:
 
 ```python
-print(10 > 5)   # True
-print(5 == 2)   # False
+marks = [70, 85, 90]
+names = ["Ali", "Riya", "Sam"]
+mixed = [10, "Python", True]
 ```
+
+Key properties:
+
+- Ordered (items have positions / indexes)  
+- Mutable (you can change elements)  
+- Can store different data types  
 
 ---
 
-## Comparison Operators
+# 2️⃣ Creating and Accessing List Elements
 
-| Operator | Meaning          | Example    |
-| -------- | ---------------- | ---------- |
-| `>`      | Greater than     | `10 > 5`   |
-| `<`      | Less than        | `3 < 2`    |
-| `==`     | Equal to         | `5 == 5`   |
-| `!=`     | Not equal        | `5 != 3`   |
-| `>=`     | Greater or equal | `10 >= 10` |
-| `<=`     | Less or equal    | `4 <= 6`   |
-
-Example:
+### Creating Lists
 
 ```python
-age = 20
-print(age >= 18)
+empty_list = []
+numbers = [1, 2, 3, 4]
+fruits = ["apple", "banana", "mango"]
 ```
 
-Output:
+### Positive Indexing
 
-```text
-True
-```
-
----
-
-## Logical Operators
-
-Logical operators combine multiple conditions.
-
-### AND
-
-Both conditions must be True.
+Indexes start from 0.
 
 ```python
-marks = 80
-attendance = 90
+fruits = ["apple", "banana", "mango"]
 
-print(marks > 40 and attendance > 75)
+print(fruits[0])  # "apple"
+print(fruits[1])  # "banana"
+print(fruits[2])  # "mango"
 ```
 
----
+### Negative Indexing
 
-### OR
-
-At least one condition must be True.
+Negative indexes count from the **end**:
 
 ```python
-print(10 > 5 or 2 > 10)
+print(fruits[-1])  # "mango"
+print(fruits[-2])  # "banana"
 ```
 
 ---
 
-### NOT
-
-Reverses the result.
-
-```python
-print(not True)   # False
-```
-
----
-
-# 3️⃣ The `if` Statement
-
-The `if` statement checks a condition.
+# 3️⃣ Slicing — Getting Sub-Lists
 
 Syntax:
 
 ```python
-if condition:
-    statement
+list[start:end]  # end is excluded
 ```
 
 Example:
 
 ```python
-age = 18
+numbers = [10, 20, 30, 40, 50]
 
-if age >= 18:
-    print("You are eligible to vote")
+print(numbers[1:4])   # [20, 30, 40]
+print(numbers[:3])    # [10, 20, 30]
+print(numbers[2:])    # [30, 40, 50]
+print(numbers[-3:])   # [30, 40, 50]
 ```
 
-Explanation:
-
-* Python checks condition.
-* If True → block runs.
-* If False → skipped.
+Slicing helps when you need part of the list only.
 
 ---
 
-## Indentation in Python
+# 4️⃣ Essential List Methods
 
-Python uses **indentation** instead of braces `{}`.
-
-Correct:
+Some commonly used list methods:
 
 ```python
-if True:
-    print("Hello")
+items.append(x)   # add at end
+items.insert(i,x) # insert at index i
+items.remove(x)   # remove first occurrence of x
+items.pop()       # remove last item
+len(items)        # length of list
 ```
 
-Wrong:
+### Example: Append and Insert
 
 ```python
-if True:
-print("Hello")
+fruits = ["apple", "banana"]
+fruits.append("mango")
+fruits.insert(1, "orange")
+
+print(fruits)  # ["apple", "orange", "banana", "mango"]
 ```
 
-Indentation defines code blocks.
-
----
-
-# 4️⃣ The `else` Statement
-
-Used when the condition is False.
+### Example: Remove and Pop
 
 ```python
-age = 15
+numbers = [1, 2, 3, 4]
+numbers.remove(2)   # removes value 2
+last = numbers.pop()  # removes 4
 
-if age >= 18:
-    print("Adult")
-else:
-    print("Minor")
+print(numbers)  # [1, 3]
+print(last)     # 4
 ```
-
-Flow:
-
-* If condition True → first block runs.
-* Otherwise → else block runs.
 
 ---
 
-# 5️⃣ The `elif` Statement
+# 5️⃣ Traversing Lists — Looping Through Elements
 
-Used when multiple conditions exist.
+We often **traverse** a list using loops.
 
-Example:
+### Using `for` Loop
 
 ```python
-marks = 75
+marks = [70, 85, 90]
 
-if marks >= 90:
-    print("Grade A")
-elif marks >= 70:
-    print("Grade B")
-else:
-    print("Grade C")
+for m in marks:
+    print(m)
 ```
 
-Execution:
-
-* Python checks from top to bottom.
-* First matching condition executes.
-
----
-
-# 6️⃣ Nested Conditionals
-
-Nested means placing a conditional inside another conditional.
-
-Example:
+### Using Index With `range`
 
 ```python
-age = 22
-citizen = True
-
-if age >= 18:
-    if citizen:
-        print("Eligible to vote")
+for i in range(len(marks)):
+    print("Index:", i, "Value:", marks[i])
 ```
 
-Explanation:
+Use this pattern when:
 
-Step 1: Check outer condition
-Step 2: If True → check inner condition
+- You need both index and value  
+- You want to modify elements at specific positions  
 
 ---
 
-## Why Use Nesting?
+# 6️⃣ Introduction to Functions — Writing Reusable Code
 
-Used when decisions depend on multiple levels.
+A **function** is a block of code that performs a specific task.
 
-Real example:
+We define functions using `def`.
 
-* If user logged in
-   → If account active
-    → Show dashboard
-
----
-
-# 7️⃣ Logical Thinking in Programming
-
-Programming is about structured thinking.
-
-Before writing code, think:
-
-1. What is the problem?
-2. What inputs are needed?
-3. What conditions exist?
-4. What should happen if condition is True or False?
-
-Example Problem:
-
-Give discount if price > 1000.
-
-Thinking steps:
-
-```text
-Step 1: Take price
-Step 2: Check condition
-Step 3: Apply logic
-```
-
-Code:
+### Basic Function
 
 ```python
-price = 1200
+def greet():
+    print("Hello from a function")
 
-if price > 1000:
-    print("Discount applied")
+greet()
 ```
+
+Benefits:
+
+- Avoid repeating code  
+- Improve organization  
+- Make programs easier to test and debug  
 
 ---
 
-# 8️⃣ Step-by-Step Problem Solving Habit
+# 7️⃣ Functions With Parameters and Return Values
 
-Developers break problems into smaller parts.
-
-Example:
-
-Check if a number is positive, negative, or zero.
-
-Steps:
-
-1. Take number
-2. Compare with zero
-3. Print result
-
-Program:
+### Parameters — Input To Functions
 
 ```python
-num = int(input("Enter number: "))
+def greet(name):
+    print("Hello", name)
 
-if num > 0:
-    print("Positive")
-elif num < 0:
-    print("Negative")
-else:
-    print("Zero")
+greet("Ali")
+greet("Riya")
 ```
 
----
-
-# 9️⃣ Common Beginner Mistakes
-
-## Mistake 1 — Using = instead of ==
-
-Wrong:
+### Return Values — Output From Functions
 
 ```python
-if age = 18:
+def add(a, b):
+    result = a + b
+    return result
+
+sum_value = add(3, 5)
+print(sum_value)
 ```
 
-Correct:
+Key Ideas:
+
+- `return` sends a value back to where the function was called  
+- A function can be used inside expressions: `add(2, 3) * 10`  
+
+---
+
+# 8️⃣ Combining Lists and Functions — Modular Programming
+
+We can write functions that **work on lists**.
+
+### Example: Calculate Average of a List
 
 ```python
-if age == 18:
+def average(numbers):
+    total = 0
+    for n in numbers:
+        total = total + n
+
+    if len(numbers) == 0:
+        return 0
+
+    return total / len(numbers)
+
+marks = [80, 90, 70]
+avg = average(marks)
+print("Average:", avg)
 ```
 
+This demonstrates:
+
+- Traversal of a list  
+- Iterative problem solving  
+- Reusable function  
+
 ---
 
-## Mistake 2 — Wrong Indentation
-
-Python will raise an error if indentation is incorrect.
-
----
-
-## Mistake 3 — Incorrect Logical Thinking
-
-Students sometimes write:
+### Example: Find Maximum Element
 
 ```python
-if marks > 90:
-elif marks > 70:
+def find_max(numbers):
+    if len(numbers) == 0:
+        return None
+
+    maximum = numbers[0]
+    for n in numbers:
+        if n > maximum:
+            maximum = n
+
+    return maximum
+
+values = [3, 9, 2, 11, 7]
+print("Max:", find_max(values))
 ```
 
-Without understanding order matters.
+Shows:
 
-Always check **higher conditions first**.
+- Use of a loop + condition  
+- Updating a variable iteratively  
 
 ---
 
-# 🔟 Practice Examples
+# 9️⃣ Why Functions Help Modularity
 
-## Example 1 — Even or Odd
+**Modular programming** means:
+
+> Breaking a big program into smaller, independent, reusable pieces (functions).
+
+Advantages:
+
+- Easier to read  
+- Easier to test (you can test each function separately)  
+- Easier to reuse in other programs  
+
+Example structure:
 
 ```python
-num = int(input("Enter number: "))
+def read_marks():
+    # input logic
 
-if num % 2 == 0:
-    print("Even")
-else:
-    print("Odd")
+def calculate_average(marks):
+    # processing logic
+
+def print_report(marks, avg):
+    # output logic
 ```
+
+Each function has **one clear responsibility**.
 
 ---
 
-## Example 2 — Scholarship Eligibility
+# 🔟 Common Mistakes
 
-```python
-marks = int(input("Enter marks: "))
-age = int(input("Enter age: "))
-
-if marks > 80 and age < 25:
-    print("Eligible")
-else:
-    print("Not Eligible")
-```
+- Accessing invalid index (e.g., `list[10]` when list has 3 items)  
+- Forgetting parentheses `()` when calling a function  
+- Using `return` but not capturing the value in a variable  
+- Changing a list while looping over it in a confusing way  
 
 ---
 
-# 📌 Key Takeaways
+# ✅ Quick Practice Ideas
 
-* Conditionals allow programs to make decisions.
-* Boolean logic produces True/False results.
-* `if`, `elif`, `else` control program flow.
-* Nested conditionals handle complex decisions.
-* Logical thinking is more important than memorizing syntax.
+1. Create a list of 5 city names and print them using a loop.  
+2. Write a function `sum_list(numbers)` that returns the sum of all numbers in a list.  
+3. Write a function `count_above_threshold(numbers, threshold)` that returns how many numbers are greater than the given threshold.  
 
- 
+

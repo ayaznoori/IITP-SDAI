@@ -1,369 +1,304 @@
- # **Lecture Notes — Conditionals & Logical Thinking in Python**
+## Session Number
+
+2.1
+
+## Title
+
+Loops & Iterations in Python
+
+## Objective
+
+Automating repetitive tasks with loops; Understanding when to use For vs While; Implementing loop control statements
+
+## Topics & Subtopics Covered
+
+- **Loops**
+  - Using `for` loops and `while` loops
+  - Controlling execution with `break` and `continue`
+  - Automating repetitive sequences
+- **Problem Solving**
+  - Iterative problem solving
+  - Breaking problems into small testable parts
 
 ---
 
-# 1️⃣ Introduction to Decision Making in Programming
+# 1. Why Do We Need Loops?
 
-So far, programs execute line by line from top to bottom.
-But real-world applications need **decision-making ability**.
+So far, our programs have executed each line once.
+But in real problems, we often need to **repeat** an action:
 
-Example:
+- Print numbers from 1 to 100  
+- Check each item in a list  
+- Ask user input multiple times  
 
-* If password is correct → login
-* If marks ≥ 90 → Grade A
-* If balance < 0 → show warning
-
-Decision-making in Python is done using **conditional statements**.
-
----
-
-# 2️⃣ Boolean Logic — Foundation of Conditionals
-
-A condition always evaluates to:
-
-```text
-True  or  False
-```
-
-These are Boolean values.
-
-Example:
+Without loops, we would repeat code manually:
 
 ```python
-print(10 > 5)   # True
-print(5 == 2)   # False
+print(1)
+print(2)
+print(3)
+```
+
+This is:
+- Hard to maintain  
+- Error–prone  
+- Not scalable  
+
+➡️ Loops allow us to **automate repetitive sequences** with fewer lines.
+
+---
+
+# 2. `for` Loop — Iterate Over a Sequence
+
+The `for` loop is used when:
+
+- We know **how many times** we want to repeat  
+- We are iterating over a **sequence** (range, list, string, etc.)
+
+### Basic Syntax
+
+```python
+for variable in sequence:
+    # repeated block
+```
+
+### Example: Print 1 to 5
+
+```python
+for num in range(1, 6):
+    print(num)
+```
+
+Explanation:
+- `range(1, 6)` gives 1, 2, 3, 4, 5  
+- `num` takes each value one by one  
+- `print(num)` runs 5 times  
+
+### Example: Loop Through a String
+
+```python
+name = "Python"
+
+for ch in name:
+    print(ch)
+```
+
+Each character of `"Python"` is printed on a new line.
+
+---
+
+# 3. `while` Loop — Repeat While Condition Is True
+
+The `while` loop is used when:
+
+- We **do not know** the exact number of repetitions  
+- We want to repeat until a **condition becomes False**  
+
+### Basic Syntax
+
+```python
+while condition:
+    # repeated block
+```
+
+### Example: Print 1 to 5 With `while`
+
+```python
+num = 1
+
+while num <= 5:
+    print(num)
+    num = num + 1
+```
+
+Key ideas:
+- We must **update** the variable (`num = num + 1`)  
+- If we forget to update, loop may become **infinite**  
+
+---
+
+# 4. Choosing Between `for` and `while`
+
+**Use `for` when:**
+- You know the count (e.g., 10 times, range, fixed list)
+- You are iterating over a list, string, or range
+
+**Use `while` when:**
+- You loop until a **condition changes** (e.g., user chooses to exit)
+- You don’t know the exact number of iterations
+
+Example — Menu Until User Exits (good for `while`):
+
+```python
+choice = ""
+
+while choice != "q":
+    choice = input("Enter option (q to quit): ")
 ```
 
 ---
 
-## Comparison Operators
+# 5. Loop Control: `break` and `continue`
 
-| Operator | Meaning          | Example    |
-| -------- | ---------------- | ---------- |
-| `>`      | Greater than     | `10 > 5`   |
-| `<`      | Less than        | `3 < 2`    |
-| `==`     | Equal to         | `5 == 5`   |
-| `!=`     | Not equal        | `5 != 3`   |
-| `>=`     | Greater or equal | `10 >= 10` |
-| `<=`     | Less or equal    | `4 <= 6`   |
+Sometimes we need to **control** the loop from inside.
 
-Example:
+## `break` — Stop the Loop Early
+
+Used to **exit** the loop when a condition is met.
 
 ```python
-age = 20
-print(age >= 18)
+for num in range(1, 11):
+    if num == 5:
+        break
+    print(num)
 ```
 
 Output:
 
 ```text
-True
+1
+2
+3
+4
 ```
+
+Loop stops when `num == 5`.
 
 ---
 
-## Logical Operators
+## `continue` — Skip Current Iteration
 
-Logical operators combine multiple conditions.
-
-### AND
-
-Both conditions must be True.
+Used to **skip** the rest of the block for the current value and continue with next.
 
 ```python
-marks = 80
-attendance = 90
-
-print(marks > 40 and attendance > 75)
+for num in range(1, 6):
+    if num == 3:
+        continue
+    print(num)
 ```
 
----
-
-### OR
-
-At least one condition must be True.
-
-```python
-print(10 > 5 or 2 > 10)
-```
-
----
-
-### NOT
-
-Reverses the result.
-
-```python
-print(not True)   # False
-```
-
----
-
-# 3️⃣ The `if` Statement
-
-The `if` statement checks a condition.
-
-Syntax:
-
-```python
-if condition:
-    statement
-```
-
-Example:
-
-```python
-age = 18
-
-if age >= 18:
-    print("You are eligible to vote")
-```
-
-Explanation:
-
-* Python checks condition.
-* If True → block runs.
-* If False → skipped.
-
----
-
-## Indentation in Python
-
-Python uses **indentation** instead of braces `{}`.
-
-Correct:
-
-```python
-if True:
-    print("Hello")
-```
-
-Wrong:
-
-```python
-if True:
-print("Hello")
-```
-
-Indentation defines code blocks.
-
----
-
-# 4️⃣ The `else` Statement
-
-Used when the condition is False.
-
-```python
-age = 15
-
-if age >= 18:
-    print("Adult")
-else:
-    print("Minor")
-```
-
-Flow:
-
-* If condition True → first block runs.
-* Otherwise → else block runs.
-
----
-
-# 5️⃣ The `elif` Statement
-
-Used when multiple conditions exist.
-
-Example:
-
-```python
-marks = 75
-
-if marks >= 90:
-    print("Grade A")
-elif marks >= 70:
-    print("Grade B")
-else:
-    print("Grade C")
-```
-
-Execution:
-
-* Python checks from top to bottom.
-* First matching condition executes.
-
----
-
-# 6️⃣ Nested Conditionals
-
-Nested means placing a conditional inside another conditional.
-
-Example:
-
-```python
-age = 22
-citizen = True
-
-if age >= 18:
-    if citizen:
-        print("Eligible to vote")
-```
-
-Explanation:
-
-Step 1: Check outer condition
-Step 2: If True → check inner condition
-
----
-
-## Why Use Nesting?
-
-Used when decisions depend on multiple levels.
-
-Real example:
-
-* If user logged in
-   → If account active
-    → Show dashboard
-
----
-
-# 7️⃣ Logical Thinking in Programming
-
-Programming is about structured thinking.
-
-Before writing code, think:
-
-1. What is the problem?
-2. What inputs are needed?
-3. What conditions exist?
-4. What should happen if condition is True or False?
-
-Example Problem:
-
-Give discount if price > 1000.
-
-Thinking steps:
+Output:
 
 ```text
-Step 1: Take price
-Step 2: Check condition
-Step 3: Apply logic
+1
+2
+4
+5
 ```
+
+The number 3 is **skipped**.
+
+---
+
+# 6. Automating Repetitive Sequences
+
+Loops help us automate tasks like:
+
+- Printing tables  
+- Repeating calculations  
+- Processing each item in a list  
+
+### Example: Multiplication Table
+
+```python
+n = int(input("Enter number: "))
+
+for i in range(1, 11):
+    print(n, "x", i, "=", n * i)
+```
+
+### Example: Sum of First N Numbers
+
+```python
+n = int(input("Enter N: "))
+total = 0
+
+for i in range(1, n + 1):
+    total = total + i
+
+print("Sum:", total)
+```
+
+---
+
+# 7. Iterative Problem Solving
+
+**Iterative problem solving** means solving a problem step-by-step, improving or updating values in each loop.
+
+General pattern:
+
+1. Initialize a variable (counter / accumulator)  
+2. Loop over a range or collection  
+3. Update the variable on each iteration  
+4. Use the final result after the loop  
+
+### Example: Count Even Numbers Between 1 and 20
+
+```python
+count_even = 0
+
+for num in range(1, 21):
+    if num % 2 == 0:
+        count_even = count_even + 1
+
+print("Even numbers:", count_even)
+```
+
+---
+
+# 8. Breaking Problems Into Small Testable Parts
+
+When solving a loop-based problem:
+
+1. **Write the goal clearly**  
+2. **Decide the loop type** (`for` vs `while`)  
+3. **Write a small version** and test  
+4. Add conditions (`if`, `break`, `continue`) if needed  
+
+### Example Problem
+
+> Take numbers from user until they enter 0.  
+> Then print the total sum.
+
+Step-by-step approach:
+
+1. Initialize `total = 0`  
+2. Use `while True:` for continuous input  
+3. Break when input is 0  
+4. Add each number to total  
 
 Code:
 
 ```python
-price = 1200
+total = 0
 
-if price > 1000:
-    print("Discount applied")
+while True:
+    num = int(input("Enter number (0 to stop): "))
+    if num == 0:
+        break
+    total = total + num
+
+print("Total sum:", total)
 ```
 
 ---
 
-# 8️⃣ Step-by-Step Problem Solving Habit
+# 9. Common Beginner Mistakes
 
-Developers break problems into smaller parts.
-
-Example:
-
-Check if a number is positive, negative, or zero.
-
-Steps:
-
-1. Take number
-2. Compare with zero
-3. Print result
-
-Program:
-
-```python
-num = int(input("Enter number: "))
-
-if num > 0:
-    print("Positive")
-elif num < 0:
-    print("Negative")
-else:
-    print("Zero")
-```
+- Forgetting to update the loop variable in `while` → **infinite loop**  
+- Using `range(1, n)` but expecting `n` to be included (need `range(1, n + 1)`)  
+- Misusing `break` inside nested loops and expecting all loops to stop  
 
 ---
 
-# 9️⃣ Common Beginner Mistakes
+# 10. Quick Practice Ideas
 
-## Mistake 1 — Using = instead of ==
+1. Print all odd numbers from 1 to 50.  
+2. Count how many numbers between 1 and 100 are divisible by 3.  
+3. Ask user for 5 marks and print the average using a loop.  
 
-Wrong:
+These will help you apply:
+- `for` loops  
+- Conditions inside loops  
+- Iterative thinking  
 
-```python
-if age = 18:
-```
-
-Correct:
-
-```python
-if age == 18:
-```
-
----
-
-## Mistake 2 — Wrong Indentation
-
-Python will raise an error if indentation is incorrect.
-
----
-
-## Mistake 3 — Incorrect Logical Thinking
-
-Students sometimes write:
-
-```python
-if marks > 90:
-elif marks > 70:
-```
-
-Without understanding order matters.
-
-Always check **higher conditions first**.
-
----
-
-# 🔟 Practice Examples
-
-## Example 1 — Even or Odd
-
-```python
-num = int(input("Enter number: "))
-
-if num % 2 == 0:
-    print("Even")
-else:
-    print("Odd")
-```
-
----
-
-## Example 2 — Scholarship Eligibility
-
-```python
-marks = int(input("Enter marks: "))
-age = int(input("Enter age: "))
-
-if marks > 80 and age < 25:
-    print("Eligible")
-else:
-    print("Not Eligible")
-```
-
----
-
-# 📌 Key Takeaways
-
-* Conditionals allow programs to make decisions.
-* Boolean logic produces True/False results.
-* `if`, `elif`, `else` control program flow.
-* Nested conditionals handle complex decisions.
-* Logical thinking is more important than memorizing syntax.
-
- 

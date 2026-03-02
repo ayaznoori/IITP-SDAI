@@ -1,8 +1,5 @@
 # **Pre-Read Material — Conditionals & Logical Thinking in Python**
 
-## 🎯 Purpose of This Pre-Read
-
-In the next class, you will learn how programs **make decisions**.
 
 Before attending the lecture, you should become familiar with:
 
@@ -45,7 +42,7 @@ else:
     print("Minor")
 ```
 
-👉 The program checks a condition and decides what to do.
+The program checks a condition and decides what to do.
 
 ---
 
@@ -72,7 +69,7 @@ Programs use comparison operators like:
 
 Before class, try to notice:
 
-👉 Every decision a program makes is based on something being **True or False**.
+Every decision a program makes is based on something being **True or False**.
 
 ---
 
@@ -159,7 +156,6 @@ This structured thinking is more important than memorizing syntax.
 
 ---
 
-# 6️⃣ Key Words You Will Hear in Class
 
 Try to become familiar with these terms:
 
@@ -186,14 +182,13 @@ We will discuss these ideas during the lecture.
 
 ---
 
-# 🚀 What You Will Learn in the Upcoming Session
 
 During the class, you will:
 
-✅ Write your first `if`, `elif`, and `else` programs
-✅ Use Boolean logic to control program flow
-✅ Build nested decision structures
-✅ Learn structured logical thinking used by real developers
+Write your first `if`, `elif`, and `else` programs
+Use Boolean logic to control program flow
+Build nested decision structures
+Learn structured logical thinking used by real developers
 
 
 

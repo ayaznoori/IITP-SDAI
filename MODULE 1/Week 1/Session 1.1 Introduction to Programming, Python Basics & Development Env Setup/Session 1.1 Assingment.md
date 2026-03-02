@@ -210,7 +210,8 @@ Your program should:
 
 1. Take student name as input.
 2. Take student age as input.
-3. Take two subject marks as input.
+4. Take mark1 as input
+5. Take mark2 as input
 4. Calculate total marks and average marks.
 5. Display the following output:
 

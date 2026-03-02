@@ -1,371 +1,427 @@
-# **Lecture Script — Conditionals & Logical Thinking in Python**
+## Session Number
+
+2.1
+
+## Title
+
+Loops & Iterations in Python
+
+## Objective
+
+Automating repetitive tasks with loops; Understanding when to use For vs While; Implementing loop control statements
+
+## Topics & Subtopics Covered
+
+- **Loops**
+  - Using `for` loops and `while` loops
+  - Controlling execution with `break` and `continue`
+  - Automating repetitive sequences
+- **Problem Solving**
+  - Iterative problem solving
+  - Breaking problems into small testable parts
 
 ---
 
-# 🎯 Hook (5 minutes)
+# 🎤 Lecture Script — Loops & Iterations in Python
 
-Start by asking students:
-
-“Can a program make decisions like humans?”
-
-Give real-life examples:
-
-* If rain → carry umbrella
-* If marks ≥ 90 → Grade A
-* If password correct → login
-
-Explain:
-
-👉 Until now, our programs ran line by line.
-👉 Today we teach Python **how to think and decide**.
-
-Key statement to students:
-
-“Conditionals are the brain of your program.”
+⏱️ **Total Duration: ~2 hours 30 minutes**
 
 ---
 
-# Section 1 — Boolean Thinking (True / False) (15 minutes)
+## 🎯 Hook (5 minutes)
+
+Ask students:
+
+> “If I ask you to print numbers from 1 to 100, will you write 100 `print` statements?”
 
 Explain:
 
-Computers do not think in emotions or language — they think in:
+- That’s what beginners think.  
+- Real developers use **loops** to automate repetition.  
+
+Key line:
+
+> “Loops allow your program to work **hard** while you work **smart**.”
+
+Connect to real-life examples:
+
+- Sending SMS to 1000 users  
+- Processing all orders in a cart  
+
+---
+
+## Section 1 — Concept of Iteration (10 minutes)
+
+Explain the word **iteration**:
+
+> “One cycle of a loop is called an iteration.”
+
+Draw on board:
 
 ```text
-True or False
+Start → Do Task → Check Condition → Repeat / Stop
 ```
 
-Live Demo:
+Make sure students understand:
 
-```python
-print(10 > 5)
-print(5 == 2)
-print(20 <= 20)
-```
-
-Ask students:
-
-“What do you notice?”
-
-Guide them:
-
-Every comparison produces a Boolean result.
+- Loops = **repeat with control**  
+- We control:
+  - What repeats  
+  - How many times  
+  - When to stop  
 
 ---
 
-## Comparison Operators
-
-Write on board:
-
-* `>`
-* `<`
-* `==`
-* `!=`
-* `>=`
-* `<=`
-
-Demo:
-
-```python
-age = 20
-print(age >= 18)
-```
+## Section 2 — `for` Loop Basics (25 minutes)
 
 Explain:
 
-👉 This result becomes the foundation of decision making.
+- Use `for` when you know the range or collection in advance.
+
+Write syntax:
+
+```python
+for variable in sequence:
+    # body
+```
+
+### Example 1 — Print 1 to 5
+
+```python
+for num in range(1, 6):
+    print(num)
+```
+
+Ask:
+
+- “What values will `num` take?”  
+- “How many times will the body run?”  
+
+Run and show output.
 
 ---
 
-# Section 2 — Logical Operators (15 minutes)
+### Example 2 — Range Variations (10 minutes)
 
-Explain:
-
-Sometimes one condition is not enough.
-
-Example story:
-
-“To enter a competition: age < 25 AND marks > 80”
-
-Code:
+Show:
 
 ```python
-marks = 85
-age = 22
+for i in range(5):      # 0 to 4
+    print(i)
 
-print(marks > 80 and age < 25)
+for i in range(2, 10, 2):  # step 2
+    print(i)
 ```
 
-Explain operators:
+Explain parameters:
 
-* `and` → both must be True
-* `or` → at least one True
-* `not` → reverse result
-
-Demo:
-
-```python
-print(True and False)
-print(True or False)
-print(not True)
-```
-
-Ask class:
-
-“What happens if one condition fails?”
+- `range(stop)`  
+- `range(start, stop)`  
+- `range(start, stop, step)`  
 
 ---
 
-# Section 3 — The `if` Statement (20 minutes)
-
-Explain structure:
+### Example 3 — Looping Over a String / List (10 minutes)
 
 ```python
-if condition:
-    action
+name = "Python"
+
+for ch in name:
+    print(ch)
 ```
 
-Example:
+Then:
 
 ```python
-age = 19
+marks = [70, 85, 90]
 
-if age >= 18:
-    print("Eligible to vote")
+for m in marks:
+    print("Mark:", m)
 ```
 
-Teaching Point:
+Emphasize:
 
-👉 Indentation matters in Python.
-
-Show wrong example:
-
-```python
-if age >= 18:
-print("Hello")
-```
-
-Explain:
-
-Python uses indentation instead of brackets.
+- `for` works with **any iterable** (string, list, range, etc.)  
 
 ---
 
-# Section 4 — The `else` Statement (15 minutes)
+## Section 3 — `while` Loop Basics (25 minutes)
+
+Transition:
+
+> “`for` is great when you **know** how many times to repeat.  
+> What if you don’t?”
+
+Introduce `while`:
+
+```python
+while condition:
+    # body
+```
+
+### Example 1 — Print 1 to 5 With `while`
+
+```python
+num = 1
+
+while num <= 5:
+    print(num)
+    num = num + 1
+```
+
+Ask:
+
+- “What happens if we remove `num = num + 1`?”  
+- Demonstrate infinite loop concept (explain, don’t actually hang the IDE for long).
+
+Teaching point:
+
+> “In `while`, **you** are responsible for changing the condition to False.”
+
+---
+
+### Example 2 — Ask Until User Enters ‘q’ (15 minutes)
+
+```python
+choice = ""
+
+while choice != "q":
+    choice = input("Press any key or q to quit: ")
+
+print("Done")
+```
+
+Show typical use case:
+
+- Login attempts  
+- Menu systems  
+
+Ask students to predict:
+
+- “What happens if I press `q` first time?”  
+
+---
+
+## Section 4 — `for` vs `while` (10 minutes)
+
+Summarize on board:
+
+- **`for`**:
+  - Known range or collection  
+  - Cleaner when count is fixed  
+- **`while`**:
+  - Unknown count  
+  - Repeat until some condition changes  
+
+Do quick exercise:
+
+> “Which loop would you use for each?”
+
+1. Print table of 7 → (for)  
+2. Keep asking password until correct → (while)  
+3. Go through all items in a shopping cart → (for)  
+
+---
+
+## Section 5 — `break` and `continue` (25 minutes)
 
 Explain:
 
-Sometimes we want an alternative action.
+- Sometimes we need **extra control** inside the loop.
 
-Example:
+### `break` — Exit Loop Immediately
 
 ```python
-age = 15
+for num in range(1, 11):
+    if num == 5:
+        break
+    print(num)
+```
 
-if age >= 18:
-    print("Adult")
+Ask:
+
+- “Will 5 be printed?”  
+- Run and show result.
+
+Explain:
+
+> “`break` jumps **outside** the loop.”
+
+---
+
+### `continue` — Skip Current Iteration
+
+```python
+for num in range(1, 6):
+    if num == 3:
+        continue
+    print(num)
+```
+
+Ask:
+
+- “Which number is missing?”  
+
+Explain:
+
+> “`continue` skips the rest of the body and moves to the **next** iteration.”
+
+---
+
+### Example — Search in a List (15 minutes)
+
+```python
+numbers = [3, 8, 15, 10, 2]
+target = 10
+
+found = False
+
+for n in numbers:
+    if n == target:
+        found = True
+        break
+
+if found:
+    print("Found")
 else:
-    print("Minor")
+    print("Not Found")
 ```
-
-Teaching Tip:
-
-Ask students:
-
-“What happens if condition is False?”
-
-Make them predict output before running.
-
----
-
-# Section 5 — The `elif` Statement (20 minutes)
 
 Explain:
 
-Used when we have multiple conditions.
+- This is a simple **linear search** using a loop + `break`.  
 
-Example:
+---
+
+## Section 6 — Automating Repetitive Sequences (20 minutes)
+
+### Example 1 — Multiplication Table
 
 ```python
-marks = 75
+n = int(input("Enter number: "))
 
-if marks >= 90:
-    print("Grade A")
-elif marks >= 70:
-    print("Grade B")
-else:
-    print("Grade C")
+for i in range(1, 11):
+    print(n, "x", i, "=", n * i)
 ```
 
-Explain execution order:
+Ask:
 
-Python checks from top to bottom.
-
-Important Teaching Line:
-
-👉 “Order of conditions matters.”
-
-Show incorrect ordering example and ask students to debug.
+- “How many times does the body run?”  
 
 ---
 
-# Section 6 — Nested Conditionals (20 minutes)
-
-Explain:
-
-A conditional inside another conditional.
-
-Real-life analogy:
-
-“If user logged in
- → If account active
-  → Show dashboard”
-
-Code:
+### Example 2 — Sum of N Numbers
 
 ```python
-age = 22
-citizen = True
+n = int(input("Enter N: "))
+total = 0
 
-if age >= 18:
-    if citizen:
-        print("Eligible to vote")
+for i in range(1, n + 1):
+    total = total + i
+
+print("Sum:", total)
 ```
 
-Ask students:
+Highlight pattern:
 
-“Why not combine conditions?”
+- Initialize accumulator (`total = 0`)  
+- Update inside loop  
+- Use result after loop  
 
-Then show alternative:
+Connect this to **iterative problem solving**.
+
+---
+
+## Section 7 — Iterative Problem Solving (20 minutes)
+
+Explain the general approach:
+
+1. Understand the problem  
+2. Identify what repeats  
+3. Decide what changes on each iteration  
+4. Decide stopping condition  
+
+### Problem: Count Even Numbers Between 1 and 50
+
+Ask students to think first, then code:
 
 ```python
-if age >= 18 and citizen:
+count_even = 0
+
+for num in range(1, 51):
+    if num % 2 == 0:
+        count_even = count_even + 1
+
+print("Even numbers:", count_even)
 ```
 
-Explain difference between nesting vs logical operators.
+Discuss:
+
+- Why did we start `count_even` at 0?  
+- What if we change the range?  
 
 ---
 
-# Section 7 — Logical Thinking & Problem Solving (20 minutes)
-
-Pause coding.
-
-Explain mental process developers use:
-
-1. Understand problem
-2. Identify conditions
-3. Decide outcomes
-4. Write logic
-
-Example Problem:
-
-Check if number is positive, negative, or zero.
-
-Ask students to THINK before coding.
-
-Then write:
+### Problem: Sum of Positive Numbers Until 0 (while + break) (15 minutes)
 
 ```python
-num = int(input("Enter number: "))
+total = 0
 
-if num > 0:
-    print("Positive")
-elif num < 0:
-    print("Negative")
-else:
-    print("Zero")
+while True:
+    num = int(input("Enter number (0 to stop): "))
+    if num == 0:
+        break
+    total = total + num
+
+print("Total:", total)
 ```
 
-Highlight:
+Use this to:
 
-👉 Coding starts with thinking, not typing.
-
----
-
-# Section 8 — Common Mistakes (10 minutes)
-
-Mistake 1 — Using `=` instead of `==`
-
-```python
-if age = 18:
-```
-
-Explain difference between assignment and comparison.
+- Show `while True` + `break` pattern  
+- Reinforce iterative thinking  
 
 ---
 
-Mistake 2 — Incorrect indentation.
+## Section 8 — Common Mistakes (10 minutes)
+
+List and demonstrate:
+
+- Forgetting to change loop variable in `while` → infinite loop  
+- Off-by-one errors with `range` (expecting inclusive upper bound)  
+- Using `break` thinking all nested loops will stop (clarify scope)  
+
+Show small broken examples and let students identify the bug.
 
 ---
 
-Mistake 3 — Logical order mistakes.
+## Section 9 — Guided Practice (20 minutes)
 
-Example:
+Give 2–3 practice tasks:
 
-```python
-if marks >= 50:
-elif marks >= 90:
-```
+1. Print all odd numbers from 1 to 30.  
+2. Take 5 marks from user and print average.  
+3. Count how many numbers between 1 and 100 are divisible by both 3 and 5.  
 
-Explain why it fails logically.
+Walk around, help students apply:
 
----
-
-# Section 9 — Guided Practice (20 minutes)
-
-## Practice 1 — Even or Odd
-
-```python
-num = int(input("Enter number: "))
-
-if num % 2 == 0:
-    print("Even")
-else:
-    print("Odd")
-```
-
-Ask students to explain logic verbally.
+- `for` loops  
+- Accumulators  
+- Conditions inside loops  
 
 ---
 
-## Practice 2 — Scholarship Checker
+## Section 10 — Wrap-Up (5 minutes)
 
-```python
-marks = int(input("Enter marks: "))
-age = int(input("Enter age: "))
+Summarize key messages:
 
-if marks > 80 and age < 25:
-    print("Eligible")
-else:
-    print("Not Eligible")
-```
-
-Encourage prediction before running.
-
----
-
-# Section 10 — Mini Challenge (10 minutes)
-
-Ask students to design logic first:
-
-“Create a program that checks login status and subscription type.”
-
-Let them write pseudocode before coding.
-
----
-
-# 🧠 Wrap-Up (5 minutes)
-
-Key Takeaways:
-
-1. Conditionals allow programs to make decisions.
-2. Boolean logic drives True/False thinking.
-3. `if`, `elif`, `else` control program flow.
-4. Nested logic handles complex decisions.
-5. Good programmers think step-by-step before coding.
+1. Loops automate repetition.  
+2. Use `for` for known ranges / collections.  
+3. Use `while` when stopping depends on a condition.  
+4. `break` and `continue` give extra control.  
+5. Iterative problem solving = small steps + testing.  
 
 End with:
 
-👉 “Programming is not about syntax — it is about logical thinking.”
+> “From now on, if you see repetition, you should **immediately** think of loops.”
 
----
