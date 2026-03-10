@@ -1,7 +1,3 @@
-## Session Number
-
-2.1
-
 ## Title
 
 Loops & Iterations in Python
