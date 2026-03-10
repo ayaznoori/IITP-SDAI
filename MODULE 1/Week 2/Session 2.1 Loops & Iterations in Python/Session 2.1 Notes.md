@@ -28,7 +28,7 @@ So far, our programs have executed each line once.
 But in real problems, we often need to **repeat** an action:
 
 - Print numbers from 1 to 100  
-- Check each item in a list  
+- Check each item (for example, each value in a sequence)  
 - Ask user input multiple times  
 
 Without loops, we would repeat code manually:
@@ -53,7 +53,7 @@ This is:
 The `for` loop is used when:
 
 - We know **how many times** we want to repeat  
-- We are iterating over a **sequence** (range, list, string, etc.)
+- We are iterating over a **sequence** (range, string, etc.)
 
 ### Basic Syntax
 
@@ -120,8 +120,8 @@ Key ideas:
 # 4. Choosing Between `for` and `while`
 
 **Use `for` when:**
-- You know the count (e.g., 10 times, range, fixed list)
-- You are iterating over a list, string, or range
+- You know the count (e.g., 10 times, range)
+- You are iterating over a sequence such as a string or a range
 
 **Use `while` when:**
 - You loop until a **condition changes** (e.g., user chooses to exit)
@@ -196,7 +196,7 @@ Loops help us automate tasks like:
 
 - Printing tables  
 - Repeating calculations  
-- Processing each item in a list  
+- Processing each item in a sequence  
 
 ### Example: Multiplication Table
 
@@ -228,7 +228,7 @@ print("Sum:", total)
 General pattern:
 
 1. Initialize a variable (counter / accumulator)  
-2. Loop over a range or collection  
+2. Loop over a range or sequence  
 3. Update the variable on each iteration  
 4. Use the final result after the loop  
 

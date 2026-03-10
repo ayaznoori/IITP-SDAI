@@ -20,7 +20,7 @@ In daily life:
 
 In programming, we also repeat actions:
 
-- Check every element of a list  
+- Check every element (for example, each value in a sequence)  
 - Process each line from a file  
 - Print a pattern  
 
@@ -71,7 +71,7 @@ for item in collection:
 You can loop over:
 
 - A range of numbers  
-- A list of marks  
+- A series of marks or values  
 - A string of characters  
 
 In class, we will convert these ideas into working code.

@@ -202,10 +202,10 @@ Iterative problem solving uses loops to move step-by-step towards the solution.
 
 Write a Python program that:
 
-1. Asks the user how many items they bought (`n`).  
-2. Uses a **loop** to take the price of each item.  
-3. Calculates the **total bill**.  
-4. Uses another loop to print the line:
+1. Asks the user how many items they bought (`n`).
+2. Uses a **loop** to take the price of each item.
+3. Calculates the **total bill**.
+4. Prints the line for each item as it is entered:
 
 ```text
 Item <number>: <price>
@@ -221,29 +221,27 @@ Average price: <average>
 
 ### 🔹 Requirements
 
-- Use **at least one `for` loop**.  
-- Use **iterative updates** (e.g., `total = total + price`).  
-- Handle the case where `n` could be 0 (no items).  
+- Use **at least one `for` loop**.
+- Use **iterative updates** (e.g., `total = total + price`).
+- Handle the case where `n` could be 0 (no items).
 
 ---
 
 ## ✅ Reference Solution (For Instructor / Review)
 
+This version avoids using lists: it reads each price, updates the total, and prints the item line immediately.
+
 ```python
 n = int(input("Enter number of items: "))
 
-prices = []
-total = 0
+total = 0.0
 
 for i in range(1, n + 1):
     price = float(input(f"Enter price of item {i}: "))
-    prices.append(price)
     total = total + price
+    print(f"Item {i}: {price}")
 
 print("------ Bill Details ------")
-
-for i in range(1, n + 1):
-    print(f"Item {i}: {prices[i - 1]}")
 
 if n > 0:
     average = total / n
