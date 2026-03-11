@@ -1,7 +1,3 @@
-## Session Number
-
-2.2
-
 ## Title
 
 DSA: Python Lists and Functions for Modular Programming

@@ -1,7 +1,3 @@
-## Session Number
-
-2.2
-
 ## Title
 
 DSA: Python Lists and Functions for Modular Programming
@@ -307,7 +303,7 @@ Each function has **one clear responsibility**.
 
 ---
 
-# ✅ Quick Practice Ideas
+#  Quick Practice Ideas
 
 1. Create a list of 5 city names and print them using a loop.  
 2. Write a function `sum_list(numbers)` that returns the sum of all numbers in a list.  
