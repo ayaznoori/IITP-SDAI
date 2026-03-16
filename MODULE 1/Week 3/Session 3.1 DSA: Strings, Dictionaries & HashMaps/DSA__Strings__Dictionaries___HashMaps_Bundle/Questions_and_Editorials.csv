@@ -1,0 +1,1794 @@
+questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
+mcsc,markdown,"- Your name
+- Your city
+- Your email
+Combine them into a sentence.",,,,,,,,,,,,,,0,markdown,"```python
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 20, 'c': 30, 'd': 40}
+
+d1_copy = dict1.copy()
+d1_copy.update(dict2)
+print(f""After update: {d1_copy}"")
+
+merged = {**dict1, **dict2}
+print(f""Unpacking merge: {merged}"")
+print(f""dict1 unchanged: {dict1}"")
+
+priority = {**dict2, **dict1}
+print(f""dict1 priority: {priority}"")
+```
+
+**Explanation:** In `{**d1, **d2}`, d2 values override d1 for shared keys. To give d1 priority, reverse the order: `{**d2, **d1}`."
+subjective,markdown,"- Contains ""@""
+- Ends with "".com""
+```python
+email = ""user@example.com""
+```",,,,,,,,,,,,,,0.5,markdown,"```python
+basic_info = {'id': 42, 'name': 'Alice', 'email': 'alice@mail.com'}
+social_info = {'twitter': '@alice', 'github': 'alicecodes'}
+preferences = {'theme': 'dark', 'language': 'en', 'notifications': {'email': True, 'sms': False}}
+activity = {'last_login': '2024-01-15', 'posts': 42}
+
+profile = {**basic_info, **social_info, **preferences, **activity, 'full_profile': True}
+
+print(""User Profile:"")
+for key, value in profile.items():
+    print(f""  {key}: {value}"")
+```"
+subjective,markdown,"```python
+text = ""Hello""
+```
+Use string operations!",,,,,,,,,,,,,,1,markdown,"```python
+warehouse_a = {'laptop': 10, 'phone': 25, 'tablet': 8, 'charger': 100}
+warehouse_b = {'phone': 15, 'tablet': 12, 'headset': 30, 'cable': 200}
+
+def total_stock(w1, w2):
+    result = w1.copy()
+    for item, qty in w2.items():
+        result[item] = result.get(item, 0) + qty
+    return result
+
+def only_in_one(w1, w2):
+    only_w1 = {k: v for k, v in w1.items() if k not in w2}
+    only_w2 = {k: v for k, v in w2.items() if k not in w1}
+    return only_w1, only_w2
+
+def rebalance(w1, w2):
+    shared = set(w1.keys()) & set(w2.keys())
+    transfers = []
+    for item in shared:
+        diff = w1[item] - w2[item]
+        if diff > 0:
+            transfer = diff // 2
+            transfers.append(f""{item}: transfer {transfer} from A to B"")
+        elif diff < 0:
+            transfer = abs(diff) // 2
+            transfers.append(f""{item}: transfer {transfer} from B to A"")
+    return transfers
+
+print(f""Total stock: {total_stock(warehouse_a, warehouse_b)}"")
+only_a, only_b = only_in_one(warehouse_a, warehouse_b)
+print(f""Only in A: {only_a}"")
+print(f""Only in B: {only_b}"")
+print(""Rebalance:"")
+for t in rebalance(warehouse_a, warehouse_b):
+    print(f""  {t}"")
+```
+
+**Explanation:** `total_stock` sums quantities using `.get()`. `only_in_one` uses `not in` to find exclusive items. `rebalance` calculates transfer amounts by finding the difference and dividing by 2 for each shared item."
+mcsc,markdown,Which statement is true regarding the concept of **implementing string data types for text**?,,,,,,1,,It is a fundamental feature that enables this specific logic or operation in Python.,It is a visual styling tool for output formatting.,It is a module that must be downloaded via pip before every use.,It is an outdated practice not included in Python 3.,,,,markdown,
+subjective,markdown,"```python
+first = ""Alice""
+middle = ""Marie""
+last = ""Johnson""
+```",,,,,,,,,,,,,,0.5,markdown,"```python
+source_a = {'item_1': 10, 'item_2': 20, 'item_3': 30}
+source_b = {'item_2': 25, 'item_4': 40, 'item_5': 50}
+source_c = {'item_1': 15, 'item_3': 35, 'item_5': 55}
+
+def merge_sum(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result[k] = result.get(k, 0) + v
+    return result
+
+def merge_max(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            if k in result:
+                result[k] = max(result[k], v)
+            else:
+                result[k] = v
+    return result
+
+def merge_all_values(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result.setdefault(k, []).append(v)
+    return result
+
+sources = [source_a, source_b, source_c]
+print(f""Sum: {merge_sum(sources)}"")
+print(f""Max: {merge_max(sources)}"")
+print(f""All values: {merge_all_values(sources)}"")
+```
+
+**Explanation:**
+- `merge_sum` uses `.get(k, 0) + v` to accumulate sums.
+- `merge_max` uses `max()` to keep the highest value.
+- `merge_all_values` uses `setdefault(k, [])` to build lists of all values."
+subjective,markdown,"```python
+word = ""Python""
+```
+Print it:
+- In uppercase
+- In lowercase
+- 3 times in a row",,,,,,,,,,,,,,0,markdown,"```python
+defaults = {'theme': 'light', 'font_size': 14, 'language': 'en', 'sidebar': True, 'notifications': True}
+user_config = {'theme': 'dark', 'font_size': 18}
+session_config = {'sidebar': False}
+
+final = {**defaults, **user_config, **session_config}
+print(f""Final config: {final}"")
+
+for key in final:
+    if key in session_config:
+        source = 'session'
+    elif key in user_config:
+        source = 'user'
+    else:
+        source = 'defaults'
+    print(f""  {key}: {final[key]} (from {source})"")
+```"
+subjective,markdown,"- Name
+- Math score
+- English score
+- Average (calculated)
+All formatted with f-strings.",,,,,,,,,,,,,,0.5,markdown,"```python
+basic_info = {'id': 42, 'name': 'Alice', 'email': 'alice@mail.com'}
+social_info = {'twitter': '@alice', 'github': 'alicecodes'}
+preferences = {'theme': 'dark', 'language': 'en', 'notifications': {'email': True, 'sms': False}}
+activity = {'last_login': '2024-01-15', 'posts': 42}
+
+profile = {**basic_info, **social_info, **preferences, **activity, 'full_profile': True}
+
+print(""User Profile:"")
+for key, value in profile.items():
+    print(f""  {key}: {value}"")
+```"
+subjective,markdown,"```python
+price = 29.99
+quantity = 3
+```",,,,,,,,,,,,,,0,markdown,"```python
+defaults = {'theme': 'light', 'font_size': 14, 'language': 'en', 'sidebar': True, 'notifications': True}
+user_config = {'theme': 'dark', 'font_size': 18}
+session_config = {'sidebar': False}
+
+final = {**defaults, **user_config, **session_config}
+print(f""Final config: {final}"")
+
+for key in final:
+    if key in session_config:
+        source = 'session'
+    elif key in user_config:
+        source = 'user'
+    else:
+        source = 'defaults'
+    print(f""  {key}: {final[key]} (from {source})"")
+```"
+subjective,markdown,"Name        | Score
+-----------|-------
+Alice      |    95
+Bob        |    87
+Charlie    |    92
+Use proper alignment and width.",,,,,,,,,,,,,,0.5,markdown,"```python
+warehouse_a = {'laptop': 10, 'phone': 25, 'tablet': 8, 'charger': 100}
+warehouse_b = {'phone': 15, 'tablet': 12, 'headset': 30, 'cable': 200}
+
+def total_stock(w1, w2):
+    result = w1.copy()
+    for item, qty in w2.items():
+        result[item] = result.get(item, 0) + qty
+    return result
+
+def only_in_one(w1, w2):
+    only_w1 = {k: v for k, v in w1.items() if k not in w2}
+    only_w2 = {k: v for k, v in w2.items() if k not in w1}
+    return only_w1, only_w2
+
+def rebalance(w1, w2):
+    shared = set(w1.keys()) & set(w2.keys())
+    transfers = []
+    for item in shared:
+        diff = w1[item] - w2[item]
+        if diff > 0:
+            transfer = diff // 2
+            transfers.append(f""{item}: transfer {transfer} from A to B"")
+        elif diff < 0:
+            transfer = abs(diff) // 2
+            transfers.append(f""{item}: transfer {transfer} from B to A"")
+    return transfers
+
+print(f""Total stock: {total_stock(warehouse_a, warehouse_b)}"")
+only_a, only_b = only_in_one(warehouse_a, warehouse_b)
+print(f""Only in A: {only_a}"")
+print(f""Only in B: {only_b}"")
+print(""Rebalance:"")
+for t in rebalance(warehouse_a, warehouse_b):
+    print(f""  {t}"")
+```
+
+**Explanation:** `total_stock` sums quantities using `.get()`. `only_in_one` uses `not in` to find exclusive items. `rebalance` calculates transfer amounts by finding the difference and dividing by 2 for each shared item."
+subjective,markdown,,,,,,,,,,,,,,,0.5,markdown,"```python
+source_a = {'item_1': 10, 'item_2': 20, 'item_3': 30}
+source_b = {'item_2': 25, 'item_4': 40, 'item_5': 50}
+source_c = {'item_1': 15, 'item_3': 35, 'item_5': 55}
+
+def merge_sum(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result[k] = result.get(k, 0) + v
+    return result
+
+def merge_max(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            if k in result:
+                result[k] = max(result[k], v)
+            else:
+                result[k] = v
+    return result
+
+def merge_all_values(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result.setdefault(k, []).append(v)
+    return result
+
+sources = [source_a, source_b, source_c]
+print(f""Sum: {merge_sum(sources)}"")
+print(f""Max: {merge_max(sources)}"")
+print(f""All values: {merge_all_values(sources)}"")
+```
+
+**Explanation:**
+- `merge_sum` uses `.get(k, 0) + v` to accumulate sums.
+- `merge_max` uses `max()` to keep the highest value.
+- `merge_all_values` uses `setdefault(k, [])` to build lists of all values."
+subjective,markdown,"""My name is [name] and I am [age] years old""",,,,,,,,,,,,,,0,markdown,"```python
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 20, 'c': 30, 'd': 40}
+
+d1_copy = dict1.copy()
+d1_copy.update(dict2)
+print(f""After update: {d1_copy}"")
+
+merged = {**dict1, **dict2}
+print(f""Unpacking merge: {merged}"")
+print(f""dict1 unchanged: {dict1}"")
+
+priority = {**dict2, **dict1}
+print(f""dict1 priority: {priority}"")
+```
+
+**Explanation:** In `{**d1, **d2}`, d2 values override d1 for shared keys. To give d1 priority, reverse the order: `{**d2, **d1}`."
+mcsc,markdown,Which statement is true regarding the concept of **formatting output using f-strings**?,,,,,,1,,It is a fundamental feature that enables this specific logic or operation in Python.,It is a visual styling tool for output formatting.,It is a module that must be downloaded via pip before every use.,It is an outdated practice not included in Python 3.,,,,markdown,
+subjective,markdown,"Create an inventory system using dictionaries:
+
+```python
+```
+
+1. Create an inventory with at least 5 products across 2+ categories
+2. Write a function `total_value(inventory)` — sum of price × quantity for all products
+3. Write a function `by_category(inventory)` — returns `{category: [product_names]}`
+4. Write a function `low_stock(inventory, threshold)` — returns products below threshold
+5. Print results for all three functions
+
+**Expected Output:**
+Total inventory value: $X,XXX.XX
+By category: {'electronics': ['laptop', 'phone'], 'food': ['rice', 'bread'], ...}
+Low stock (< 5): {'bread': 3, 'phone': 2}
+
+**Key Concepts:** Nested dicts, iteration, building new dicts from existing ones",,,,,,,,,,,,,,0.5,markdown,"```python
+warehouse_a = {'laptop': 10, 'phone': 25, 'tablet': 8, 'charger': 100}
+warehouse_b = {'phone': 15, 'tablet': 12, 'headset': 30, 'cable': 200}
+
+def total_stock(w1, w2):
+    result = w1.copy()
+    for item, qty in w2.items():
+        result[item] = result.get(item, 0) + qty
+    return result
+
+def only_in_one(w1, w2):
+    only_w1 = {k: v for k, v in w1.items() if k not in w2}
+    only_w2 = {k: v for k, v in w2.items() if k not in w1}
+    return only_w1, only_w2
+
+def rebalance(w1, w2):
+    shared = set(w1.keys()) & set(w2.keys())
+    transfers = []
+    for item in shared:
+        diff = w1[item] - w2[item]
+        if diff > 0:
+            transfer = diff // 2
+            transfers.append(f""{item}: transfer {transfer} from A to B"")
+        elif diff < 0:
+            transfer = abs(diff) // 2
+            transfers.append(f""{item}: transfer {transfer} from B to A"")
+    return transfers
+
+print(f""Total stock: {total_stock(warehouse_a, warehouse_b)}"")
+only_a, only_b = only_in_one(warehouse_a, warehouse_b)
+print(f""Only in A: {only_a}"")
+print(f""Only in B: {only_b}"")
+print(""Rebalance:"")
+for t in rebalance(warehouse_a, warehouse_b):
+    print(f""  {t}"")
+```
+
+**Explanation:** `total_stock` sums quantities using `.get()`. `only_in_one` uses `not in` to find exclusive items. `rebalance` calculates transfer amounts by finding the difference and dividing by 2 for each shared item."
+mcsc,markdown,What is the primary characteristic to remember when **creating and initializing dictionaries for key-value pairs**?,,,,,,1,,They are essential data structures used to store and manipulate collections of data.,They can only store integer values.,They are automatically sorted in alphabetical order.,They cannot be assigned to variables.,,,,markdown,
+subjective,markdown,"Create a nested dictionary representing a grade book:
+
+```python
+```
+
+1. Create entries for 3 students with 3 subjects each
+2. Print each student's grades
+3. Calculate and print each student's average grade
+4. Find the student with the highest average
+
+**Expected Output:**
+Alice: {'Math': 92, 'Science': 88, 'English': 95}
+Bob: {'Math': 78, 'Science': 85, 'English': 80}
+Charlie: {'Math': 95, 'Science': 92, 'English': 88}
+
+Alice average: 91.67
+Bob average: 81.00
+Charlie average: 91.67
+Top student: Alice (or Charlie, tied at 91.67)
+
+**Key Concepts:** Nested dictionaries, iteration, calculations",,,,,,,,,,,,,,0.5,markdown,"```python
+source_a = {'item_1': 10, 'item_2': 20, 'item_3': 30}
+source_b = {'item_2': 25, 'item_4': 40, 'item_5': 50}
+source_c = {'item_1': 15, 'item_3': 35, 'item_5': 55}
+
+def merge_sum(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result[k] = result.get(k, 0) + v
+    return result
+
+def merge_max(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            if k in result:
+                result[k] = max(result[k], v)
+            else:
+                result[k] = v
+    return result
+
+def merge_all_values(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result.setdefault(k, []).append(v)
+    return result
+
+sources = [source_a, source_b, source_c]
+print(f""Sum: {merge_sum(sources)}"")
+print(f""Max: {merge_max(sources)}"")
+print(f""All values: {merge_all_values(sources)}"")
+```
+
+**Explanation:**
+- `merge_sum` uses `.get(k, 0) + v` to accumulate sums.
+- `merge_max` uses `max()` to keep the highest value.
+- `merge_all_values` uses `setdefault(k, [])` to build lists of all values."
+subjective,markdown,"Given a paragraph:
+```python
+text = ""python is great and python is fun and learning python is the best way to learn programming and programming is fun""
+```
+
+1. Build a word frequency dictionary using a loop
+2. Build a dictionary of words that appear more than once (using comprehension)
+3. Build a dictionary of word lengths (word → length) for unique words
+4. Find the most frequent word
+
+**Expected Output:**
+Frequencies: {'python': 3, 'is': 4, 'great': 1, 'and': 3, ...}
+Repeated words: {'python': 3, 'is': 4, 'and': 3, 'fun': 2, 'programming': 2}
+Word lengths: {'python': 6, 'is': 2, 'great': 5, ...}
+Most frequent: 'is' (4 times)
+
+**Key Concepts:** Building dicts from data, comprehension filtering, `max()`",,,,,,,,,,,,,,0.5,markdown,"```python
+basic_info = {'id': 42, 'name': 'Alice', 'email': 'alice@mail.com'}
+social_info = {'twitter': '@alice', 'github': 'alicecodes'}
+preferences = {'theme': 'dark', 'language': 'en', 'notifications': {'email': True, 'sms': False}}
+activity = {'last_login': '2024-01-15', 'posts': 42}
+
+profile = {**basic_info, **social_info, **preferences, **activity, 'full_profile': True}
+
+print(""User Profile:"")
+for key, value in profile.items():
+    print(f""  {key}: {value}"")
+```"
+subjective,markdown,"Given two lists:
+```python
+countries = ['India', 'Japan', 'Brazil', 'Germany', 'Australia']
+capitals = ['New Delhi', 'Tokyo', 'Brasilia', 'Berlin', 'Canberra']
+```
+
+1. Create a dictionary mapping countries to capitals using `zip()`
+2. Print the dictionary
+3. Create the reverse mapping (capitals → countries) using a comprehension
+
+**Expected Output:**
+Countries to capitals: {'India': 'New Delhi', 'Japan': 'Tokyo', ...}
+Capitals to countries: {'New Delhi': 'India', 'Tokyo': 'Japan', ...}
+
+**Key Concepts:** `zip()` with `dict()`, dictionary comprehension",,,,,,,,,,,,,,0,markdown,"```python
+defaults = {'theme': 'light', 'font_size': 14, 'language': 'en', 'sidebar': True, 'notifications': True}
+user_config = {'theme': 'dark', 'font_size': 18}
+session_config = {'sidebar': False}
+
+final = {**defaults, **user_config, **session_config}
+print(f""Final config: {final}"")
+
+for key in final:
+    if key in session_config:
+        source = 'session'
+    elif key in user_config:
+        source = 'user'
+    else:
+        source = 'defaults'
+    print(f""  {key}: {final[key]} (from {source})"")
+```"
+subjective,markdown,"Create dictionaries using three different methods:
+1. Using curly braces: a `book` dict with keys `title`, `author`, `year`, `pages`
+2. Using `dict()`: a `settings` dict with keys `theme`, `language`, `notifications`
+3. Using `dict.fromkeys()`: a `scores` dict with keys `Math`, `Science`, `English` all set to 0
+
+Print each dictionary.
+
+**Expected Output:**
+book: {'title': 'Python Crash Course', 'author': 'Eric Matthes', 'year': 2019, 'pages': 544}
+settings: {'theme': 'dark', 'language': 'en', 'notifications': True}
+scores: {'Math': 0, 'Science': 0, 'English': 0}
+
+**Key Concepts:** Multiple dictionary creation methods",,,,,,,,,,,,,,0,markdown,"```python
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 20, 'c': 30, 'd': 40}
+
+d1_copy = dict1.copy()
+d1_copy.update(dict2)
+print(f""After update: {d1_copy}"")
+
+merged = {**dict1, **dict2}
+print(f""Unpacking merge: {merged}"")
+print(f""dict1 unchanged: {dict1}"")
+
+priority = {**dict2, **dict1}
+print(f""dict1 priority: {priority}"")
+```
+
+**Explanation:** In `{**d1, **d2}`, d2 values override d1 for shared keys. To give d1 priority, reverse the order: `{**d2, **d1}`."
+subjective,markdown,"```python
+students = {
+    'S001': {'name': 'Alice', 'grade': 'A', 'courses': ['Math', 'Physics']},
+    'S002': {'name': 'Bob', 'grade': 'B', 'courses': ['Chemistry', 'Biology']},
+    'S003': {'name': 'Charlie', 'grade': 'A', 'courses': ['Math', 'English']}
+}
+```
+
+Write a function `lookup(student_id)` that:
+1. Returns student info if ID exists
+2. Returns `""Student not found""` if ID doesn't exist
+3. Prints name, grade, and number of courses
+
+Test with: `'S001'`, `'S004'`, `'S003'`
+
+Then write `get_students_by_grade(grade)` that returns names of all students with that grade.
+
+**Expected Output:**
+S001: Alice, Grade A, 2 courses
+S004: Student not found
+S003: Charlie, Grade A, 2 courses
+Students with grade A: ['Alice', 'Charlie']
+
+**Key Concepts:** `.get()` for missing keys, iterating dict values",,,,,,,,,,,,,,0.5,markdown,"```python
+basic_info = {'id': 42, 'name': 'Alice', 'email': 'alice@mail.com'}
+social_info = {'twitter': '@alice', 'github': 'alicecodes'}
+preferences = {'theme': 'dark', 'language': 'en', 'notifications': {'email': True, 'sms': False}}
+activity = {'last_login': '2024-01-15', 'posts': 42}
+
+profile = {**basic_info, **social_info, **preferences, **activity, 'full_profile': True}
+
+print(""User Profile:"")
+for key, value in profile.items():
+    print(f""  {key}: {value}"")
+```"
+subjective,markdown,"Given:
+```python
+api_response = {
+    'status': 'success',
+    'data': {
+        'user': {
+            'id': 42,
+            'name': 'Alice',
+            'profile': {
+                'avatar': 'alice.png',
+                'bio': 'Python developer'
+            }
+        },
+        'posts': [
+            {'id': 1, 'title': 'Hello World'},
+            {'id': 2, 'title': 'Learning Python'}
+        ]
+    }
+}
+```
+
+Safely extract and print:
+1. The user's name
+2. The user's bio
+3. The user's phone (doesn't exist — default to `'N/A'`)
+4. The title of the second post
+5. The total number of posts
+
+**Expected Output:**
+Name: Alice
+Bio: Python developer
+Phone: N/A
+Second post: Learning Python
+Total posts: 2
+
+**Key Concepts:** Nested access, safe chaining with `.get()`",,,,,,,,,,,,,,0.5,markdown,"```python
+source_a = {'item_1': 10, 'item_2': 20, 'item_3': 30}
+source_b = {'item_2': 25, 'item_4': 40, 'item_5': 50}
+source_c = {'item_1': 15, 'item_3': 35, 'item_5': 55}
+
+def merge_sum(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result[k] = result.get(k, 0) + v
+    return result
+
+def merge_max(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            if k in result:
+                result[k] = max(result[k], v)
+            else:
+                result[k] = v
+    return result
+
+def merge_all_values(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result.setdefault(k, []).append(v)
+    return result
+
+sources = [source_a, source_b, source_c]
+print(f""Sum: {merge_sum(sources)}"")
+print(f""Max: {merge_max(sources)}"")
+print(f""All values: {merge_all_values(sources)}"")
+```
+
+**Explanation:**
+- `merge_sum` uses `.get(k, 0) + v` to accumulate sums.
+- `merge_max` uses `max()` to keep the highest value.
+- `merge_all_values` uses `setdefault(k, [])` to build lists of all values."
+mcsc,markdown,What is the primary characteristic to remember when **accessing dictionary values using keys and get() method**?,,,,,,1,,They are essential data structures used to store and manipulate collections of data.,They can only store integer values.,They are automatically sorted in alphabetical order.,They cannot be assigned to variables.,,,,markdown,
+subjective,markdown,"Given:
+```python
+movie = {
+    'title': 'Inception',
+    'director': 'Christopher Nolan',
+    'year': 2010,
+    'rating': 8.8,
+    'genres': ['Sci-Fi', 'Thriller']
+}
+```
+
+Print:
+1. The title using `[]`
+2. The director using `.get()`
+3. The first genre from the genres list
+4. The `'budget'` key using `.get()` with a default of `'Unknown'`
+5. Check if `'rating'` exists in the dict
+
+**Expected Output:**
+Title: Inception
+Director: Christopher Nolan
+First genre: Sci-Fi
+Budget: Unknown
+Has rating: True
+
+**Key Concepts:** `[]` vs `.get()`, nested access, `in` operator",,,,,,,,,,,,,,0,markdown,"```python
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 20, 'c': 30, 'd': 40}
+
+d1_copy = dict1.copy()
+d1_copy.update(dict2)
+print(f""After update: {d1_copy}"")
+
+merged = {**dict1, **dict2}
+print(f""Unpacking merge: {merged}"")
+print(f""dict1 unchanged: {dict1}"")
+
+priority = {**dict2, **dict1}
+print(f""dict1 priority: {priority}"")
+```
+
+**Explanation:** In `{**d1, **d2}`, d2 values override d1 for shared keys. To give d1 priority, reverse the order: `{**d2, **d1}`."
+subjective,markdown,"Given a partial configuration:
+```python
+config = {'host': '192.168.1.1', 'port': 8080}
+```
+
+Write code that reads these settings with defaults:
+- `host` (default: `'localhost'`)
+- `port` (default: `3000`)
+- `protocol` (default: `'http'`)
+- `timeout` (default: `30`)
+- `debug` (default: `False`)
+
+Print the complete configuration.
+
+**Expected Output:**
+host: 192.168.1.1
+port: 8080
+protocol: http
+timeout: 30
+debug: False
+
+**Key Concepts:** `.get()` with default values",,,,,,,,,,,,,,0,markdown,"```python
+defaults = {'theme': 'light', 'font_size': 14, 'language': 'en', 'sidebar': True, 'notifications': True}
+user_config = {'theme': 'dark', 'font_size': 18}
+session_config = {'sidebar': False}
+
+final = {**defaults, **user_config, **session_config}
+print(f""Final config: {final}"")
+
+for key in final:
+    if key in session_config:
+        source = 'session'
+    elif key in user_config:
+        source = 'user'
+    else:
+        source = 'defaults'
+    print(f""  {key}: {final[key]} (from {source})"")
+```"
+subjective,markdown,"Given raw data with inconsistent keys:
+```python
+records = [
+    {'name': 'Alice', 'age': 25, 'city': 'Mumbai'},
+    {'name': 'Bob', 'city': 'Delhi'},
+    {'name': 'Charlie', 'age': 30},
+    {'name': 'Diana', 'age': 28, 'city': 'Bangalore', 'phone': '9876543210'},
+]
+```
+
+Write a function `normalize(records)` that:
+1. Ensures every record has keys: `name`, `age`, `city`, `phone`
+2. Uses defaults: `age=0`, `city='Unknown'`, `phone='N/A'`
+3. Returns the normalized list
+
+Print all normalized records.
+
+**Expected Output:**
+Alice | Age: 25 | City: Mumbai | Phone: N/A
+Bob | Age: 0 | City: Delhi | Phone: N/A
+Charlie | Age: 30 | City: Unknown | Phone: N/A
+Diana | Age: 28 | City: Bangalore | Phone: 9876543210
+
+**Key Concepts:** `.get()` for filling missing fields, data normalization",,,,,,,,,,,,,,0.5,markdown,"```python
+warehouse_a = {'laptop': 10, 'phone': 25, 'tablet': 8, 'charger': 100}
+warehouse_b = {'phone': 15, 'tablet': 12, 'headset': 30, 'cable': 200}
+
+def total_stock(w1, w2):
+    result = w1.copy()
+    for item, qty in w2.items():
+        result[item] = result.get(item, 0) + qty
+    return result
+
+def only_in_one(w1, w2):
+    only_w1 = {k: v for k, v in w1.items() if k not in w2}
+    only_w2 = {k: v for k, v in w2.items() if k not in w1}
+    return only_w1, only_w2
+
+def rebalance(w1, w2):
+    shared = set(w1.keys()) & set(w2.keys())
+    transfers = []
+    for item in shared:
+        diff = w1[item] - w2[item]
+        if diff > 0:
+            transfer = diff // 2
+            transfers.append(f""{item}: transfer {transfer} from A to B"")
+        elif diff < 0:
+            transfer = abs(diff) // 2
+            transfers.append(f""{item}: transfer {transfer} from B to A"")
+    return transfers
+
+print(f""Total stock: {total_stock(warehouse_a, warehouse_b)}"")
+only_a, only_b = only_in_one(warehouse_a, warehouse_b)
+print(f""Only in A: {only_a}"")
+print(f""Only in B: {only_b}"")
+print(""Rebalance:"")
+for t in rebalance(warehouse_a, warehouse_b):
+    print(f""  {t}"")
+```
+
+**Explanation:** `total_stock` sums quantities using `.get()`. `only_in_one` uses `not in` to find exclusive items. `rebalance` calculates transfer amounts by finding the difference and dividing by 2 for each shared item."
+subjective,markdown,"Build a grade tracking system:
+
+```python
+```
+
+1. Initialize with empty dict
+2. Add scores one by one: Alice:85, Bob:90, Alice:92, Charlie:78, Bob:88, Alice:95
+3. Calculate each student's average
+4. Assign letter grades (A: 90+, B: 80+, C: 70+, D: below 70)
+5. Print a summary
+
+**Expected Output:**
+Alice: [85, 92, 95] -> Avg: 90.67 -> Grade: A
+Bob: [90, 88] -> Avg: 89.00 -> Grade: B
+Charlie: [78] -> Avg: 78.00 -> Grade: C
+
+**Key Concepts:** `setdefault()` with lists, accumulating data",,,,,,,,,,,,,,0.5,markdown,"```python
+warehouse_a = {'laptop': 10, 'phone': 25, 'tablet': 8, 'charger': 100}
+warehouse_b = {'phone': 15, 'tablet': 12, 'headset': 30, 'cable': 200}
+
+def total_stock(w1, w2):
+    result = w1.copy()
+    for item, qty in w2.items():
+        result[item] = result.get(item, 0) + qty
+    return result
+
+def only_in_one(w1, w2):
+    only_w1 = {k: v for k, v in w1.items() if k not in w2}
+    only_w2 = {k: v for k, v in w2.items() if k not in w1}
+    return only_w1, only_w2
+
+def rebalance(w1, w2):
+    shared = set(w1.keys()) & set(w2.keys())
+    transfers = []
+    for item in shared:
+        diff = w1[item] - w2[item]
+        if diff > 0:
+            transfer = diff // 2
+            transfers.append(f""{item}: transfer {transfer} from A to B"")
+        elif diff < 0:
+            transfer = abs(diff) // 2
+            transfers.append(f""{item}: transfer {transfer} from B to A"")
+    return transfers
+
+print(f""Total stock: {total_stock(warehouse_a, warehouse_b)}"")
+only_a, only_b = only_in_one(warehouse_a, warehouse_b)
+print(f""Only in A: {only_a}"")
+print(f""Only in B: {only_b}"")
+print(""Rebalance:"")
+for t in rebalance(warehouse_a, warehouse_b):
+    print(f""  {t}"")
+```
+
+**Explanation:** `total_stock` sums quantities using `.get()`. `only_in_one` uses `not in` to find exclusive items. `rebalance` calculates transfer amounts by finding the difference and dividing by 2 for each shared item."
+subjective,markdown,"Build a shopping cart system using a dictionary:
+
+```python
+```
+
+Implement:
+1. `add_item(cart, name, price, qty)` — add new item or increase quantity
+2. `update_quantity(cart, name, new_qty)` — set new quantity
+3. `get_total(cart)` — total cost
+4. `apply_discount(cart, product, percent)` — reduce price by percent
+
+Test:
+- Add ""Apple"" ($1.50, qty 3)
+- Add ""Banana"" ($0.75, qty 5)
+- Add ""Apple"" again ($1.50, qty 2) — should increase to qty 5
+- Apply 10% discount on Apple
+- Print cart and total
+
+**Key Concepts:** `setdefault()`, modifying nested values",,,,,,,,,,,,,,0.5,markdown,"```python
+basic_info = {'id': 42, 'name': 'Alice', 'email': 'alice@mail.com'}
+social_info = {'twitter': '@alice', 'github': 'alicecodes'}
+preferences = {'theme': 'dark', 'language': 'en', 'notifications': {'email': True, 'sms': False}}
+activity = {'last_login': '2024-01-15', 'posts': 42}
+
+profile = {**basic_info, **social_info, **preferences, **activity, 'full_profile': True}
+
+print(""User Profile:"")
+for key, value in profile.items():
+    print(f""  {key}: {value}"")
+```"
+subjective,markdown,"Start with an empty dictionary. Build a contact entry by:
+1. Adding `name` = `'Alice'`
+2. Adding `phone` = `'555-0101'`
+3. Adding `email` = `'alice@old.com'`
+4. Updating `email` to `'alice@new.com'`
+5. Adding `city` = `'Mumbai'` using `setdefault()`
+6. Try to change `city` to `'Delhi'` using `setdefault()` — observe what happens
+
+Print the contact after each step.
+
+**Expected Output:**
+Step 1: {'name': 'Alice'}
+Step 2: {'name': 'Alice', 'phone': '555-0101'}
+Step 3: {'name': 'Alice', 'phone': '555-0101', 'email': 'alice@old.com'}
+Step 4: {'name': 'Alice', 'phone': '555-0101', 'email': 'alice@new.com'}
+Step 5: {'name': 'Alice', 'phone': '555-0101', 'email': 'alice@new.com', 'city': 'Mumbai'}
+Step 6: {'name': 'Alice', 'phone': '555-0101', 'email': 'alice@new.com', 'city': 'Mumbai'}
+
+**Key Concepts:** Assignment, `setdefault()` behavior",,,,,,,,,,,,,,0,markdown,"```python
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 20, 'c': 30, 'd': 40}
+
+d1_copy = dict1.copy()
+d1_copy.update(dict2)
+print(f""After update: {d1_copy}"")
+
+merged = {**dict1, **dict2}
+print(f""Unpacking merge: {merged}"")
+print(f""dict1 unchanged: {dict1}"")
+
+priority = {**dict2, **dict1}
+print(f""dict1 priority: {priority}"")
+```
+
+**Explanation:** In `{**d1, **d2}`, d2 values override d1 for shared keys. To give d1 priority, reverse the order: `{**d2, **d1}`."
+subjective,markdown,"```python
+text = ""to be or not to be that is the question to be is to exist""
+```
+
+1. Build a frequency dictionary using `.get()` pattern
+2. Find the most common word
+3. Find words that appear exactly once
+4. Find words that appear more than twice
+
+**Expected Output:**
+Frequencies: {'to': 4, 'be': 3, 'or': 1, 'not': 1, ...}
+Most common: 'to' (4 times)
+Appear once: ['or', 'not', 'that', 'the', 'question', 'exist']
+Appear 3+ times: ['to', 'be']
+
+**Key Concepts:** Counter pattern with `.get()`, dict comprehension",,,,,,,,,,,,,,0.5,markdown,"```python
+source_a = {'item_1': 10, 'item_2': 20, 'item_3': 30}
+source_b = {'item_2': 25, 'item_4': 40, 'item_5': 50}
+source_c = {'item_1': 15, 'item_3': 35, 'item_5': 55}
+
+def merge_sum(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result[k] = result.get(k, 0) + v
+    return result
+
+def merge_max(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            if k in result:
+                result[k] = max(result[k], v)
+            else:
+                result[k] = v
+    return result
+
+def merge_all_values(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result.setdefault(k, []).append(v)
+    return result
+
+sources = [source_a, source_b, source_c]
+print(f""Sum: {merge_sum(sources)}"")
+print(f""Max: {merge_max(sources)}"")
+print(f""All values: {merge_all_values(sources)}"")
+```
+
+**Explanation:**
+- `merge_sum` uses `.get(k, 0) + v` to accumulate sums.
+- `merge_max` uses `max()` to keep the highest value.
+- `merge_all_values` uses `setdefault(k, [])` to build lists of all values."
+mcsc,markdown,What is the primary characteristic to remember when **adding and modifying dictionary entries**?,,,,,,1,,They are essential data structures used to store and manipulate collections of data.,They can only store integer values.,They are automatically sorted in alphabetical order.,They cannot be assigned to variables.,,,,markdown,
+subjective,markdown,"Given:
+```python
+defaults = {'theme': 'light', 'font_size': 14, 'language': 'en', 'notifications': True}
+user_settings = {'theme': 'dark', 'font_size': 18}
+```
+
+1. Create a final config by merging defaults with user settings (user overrides defaults)
+2. Print which settings were overridden
+
+**Expected Output:**
+Final config: {'theme': 'dark', 'font_size': 18, 'language': 'en', 'notifications': True}
+Overridden: theme (light -> dark), font_size (14 -> 18)
+
+**Key Concepts:** `update()`, detecting changes",,,,,,,,,,,,,,0,markdown,"```python
+defaults = {'theme': 'light', 'font_size': 14, 'language': 'en', 'sidebar': True, 'notifications': True}
+user_config = {'theme': 'dark', 'font_size': 18}
+session_config = {'sidebar': False}
+
+final = {**defaults, **user_config, **session_config}
+print(f""Final config: {final}"")
+
+for key in final:
+    if key in session_config:
+        source = 'session'
+    elif key in user_config:
+        source = 'user'
+    else:
+        source = 'defaults'
+    print(f""  {key}: {final[key]} (from {source})"")
+```"
+subjective,markdown,"Implement a simple task queue using a dictionary:
+
+```python
+tasks = {
+    'T001': {'desc': 'Fix login bug', 'priority': 'high'},
+    'T002': {'desc': 'Update docs', 'priority': 'low'},
+    'T003': {'desc': 'Add tests', 'priority': 'medium'},
+    'T004': {'desc': 'Deploy v2', 'priority': 'high'},
+    'T005': {'desc': 'Clean logs', 'priority': 'low'}
+}
+```
+
+1. Process (remove) all high-priority tasks first, printing each
+2. Process one more task using `popitem()`
+3. Clear remaining tasks and print ""Queue cleared""
+
+**Expected Output:**
+Processing HIGH: T001 - Fix login bug
+Processing HIGH: T004 - Deploy v2
+Processing next: T005 - Clean logs
+Queue cleared. Tasks remaining: 0
+
+**Key Concepts:** Conditional removal, `popitem()`, `clear()`",,,,,,,,,,,,,,0.5,markdown,"```python
+basic_info = {'id': 42, 'name': 'Alice', 'email': 'alice@mail.com'}
+social_info = {'twitter': '@alice', 'github': 'alicecodes'}
+preferences = {'theme': 'dark', 'language': 'en', 'notifications': {'email': True, 'sms': False}}
+activity = {'last_login': '2024-01-15', 'posts': 42}
+
+profile = {**basic_info, **social_info, **preferences, **activity, 'full_profile': True}
+
+print(""User Profile:"")
+for key, value in profile.items():
+    print(f""  {key}: {value}"")
+```"
+subjective,markdown,"Given a dictionary and a list of keys to remove:
+```python
+data = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
+remove_keys = ['b', 'c', 'x', 'y', 'z']
+```
+
+Remove all keys from `remove_keys` that exist, without any errors for missing keys. Print which keys were actually removed and which weren't found.
+
+**Expected Output:**
+Removed: b=2
+Removed: c=3
+Not found: x
+Not found: y
+Not found: z
+Final: {'a': 1, 'd': 4, 'e': 5}
+
+**Key Concepts:** `pop()` with default value",,,,,,,,,,,,,,0,markdown,"```python
+defaults = {'theme': 'light', 'font_size': 14, 'language': 'en', 'sidebar': True, 'notifications': True}
+user_config = {'theme': 'dark', 'font_size': 18}
+session_config = {'sidebar': False}
+
+final = {**defaults, **user_config, **session_config}
+print(f""Final config: {final}"")
+
+for key in final:
+    if key in session_config:
+        source = 'session'
+    elif key in user_config:
+        source = 'user'
+    else:
+        source = 'defaults'
+    print(f""  {key}: {final[key]} (from {source})"")
+```"
+mcsc,markdown,"Which statement is true regarding the concept of **removing entries using pop(), popitem(), and del**?",,,,,,1,,It is a fundamental feature that enables this specific logic or operation in Python.,It is a visual styling tool for output formatting.,It is a module that must be downloaded via pip before every use.,It is an outdated practice not included in Python 3.,,,,markdown,
+subjective,markdown,"Build a simple cache with a maximum size:
+
+```python
+cache = {}
+max_size = 3
+```
+
+Write functions:
+1. `cache_set(key, value)` — adds to cache; if full, removes oldest entry first
+2. `cache_get(key)` — returns value or `'MISS'`
+3. `cache_delete(key)` — removes entry if exists
+4. `cache_clear()` — empties cache
+
+Test with this sequence:
+- Set a=1, b=2, c=3 (cache full)
+- Set d=4 (should evict 'a')
+- Get 'a' (should be MISS)
+- Get 'b' (should return 2)
+- Delete 'c'
+- Print cache state
+
+**Key Concepts:** `popitem()` for eviction, `pop()` for deletion, cache pattern",,,,,,,,,,,,,,0.5,markdown,"```python
+warehouse_a = {'laptop': 10, 'phone': 25, 'tablet': 8, 'charger': 100}
+warehouse_b = {'phone': 15, 'tablet': 12, 'headset': 30, 'cable': 200}
+
+def total_stock(w1, w2):
+    result = w1.copy()
+    for item, qty in w2.items():
+        result[item] = result.get(item, 0) + qty
+    return result
+
+def only_in_one(w1, w2):
+    only_w1 = {k: v for k, v in w1.items() if k not in w2}
+    only_w2 = {k: v for k, v in w2.items() if k not in w1}
+    return only_w1, only_w2
+
+def rebalance(w1, w2):
+    shared = set(w1.keys()) & set(w2.keys())
+    transfers = []
+    for item in shared:
+        diff = w1[item] - w2[item]
+        if diff > 0:
+            transfer = diff // 2
+            transfers.append(f""{item}: transfer {transfer} from A to B"")
+        elif diff < 0:
+            transfer = abs(diff) // 2
+            transfers.append(f""{item}: transfer {transfer} from B to A"")
+    return transfers
+
+print(f""Total stock: {total_stock(warehouse_a, warehouse_b)}"")
+only_a, only_b = only_in_one(warehouse_a, warehouse_b)
+print(f""Only in A: {only_a}"")
+print(f""Only in B: {only_b}"")
+print(""Rebalance:"")
+for t in rebalance(warehouse_a, warehouse_b):
+    print(f""  {t}"")
+```
+
+**Explanation:** `total_stock` sums quantities using `.get()`. `only_in_one` uses `not in` to find exclusive items. `rebalance` calculates transfer amounts by finding the difference and dividing by 2 for each shared item."
+subjective,markdown,"Given:
+```python
+inventory = {'apple': 50, 'banana': 30, 'cherry': 0, 'date': 15, 'elderberry': 5}
+```
+
+1. Remove `'cherry'` using `del` (it's out of stock)
+2. Remove `'date'` using `pop()` and print the removed value
+3. Remove the last item using `popitem()` and print it
+4. Print the remaining inventory
+
+**Expected Output:**
+Removed date with quantity: 15
+Last item removed: ('elderberry', 5)
+Remaining: {'apple': 50, 'banana': 30}
+
+**Key Concepts:** `del`, `pop()`, `popitem()`",,,,,,,,,,,,,,0,markdown,"```python
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 20, 'c': 30, 'd': 40}
+
+d1_copy = dict1.copy()
+d1_copy.update(dict2)
+print(f""After update: {d1_copy}"")
+
+merged = {**dict1, **dict2}
+print(f""Unpacking merge: {merged}"")
+print(f""dict1 unchanged: {dict1}"")
+
+priority = {**dict2, **dict1}
+print(f""dict1 priority: {priority}"")
+```
+
+**Explanation:** In `{**d1, **d2}`, d2 values override d1 for shared keys. To give d1 priority, reverse the order: `{**d2, **d1}`."
+subjective,markdown,"Write a function `sanitize(data, keep_keys)` that:
+- Takes a dictionary and a set of keys to keep
+- Returns a new dictionary with ONLY the specified keys
+- Also returns a dictionary of removed key-value pairs
+
+```python
+user = {
+    'name': 'Alice', 'age': 25, 'email': 'alice@mail.com',
+    'password': 'secret', 'ssn': '123-45-6789',
+    'address': 'Mumbai', 'phone': '9876543210'
+}
+keep = {'name', 'age', 'email', 'address', 'phone'}
+```
+
+**Expected Output:**
+Safe data: {'name': 'Alice', 'age': 25, 'email': 'alice@mail.com', 'address': 'Mumbai', 'phone': '9876543210'}
+Removed: {'password': 'secret', 'ssn': '123-45-6789'}
+
+**Key Concepts:** Selective removal, dictionary comprehension",,,,,,,,,,,,,,0.5,markdown,"```python
+source_a = {'item_1': 10, 'item_2': 20, 'item_3': 30}
+source_b = {'item_2': 25, 'item_4': 40, 'item_5': 50}
+source_c = {'item_1': 15, 'item_3': 35, 'item_5': 55}
+
+def merge_sum(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result[k] = result.get(k, 0) + v
+    return result
+
+def merge_max(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            if k in result:
+                result[k] = max(result[k], v)
+            else:
+                result[k] = v
+    return result
+
+def merge_all_values(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result.setdefault(k, []).append(v)
+    return result
+
+sources = [source_a, source_b, source_c]
+print(f""Sum: {merge_sum(sources)}"")
+print(f""Max: {merge_max(sources)}"")
+print(f""All values: {merge_all_values(sources)}"")
+```
+
+**Explanation:**
+- `merge_sum` uses `.get(k, 0) + v` to accumulate sums.
+- `merge_max` uses `max()` to keep the highest value.
+- `merge_all_values` uses `setdefault(k, [])` to build lists of all values."
+mcsc,markdown,Which statement is true regarding the concept of **checking for key existence using the 'in' keyword**?,,,,,,1,,It is a fundamental feature that enables this specific logic or operation in Python.,It is a visual styling tool for output formatting.,It is a module that must be downloaded via pip before every use.,It is an outdated practice not included in Python 3.,,,,markdown,
+subjective,markdown,"Write a function `safe_merge(base, updates, overwrite=False)` that:
+- Adds new keys from `updates` to `base`
+- If `overwrite=False`: skips keys that already exist in `base`
+- If `overwrite=True`: overwrites existing keys
+- Returns which keys were added, skipped, or overwritten
+
+```python
+base = {'name': 'Alice', 'age': 25, 'city': 'Mumbai'}
+updates = {'age': 26, 'email': 'alice@mail.com', 'phone': '9876543210'}
+```
+
+Test with both `overwrite=False` and `overwrite=True`.
+
+**Expected Output:**
+Without overwrite:
+  Added: ['email', 'phone']
+  Skipped: ['age']
+  Result: {'name': 'Alice', 'age': 25, 'city': 'Mumbai', 'email': 'alice@mail.com', 'phone': '9876543210'}
+
+With overwrite:
+  Added: ['email', 'phone']
+  Overwritten: ['age'] (25 -> 26)
+  Result: {'name': 'Alice', 'age': 26, 'city': 'Mumbai', 'email': 'alice@mail.com', 'phone': '9876543210'}
+
+**Key Concepts:** `in` for conditional updates",,,,,,,,,,,,,,0.5,markdown,"```python
+source_a = {'item_1': 10, 'item_2': 20, 'item_3': 30}
+source_b = {'item_2': 25, 'item_4': 40, 'item_5': 50}
+source_c = {'item_1': 15, 'item_3': 35, 'item_5': 55}
+
+def merge_sum(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result[k] = result.get(k, 0) + v
+    return result
+
+def merge_max(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            if k in result:
+                result[k] = max(result[k], v)
+            else:
+                result[k] = v
+    return result
+
+def merge_all_values(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result.setdefault(k, []).append(v)
+    return result
+
+sources = [source_a, source_b, source_c]
+print(f""Sum: {merge_sum(sources)}"")
+print(f""Max: {merge_max(sources)}"")
+print(f""All values: {merge_all_values(sources)}"")
+```
+
+**Explanation:**
+- `merge_sum` uses `.get(k, 0) + v` to accumulate sums.
+- `merge_max` uses `max()` to keep the highest value.
+- `merge_all_values` uses `setdefault(k, [])` to build lists of all values."
+subjective,markdown,"Write a function `validate_form(data, required_fields)` that checks if all required fields are present in a form dictionary.
+
+```python
+required = ['name', 'email', 'password', 'age']
+
+form1 = {'name': 'Alice', 'email': 'a@b.com', 'password': '123', 'age': 25}
+form2 = {'name': 'Bob', 'email': 'b@c.com'}
+form3 = {'name': 'Charlie', 'age': 30, 'phone': '555-0000'}
+```
+
+For each form, print whether it's valid and list any missing fields.
+
+**Expected Output:**
+Form 1: VALID
+Form 2: INVALID - Missing: ['password', 'age']
+Form 3: INVALID - Missing: ['email', 'password']
+
+**Key Concepts:** `in` with loops, collecting missing keys",,,,,,,,,,,,,,0,markdown,"```python
+defaults = {'theme': 'light', 'font_size': 14, 'language': 'en', 'sidebar': True, 'notifications': True}
+user_config = {'theme': 'dark', 'font_size': 18}
+session_config = {'sidebar': False}
+
+final = {**defaults, **user_config, **session_config}
+print(f""Final config: {final}"")
+
+for key in final:
+    if key in session_config:
+        source = 'session'
+    elif key in user_config:
+        source = 'user'
+    else:
+        source = 'defaults'
+    print(f""  {key}: {final[key]} (from {source})"")
+```"
+subjective,markdown,"```python
+inventory = {
+    'laptop': {'stock': 5, 'min_stock': 10, 'price': 999},
+    'mouse': {'stock': 50, 'min_stock': 20, 'price': 29},
+    'keyboard': {'stock': 8, 'min_stock': 15, 'price': 79},
+    'monitor': {'stock': 30, 'min_stock': 10, 'price': 399}
+}
+```
+
+Write a program that:
+1. Checks if each product has a 'discount' key — if not, set discount to 0
+2. Finds products where stock is below min_stock
+3. Checks if a searched product exists, prints info or ""Not found""
+4. Adds a new product only if it doesn't already exist
+
+**Key Concepts:** `in` with nested dicts, conditional adding",,,,,,,,,,,,,,0.5,markdown,"```python
+basic_info = {'id': 42, 'name': 'Alice', 'email': 'alice@mail.com'}
+social_info = {'twitter': '@alice', 'github': 'alicecodes'}
+preferences = {'theme': 'dark', 'language': 'en', 'notifications': {'email': True, 'sms': False}}
+activity = {'last_login': '2024-01-15', 'posts': 42}
+
+profile = {**basic_info, **social_info, **preferences, **activity, 'full_profile': True}
+
+print(""User Profile:"")
+for key, value in profile.items():
+    print(f""  {key}: {value}"")
+```"
+subjective,markdown,"```python
+records = {
+    'S001': {'name': 'Alice', 'marks': {'Math': 85, 'Science': 92}},
+    'S002': {'name': 'Bob', 'marks': {'Math': 78}},
+    'S003': {'name': 'Charlie', 'marks': {'Science': 88, 'English': 76}}
+}
+```
+
+Write functions:
+1. `has_subject(student_id, subject)` — check if student has a grade for that subject
+2. `add_mark(student_id, subject, score)` — add only if subject not already graded
+3. `get_mark(student_id, subject)` — return mark or ""Not graded""
+4. `common_subjects(id1, id2)` — subjects both students have grades for
+
+**Key Concepts:** Nested key checking, `in` with dict keys",,,,,,,,,,,,,,0.5,markdown,"```python
+warehouse_a = {'laptop': 10, 'phone': 25, 'tablet': 8, 'charger': 100}
+warehouse_b = {'phone': 15, 'tablet': 12, 'headset': 30, 'cable': 200}
+
+def total_stock(w1, w2):
+    result = w1.copy()
+    for item, qty in w2.items():
+        result[item] = result.get(item, 0) + qty
+    return result
+
+def only_in_one(w1, w2):
+    only_w1 = {k: v for k, v in w1.items() if k not in w2}
+    only_w2 = {k: v for k, v in w2.items() if k not in w1}
+    return only_w1, only_w2
+
+def rebalance(w1, w2):
+    shared = set(w1.keys()) & set(w2.keys())
+    transfers = []
+    for item in shared:
+        diff = w1[item] - w2[item]
+        if diff > 0:
+            transfer = diff // 2
+            transfers.append(f""{item}: transfer {transfer} from A to B"")
+        elif diff < 0:
+            transfer = abs(diff) // 2
+            transfers.append(f""{item}: transfer {transfer} from B to A"")
+    return transfers
+
+print(f""Total stock: {total_stock(warehouse_a, warehouse_b)}"")
+only_a, only_b = only_in_one(warehouse_a, warehouse_b)
+print(f""Only in A: {only_a}"")
+print(f""Only in B: {only_b}"")
+print(""Rebalance:"")
+for t in rebalance(warehouse_a, warehouse_b):
+    print(f""  {t}"")
+```
+
+**Explanation:** `total_stock` sums quantities using `.get()`. `only_in_one` uses `not in` to find exclusive items. `rebalance` calculates transfer amounts by finding the difference and dividing by 2 for each shared item."
+subjective,markdown,"Given:
+```python
+phonebook = {'Alice': '555-0101', 'Bob': '555-0202', 'Charlie': '555-0303'}
+```
+
+Write code to check:
+1. Is 'Alice' a key? Is 'Alice' a value?
+2. Is '555-0202' a key? Is '555-0202' a value?
+3. Is 'Diana' in the phonebook?
+
+**Expected Output:**
+'Alice' is a key: True
+'Alice' is a value: False
+'555-0202' is a key: False
+'555-0202' is a value: True
+'Diana' in phonebook: False
+
+**Key Concepts:** `in` checks keys, `.values()` for value checks",,,,,,,,,,,,,,0,markdown,"```python
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 20, 'c': 30, 'd': 40}
+
+d1_copy = dict1.copy()
+d1_copy.update(dict2)
+print(f""After update: {d1_copy}"")
+
+merged = {**dict1, **dict2}
+print(f""Unpacking merge: {merged}"")
+print(f""dict1 unchanged: {dict1}"")
+
+priority = {**dict2, **dict1}
+print(f""dict1 priority: {priority}"")
+```
+
+**Explanation:** In `{**d1, **d2}`, d2 values override d1 for shared keys. To give d1 priority, reverse the order: `{**d2, **d1}`."
+mcsc,markdown,"Which of the following is the primary advantage of **iterating through dictionary keys, values, and items**?",,,,,,1,,It automates the execution of repetitive tasks over a sequence or condition.,It replaces the need for defining functions in a program.,It automatically converts all data types into strings.,It prevents the program from encountering infinite loops.,,,,markdown,
+subjective,markdown,"```python
+company = {
+    'Engineering': {
+        'Alice': {'salary': 120000, 'level': 'Senior'},
+        'Bob': {'salary': 85000, 'level': 'Junior'}
+    },
+    'Marketing': {
+        'Charlie': {'salary': 95000, 'level': 'Mid'},
+        'Diana': {'salary': 110000, 'level': 'Senior'}
+    },
+    'Sales': {
+        'Eve': {'salary': 75000, 'level': 'Junior'},
+        'Frank': {'salary': 130000, 'level': 'Senior'}
+    }
+}
+```
+
+By iterating through the nested structure, print:
+1. Each department with its employees
+2. Total salary per department
+3. Department with highest total salary
+4. All Senior-level employees across departments
+
+**Key Concepts:** Nested iteration, accumulating values",,,,,,,,,,,,,,0.5,markdown,"```python
+basic_info = {'id': 42, 'name': 'Alice', 'email': 'alice@mail.com'}
+social_info = {'twitter': '@alice', 'github': 'alicecodes'}
+preferences = {'theme': 'dark', 'language': 'en', 'notifications': {'email': True, 'sms': False}}
+activity = {'last_login': '2024-01-15', 'posts': 42}
+
+profile = {**basic_info, **social_info, **preferences, **activity, 'full_profile': True}
+
+print(""User Profile:"")
+for key, value in profile.items():
+    print(f""  {key}: {value}"")
+```"
+subjective,markdown,"Given:
+```python
+capitals = {'India': 'New Delhi', 'Japan': 'Tokyo', 'France': 'Paris', 'Brazil': 'Brasilia'}
+```
+
+Using iteration, print:
+1. All country names (keys only)
+2. All capital cities (values only)
+3. Each country with its capital in format ""The capital of X is Y""
+
+**Expected Output:**
+Countries: India, Japan, France, Brazil
+Capitals: New Delhi, Tokyo, Paris, Brasilia
+The capital of India is New Delhi
+The capital of Japan is Tokyo
+The capital of France is Paris
+The capital of Brazil is Brasilia
+
+**Key Concepts:** `.keys()`, `.values()`, `.items()`",,,,,,,,,,,,,,0,markdown,"```python
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 20, 'c': 30, 'd': 40}
+
+d1_copy = dict1.copy()
+d1_copy.update(dict2)
+print(f""After update: {d1_copy}"")
+
+merged = {**dict1, **dict2}
+print(f""Unpacking merge: {merged}"")
+print(f""dict1 unchanged: {dict1}"")
+
+priority = {**dict2, **dict1}
+print(f""dict1 priority: {priority}"")
+```
+
+**Explanation:** In `{**d1, **d2}`, d2 values override d1 for shared keys. To give d1 priority, reverse the order: `{**d2, **d1}`."
+subjective,markdown,"```python
+text = ""python is great python is powerful python is easy to learn and python is fun""
+```
+
+1. Build a frequency dictionary
+2. Print words sorted alphabetically with their counts
+3. Print words sorted by frequency (highest first)
+4. Print a bar chart using `*` characters
+
+**Expected Output:**
+Alphabetical:
+  and: 1
+  easy: 1
+  fun: 1
+  ...
+  python: 4
+
+By frequency:
+  python: 4
+  is: 4
+  ...
+
+Bar chart:
+  python : ****
+  is     : ****
+  to     : *
+  ...
+
+**Key Concepts:** Sorted iteration, formatting",,,,,,,,,,,,,,0.5,markdown,"```python
+source_a = {'item_1': 10, 'item_2': 20, 'item_3': 30}
+source_b = {'item_2': 25, 'item_4': 40, 'item_5': 50}
+source_c = {'item_1': 15, 'item_3': 35, 'item_5': 55}
+
+def merge_sum(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result[k] = result.get(k, 0) + v
+    return result
+
+def merge_max(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            if k in result:
+                result[k] = max(result[k], v)
+            else:
+                result[k] = v
+    return result
+
+def merge_all_values(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result.setdefault(k, []).append(v)
+    return result
+
+sources = [source_a, source_b, source_c]
+print(f""Sum: {merge_sum(sources)}"")
+print(f""Max: {merge_max(sources)}"")
+print(f""All values: {merge_all_values(sources)}"")
+```
+
+**Explanation:**
+- `merge_sum` uses `.get(k, 0) + v` to accumulate sums.
+- `merge_max` uses `max()` to keep the highest value.
+- `merge_all_values` uses `setdefault(k, [])` to build lists of all values."
+subjective,markdown,"```python
+raw_data = {
+    'product_001': {'name': 'Laptop', 'price': 999, 'stock': 5},
+    'product_002': {'name': 'Mouse', 'price': 29, 'stock': 0},
+    'product_003': {'name': 'Keyboard', 'price': 79, 'stock': 12},
+    'product_004': {'name': 'Monitor', 'price': 399, 'stock': 0},
+    'product_005': {'name': 'Headset', 'price': 149, 'stock': 8}
+}
+```
+
+Using dict iteration and comprehensions:
+1. Create `in_stock` — only products with stock > 0
+2. Create `price_map` — {product_name: price} for in-stock items
+3. Create `affordable` — products under $200 that are in stock
+4. Calculate total inventory value (price × stock for in-stock items)
+
+**Key Concepts:** Filtering with comprehensions, chained transformations",,,,,,,,,,,,,,0.5,markdown,"```python
+warehouse_a = {'laptop': 10, 'phone': 25, 'tablet': 8, 'charger': 100}
+warehouse_b = {'phone': 15, 'tablet': 12, 'headset': 30, 'cable': 200}
+
+def total_stock(w1, w2):
+    result = w1.copy()
+    for item, qty in w2.items():
+        result[item] = result.get(item, 0) + qty
+    return result
+
+def only_in_one(w1, w2):
+    only_w1 = {k: v for k, v in w1.items() if k not in w2}
+    only_w2 = {k: v for k, v in w2.items() if k not in w1}
+    return only_w1, only_w2
+
+def rebalance(w1, w2):
+    shared = set(w1.keys()) & set(w2.keys())
+    transfers = []
+    for item in shared:
+        diff = w1[item] - w2[item]
+        if diff > 0:
+            transfer = diff // 2
+            transfers.append(f""{item}: transfer {transfer} from A to B"")
+        elif diff < 0:
+            transfer = abs(diff) // 2
+            transfers.append(f""{item}: transfer {transfer} from B to A"")
+    return transfers
+
+print(f""Total stock: {total_stock(warehouse_a, warehouse_b)}"")
+only_a, only_b = only_in_one(warehouse_a, warehouse_b)
+print(f""Only in A: {only_a}"")
+print(f""Only in B: {only_b}"")
+print(""Rebalance:"")
+for t in rebalance(warehouse_a, warehouse_b):
+    print(f""  {t}"")
+```
+
+**Explanation:** `total_stock` sums quantities using `.get()`. `only_in_one` uses `not in` to find exclusive items. `rebalance` calculates transfer amounts by finding the difference and dividing by 2 for each shared item."
+subjective,markdown,"```python
+grades = {'Alice': 92, 'Bob': 78, 'Charlie': 85, 'Diana': 95, 'Eve': 70}
+```
+
+Using dictionary iteration, calculate and print:
+1. Average grade
+2. Highest scorer (name and grade)
+3. Lowest scorer (name and grade)
+4. Students above average (names)
+
+**Expected Output:**
+Average: 84.0
+Highest: Diana (95)
+Lowest: Eve (70)
+Above average: ['Alice', 'Diana', 'Charlie']
+
+**Key Concepts:** `.values()`, `.items()`, `max()`, `min()`",,,,,,,,,,,,,,0,markdown,"```python
+defaults = {'theme': 'light', 'font_size': 14, 'language': 'en', 'sidebar': True, 'notifications': True}
+user_config = {'theme': 'dark', 'font_size': 18}
+session_config = {'sidebar': False}
+
+final = {**defaults, **user_config, **session_config}
+print(f""Final config: {final}"")
+
+for key in final:
+    if key in session_config:
+        source = 'session'
+    elif key in user_config:
+        source = 'user'
+    else:
+        source = 'defaults'
+    print(f""  {key}: {final[key]} (from {source})"")
+```"
+subjective,markdown,"Given multiple data sources:
+```python
+source_a = {'item_1': 10, 'item_2': 20, 'item_3': 30}
+source_b = {'item_2': 25, 'item_4': 40, 'item_5': 50}
+source_c = {'item_1': 15, 'item_3': 35, 'item_5': 55}
+```
+
+Write functions:
+1. `merge_sum(dicts)` — merge all, summing values for shared keys
+2. `merge_max(dicts)` — merge all, keeping max value for shared keys
+3. `merge_all_values(dicts)` — merge all, collecting all values as lists
+
+**Expected Output:**
+Sum: {'item_1': 25, 'item_2': 45, 'item_3': 65, 'item_4': 40, 'item_5': 105}
+Max: {'item_1': 15, 'item_2': 25, 'item_3': 35, 'item_4': 40, 'item_5': 55}
+All values: {'item_1': [10, 15], 'item_2': [20, 25], 'item_3': [30, 35], 'item_4': [40], 'item_5': [50, 55]}
+
+**Key Concepts:** Custom merge strategies",,,,,,,,,,,,,,0.5,markdown,"```python
+source_a = {'item_1': 10, 'item_2': 20, 'item_3': 30}
+source_b = {'item_2': 25, 'item_4': 40, 'item_5': 50}
+source_c = {'item_1': 15, 'item_3': 35, 'item_5': 55}
+
+def merge_sum(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result[k] = result.get(k, 0) + v
+    return result
+
+def merge_max(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            if k in result:
+                result[k] = max(result[k], v)
+            else:
+                result[k] = v
+    return result
+
+def merge_all_values(dicts):
+    result = {}
+    for d in dicts:
+        for k, v in d.items():
+            result.setdefault(k, []).append(v)
+    return result
+
+sources = [source_a, source_b, source_c]
+print(f""Sum: {merge_sum(sources)}"")
+print(f""Max: {merge_max(sources)}"")
+print(f""All values: {merge_all_values(sources)}"")
+```
+
+**Explanation:**
+- `merge_sum` uses `.get(k, 0) + v` to accumulate sums.
+- `merge_max` uses `max()` to keep the highest value.
+- `merge_all_values` uses `setdefault(k, [])` to build lists of all values."
+subjective,markdown,"Build a user profile from multiple API responses:
+
+```python
+basic_info = {'id': 42, 'name': 'Alice', 'email': 'alice@mail.com'}
+social_info = {'twitter': '@alice', 'github': 'alicecodes'}
+preferences = {'theme': 'dark', 'language': 'en', 'notifications': {'email': True, 'sms': False}}
+activity = {'last_login': '2024-01-15', 'posts': 42}
+```
+
+1. Merge all into a single profile dict
+2. Add a 'full_profile' key that is True
+3. Print the profile in a formatted way
+
+**Key Concepts:** Multi-source merging, nested data",,,,,,,,,,,,,,0.5,markdown,"```python
+basic_info = {'id': 42, 'name': 'Alice', 'email': 'alice@mail.com'}
+social_info = {'twitter': '@alice', 'github': 'alicecodes'}
+preferences = {'theme': 'dark', 'language': 'en', 'notifications': {'email': True, 'sms': False}}
+activity = {'last_login': '2024-01-15', 'posts': 42}
+
+profile = {**basic_info, **social_info, **preferences, **activity, 'full_profile': True}
+
+print(""User Profile:"")
+for key, value in profile.items():
+    print(f""  {key}: {value}"")
+```"
+subjective,markdown,"Two warehouses report their stock:
+```python
+warehouse_a = {'laptop': 10, 'phone': 25, 'tablet': 8, 'charger': 100}
+warehouse_b = {'phone': 15, 'tablet': 12, 'headset': 30, 'cable': 200}
+```
+
+Write functions:
+1. `total_stock(w1, w2)` — combined stock (sum values for shared items)
+2. `only_in_one(w1, w2)` — items available in only one warehouse
+3. `rebalance(w1, w2)` — for shared items, calculate transfer needed to equalize stock
+
+**Expected Output:**
+Total stock: {'laptop': 10, 'phone': 40, 'tablet': 20, 'charger': 100, 'headset': 30, 'cable': 200}
+Only in A: {'laptop': 10, 'charger': 100}
+Only in B: {'headset': 30, 'cable': 200}
+Rebalance: phone: transfer 5 from A to B, tablet: transfer 2 from B to A
+
+**Key Concepts:** Custom merge with arithmetic, set operations on keys",,,,,,,,,,,,,,0.5,markdown,"```python
+warehouse_a = {'laptop': 10, 'phone': 25, 'tablet': 8, 'charger': 100}
+warehouse_b = {'phone': 15, 'tablet': 12, 'headset': 30, 'cable': 200}
+
+def total_stock(w1, w2):
+    result = w1.copy()
+    for item, qty in w2.items():
+        result[item] = result.get(item, 0) + qty
+    return result
+
+def only_in_one(w1, w2):
+    only_w1 = {k: v for k, v in w1.items() if k not in w2}
+    only_w2 = {k: v for k, v in w2.items() if k not in w1}
+    return only_w1, only_w2
+
+def rebalance(w1, w2):
+    shared = set(w1.keys()) & set(w2.keys())
+    transfers = []
+    for item in shared:
+        diff = w1[item] - w2[item]
+        if diff > 0:
+            transfer = diff // 2
+            transfers.append(f""{item}: transfer {transfer} from A to B"")
+        elif diff < 0:
+            transfer = abs(diff) // 2
+            transfers.append(f""{item}: transfer {transfer} from B to A"")
+    return transfers
+
+print(f""Total stock: {total_stock(warehouse_a, warehouse_b)}"")
+only_a, only_b = only_in_one(warehouse_a, warehouse_b)
+print(f""Only in A: {only_a}"")
+print(f""Only in B: {only_b}"")
+print(""Rebalance:"")
+for t in rebalance(warehouse_a, warehouse_b):
+    print(f""  {t}"")
+```
+
+**Explanation:** `total_stock` sums quantities using `.get()`. `only_in_one` uses `not in` to find exclusive items. `rebalance` calculates transfer amounts by finding the difference and dividing by 2 for each shared item."
+subjective,markdown,"Build a 3-layer configuration system:
+```python
+defaults = {'theme': 'light', 'font_size': 14, 'language': 'en', 'sidebar': True, 'notifications': True}
+user_config = {'theme': 'dark', 'font_size': 18}
+session_config = {'sidebar': False}
+```
+
+1. Merge in priority order: defaults < user_config < session_config
+2. Print the final config
+3. Show which settings came from which layer
+
+**Expected Output:**
+Final config: {'theme': 'dark', 'font_size': 18, 'language': 'en', 'sidebar': False, 'notifications': True}
+From defaults: ['language', 'notifications']
+From user: ['theme', 'font_size']
+From session: ['sidebar']
+
+**Key Concepts:** Layered merging, tracking sources",,,,,,,,,,,,,,0,markdown,"```python
+defaults = {'theme': 'light', 'font_size': 14, 'language': 'en', 'sidebar': True, 'notifications': True}
+user_config = {'theme': 'dark', 'font_size': 18}
+session_config = {'sidebar': False}
+
+final = {**defaults, **user_config, **session_config}
+print(f""Final config: {final}"")
+
+for key in final:
+    if key in session_config:
+        source = 'session'
+    elif key in user_config:
+        source = 'user'
+    else:
+        source = 'defaults'
+    print(f""  {key}: {final[key]} (from {source})"")
+```"
+subjective,markdown,"Given:
+```python
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 20, 'c': 30, 'd': 40}
+```
+
+1. Merge dict2 into dict1 using `update()` — print result
+2. Start fresh with original values. Create a NEW merged dict using `{**d1, **d2}` — verify originals are unchanged
+3. Merge with dict1 taking priority for shared keys
+
+**Expected Output:**
+After update: {'a': 1, 'b': 20, 'c': 30, 'd': 40}
+Unpacking merge: {'a': 1, 'b': 20, 'c': 30, 'd': 40}
+dict1 unchanged: {'a': 1, 'b': 2, 'c': 3}
+dict1 priority: {'b': 2, 'c': 3, 'd': 40, 'a': 1}
+
+**Key Concepts:** `update()`, `{**d1, **d2}`, merge priority",,,,,,,,,,,,,,0,markdown,"```python
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 20, 'c': 30, 'd': 40}
+
+d1_copy = dict1.copy()
+d1_copy.update(dict2)
+print(f""After update: {d1_copy}"")
+
+merged = {**dict1, **dict2}
+print(f""Unpacking merge: {merged}"")
+print(f""dict1 unchanged: {dict1}"")
+
+priority = {**dict2, **dict1}
+print(f""dict1 priority: {priority}"")
+```
+
+**Explanation:** In `{**d1, **d2}`, d2 values override d1 for shared keys. To give d1 priority, reverse the order: `{**d2, **d1}`."
+mcsc,markdown,What is the primary characteristic to remember when **merging dictionaries using the update() method**?,,,,,,1,,They are essential data structures used to store and manipulate collections of data.,They can only store integer values.,They are automatically sorted in alphabetical order.,They cannot be assigned to variables.,,,,markdown,
