@@ -199,8 +199,6 @@ print(f"{name} is {age} years old and lives in {city}")
 
 ## Creating and Initializing Dictionaries
 
-**Duration:** 5 minutes
-
 ---
 
 ## What Are Dictionaries?
@@ -336,7 +334,6 @@ In class, you'll learn:
 
 ## Accessing Dictionary Values
 
-**Duration:** 5 minutes
 
 ---
 
@@ -451,7 +448,6 @@ print(config.get('host', 'localhost'))  # ?
 
 ## Adding and Modifying Dictionary Entries
 
-**Duration:** 5 minutes
 
 ---
 
@@ -556,7 +552,6 @@ print(cart)
 
 ## Removing Dictionary Entries
 
-**Duration:** 5 minutes
 
 ---
 
@@ -601,7 +596,6 @@ val = d.pop('z', None)  # val = None, no crash
 
 ## Checking for Key Existence
 
-**Duration:** 5 minutes
 
 ---
 
@@ -659,8 +653,6 @@ print('host' not in config) # ?
 
 ## Iterating Through Dictionaries
 
-**Duration:** 5 minutes
-
 ---
 
 ### Three Iteration Methods
@@ -711,7 +703,6 @@ for item, price in prices.items():
 
 ## Merging Dictionaries
 
-**Duration:** 5 minutes
 
 ---
 

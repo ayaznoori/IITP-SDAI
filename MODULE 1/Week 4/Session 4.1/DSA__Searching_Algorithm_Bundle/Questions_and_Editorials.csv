@@ -1,0 +1,710 @@
+questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
+mcsc,markdown,"For a single search query on an unsorted array of N elements, which approach is more efficient?",,,,,,2,,"Sort the array first, then binary search",Linear search directly,Both have the same complexity,It depends on the target value,,,0,markdown,"Recursive binary search makes one recursive call per iteration, halving the search space each time. The maximum recursion depth equals the maximum number of halvings = log₂(N).
+
+Each frame stores: arr reference, target, lo, hi, mid, return address — a constant amount. So total stack space = O(log N) × O(1) = O(log N)."
+mcsc,markdown,"For N = 1,000,000 elements and Q queries, at approximately what value of Q does sorting once and using binary search become faster than Q linear searches?",,,,,,2,,Q = 1,Q = 20,"Q = 1,000",Q = N,,,0,markdown,"In the recursive binary search:
+```
+IF arr[mid] < target:
+    RETURN bs_rec(arr, target, mid+1, hi)   // last operation ← tail call
+RETURN bs_rec(arr, target, lo, mid-1)        // last operation ← tail call
+```
+
+Both recursive calls are the last thing that happens before the function returns — no computation occurs after the recursive call. This is the definition of tail recursion.
+
+**Option A** is wrong: tail recursion means calling itself once as the last operation.
+**Option C** is wrong: Python does not perform TCO. Each call still uses a stack frame.
+**Option D** is wrong: tail recursion does not imply O(N) stack. Without TCO, it's O(log N); with TCO, O(1)."
+int,markdown,"For an array of N = 2¹⁰ = 1024 elements, what is the minimum number of queries Q for which the total cost of sorting once then using binary search (O(N log N + Q log N)) is less than the total cost of Q linear searches (O(QN))?
+
+Assume each comparison has equal cost and ignore constants. Enter Q: ____",11,,,,,,,,,,,,,0,markdown,"For N = 2³⁰: each recursive call halves the search space. After k calls, N / 2ᵏ elements remain. The base case (lo > hi) is reached when k = log₂(N) = log₂(2³⁰) = 30.
+
+So exactly 30 recursive calls are made in the worst case.
+
+Memory usage: 30 frames × ~100 bytes/frame (Python frame overhead) ≈ 3KB. Completely safe.
+
+Python's default recursion limit is 1000. 30 << 1000 — no risk of hitting the limit for binary search even on the largest practical arrays."
+subjective,markdown,"Given an unsorted array of N integers and Q search targets, return all indices of found targets using the optimal strategy:
+- If Q == 1, use linear search.
+- If Q > 1, sort once and use binary search for each query.
+
+Return results in the order of queries. Return -1 for targets not found.
+
+**Constraints:**
+- 1 ≤ N ≤ 10⁵
+- 1 ≤ Q ≤ 10⁵
+- -10⁶ ≤ arr[i], targets[i] ≤ 10⁶
+
+**Examples:**
+
+**Input:** `arr = [5, 2, 8, 1, 9]`, `targets = [8, 2]`
+**Output:** `[2, 1]` (original indices after sorting, use binary search)
+
+**Input:** `arr = [5, 2, 8, 1, 9]`, `targets = [8]`
+**Output:** `[2]` (linear search, original index)
+
+**Expected Complexity:**
+- Single query: O(N)
+- Multiple queries: O(N log N + Q log N)",,,,,,,,,,,,,,0.5,markdown,"**Algorithm:**
+```
+FUNCTION bs_rec(arr, target, lo, hi):
+    IF lo > hi: RETURN -1                    // base case: empty window
+    mid ← lo + (hi - lo) // 2
+    IF arr[mid] == target: RETURN mid
+    IF arr[mid] < target:
+        RETURN bs_rec(arr, target, mid+1, hi)
+    RETURN bs_rec(arr, target, lo, mid-1)
+```
+
+Call with: `bs_rec(arr, target, 0, len(arr)-1)`
+
+**Trace on [2,4,6,8,10], target=6:**
+- bs_rec(..., 0, 4): mid=2, arr[2]=6 == 6 → return 2 ✓
+
+**Trace on [2,4,6,8,10], target=5:**
+- bs_rec(..., 0, 4): mid=2, arr[2]=6 > 5 → bs_rec(..., 0, 1)
+- bs_rec(..., 0, 1): mid=0, arr[0]=2 < 5 → bs_rec(..., 1, 1)
+- bs_rec(..., 1, 1): mid=1, arr[1]=4 < 5 → bs_rec(..., 2, 1)
+- bs_rec(..., 2, 1): lo=2 > hi=1 → return -1 ✓
+
+**Complexity:** O(log N) time, O(log N) space (call stack)."
+subjective,markdown,"Given N (array size) and Q (number of queries), determine which total cost is lower: Q linear searches (cost = Q × N) or sort + Q binary searches (cost = N log N + Q × log N). Return ""linear"" or ""binary"".
+
+**Constraints:**
+- 1 ≤ N ≤ 10⁹
+- 1 ≤ Q ≤ 10⁹
+- Use integer arithmetic; treat log N as floor(log2(N))
+
+**Examples:**
+
+**Input:** `N = 1000000`, `Q = 5`
+**Output:** `""linear""` (5 × 10⁶ vs 20 × 10⁶ + 5 × 20 = 20000100; linear wins)
+
+**Input:** `N = 1000000`, `Q = 100`
+**Output:** `""binary""` (100 × 10⁶ vs 20000000 + 100 × 20 = 20002000; binary wins)
+
+**Expected Complexity:**
+- Time: O(log N)
+- Space: O(1)",,,,,,,,,,,,,,0.5,markdown,"**Implementation:**
+```python
+def bs_iter(arr, target):
+    lo, hi = 0, len(arr) - 1
+    while lo <= hi:
+        mid = lo + (hi - lo) // 2
+        if arr[mid] == target: return mid
+        if arr[mid] < target: lo = mid + 1
+        else: hi = mid - 1
+    return -1
+
+def bs_rec(arr, target, lo, hi, depth=[0]):
+    depth[0] += 1
+    if lo > hi: return -1
+    mid = lo + (hi - lo) // 2
+    if arr[mid] == target: return mid
+    if arr[mid] < target:
+        return bs_rec(arr, target, mid+1, hi, depth)
+    return bs_rec(arr, target, lo, mid-1, depth)
+```
+
+**Results for test cases:**
+
+arr = list(range(1, 1001)):
+- target=500: iter=499, rec=499, depth=10
+- target=1001: iter=-1, rec=-1, depth=10
+
+arr=[42]: target=42: iter=0, rec=0, depth=1
+
+**Complexity:**
+- Iterative: O(log N) time, O(1) space
+- Recursive: O(log N) time, O(log N) space"
+subjective,markdown,"Answer the following:
+
+1. You have a dataset of 10 million user records stored in insertion order (unsorted). You receive 50 search queries per day. Is it worth sorting the dataset? Show your cost analysis.
+
+2. An e-commerce platform stores product IDs in the order products were added. New products are added 100 times per day, and the search API receives 10,000 queries per second. Recommend a data structure and strategy. Justify your choice.
+
+3. Describe a scenario where sorting before searching would be incorrect, not just inefficient.
+
+4. A database table has a sorted index on a column. A user deletes a row. How does this affect the cost model for future queries, and what does the database do to maintain sorted order?",,,,,,,,,,,,,,1,markdown,"**1. Three advantages of iterative:**
+- O(1) space — no stack growth; memory usage independent of N.
+- No risk of stack overflow — even for N=10⁹ (which only needs 30 recursive calls, but theoretically for pathological N).
+- Slightly faster — no function call overhead (saving/restoring registers, return address, frame setup). Modern CPUs execute loop iterations faster than function calls.
+
+**2. One advantage of recursive:**
+- Clearer mapping to the divide-and-conquer structure — when binary search is a subroutine in a larger recursive algorithm (e.g., merge sort), the recursive form integrates more naturally.
+
+**3. Python's recursion limit:**
+Python default limit: 1000. Binary search hits limit when log₂(N) > 1000 → N > 2¹⁰⁰⁰ ≈ 10³⁰¹. No practical array has this many elements. The recursion limit is NOT a concern for binary search in Python.
+
+**4. Tail Call Optimisation (TCO):**
+With TCO, the compiler recognises that the recursive call is the LAST operation and reuses the same stack frame instead of creating a new one. Result: the recursive binary search runs with O(1) stack space — identical to iterative. The call stack never grows beyond 1 frame. Languages like Scheme, Haskell, and Scala perform TCO. Python does not.
+
+**5. Call overhead for N=10⁶:**
+Binary search does log₂(10⁶) ≈ 20 iterations. Each function call in C++: ~5-10 ns overhead (save registers, jump, restore). 20 calls × 10 ns = 200 ns extra overhead vs iterative. For a search that takes ~100 ns total, this is 2× overhead — potentially significant for tight loops. For a single search per user request, 200 ns is imperceptible. In practice, the JIT compiler or optimizer often eliminates this overhead entirely."
+mcsc,markdown,"What does `binary_search([1, 3, 5, 7, 9, 11, 13], 7)` return?",,,,,,1,,3,4,7,-1,,,0,markdown,"Recursive binary search makes one recursive call per iteration, halving the search space each time. The maximum recursion depth equals the maximum number of halvings = log₂(N).
+
+Each frame stores: arr reference, target, lo, hi, mid, return address — a constant amount. So total stack space = O(log N) × O(1) = O(log N)."
+mcsc,markdown,"In binary search with lo = 2,000,000,000 and hi = 2,000,000,001, which formula correctly computes mid without overflow?",,,,,,2,,(lo + hi) // 2,lo + (hi - lo) // 2,(lo + hi + 1) // 2,hi - (hi - lo) // 2,,,0,markdown,"In the recursive binary search:
+```
+IF arr[mid] < target:
+    RETURN bs_rec(arr, target, mid+1, hi)   // last operation ← tail call
+RETURN bs_rec(arr, target, lo, mid-1)        // last operation ← tail call
+```
+
+Both recursive calls are the last thing that happens before the function returns — no computation occurs after the recursive call. This is the definition of tail recursion.
+
+**Option A** is wrong: tail recursion means calling itself once as the last operation.
+**Option C** is wrong: Python does not perform TCO. Each call still uses a stack frame.
+**Option D** is wrong: tail recursion does not imply O(N) stack. Without TCO, it's O(log N); with TCO, O(1)."
+int,markdown,"How many iterations does binary search on arr = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91] (N=10) require to determine that target = 17 is NOT present?",4,,,,,,,,,,,,,0,markdown,"For N = 2³⁰: each recursive call halves the search space. After k calls, N / 2ᵏ elements remain. The base case (lo > hi) is reached when k = log₂(N) = log₂(2³⁰) = 30.
+
+So exactly 30 recursive calls are made in the worst case.
+
+Memory usage: 30 frames × ~100 bytes/frame (Python frame overhead) ≈ 3KB. Completely safe.
+
+Python's default recursion limit is 1000. 30 << 1000 — no risk of hitting the limit for binary search even on the largest practical arrays."
+subjective,markdown,"Given a sorted array of distinct integers and a target, return the index of the target if found, or -1 if not present. Implement using iterative binary search.
+
+**Constraints:**
+- 1 ≤ len(arr) ≤ 10⁴
+- -10⁴ ≤ arr[i], target ≤ 10⁴
+- All elements are distinct
+- Array is sorted in ascending order
+
+**Examples:**
+
+**Input:** `arr = [-1, 0, 3, 5, 9, 12]`, `target = 9`
+**Output:** `4`
+
+**Input:** `arr = [-1, 0, 3, 5, 9, 12]`, `target = 2`
+**Output:** `-1`
+
+**Input:** `arr = [5]`, `target = 5`
+**Output:** `0`
+
+**Expected Complexity:**
+- Time: O(log N)
+- Space: O(1)",,,,,,,,,,,,,,0.5,markdown,"**Algorithm:**
+```
+FUNCTION bs_rec(arr, target, lo, hi):
+    IF lo > hi: RETURN -1                    // base case: empty window
+    mid ← lo + (hi - lo) // 2
+    IF arr[mid] == target: RETURN mid
+    IF arr[mid] < target:
+        RETURN bs_rec(arr, target, mid+1, hi)
+    RETURN bs_rec(arr, target, lo, mid-1)
+```
+
+Call with: `bs_rec(arr, target, 0, len(arr)-1)`
+
+**Trace on [2,4,6,8,10], target=6:**
+- bs_rec(..., 0, 4): mid=2, arr[2]=6 == 6 → return 2 ✓
+
+**Trace on [2,4,6,8,10], target=5:**
+- bs_rec(..., 0, 4): mid=2, arr[2]=6 > 5 → bs_rec(..., 0, 1)
+- bs_rec(..., 0, 1): mid=0, arr[0]=2 < 5 → bs_rec(..., 1, 1)
+- bs_rec(..., 1, 1): mid=1, arr[1]=4 < 5 → bs_rec(..., 2, 1)
+- bs_rec(..., 2, 1): lo=2 > hi=1 → return -1 ✓
+
+**Complexity:** O(log N) time, O(log N) space (call stack)."
+subjective,markdown,"Given a sorted array of distinct integers and a target, return the index where the target is found, OR the index where it would be inserted to keep the array sorted.
+
+**Constraints:**
+- 1 ≤ len(arr) ≤ 10⁴
+- -10⁴ ≤ arr[i], target ≤ 10⁴
+- All elements are distinct
+
+**Examples:**
+
+**Input:** `arr = [1, 3, 5, 6]`, `target = 5`
+**Output:** `2`
+
+**Input:** `arr = [1, 3, 5, 6]`, `target = 2`
+**Output:** `1`
+
+**Input:** `arr = [1, 3, 5, 6]`, `target = 7`
+**Output:** `4`
+
+**Input:** `arr = [1, 3, 5, 6]`, `target = 0`
+**Output:** `0`
+
+**Expected Complexity:**
+- Time: O(log N)
+- Space: O(1)",,,,,,,,,,,,,,0.5,markdown,"**Implementation:**
+```python
+def bs_iter(arr, target):
+    lo, hi = 0, len(arr) - 1
+    while lo <= hi:
+        mid = lo + (hi - lo) // 2
+        if arr[mid] == target: return mid
+        if arr[mid] < target: lo = mid + 1
+        else: hi = mid - 1
+    return -1
+
+def bs_rec(arr, target, lo, hi, depth=[0]):
+    depth[0] += 1
+    if lo > hi: return -1
+    mid = lo + (hi - lo) // 2
+    if arr[mid] == target: return mid
+    if arr[mid] < target:
+        return bs_rec(arr, target, mid+1, hi, depth)
+    return bs_rec(arr, target, lo, mid-1, depth)
+```
+
+**Results for test cases:**
+
+arr = list(range(1, 1001)):
+- target=500: iter=499, rec=499, depth=10
+- target=1001: iter=-1, rec=-1, depth=10
+
+arr=[42]: target=42: iter=0, rec=0, depth=1
+
+**Complexity:**
+- Iterative: O(log N) time, O(1) space
+- Recursive: O(log N) time, O(log N) space"
+subjective,markdown,"Answer the following:
+
+1. State the loop invariant of binary search. Prove it is established before the loop and preserved by each iteration.
+
+2. Why do we update `lo = mid + 1` rather than `lo = mid` when arr[mid] < target? What goes wrong if we use `lo = mid`?
+
+3. Trace binary search on arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], target = 1. Show every value of lo, hi, mid.
+
+4. Binary search requires the array to be sorted. If you call binary search on an unsorted array, can it accidentally return a correct answer? Can it return an incorrect one? Give examples of both.",,,,,,,,,,,,,,1,markdown,"**1. Three advantages of iterative:**
+- O(1) space — no stack growth; memory usage independent of N.
+- No risk of stack overflow — even for N=10⁹ (which only needs 30 recursive calls, but theoretically for pathological N).
+- Slightly faster — no function call overhead (saving/restoring registers, return address, frame setup). Modern CPUs execute loop iterations faster than function calls.
+
+**2. One advantage of recursive:**
+- Clearer mapping to the divide-and-conquer structure — when binary search is a subroutine in a larger recursive algorithm (e.g., merge sort), the recursive form integrates more naturally.
+
+**3. Python's recursion limit:**
+Python default limit: 1000. Binary search hits limit when log₂(N) > 1000 → N > 2¹⁰⁰⁰ ≈ 10³⁰¹. No practical array has this many elements. The recursion limit is NOT a concern for binary search in Python.
+
+**4. Tail Call Optimisation (TCO):**
+With TCO, the compiler recognises that the recursive call is the LAST operation and reuses the same stack frame instead of creating a new one. Result: the recursive binary search runs with O(1) stack space — identical to iterative. The call stack never grows beyond 1 frame. Languages like Scheme, Haskell, and Scala perform TCO. Python does not.
+
+**5. Call overhead for N=10⁶:**
+Binary search does log₂(10⁶) ≈ 20 iterations. Each function call in C++: ~5-10 ns overhead (save registers, jump, restore). 20 calls × 10 ns = 200 ns extra overhead vs iterative. For a search that takes ~100 ns total, this is 2× overhead — potentially significant for tight loops. For a single search per user request, 200 ns is imperceptible. In practice, the JIT compiler or optimizer often eliminates this overhead entirely."
+mcsc,markdown,What is the maximum number of iterations binary search requires on an array of 128 elements?,,,,,,2,,6,7,8,128,,,0,markdown,"Recursive binary search makes one recursive call per iteration, halving the search space each time. The maximum recursion depth equals the maximum number of halvings = log₂(N).
+
+Each frame stores: arr reference, target, lo, hi, mid, return address — a constant amount. So total stack space = O(log N) × O(1) = O(log N)."
+mcsc,markdown,Which statement best explains why binary search runs in O(log N)?,,,,,,2,,It skips every other element,"It divides the search space by 2 each iteration, reducing a size-N problem to size 1 in log₂(N) steps",It uses hashing to find elements quickly,It sorts the array before searching,,,0,markdown,"In the recursive binary search:
+```
+IF arr[mid] < target:
+    RETURN bs_rec(arr, target, mid+1, hi)   // last operation ← tail call
+RETURN bs_rec(arr, target, lo, mid-1)        // last operation ← tail call
+```
+
+Both recursive calls are the last thing that happens before the function returns — no computation occurs after the recursive call. This is the definition of tail recursion.
+
+**Option A** is wrong: tail recursion means calling itself once as the last operation.
+**Option C** is wrong: Python does not perform TCO. Each call still uses a stack frame.
+**Option D** is wrong: tail recursion does not imply O(N) stack. Without TCO, it's O(log N); with TCO, O(1)."
+int,markdown,"If binary search requires exactly 5 iterations in the worst case, what is the maximum array size N this could correspond to?",31,,,,,,,,,,,,,0,markdown,"For N = 2³⁰: each recursive call halves the search space. After k calls, N / 2ᵏ elements remain. The base case (lo > hi) is reached when k = log₂(N) = log₂(2³⁰) = 30.
+
+So exactly 30 recursive calls are made in the worst case.
+
+Memory usage: 30 frames × ~100 bytes/frame (Python frame overhead) ≈ 3KB. Completely safe.
+
+Python's default recursion limit is 1000. 30 << 1000 — no risk of hitting the limit for binary search even on the largest practical arrays."
+subjective,markdown,"Given a sorted array and a target, return the number of iterations binary search takes to either find the target or determine it is absent.
+
+**Constraints:**
+- 1 ≤ len(arr) ≤ 10⁵
+- -10⁶ ≤ arr[i], target ≤ 10⁶
+- Array is sorted in ascending order
+
+**Examples:**
+
+**Input:** `arr = [1, 3, 5, 7, 9]`, `target = 9`
+**Output:** `3`
+
+**Input:** `arr = [1, 3, 5, 7, 9]`, `target = 6`
+**Output:** `3`
+
+**Input:** `arr = [5]`, `target = 5`
+**Output:** `1`
+
+**Expected Complexity:**
+- Time: O(log N)
+- Space: O(1)",,,,,,,,,,,,,,0.5,markdown,"**Algorithm:**
+```
+FUNCTION bs_rec(arr, target, lo, hi):
+    IF lo > hi: RETURN -1                    // base case: empty window
+    mid ← lo + (hi - lo) // 2
+    IF arr[mid] == target: RETURN mid
+    IF arr[mid] < target:
+        RETURN bs_rec(arr, target, mid+1, hi)
+    RETURN bs_rec(arr, target, lo, mid-1)
+```
+
+Call with: `bs_rec(arr, target, 0, len(arr)-1)`
+
+**Trace on [2,4,6,8,10], target=6:**
+- bs_rec(..., 0, 4): mid=2, arr[2]=6 == 6 → return 2 ✓
+
+**Trace on [2,4,6,8,10], target=5:**
+- bs_rec(..., 0, 4): mid=2, arr[2]=6 > 5 → bs_rec(..., 0, 1)
+- bs_rec(..., 0, 1): mid=0, arr[0]=2 < 5 → bs_rec(..., 1, 1)
+- bs_rec(..., 1, 1): mid=1, arr[1]=4 < 5 → bs_rec(..., 2, 1)
+- bs_rec(..., 2, 1): lo=2 > hi=1 → return -1 ✓
+
+**Complexity:** O(log N) time, O(log N) space (call stack)."
+subjective,markdown,"Given K, return the minimum array size N such that binary search on a sorted array of N elements requires exactly K iterations in the worst case.
+
+**Constraints:**
+- 1 ≤ K ≤ 30
+
+**Examples:**
+
+**Input:** `K = 1`
+**Output:** `1`
+
+**Input:** `K = 3`
+**Output:** `5`
+
+**Input:** `K = 10`
+**Output:** `513`
+
+**Expected Complexity:**
+- Time: O(1)
+- Space: O(1)
+
+The maximum array size for K iterations is 2ᴷ - 1. The minimum size for exactly K iterations is 2^(K-1).",,,,,,,,,,,,,,0.5,markdown,"**Implementation:**
+```python
+def bs_iter(arr, target):
+    lo, hi = 0, len(arr) - 1
+    while lo <= hi:
+        mid = lo + (hi - lo) // 2
+        if arr[mid] == target: return mid
+        if arr[mid] < target: lo = mid + 1
+        else: hi = mid - 1
+    return -1
+
+def bs_rec(arr, target, lo, hi, depth=[0]):
+    depth[0] += 1
+    if lo > hi: return -1
+    mid = lo + (hi - lo) // 2
+    if arr[mid] == target: return mid
+    if arr[mid] < target:
+        return bs_rec(arr, target, mid+1, hi, depth)
+    return bs_rec(arr, target, lo, mid-1, depth)
+```
+
+**Results for test cases:**
+
+arr = list(range(1, 1001)):
+- target=500: iter=499, rec=499, depth=10
+- target=1001: iter=-1, rec=-1, depth=10
+
+arr=[42]: target=42: iter=0, rec=0, depth=1
+
+**Complexity:**
+- Iterative: O(log N) time, O(1) space
+- Recursive: O(log N) time, O(log N) space"
+subjective,markdown,"Answer the following:
+
+1. Derive the worst-case time complexity of binary search from first principles. Show every step.
+
+2. Binary search on an array of N = 10⁹ elements requires at most 31 comparisons. A linear search on an array of N = 100 elements requires at most 100 comparisons. In what situation would you prefer linear search over binary search even when the data is sorted?
+
+3. What is the space complexity of iterative binary search? What is it for recursive? Why is O(log N) stack space acceptable in practice?
+
+4. If binary search is O(log N), and we apply it to a problem where the search space is itself O(N) large (e.g., answer space from 1 to N), what is the overall complexity?",,,,,,,,,,,,,,1,markdown,"**1. Three advantages of iterative:**
+- O(1) space — no stack growth; memory usage independent of N.
+- No risk of stack overflow — even for N=10⁹ (which only needs 30 recursive calls, but theoretically for pathological N).
+- Slightly faster — no function call overhead (saving/restoring registers, return address, frame setup). Modern CPUs execute loop iterations faster than function calls.
+
+**2. One advantage of recursive:**
+- Clearer mapping to the divide-and-conquer structure — when binary search is a subroutine in a larger recursive algorithm (e.g., merge sort), the recursive form integrates more naturally.
+
+**3. Python's recursion limit:**
+Python default limit: 1000. Binary search hits limit when log₂(N) > 1000 → N > 2¹⁰⁰⁰ ≈ 10³⁰¹. No practical array has this many elements. The recursion limit is NOT a concern for binary search in Python.
+
+**4. Tail Call Optimisation (TCO):**
+With TCO, the compiler recognises that the recursive call is the LAST operation and reuses the same stack frame instead of creating a new one. Result: the recursive binary search runs with O(1) stack space — identical to iterative. The call stack never grows beyond 1 frame. Languages like Scheme, Haskell, and Scala perform TCO. Python does not.
+
+**5. Call overhead for N=10⁶:**
+Binary search does log₂(10⁶) ≈ 20 iterations. Each function call in C++: ~5-10 ns overhead (save registers, jump, restore). 20 calls × 10 ns = 200 ns extra overhead vs iterative. For a search that takes ~100 ns total, this is 2× overhead — potentially significant for tight loops. For a single search per user request, 200 ns is imperceptible. In practice, the JIT compiler or optimizer often eliminates this overhead entirely."
+mcsc,markdown,"Binary search on arr = [3, 6, 9, 12, 15, 18, 21], target = 18 (lo=0, hi=6, mid=3, arr[3]=12). What is the next state?",,,,,,2,,"lo=0, hi=2","lo=4, hi=6","lo=3, hi=6","lo=0, hi=3",,,0,markdown,"Recursive binary search makes one recursive call per iteration, halving the search space each time. The maximum recursion depth equals the maximum number of halvings = log₂(N).
+
+Each frame stores: arr reference, target, lo, hi, mid, return address — a constant amount. So total stack space = O(log N) × O(1) = O(log N)."
+mcsc,markdown,"Binary search on arr = [1, 2, 4, 8], target = 3 (not present). After all iterations, what is the final relationship between lo and hi that triggers termination?",,,,,,2,,lo == hi,lo > hi,lo == 0,hi == len(arr) - 1,,,0,markdown,"In the recursive binary search:
+```
+IF arr[mid] < target:
+    RETURN bs_rec(arr, target, mid+1, hi)   // last operation ← tail call
+RETURN bs_rec(arr, target, lo, mid-1)        // last operation ← tail call
+```
+
+Both recursive calls are the last thing that happens before the function returns — no computation occurs after the recursive call. This is the definition of tail recursion.
+
+**Option A** is wrong: tail recursion means calling itself once as the last operation.
+**Option C** is wrong: Python does not perform TCO. Each call still uses a stack frame.
+**Option D** is wrong: tail recursion does not imply O(N) stack. Without TCO, it's O(log N); with TCO, O(1)."
+int,markdown,"Trace binary search on arr = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20] (N=10), target = 14. How many iterations does the algorithm take?
+
+
+Actually: Iter 1→2→3→4 (found at iter 4). Answer: **4**.",3,,,,,,,,,,,,,0,markdown,"For N = 2³⁰: each recursive call halves the search space. After k calls, N / 2ᵏ elements remain. The base case (lo > hi) is reached when k = log₂(N) = log₂(2³⁰) = 30.
+
+So exactly 30 recursive calls are made in the worst case.
+
+Memory usage: 30 frames × ~100 bytes/frame (Python frame overhead) ≈ 3KB. Completely safe.
+
+Python's default recursion limit is 1000. 30 << 1000 — no risk of hitting the limit for binary search even on the largest practical arrays."
+subjective,markdown,"Implement binary search that returns not just the index of the target, but also a list of (lo, hi, mid) tuples for each iteration.
+
+**Constraints:**
+- 1 ≤ len(arr) ≤ 10⁴
+- Array is sorted, elements may have duplicates
+- Return index of any matching element if found, -1 if not found
+
+**Examples:**
+
+**Input:** `arr = [1, 3, 5, 7, 9]`, `target = 5`
+**Output:** `(2, [(0,4,2)])`
+(Found at index 2 in 1 iteration: lo=0,hi=4,mid=2)
+
+**Input:** `arr = [1, 3, 5, 7, 9]`, `target = 4`
+**Output:** `(-1, [(0,4,2),(0,1,0),(1,1,1),(2,1,-1)])`
+(Not found; trace shows each iteration)
+
+**Expected Complexity:**
+- Time: O(log N)
+- Space: O(log N) for the trace",,,,,,,,,,,,,,0.5,markdown,"**Algorithm:**
+```
+FUNCTION bs_rec(arr, target, lo, hi):
+    IF lo > hi: RETURN -1                    // base case: empty window
+    mid ← lo + (hi - lo) // 2
+    IF arr[mid] == target: RETURN mid
+    IF arr[mid] < target:
+        RETURN bs_rec(arr, target, mid+1, hi)
+    RETURN bs_rec(arr, target, lo, mid-1)
+```
+
+Call with: `bs_rec(arr, target, 0, len(arr)-1)`
+
+**Trace on [2,4,6,8,10], target=6:**
+- bs_rec(..., 0, 4): mid=2, arr[2]=6 == 6 → return 2 ✓
+
+**Trace on [2,4,6,8,10], target=5:**
+- bs_rec(..., 0, 4): mid=2, arr[2]=6 > 5 → bs_rec(..., 0, 1)
+- bs_rec(..., 0, 1): mid=0, arr[0]=2 < 5 → bs_rec(..., 1, 1)
+- bs_rec(..., 1, 1): mid=1, arr[1]=4 < 5 → bs_rec(..., 2, 1)
+- bs_rec(..., 2, 1): lo=2 > hi=1 → return -1 ✓
+
+**Complexity:** O(log N) time, O(log N) space (call stack)."
+subjective,markdown,"Implement a number guessing game. A secret number is chosen in [1, N]. You can call `guess(k)` which returns:
+- 0 if k == secret
+- -1 if k > secret
+- 1 if k < secret
+
+Find the secret number using binary search. Return the secret number.
+
+**Constraints:**
+- 1 ≤ N ≤ 2³¹ - 1
+- The guess API is provided; call it in your implementation
+
+**Examples:**
+
+**Input:** `N = 10`, `secret = 6`
+**Output:** `6`
+
+**Input:** `N = 1`, `secret = 1`
+**Output:** `1`
+
+**Expected Complexity:**
+- Time: O(log N)
+- Space: O(1)",,,,,,,,,,,,,,0.5,markdown,"**Implementation:**
+```python
+def bs_iter(arr, target):
+    lo, hi = 0, len(arr) - 1
+    while lo <= hi:
+        mid = lo + (hi - lo) // 2
+        if arr[mid] == target: return mid
+        if arr[mid] < target: lo = mid + 1
+        else: hi = mid - 1
+    return -1
+
+def bs_rec(arr, target, lo, hi, depth=[0]):
+    depth[0] += 1
+    if lo > hi: return -1
+    mid = lo + (hi - lo) // 2
+    if arr[mid] == target: return mid
+    if arr[mid] < target:
+        return bs_rec(arr, target, mid+1, hi, depth)
+    return bs_rec(arr, target, lo, mid-1, depth)
+```
+
+**Results for test cases:**
+
+arr = list(range(1, 1001)):
+- target=500: iter=499, rec=499, depth=10
+- target=1001: iter=-1, rec=-1, depth=10
+
+arr=[42]: target=42: iter=0, rec=0, depth=1
+
+**Complexity:**
+- Iterative: O(log N) time, O(1) space
+- Recursive: O(log N) time, O(log N) space"
+subjective,markdown,"Answer the following:
+
+1. Three buggy binary search implementations are given below. For each, identify the bug and describe what goes wrong:
+   - Bug A: `WHILE lo < hi` (instead of `lo <= hi`)
+   - Bug B: `hi = mid` (instead of `hi = mid - 1`) when arr[mid] > target
+   - Bug C: `lo = mid` (instead of `lo = mid + 1`) when arr[mid] < target
+
+2. Construct a minimal example (smallest N) that triggers each bug to produce a wrong result.
+
+3. Explain why the loop invariant ""if target exists, it is in arr[lo..hi]"" breaks under Bug B and Bug C.
+
+4. Is it possible to write a correct binary search with `lo = 0, hi = len(arr)` (hi inclusive of one past the end)? If so, what changes to the update rules are needed?",,,,,,,,,,,,,,1,markdown,"**1. Three advantages of iterative:**
+- O(1) space — no stack growth; memory usage independent of N.
+- No risk of stack overflow — even for N=10⁹ (which only needs 30 recursive calls, but theoretically for pathological N).
+- Slightly faster — no function call overhead (saving/restoring registers, return address, frame setup). Modern CPUs execute loop iterations faster than function calls.
+
+**2. One advantage of recursive:**
+- Clearer mapping to the divide-and-conquer structure — when binary search is a subroutine in a larger recursive algorithm (e.g., merge sort), the recursive form integrates more naturally.
+
+**3. Python's recursion limit:**
+Python default limit: 1000. Binary search hits limit when log₂(N) > 1000 → N > 2¹⁰⁰⁰ ≈ 10³⁰¹. No practical array has this many elements. The recursion limit is NOT a concern for binary search in Python.
+
+**4. Tail Call Optimisation (TCO):**
+With TCO, the compiler recognises that the recursive call is the LAST operation and reuses the same stack frame instead of creating a new one. Result: the recursive binary search runs with O(1) stack space — identical to iterative. The call stack never grows beyond 1 frame. Languages like Scheme, Haskell, and Scala perform TCO. Python does not.
+
+**5. Call overhead for N=10⁶:**
+Binary search does log₂(10⁶) ≈ 20 iterations. Each function call in C++: ~5-10 ns overhead (save registers, jump, restore). 20 calls × 10 ns = 200 ns extra overhead vs iterative. For a search that takes ~100 ns total, this is 2× overhead — potentially significant for tight loops. For a single search per user request, 200 ns is imperceptible. In practice, the JIT compiler or optimizer often eliminates this overhead entirely."
+mcsc,markdown,What is the space complexity of recursive binary search due to call stack frames?,,,,,,2,,O(1),O(log N),O(N),O(N log N),,,0,markdown,"Recursive binary search makes one recursive call per iteration, halving the search space each time. The maximum recursion depth equals the maximum number of halvings = log₂(N).
+
+Each frame stores: arr reference, target, lo, hi, mid, return address — a constant amount. So total stack space = O(log N) × O(1) = O(log N)."
+mcsc,markdown,Which statement about tail recursion is correct in the context of binary search?,,,,,,2,,Tail recursion means the function calls itself more than once,The recursive binary search is tail-recursive because the recursive call is the last operation in each branch,Python automatically optimises tail-recursive functions to use O(1) stack,Tail recursion always requires O(N) stack space,,,0,markdown,"In the recursive binary search:
+```
+IF arr[mid] < target:
+    RETURN bs_rec(arr, target, mid+1, hi)   // last operation ← tail call
+RETURN bs_rec(arr, target, lo, mid-1)        // last operation ← tail call
+```
+
+Both recursive calls are the last thing that happens before the function returns — no computation occurs after the recursive call. This is the definition of tail recursion.
+
+**Option A** is wrong: tail recursion means calling itself once as the last operation.
+**Option C** is wrong: Python does not perform TCO. Each call still uses a stack frame.
+**Option D** is wrong: tail recursion does not imply O(N) stack. Without TCO, it's O(log N); with TCO, O(1)."
+int,markdown,"For N = 2³⁰ ≈ 10⁹ elements, what is the maximum call stack depth of recursive binary search?",30,,,,,,,,,,,,,0,markdown,"For N = 2³⁰: each recursive call halves the search space. After k calls, N / 2ᵏ elements remain. The base case (lo > hi) is reached when k = log₂(N) = log₂(2³⁰) = 30.
+
+So exactly 30 recursive calls are made in the worst case.
+
+Memory usage: 30 frames × ~100 bytes/frame (Python frame overhead) ≈ 3KB. Completely safe.
+
+Python's default recursion limit is 1000. 30 << 1000 — no risk of hitting the limit for binary search even on the largest practical arrays."
+subjective,markdown,"Implement recursive binary search. Return the index of target if found, -1 otherwise.
+
+**Constraints:**
+- 1 ≤ len(arr) ≤ 10⁴
+- Array is sorted in ascending order, elements are distinct
+- -10⁶ ≤ arr[i], target ≤ 10⁶
+
+**Examples:**
+
+**Input:** `arr = [2, 4, 6, 8, 10]`, `target = 6`
+**Output:** `2`
+
+**Input:** `arr = [2, 4, 6, 8, 10]`, `target = 5`
+**Output:** `-1`
+
+**Input:** `arr = [7]`, `target = 7`
+**Output:** `0`
+
+**Expected Complexity:**
+- Time: O(log N)
+- Space: O(log N) call stack",,,,,,,,,,,,,,0.5,markdown,"**Algorithm:**
+```
+FUNCTION bs_rec(arr, target, lo, hi):
+    IF lo > hi: RETURN -1                    // base case: empty window
+    mid ← lo + (hi - lo) // 2
+    IF arr[mid] == target: RETURN mid
+    IF arr[mid] < target:
+        RETURN bs_rec(arr, target, mid+1, hi)
+    RETURN bs_rec(arr, target, lo, mid-1)
+```
+
+Call with: `bs_rec(arr, target, 0, len(arr)-1)`
+
+**Trace on [2,4,6,8,10], target=6:**
+- bs_rec(..., 0, 4): mid=2, arr[2]=6 == 6 → return 2 ✓
+
+**Trace on [2,4,6,8,10], target=5:**
+- bs_rec(..., 0, 4): mid=2, arr[2]=6 > 5 → bs_rec(..., 0, 1)
+- bs_rec(..., 0, 1): mid=0, arr[0]=2 < 5 → bs_rec(..., 1, 1)
+- bs_rec(..., 1, 1): mid=1, arr[1]=4 < 5 → bs_rec(..., 2, 1)
+- bs_rec(..., 2, 1): lo=2 > hi=1 → return -1 ✓
+
+**Complexity:** O(log N) time, O(log N) space (call stack)."
+subjective,markdown,"Given a recursive binary search implementation (as a string description or pseudocode), write the equivalent iterative version that uses O(1) space.
+
+Implement iterative binary search on arr = sorted array, target = search value. Also implement recursive binary search. Verify both return the same results on these test cases and report the maximum recursion depth for the recursive version.
+
+- arr = [1..1000] (1 to 1000), target = 500
+- arr = [1..1000], target = 1001 (not present)
+- arr = [42], target = 42
+
+For each test case: `(result_iterative, result_recursive, max_depth_recursive)`
+
+**Expected Complexity:**
+- Iterative: O(log N) time, O(1) space
+- Recursive: O(log N) time, O(log N) space",,,,,,,,,,,,,,0.5,markdown,"**Implementation:**
+```python
+def bs_iter(arr, target):
+    lo, hi = 0, len(arr) - 1
+    while lo <= hi:
+        mid = lo + (hi - lo) // 2
+        if arr[mid] == target: return mid
+        if arr[mid] < target: lo = mid + 1
+        else: hi = mid - 1
+    return -1
+
+def bs_rec(arr, target, lo, hi, depth=[0]):
+    depth[0] += 1
+    if lo > hi: return -1
+    mid = lo + (hi - lo) // 2
+    if arr[mid] == target: return mid
+    if arr[mid] < target:
+        return bs_rec(arr, target, mid+1, hi, depth)
+    return bs_rec(arr, target, lo, mid-1, depth)
+```
+
+**Results for test cases:**
+
+arr = list(range(1, 1001)):
+- target=500: iter=499, rec=499, depth=10
+- target=1001: iter=-1, rec=-1, depth=10
+
+arr=[42]: target=42: iter=0, rec=0, depth=1
+
+**Complexity:**
+- Iterative: O(log N) time, O(1) space
+- Recursive: O(log N) time, O(log N) space"
+subjective,markdown,"Answer the following:
+
+1. List three advantages of the iterative binary search implementation over the recursive one.
+
+2. List one advantage of the recursive implementation over the iterative one.
+
+3. Python has a default recursion limit of 1000. For what minimum array size N would recursive binary search risk hitting this limit?
+
+4. A language supports ""tail call optimisation"" (TCO). Explain how TCO would change the space complexity of recursive binary search in that language. Is the result equivalent to iterative in terms of space?
+
+5. In C++, every function call adds overhead (save registers, push arguments, return address). Estimate whether this overhead is significant for binary search on N=10⁶ elements. Justify.",,,,,,,,,,,,,,1,markdown,"**1. Three advantages of iterative:**
+- O(1) space — no stack growth; memory usage independent of N.
+- No risk of stack overflow — even for N=10⁹ (which only needs 30 recursive calls, but theoretically for pathological N).
+- Slightly faster — no function call overhead (saving/restoring registers, return address, frame setup). Modern CPUs execute loop iterations faster than function calls.
+
+**2. One advantage of recursive:**
+- Clearer mapping to the divide-and-conquer structure — when binary search is a subroutine in a larger recursive algorithm (e.g., merge sort), the recursive form integrates more naturally.
+
+**3. Python's recursion limit:**
+Python default limit: 1000. Binary search hits limit when log₂(N) > 1000 → N > 2¹⁰⁰⁰ ≈ 10³⁰¹. No practical array has this many elements. The recursion limit is NOT a concern for binary search in Python.
+
+**4. Tail Call Optimisation (TCO):**
+With TCO, the compiler recognises that the recursive call is the LAST operation and reuses the same stack frame instead of creating a new one. Result: the recursive binary search runs with O(1) stack space — identical to iterative. The call stack never grows beyond 1 frame. Languages like Scheme, Haskell, and Scala perform TCO. Python does not.
+
+**5. Call overhead for N=10⁶:**
+Binary search does log₂(10⁶) ≈ 20 iterations. Each function call in C++: ~5-10 ns overhead (save registers, jump, restore). 20 calls × 10 ns = 200 ns extra overhead vs iterative. For a search that takes ~100 ns total, this is 2× overhead — potentially significant for tight loops. For a single search per user request, 200 ns is imperceptible. In practice, the JIT compiler or optimizer often eliminates this overhead entirely."
