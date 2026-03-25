@@ -1,137 +1,134 @@
-#  Assignment — Problem Solving using Searching, Sorting, and Recursion
+# Assignment — Problem Solving using Sorting, Searching, and Recursion
 
 ---
 
-## **Q1. Which searching algorithm works correctly only on a sorted array?**
+## **Q1. Why can Binary Search not be applied directly to an unsorted array?**
 
-A) Linear Search  
-B) Binary Search  
-C) Bubble Search  
-D) Sequential Check  
+A) Because it only works for strings  
+B) Because it requires comparing with the middle element in ordered data  
+C) Because recursion is required  
+D) Because Python does not support it  
 
 ✅ **Correct Answer:** B
 
 **Explanation:**  
-Binary Search requires the array to be sorted because it repeatedly checks the middle element and discards half of the remaining search space.
+Binary Search depends on the array being sorted so that half of the search space can be eliminated correctly after each comparison.
 
 ---
 
-## **Q2. What is the worst-case time complexity of Linear Search?**
+## **Q2. Which sorting algorithm have you implemented manually in this module?**
+
+A) Merge Sort  
+B) Quick Sort  
+C) Insertion Sort  
+D) Selection Sort  
+
+✅ **Correct Answer:** C
+
+**Explanation:**  
+Students have learned Insertion Sort and used it to understand how sorting works step by step.
+
+---
+
+## **Q3. What is the worst-case time complexity of Insertion Sort?**
 
 A) O(1)  
 B) O(log n)  
 C) O(n)  
-D) O(n log n)  
-
-✅ **Correct Answer:** C
-
-**Explanation:**  
-In the worst case, Linear Search checks every element before finding the target or confirming it is absent.
-
----
-
-## **Q3. Why is sorting often used before solving a problem?**
-
-A) Because sorting always reduces memory usage  
-B) Because sorting can make searching and comparisons easier  
-C) Because sorting changes the size of the array  
-D) Because recursion requires sorted arrays  
-
-✅ **Correct Answer:** B
-
-**Explanation:**  
-Many problems become easier after sorting because data becomes structured, allowing efficient techniques like Binary Search or Two Pointers.
-
----
-
-## **Q4. What is the time complexity of Binary Search in the worst case?**
-
-A) O(1)  
-B) O(n)  
-C) O(log n)  
 D) O(n²)  
 
-✅ **Correct Answer:** C
+✅ **Correct Answer:** D
 
 **Explanation:**  
-Binary Search cuts the search space in half on each step, making it much faster than Linear Search for sorted arrays.
+In the worst case, Insertion Sort may need to shift many elements for each position, resulting in O(n²) time complexity.
 
 ---
 
-## **Q5. Which concept is most important to stop recursion correctly?**
+## **Q4. What is the worst-case time complexity of Binary Search?**
 
-A) Loop variable  
-B) Base case  
-C) Sorting order  
-D) Input size  
+A) O(n²)  
+B) O(n)  
+C) O(log n)  
+D) O(1)  
+
+✅ **Correct Answer:** C
+
+**Explanation:**  
+Binary Search halves the search space in every step, making it much faster than linear scanning for sorted arrays.
+
+---
+
+## **Q5. Which of the following is TRUE about iterative and recursive Binary Search?**
+
+A) Both have O(log n) time complexity  
+B) Recursive Binary Search has O(1) space complexity  
+C) Iterative Binary Search always runs faster because of syntax  
+D) Recursive Binary Search does not need a base case  
+
+✅ **Correct Answer:** A
+
+**Explanation:**  
+Both iterative and recursive Binary Search take O(log n) time, but recursive Binary Search uses extra stack space.
+
+---
+
+## **Q6. Which Python method sorts the original list directly?**
+
+A) `sorted()`  
+B) `sort()`  
+C) `append()`  
+D) `reverse()`  
 
 ✅ **Correct Answer:** B
 
 **Explanation:**  
-A recursive function must include a base case, otherwise it will continue calling itself indefinitely and may cause a stack overflow.
+`list.sort()` modifies the original list, while `sorted()` returns a new sorted list.
 
 ---
 
-## **Q6. Which of the following is the best approach to check whether any pair in a sorted array adds up to a target?**
+## **Q7. If you need to search many times in the same unsorted array, what is usually a better strategy?**
 
-A) Use nested loops only  
-B) Use stack and queue  
-C) Use two pointers  
-D) Use recursion only  
-
-✅ **Correct Answer:** C
-
-**Explanation:**  
-For a sorted array, the two-pointer technique is efficient because it allows checking sums from both ends in linear time.
-
----
-
-## **Q7. Merge Sort mainly uses which problem-solving strategy?**
-
-A) Greedy  
-B) Divide and Conquer  
-C) Dynamic Programming  
-D) Backtracking  
+A) Always scan from left to right  
+B) Sort once and use Binary Search repeatedly  
+C) Use recursion without sorting  
+D) Print the array first  
 
 ✅ **Correct Answer:** B
 
 **Explanation:**  
-Merge Sort divides the array into smaller parts, recursively sorts them, and then merges them back in sorted order.
+If multiple searches are required, sorting once and then applying Binary Search can be more efficient overall.
 
 ---
 
-## **Q8. Which statement is TRUE about problem solving in DSA?**
+## **Q8. What is the main purpose of this session?**
 
-A) Brute-force solutions should always be avoided  
-B) Efficient solutions are not important if output is correct  
-C) A brute-force solution is often the first step before optimization  
-D) Sorting is useful only for display purposes  
+A) Learn brand-new sorting algorithms  
+B) Memorize only code syntax  
+C) Apply learned searching and sorting concepts to solve problems  
+D) Avoid time complexity completely  
 
 ✅ **Correct Answer:** C
 
 **Explanation:**  
-A brute-force solution helps in understanding the problem clearly before improving it with optimized approaches.
+This session focuses on problem solving using concepts students have already learned, rather than introducing many new algorithms.
 
 ---
 
 #  SUBJECTIVE QUESTION
 
-## **Q9. Efficient Search and Pair Sum Problem**
+## **Q9. Sort and Search Efficiently**
 
 ### 🔹 Problem Statement
 
-You are given an integer array and a target value.
+You are given an unsorted array of integers and a target value.
 
-Write Python functions to solve the following:
+Write a Python program to do the following:
 
-### Part A
-Check whether a target number exists in the array using **Linear Search**.
-
-### Part B
-Sort the array and check whether any **pair of numbers** sums to the target using an efficient approach.
-
-### Part C
-Write a **recursive Binary Search** function to search for a target in a sorted array.
+1. Sort the array using **Insertion Sort**
+2. Print the sorted array
+3. Search for the target using **Iterative Binary Search**
+4. Search for the same target using **Recursive Binary Search**
+5. Print whether the target is found and its index
 
 ---
 
@@ -140,45 +137,49 @@ Write a **recursive Binary Search** function to search for a target in a sorted 
 You must:
 
 ✅ Use functions  
-✅ Use searching techniques  
-✅ Use sorting  
-✅ Use recursion  
-✅ Compare brute-force and optimized approaches  
+✅ Use Insertion Sort  
+✅ Use Iterative Binary Search  
+✅ Use Recursive Binary Search  
+✅ Print meaningful output  
+✅ Explain time complexity
 
 ---
 
 ## ✅ Expected Answer (Reference Solution)
 
 ```python
-# Part A — Linear Search
-def linear_search(arr, target):
-    for i in range(len(arr)):
-        if arr[i] == target:
-            return i
-    return -1
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+
+        arr[j + 1] = key
+
+    return arr
 
 
-# Part B — Pair Sum using Sorting + Two Pointers
-def pair_sum_sorted(arr, target):
-    arr.sort()
+def binary_search(arr, target):
     left = 0
     right = len(arr) - 1
 
-    while left < right:
-        current_sum = arr[left] + arr[right]
+    while left <= right:
+        mid = (left + right) // 2
 
-        if current_sum == target:
-            return True
-        elif current_sum < target:
-            left += 1
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
         else:
-            right -= 1
+            right = mid - 1
 
-    return False
+    return -1
 
 
-# Part C — Recursive Binary Search
-def binary_search_recursive(arr, target, left, right):
+def recursive_binary_search(arr, target, left, right):
     if left > right:
         return -1
 
@@ -187,21 +188,19 @@ def binary_search_recursive(arr, target, left, right):
     if arr[mid] == target:
         return mid
     elif arr[mid] < target:
-        return binary_search_recursive(arr, target, mid + 1, right)
+        return recursive_binary_search(arr, target, mid + 1, right)
     else:
-        return binary_search_recursive(arr, target, left, mid - 1)
+        return recursive_binary_search(arr, target, left, mid - 1)
 
 
-# Driver code
-arr = [8, 4, 1, 6, 2, 7]
-target = 10
+arr = [8, 3, 6, 1, 9, 4]
+target = 6
 
-print("Linear Search for 6:", linear_search(arr, 6))
-print("Pair Sum Exists:", pair_sum_sorted(arr[:], target))
+sorted_arr = insertion_sort(arr)
 
-sorted_arr = sorted(arr)
 print("Sorted Array:", sorted_arr)
-print("Binary Search for 7:", binary_search_recursive(sorted_arr, 7, 0, len(sorted_arr) - 1))
+print("Iterative Binary Search Result:", binary_search(sorted_arr, target))
+print("Recursive Binary Search Result:", recursive_binary_search(sorted_arr, target, 0, len(sorted_arr)-1))
 ```
 
 ---
@@ -209,8 +208,7 @@ print("Binary Search for 7:", binary_search_recursive(sorted_arr, 7, 0, len(sort
 ## ✅ Sample Output
 
 ```text
-Linear Search for 6: 3
-Pair Sum Exists: True
-Sorted Array: [1, 2, 4, 6, 7, 8]
-Binary Search for 7: 4
+Sorted Array: [1, 3, 4, 6, 8, 9]
+Iterative Binary Search Result: 3
+Recursive Binary Search Result: 3
 ```
