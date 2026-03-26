@@ -100,18 +100,20 @@ If multiple searches are required, sorting once and then applying Binary Search 
 
 ---
 
-## **Q8. What is the main purpose of this session?**
+8 What is the fundamental idea behind the Insertion Sort algorithm?
 
-A) Learn brand-new sorting algorithms  
-B) Memorize only code syntax  
-C) Apply learned searching and sorting concepts to solve problems  
-D) Avoid time complexity completely  
+A. Finding the smallest element and swapping it to the front.
 
-✅ **Correct Answer:** C
+B. Dividing the array into a sorted and an unsorted part, then placing the next unsorted element into its correct position in the sorted part.
+
+C. Comparing each pair of adjacent items and swapping them if they are in the wrong order.
+
+D. Splitting the array into single-element groups and merging them back in order.
+
+Correct Answer: B
 
 **Explanation:**  
-This session focuses on problem solving using concepts students have already learned, rather than introducing many new algorithms.
-
+Insertion Sort works by virtually splitting the array into a sorted and an unsorted part, where it repeatedly takes the next element from the unsorted part and shifts the sorted elements to the right until it finds the correct position to insert it.
 ---
 
 #  SUBJECTIVE QUESTION

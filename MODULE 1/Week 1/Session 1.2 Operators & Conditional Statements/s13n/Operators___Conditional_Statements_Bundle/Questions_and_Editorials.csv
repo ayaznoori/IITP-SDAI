@@ -1,0 +1,1171 @@
+questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
+mcsc,markdown,Which statement is true regarding the concept of **applying logical operators for boolean logic**?,,,,,,1,,It is a fundamental feature that enables this specific logic or operation in Python.,It is a visual styling tool for output formatting.,It is a module that must be downloaded via pip before every use.,It is an outdated practice not included in Python 3.,,,,markdown,
+subjective,markdown,"1. Takes user's age and whether they have a driver's license (yes/no)
+2. Determines if they can drive (age >= 18 AND has license)
+3. Prints the result
+
+Example:
+Enter your age: 20
+Do you have a license? (yes/no): yes
+Can drive: True",,,,,,,,,,,,,,0,markdown,"```python
+name = ""Alice""
+age = 25
+print(f""My name is {name} and I am {age} years old"")
+```"
+subjective,markdown,"1. Take inputs for is_weekend (yes/no) and is_sunny (yes/no)
+2. Good day if it's weekend OR sunny
+3. Print the result
+
+Example:
+Is it weekend? (yes/no): no
+Is it sunny? (yes/no): yes
+Good day to go outside: True",,,,,,,,,,,,,,0,markdown,"```python
+price = 29.99
+quantity = 3
+total = price * quantity
+print(f""Total: ${total:.2f}"")
+```"
+subjective,markdown,"1. Take exam score (0-100) and whether assignment was submitted (yes/no)
+2. Student passes if score >= 60 AND assignment submitted
+3. Also check if student got excellent grade (score >= 90 AND assignment submitted)
+4. Print both results
+
+Example:
+Enter exam score: 85
+Was assignment submitted? (yes/no): yes
+Passed: True
+Excellent: False",,,,,,,,,,,,,,0.5,markdown,"```python
+import math
+pi = math.pi
+print(f""Pi: {pi:.3f}"")  # 3.142
+```"
+subjective,markdown,"1. Username is not empty (length > 0)
+2. Password is at least 8 characters
+3. Both conditions must be true to login
+4. Print if login is valid
+
+Example:
+Enter username: alice
+Enter password: secure123
+Login valid: True",,,,,,,,,,,,,,0.5,markdown,"```python
+name = ""Alice Johnson""
+math_score = 95
+english_score = 87
+average = (math_score + english_score) / 2
+
+print(f""Student: {name}"")
+print(f""Math: {math_score}"")
+print(f""English: {english_score}"")
+print(f""Average: {average:.1f}"")
+```"
+subjective,markdown,"1. Take age, has parent with them (yes/no), and movie rating (G/PG/PG13/R)
+2. Rules:
+   - G: Anyone can watch
+   - PG: Anyone can watch
+   - PG13: Age >= 13 OR has parent
+   - R: Age >= 17 OR (age >= 13 AND has parent)
+3. Print if they can watch
+
+Example:
+Enter your age: 15
+Is parent with you? (yes/no): no
+Movie rating (G/PG/PG13/R): PG13
+Can watch movie: True
+
+Hint: Use multiple `and`/`or` combinations!",,,,,,,,,,,,,,0.5,markdown,"```python
+print(f""{'Name':<12} | {'Score':>5}"")
+print(f""{'-'*12}-|-{'-'*5}"")
+print(f""{'Alice':<12} | {95:>5}"")
+print(f""{'Bob':<12} | {87:>5}"")
+print(f""{'Charlie':<12} | {92:>5}"")
+```"
+mcsc,markdown,Which statement is true regarding the concept of **writing if statements for conditional execution**?,,,,,,1,,It is a fundamental feature that enables this specific logic or operation in Python.,It is a visual styling tool for output formatting.,It is a module that must be downloaded via pip before every use.,It is an outdated practice not included in Python 3.,,,,markdown,
+subjective,markdown,"1. Takes a number as input
+2. If the number is positive (> 0), print ""Positive number""
+3. If the number is negative (< 0), print ""Negative number""
+4. If the number is zero (== 0), print ""Zero""
+
+Example:
+Enter a number: 5
+Positive number",,,,,,,,,,,,,,0,markdown,"```python
+name = ""Alice""
+age = 25
+print(f""My name is {name} and I am {age} years old"")
+```"
+subjective,markdown,"1. Takes user's age as input
+2. If age is 18 or above, print ""You can vote""
+3. If age is 21 or above, print ""You can drink alcohol (in US)""
+4. Always print ""Thank you"" at the end
+
+Example:
+Enter your age: 25
+You can vote
+You can drink alcohol (in US)
+Thank you",,,,,,,,,,,,,,0,markdown,"```python
+price = 29.99
+quantity = 3
+total = price * quantity
+print(f""Total: ${total:.2f}"")
+```"
+subjective,markdown,"1. Take a password as input
+2. Check and print messages for:
+   - Length >= 8: ""Good length""
+   - Length >= 12: ""Strong length""
+   - Length < 8: ""Too short""
+
+Example:
+Enter password: mypass123
+Good length",,,,,,,,,,,,,,0.5,markdown,"```python
+import math
+pi = math.pi
+print(f""Pi: {pi:.3f}"")  # 3.142
+```"
+subjective,markdown,"1. Take attendance percentage and fee status (paid/unpaid)
+2. If attendance >= 75 AND fee is paid, print ""Eligible for exam""
+3. If attendance < 75, print ""Low attendance""
+4. If fee is unpaid, print ""Fee not paid""
+
+Example:
+Enter attendance %: 80
+Fee paid? (paid/unpaid): paid
+Eligible for exam",,,,,,,,,,,,,,0.5,markdown,"```python
+name = ""Alice Johnson""
+math_score = 95
+english_score = 87
+average = (math_score + english_score) / 2
+
+print(f""Student: {name}"")
+print(f""Math: {math_score}"")
+print(f""English: {english_score}"")
+print(f""Average: {average:.1f}"")
+```"
+subjective,markdown,"1. Take a score (0-100) as input
+2. Use multiple if statements to:
+   - Check if score >= 90: print ""Grade: A"" and ""Excellent work!""
+   - Check if score >= 80 and < 90: print ""Grade: B"" and ""Good job!""
+   - Check if score >= 70 and < 80: print ""Grade: C"" and ""Satisfactory""
+   - Check if score >= 60 and < 70: print ""Grade: D"" and ""Needs improvement""
+   - Check if score < 60: print ""Grade: F"" and ""Failed""
+3. Also check:
+   - If score == 100: print ""Perfect score!""
+   - If score < 50: print ""Please see instructor""
+
+Example:
+Enter your score: 95
+Grade: A
+Excellent work!
+
+Hint: You'll need multiple if statements with different conditions!",,,,,,,,,,,,,,0.5,markdown,"```python
+print(f""{'Name':<12} | {'Score':>5}"")
+print(f""{'-'*12}-|-{'-'*5}"")
+print(f""{'Alice':<12} | {95:>5}"")
+print(f""{'Bob':<12} | {87:>5}"")
+print(f""{'Charlie':<12} | {92:>5}"")
+```"
+mcsc,markdown,Which statement is true regarding the concept of **writing elif statements for multiple conditions**?,,,,,,1,,It is a fundamental feature that enables this specific logic or operation in Python.,It is a visual styling tool for output formatting.,It is a module that must be downloaded via pip before every use.,It is an outdated practice not included in Python 3.,,,,markdown,
+subjective,markdown,"- If chest >= 42: ""XL""
+- Elif chest >= 38: ""L""
+- Elif chest >= 34: ""M""
+- Elif chest >= 30: ""S""
+- Else: ""XS""
+
+Example:
+Enter chest measurement (inches): 36
+Size: M",,,,,,,,,,,,,,0,markdown,"```python
+name = ""Alice""
+age = 25
+print(f""My name is {name} and I am {age} years old"")
+```"
+subjective,markdown,"- If number > 0: ""Positive""
+- Elif number < 0: ""Negative""
+- Else: ""Zero""
+
+Example:
+Enter a number: -5
+Negative",,,,,,,,,,,,,,0,markdown,"```python
+price = 29.99
+quantity = 3
+total = price * quantity
+print(f""Total: ${total:.2f}"")
+```"
+subjective,markdown,"- If speed <= speed_limit: ""No fine""
+- Elif speed <= speed_limit + 10: ""Warning""
+- Elif speed <= speed_limit + 20: ""Fine: $50""
+- Elif speed <= speed_limit + 30: ""Fine: $100""
+- Else: ""Fine: $200 and court appearance""
+
+Take speed limit and actual speed as inputs.
+
+Example:
+Enter speed limit: 60
+Enter your speed: 75
+Fine: $50",,,,,,,,,,,,,,0.5,markdown,"```python
+import math
+pi = math.pi
+print(f""Pi: {pi:.3f}"")  # 3.142
+```"
+subjective,markdown,"- If score >= 97: ""A+""
+- Elif score >= 93: ""A""
+- Elif score >= 90: ""A-""
+- Elif score >= 87: ""B+""
+- Elif score >= 83: ""B""
+- Elif score >= 80: ""B-""
+- Elif score >= 77: ""C+""
+- Elif score >= 73: ""C""
+- Elif score >= 70: ""C-""
+- Elif score >= 60: ""D""
+- Else: ""F""",,,,,,,,,,,,,,0.5,markdown,"```python
+name = ""Alice Johnson""
+math_score = 95
+english_score = 87
+average = (math_score + english_score) / 2
+
+print(f""Student: {name}"")
+print(f""Math: {math_score}"")
+print(f""English: {english_score}"")
+print(f""Average: {average:.1f}"")
+```"
+subjective,markdown,"- $0 - $10,000: 0% tax
+- $10,001 - $40,000: 10% tax
+- $40,001 - $85,000: 20% tax
+- $85,001 - $160,000: 30% tax
+- Above $160,000: 40% tax
+
+Calculate and print the tax amount.
+
+Example:
+Enter annual income: 50000
+Tax bracket: 20%
+Tax amount: $10000.00
+
+Hint: Use elif to determine the bracket, then calculate tax!",,,,,,,,,,,,,,0.5,markdown,"```python
+print(f""{'Name':<12} | {'Score':>5}"")
+print(f""{'-'*12}-|-{'-'*5}"")
+print(f""{'Alice':<12} | {95:>5}"")
+print(f""{'Bob':<12} | {87:>5}"")
+print(f""{'Charlie':<12} | {92:>5}"")
+```"
+mcsc,markdown,Which statement is true regarding the concept of **writing else statements for default cases**?,,,,,,1,,It is a fundamental feature that enables this specific logic or operation in Python.,It is a visual styling tool for output formatting.,It is a module that must be downloaded via pip before every use.,It is an outdated practice not included in Python 3.,,,,markdown,
+subjective,markdown,"- If divisible by 2: ""Even""
+- Else: ""Odd""
+
+Example:
+Enter a number: 7
+Odd",,,,,,,,,,,,,,0,markdown,"```python
+name = ""Alice""
+age = 25
+print(f""My name is {name} and I am {age} years old"")
+```"
+subjective,markdown,"- If age >= 18: ""You can vote""
+- Else: ""You cannot vote yet. Wait X years"" (calculate X)
+
+Example:
+Enter your age: 16
+You cannot vote yet. Wait 2 years",,,,,,,,,,,,,,0,markdown,"```python
+price = 29.99
+quantity = 3
+total = price * quantity
+print(f""Total: ${total:.2f}"")
+```"
+subjective,markdown,"- >= 90: A
+- >= 80: B
+- >= 70: C
+- >= 60: D
+- Else: F
+
+Also print whether they passed (>= 60) or failed.
+
+Example:
+Enter score: 55
+Grade: F
+Result: Failed",,,,,,,,,,,,,,0.5,markdown,"```python
+import math
+pi = math.pi
+print(f""Pi: {pi:.3f}"")  # 3.142
+```"
+subjective,markdown,"- If weight <= 1kg: $5
+- Elif weight <= 5kg: $10
+- Elif weight <= 10kg: $15
+- Else: $25
+
+Example:
+Enter package weight (kg): 12
+Shipping cost: $25",,,,,,,,,,,,,,0.5,markdown,"```python
+name = ""Alice Johnson""
+math_score = 95
+english_score = 87
+average = (math_score + english_score) / 2
+
+print(f""Student: {name}"")
+print(f""Math: {math_score}"")
+print(f""English: {english_score}"")
+print(f""Average: {average:.1f}"")
+```"
+subjective,markdown,"- Check if amount > 0 (else: ""Invalid amount"")
+- Check if amount <= balance (else: ""Insufficient funds"")
+- Check if amount % 10 == 0 (else: ""Amount must be multiple of 10"")
+- Else: ""Withdrawal successful""
+
+Use nested if-else statements.
+
+Example:
+Balance: $500
+Enter amount: $50
+Withdrawal successful
+New balance: $450",,,,,,,,,,,,,,0.5,markdown,"```python
+print(f""{'Name':<12} | {'Score':>5}"")
+print(f""{'-'*12}-|-{'-'*5}"")
+print(f""{'Alice':<12} | {95:>5}"")
+print(f""{'Bob':<12} | {87:>5}"")
+print(f""{'Charlie':<12} | {92:>5}"")
+```"
+mcsc,markdown,Which statement is true regarding the concept of **writing nested conditionals for complex logic**?,,,,,,1,,It is a fundamental feature that enables this specific logic or operation in Python.,It is a visual styling tool for output formatting.,It is a module that must be downloaded via pip before every use.,It is an outdated practice not included in Python 3.,,,,markdown,
+subjective,markdown,"Write a program that classifies a person's age into categories. If age is valid (>= 0), classify as:
+- Child: 0-12
+- Teenager: 13-19
+- Adult: 20-59
+- Senior: 60+
+
+If age is negative, print ""Invalid age"".
+
+Test with age = 25.
+
+**Expected Output:**
+Adult
+
+**Hint:** Use outer if for validation, inner elif chain for classification.",,,,,,,,,,,,,,0,markdown,"```python
+name = ""Alice""
+age = 25
+print(f""My name is {name} and I am {age} years old"")
+```"
+subjective,markdown,"Write a program that assigns letter grades and pass/fail status. If score is valid (0-100):
+- A: 90-100 (Pass)
+- B: 80-89 (Pass)
+- C: 70-79 (Pass)
+- D: 60-69 (Pass)
+- F: Below 60 (Fail)
+
+If score is invalid, print ""Invalid score"".
+
+Test with score = 85.
+
+**Expected Output:**
+Grade: B (Pass)
+
+**Hint:** Outer if validates range, first inner if checks pass/fail, second inner if assigns grade.",,,,,,,,,,,,,,0,markdown,"```python
+price = 29.99
+quantity = 3
+total = price * quantity
+print(f""Total: ${total:.2f}"")
+```"
+subjective,markdown,"Calculate movie ticket price based on age and student status:
+- Child (under 18) student: $5
+- Child non-student: $7
+- Adult (18+) student: $8
+- Adult non-student: $10
+
+Test with age = 15, is_student = True.
+
+**Expected Output:**
+Ticket price: $5
+
+**Hint:** Outer if checks age, inner if checks student status for each age group.",,,,,,,,,,,,,,0.5,markdown,"```python
+import math
+pi = math.pi
+print(f""Pi: {pi:.3f}"")  # 3.142
+```"
+subjective,markdown,"Write a login system that checks:
+1. Is username provided?
+2. Is password provided?
+3. Does username match ""admin""?
+4. Does password match ""secret123""?
+
+Provide specific error messages for each failure point.
+
+Test with username = ""admin"", password = ""secret123"".
+
+**Expected Output:**
+Login successful
+
+**Hint:** Use 4 levels of nesting, one for each check. Provide specific error in each else.",,,,,,,,,,,,,,0.5,markdown,"```python
+name = ""Alice Johnson""
+math_score = 95
+english_score = 87
+average = (math_score + english_score) / 2
+
+print(f""Student: {name}"")
+print(f""Math: {math_score}"")
+print(f""English: {english_score}"")
+print(f""Average: {average:.1f}"")
+```"
+subjective,markdown,"Calculate tip and total for a restaurant bill:
+- Validate num_people > 0
+- Determine tip based on service quality:
+  - ""excellent"": 20%
+  - ""good"": 15%
+  - ""poor"": 10%
+- Calculate total and per-person amount
+
+Test with bill_amount = 120, num_people = 4, service_quality = ""good"".
+
+**Expected Output:**
+Tip: $18.00
+Total: $138.00
+Per person: $34.50
+
+**Hint:** Outer if validates people count, inner elif chain determines tip percentage.",,,,,,,,,,,,,,1,markdown,"```python
+print(f""{'Name':<12} | {'Score':>5}"")
+print(f""{'-'*12}-|-{'-'*5}"")
+print(f""{'Alice':<12} | {95:>5}"")
+print(f""{'Bob':<12} | {87:>5}"")
+print(f""{'Charlie':<12} | {92:>5}"")
+```"
+subjective,markdown,"Determine scholarship based on criteria:
+- If GPA >= 3.0:
+  - If income < $50k:
+    - If has extracurriculars → Full scholarship
+    - Else → Partial scholarship
+  - Else:
+    - If has extracurriculars AND GPA >= 3.5 → Partial scholarship
+    - Else → Not eligible
+- If GPA < 3.0 → Not eligible
+
+Test with gpa = 3.8, income = 45000, extracurricular = True.
+
+**Expected Output:**
+Full scholarship
+
+**Hint:** Three levels of nesting for three criteria.",,,,,,,,,,,,,,0.5,markdown,"```python
+gpa = 3.8
+income = 45000
+extracurricular = True
+
+if gpa >= 3.0:
+    if income < 50000:
+        if extracurricular:
+            scholarship = ""Full scholarship""
+        else:
+            scholarship = ""Partial scholarship""
+    else:
+        if extracurricular and gpa >= 3.5:
+            scholarship = ""Partial scholarship""
+        else:
+            scholarship = ""Not eligible""
+else:
+    scholarship = ""Not eligible""
+
+print(scholarship)
+```
+
+**Output:**
+Full scholarship
+
+- Three criteria: GPA, income, extracurricular activities
+- Scholarship rules:
+  - GPA >= 3.0 AND income < 50k AND extracurricular → Full
+  - GPA >= 3.0 AND income < 50k → Partial
+  - GPA >= 3.5 AND income >= 50k AND extracurricular → Partial
+  - Otherwise → Not eligible
+- Nested structure implements complex eligibility logic"
+mcsc,markdown,"Issue weather advisories based on temperature and humidity:
+- If temp > 90:
+  - If humidity > 60 → ""Heat advisory: Dangerous conditions""
+  - Else → ""Hot weather: Exercise caution""
+- If temp < 32:
+  - If humidity > 50 → ""Freezing rain possible""
+  - Else → ""Cold weather: Dress warmly""
+- Else → ""Pleasant weather""
+
+Test with temperature = 95, humidity = 70.
+
+**Expected Output:**
+Heat advisory: Dangerous conditions
+Stay indoors and drink water
+
+**Hint:** Use elif for temperature ranges, nested if for humidity checks.",,,,,,,,,,,,,,,markdown,"```python
+temperature = 95
+humidity = 70
+
+if temperature > 90:
+    if humidity > 60:
+        print(""Heat advisory: Dangerous conditions"")
+        print(""Stay indoors and drink water"")
+    else:
+        print(""Hot weather: Exercise caution"")
+elif temperature < 32:
+    if humidity > 50:
+        print(""Freezing rain possible"")
+    else:
+        print(""Cold weather: Dress warmly"")
+else:
+    print(""Pleasant weather"")
+```
+
+**Output:**
+Heat advisory: Dangerous conditions
+Stay indoors and drink water
+
+- Outer conditions classify temperature ranges
+- Inner conditions check humidity for additional warnings
+- Combines temperature and humidity for comprehensive advisories
+- Provides specific safety recommendations
+- Handles multiple weather scenarios"
+mcsc,markdown,"Implement a 4-level security system:
+- Has keycard?
+  - PIN correct?
+    - Is business hours?
+      - Grant access
+    - Else:
+      - Is authorized personnel?
+        - Grant access (after-hours)
+      - Else:
+        - Deny: Not authorized for after-hours
+
+Provide specific denial reasons.
+
+Test with has_keycard = True, pin_correct = True, is_business_hours = False, is_authorized_personnel = True.
+
+**Expected Output:**
+Access granted (after-hours)
+
+**Hint:** Four levels of nesting with specific messages at each failure point.",,,,,,,,,,,,,,,markdown,"```python
+has_keycard = True
+pin_correct = True
+is_business_hours = False
+is_authorized_personnel = True
+
+if has_keycard:
+    if pin_correct:
+        if is_business_hours:
+            print(""Access granted"")
+        else:
+            if is_authorized_personnel:
+                print(""Access granted (after-hours)"")
+            else:
+                print(""Access denied: Not authorized for after-hours"")
+    else:
+        print(""Access denied: Incorrect PIN"")
+else:
+    print(""Access denied: No keycard"")
+```
+
+**Output:**
+Access granted (after-hours)
+
+- Four levels of security checks:
+  1. Keycard present
+  2. PIN correct
+  3. Business hours or authorized personnel
+- Access rules:
+  - Business hours: keycard + PIN
+  - After hours: keycard + PIN + authorized personnel
+- Provides specific denial reasons for debugging
+- Implements defense-in-depth security"
+mcsc,markdown,"Calculate parking fee based on:
+- Vehicle type: motorcycle ($2/hr), car ($5/hr), truck ($10/hr)
+- Hours parked
+- Weekend discount: After 2 hours, remaining hours are 50% off on weekends
+
+Formula for weekend: (base_rate × 2) + (base_rate × 0.5 × (hours - 2))
+
+Test with hours = 5, vehicle_type = ""car"", is_weekend = True.
+
+**Expected Output:**
+Parking fee: $17.50
+
+**Hint:** Set base rate first, then calculate fee using nested if for hours and weekend.",,,,,,,,,,,,,,,markdown,"```python
+hours = 5
+vehicle_type = ""car""
+is_weekend = True
+
+if vehicle_type == ""motorcycle"":
+    base_rate = 2
+elif vehicle_type == ""car"":
+    base_rate = 5
+else:
+    base_rate = 10  # truck/van
+
+if hours > 0:
+    if hours <= 2:
+        fee = base_rate * hours
+    else:
+        if is_weekend:
+            fee = (base_rate * 2) + (base_rate * 0.5 * (hours - 2))
+        else:
+            fee = base_rate * hours
+
+    print(f""Parking fee: ${fee:.2f}"")
+else:
+    print(""Invalid hours"")
+```
+
+**Output:**
+Parking fee: $17.50
+
+- Calculation: (5 * 2) + (5 * 0.5 * 3) = 10 + 7.5 = $17.50
+- Three factors: vehicle type, hours, weekend status
+- Pricing logic:
+  - First 2 hours: base rate
+  - Additional hours: weekend gets 50% discount
+- Base rates: motorcycle $2, car $5, truck $10
+- Nested structure handles complex pricing rules"
+mcsc,markdown,"Generate performance status and recommendation:
+- If attendance >= 75%:
+  - If assignment_avg >= 70%:
+    - If exam_score >= 80 → ""Excellent"" / ""Keep up the great work!""
+    - Elif exam_score >= 60 → ""Good"" / ""Focus on exam preparation""
+    - Else → ""At risk"" / ""Attend tutoring sessions""
+  - Else → ""At risk"" / ""Complete missing assignments""
+- Else → ""Critical"" / ""Meet with academic advisor immediately""
+
+Test with attendance = 85, assignment_avg = 78, exam_score = 82.
+
+**Expected Output:**
+Status: Excellent
+Recommendation: Keep up the great work!
+
+**Hint:** Three levels for three metrics, with different recommendations at each level.",,,,,,,,,,,,,,,markdown,"```python
+attendance = 85
+assignment_avg = 78
+exam_score = 82
+
+if attendance >= 75:
+    if assignment_avg >= 70:
+        if exam_score >= 80:
+            status = ""Excellent""
+            recommendation = ""Keep up the great work!""
+        elif exam_score >= 60:
+            status = ""Good""
+            recommendation = ""Focus on exam preparation""
+        else:
+            status = ""At risk""
+            recommendation = ""Attend tutoring sessions""
+    else:
+        status = ""At risk""
+        recommendation = ""Complete missing assignments""
+else:
+    status = ""Critical""
+    recommendation = ""Meet with academic advisor immediately""
+
+print(f""Status: {status}"")
+print(f""Recommendation: {recommendation}"")
+```
+
+**Output:**
+Status: Excellent
+Recommendation: Keep up the great work!
+
+- Three performance metrics: attendance, assignments, exam
+- Status categories:
+  - Excellent: all metrics good
+  - Good: attendance and assignments good, exam needs work
+  - At risk: one metric failing
+  - Critical: poor attendance
+- Provides personalized recommendations
+- Nested structure prioritizes attendance first"
+mcsc,markdown,"Calculate discount based on membership and cart:
+- If member:
+  - If cart_total >= $100:
+    - If num_items >= 5 → 25% off
+    - Else → 15% off
+  - Else → 10% off
+- Else:
+  - If first_purchase → 10% off
+  - Else → No discount
+
+Calculate final price and savings.
+
+Test with is_member = True, cart_total = 150, num_items = 8, is_first_purchase = False.
+
+**Expected Output:**
+Original: $150.00
+Discount: 25%
+Savings: $37.50
+Final price: $112.50
+
+**Hint:** Nested structure for tiered discounts, calculate savings at end.",,,,,,,,,,,,,,,markdown,"```python
+is_member = True
+cart_total = 150
+num_items = 8
+is_first_purchase = False
+
+if is_member:
+    if cart_total >= 100:
+        if num_items >= 5:
+            discount = 0.25  # 25% off
+        else:
+            discount = 0.15  # 15% off
+    else:
+        discount = 0.10  # 10% off
+else:
+    if is_first_purchase:
+        discount = 0.10  # 10% off for first-time buyers
+    else:
+        discount = 0  # No discount
+
+final_price = cart_total * (1 - discount)
+savings = cart_total * discount
+
+print(f""Original: ${cart_total:.2f}"")
+print(f""Discount: {discount * 100:.0f}%"")
+print(f""Savings: ${savings:.2f}"")
+print(f""Final price: ${final_price:.2f}"")
+```
+
+**Output:**
+Original: $150.00
+Discount: 25%
+Savings: $37.50
+Final price: $112.50
+
+- Discount rules:
+  - Member + $100+ + 5+ items → 25%
+  - Member + $100+ → 15%
+  - Member → 10%
+  - Non-member first purchase → 10%
+  - Non-member → 0%
+- Nested structure implements tiered discount system
+- Calculates and displays savings"
+mcsc,markdown,"Approve loan based on multiple criteria:
+- If credit_score >= 700:
+  - If debt_to_income < 0.3:
+    - If employment_years >= 2 → Approve at 3.5%
+    - Else:
+      - If annual_income >= $70k → Approve at 4.0%
+      - Else → Deny: ""Insufficient employment history""
+  - Else:
+    - If credit_score >= 750 AND income >= $80k → Approve at 4.5%
+    - Else → Deny: ""Debt-to-income ratio too high""
+- Else → Deny: ""Credit score too low""
+
+Test with credit_score = 720, annual_income = 65000, existing_debt = 15000, employment_years = 3.
+
+**Expected Output:**
+Loan approved!
+Interest rate: 3.5%
+
+**Hint:** Calculate debt_to_income first, then use multi-level nesting with specific denial reasons.",,,,,,,,,,,,,,,markdown,"```python
+credit_score = 720
+annual_income = 65000
+existing_debt = 15000
+employment_years = 3
+
+debt_to_income = existing_debt / annual_income
+
+if credit_score >= 700:
+    if debt_to_income < 0.3:
+        if employment_years >= 2:
+            loan_approved = True
+            interest_rate = 3.5
+        else:
+            if annual_income >= 70000:
+                loan_approved = True
+                interest_rate = 4.0
+            else:
+                loan_approved = False
+                reason = ""Insufficient employment history""
+    else:
+        if credit_score >= 750 and annual_income >= 80000:
+            loan_approved = True
+            interest_rate = 4.5
+        else:
+            loan_approved = False
+            reason = ""Debt-to-income ratio too high""
+else:
+    loan_approved = False
+    reason = ""Credit score too low""
+
+if loan_approved:
+    print(""Loan approved!"")
+    print(f""Interest rate: {interest_rate}%"")
+else:
+    print(""Loan denied"")
+    print(f""Reason: {reason}"")
+```
+
+**Output:**
+Loan approved!
+Interest rate: 3.5%
+
+- Complex approval criteria:
+  - Credit score >= 700
+  - Debt-to-income ratio < 30%
+  - Employment >= 2 years OR income >= 70k
+- Special case: high credit (750+) and income (80k+) can override debt ratio
+- Interest rates based on risk level (3.5% - 4.5%)
+- Provides specific denial reasons
+- Nested structure implements multi-factor decision tree"
+mcsc,markdown,"Recommend game difficulty based on player stats:
+- If player_level >= 10:
+  - Calculate win_rate = wins / (wins + losses)
+  - If win_rate >= 0.7:
+    - If average_score >= 9000 → ""Expert"" (1.5x XP)
+    - Else → ""Advanced"" (1.3x XP)
+  - Elif win_rate >= 0.5:
+    - If average_score >= 7500 → ""Intermediate"" (1.2x XP)
+    - Else → ""Beginner+"" (1.1x XP)
+  - Else → ""Beginner"" (1.0x XP)
+- Else → ""Tutorial"" (1.0x XP)
+
+Test with player_level = 15, wins = 45, losses = 20, average_score = 8500.
+
+**Expected Output:**
+Recommended difficulty: Intermediate
+XP bonus multiplier: 1.2x
+
+**Hint:** Calculate win_rate first, use nested structure for difficulty tiers.",,,,,,,,,,,,,,,markdown,"```python
+player_level = 15
+wins = 45
+losses = 20
+average_score = 8500
+
+if player_level >= 10:
+    win_rate = wins / (wins + losses)
+
+    if win_rate >= 0.7:
+        if average_score >= 9000:
+            difficulty = ""Expert""
+            bonus_xp = 1.5
+        else:
+            difficulty = ""Advanced""
+            bonus_xp = 1.3
+    elif win_rate >= 0.5:
+        if average_score >= 7500:
+            difficulty = ""Intermediate""
+            bonus_xp = 1.2
+        else:
+            difficulty = ""Beginner+""
+            bonus_xp = 1.1
+    else:
+        difficulty = ""Beginner""
+        bonus_xp = 1.0
+else:
+    difficulty = ""Tutorial""
+    bonus_xp = 1.0
+
+print(f""Recommended difficulty: {difficulty}"")
+print(f""XP bonus multiplier: {bonus_xp}x"")
+```
+
+**Output:**
+Recommended difficulty: Intermediate
+XP bonus multiplier: 1.2x
+
+- Calculation: win_rate = 45/(45+20) = 0.69 (69%)
+- Three factors: level, win rate, average score
+- Difficulty tiers:
+  - Expert: level 10+, 70%+ wins, 9000+ score
+  - Advanced: level 10+, 70%+ wins
+  - Intermediate: level 10+, 50%+ wins, 7500+ score
+  - Beginner+: level 10+, 50%+ wins
+  - Beginner: level 10+, under 50% wins
+  - Tutorial: under level 10
+- Bonus XP encourages harder difficulties
+- Nested structure ensures balanced matchmaking"
+mcsc,markdown,"Calculate annual insurance premium with multiple factors:
+- Age multiplier:
+  - Under 25: 1.5x
+  - 25-29: 1.2x
+  - 30+: 1.0x
+- Accident history:
+  - If has_accidents:
+    - If years_driving < 5 → 1.8x
+    - Else → 1.4x
+  - Else:
+    - If years_driving >= 5 → 0.9x
+    - Else → 1.0x
+- Vehicle value:
+  - Over $30k: 1.3x
+  - $20k-$30k: 1.1x
+  - Under $20k: 1.0x
+- Security system: -10% discount
+
+Base premium: $800
+Formula: base × age_mult × accident_mult × vehicle_mult × (1 - security_discount)
+
+Test with age = 28, has_accidents = False, years_driving = 8, vehicle_value = 25000, has_security_system = True.
+
+**Expected Output:**
+Annual premium: $950.40
+
+**Hint:** Calculate each multiplier independently using nested ifs, then combine at end.",,,,,,,,,,,,,,,markdown,"```python
+age = 28
+has_accidents = False
+years_driving = 8
+vehicle_value = 25000
+has_security_system = True
+
+base_premium = 800
+
+if age < 25:
+    age_multiplier = 1.5
+elif age < 30:
+    age_multiplier = 1.2
+else:
+    age_multiplier = 1.0
+
+if has_accidents:
+    if years_driving < 5:
+        accident_multiplier = 1.8
+    else:
+        accident_multiplier = 1.4
+else:
+    if years_driving >= 5:
+        accident_multiplier = 0.9
+    else:
+        accident_multiplier = 1.0
+
+if vehicle_value > 30000:
+    vehicle_multiplier = 1.3
+elif vehicle_value > 20000:
+    vehicle_multiplier = 1.1
+else:
+    vehicle_multiplier = 1.0
+
+if has_security_system:
+    security_discount = 0.1
+else:
+    security_discount = 0
+
+premium = base_premium * age_multiplier * accident_multiplier * vehicle_multiplier
+premium = premium * (1 - security_discount)
+
+print(f""Annual premium: ${premium:.2f}"")
+```
+
+**Output:**
+Annual premium: $950.40
+
+- Calculation: 800 * 1.2 * 0.9 * 1.1 * 0.9 = $950.40
+- Five factors affecting premium:
+  - Age: younger drivers pay more
+  - Accidents: increases premium significantly
+  - Driving experience: experienced drivers get discount
+  - Vehicle value: expensive cars cost more to insure
+  - Security system: 10% discount
+- Nested structure calculates multipliers independently
+- Final premium is product of all factors
+- Real-world insurance pricing model"
+mcsc,markdown,"Calculate admission points and make decision:
+
+**GPA and SAT:**
+- If GPA >= 3.5:
+  - SAT >= 1400 → 30 points
+  - SAT >= 1200 → 20 points
+  - Else → 10 points
+- Else:
+  - SAT >= 1450 → 15 points
+  - Else → 5 points
+
+**Extracurriculars and Essay:**
+- If activities >= 5:
+  - Essay >= 8 → 20 points
+  - Else → 15 points
+- Elif activities >= 3:
+  - Essay >= 7 → 15 points
+  - Else → 10 points
+- Else → 5 points
+
+**Recommendation:**
+- ""excellent"" → 15 points
+- ""good"" → 10 points
+- Else → 5 points
+
+**Decision:**
+- 60+ points → Accepted
+- 45-59 points → Waitlisted
+- Below 45 → Rejected
+
+Test with gpa = 3.7, sat_score = 1350, extracurricular_count = 4, essay_score = 8, recommendation_quality = ""excellent"".
+
+**Expected Output:**
+Admission points: 50
+Decision: Waitlisted
+
+**Hint:** Calculate points for each category using nested ifs, sum points, then decide based on total.",,,,,,,,,,,,,,,markdown,"```python
+gpa = 3.7
+sat_score = 1350
+extracurricular_count = 4
+essay_score = 8  # out of 10
+recommendation_quality = ""excellent""
+
+admission_points = 0
+
+if gpa >= 3.5:
+    if sat_score >= 1400:
+        admission_points += 30
+    elif sat_score >= 1200:
+        admission_points += 20
+    else:
+        admission_points += 10
+else:
+    if sat_score >= 1450:
+        admission_points += 15
+    else:
+        admission_points += 5
+
+if extracurricular_count >= 5:
+    if essay_score >= 8:
+        admission_points += 20
+    else:
+        admission_points += 15
+elif extracurricular_count >= 3:
+    if essay_score >= 7:
+        admission_points += 15
+    else:
+        admission_points += 10
+else:
+    admission_points += 5
+
+if recommendation_quality == ""excellent"":
+    admission_points += 15
+elif recommendation_quality == ""good"":
+    admission_points += 10
+else:
+    admission_points += 5
+
+if admission_points >= 60:
+    decision = ""Accepted""
+elif admission_points >= 45:
+    decision = ""Waitlisted""
+else:
+    decision = ""Rejected""
+
+print(f""Admission points: {admission_points}"")
+print(f""Decision: {decision}"")
+```
+
+**Output:**
+Admission points: 50
+Admission decision: Waitlisted
+
+- Point breakdown:
+  - GPA 3.7 + SAT 1350 → 20 points
+  - 4 activities + essay 8 → 15 points
+  - Excellent recommendation → 15 points
+  - Total: 50 points → Waitlisted
+- Holistic admissions criteria:
+  - Academic performance (GPA + SAT)
+  - Extracurricular involvement
+  - Essay quality
+  - Recommendations
+- Decision thresholds:
+  - 60+ points → Accepted
+  - 45-59 points → Waitlisted
+  - Under 45 → Rejected
+- Nested structure allows compensation (weak GPA can be offset by strong SAT)
+- Models real university admissions process
+
+---
+
+
+1. **Validation First**: Check inputs before processing
+2. **Hierarchical Logic**: Outer conditions control inner logic
+3. **Clear Error Messages**: Specific feedback for each path
+4. **Complex Decision Trees**: Multiple factors influence outcome
+5. **Defense in Depth**: Layer security checks
+6. **Readable Indentation**: Proper formatting shows structure
+7. **Avoid Deep Nesting**: Refactor if more than 3-4 levels
+8. **Calculate Once**: Store intermediate values
+9. **Consistent Patterns**: Similar problems use similar structures
+10. **Real-World Models**: Practice with authentic scenarios
+
+
+- Keep nesting to 3-4 levels maximum for readability
+- Use meaningful variable names
+- Add comments for complex conditions
+- Consider using `and`/`or` to flatten simple nested conditions
+- Test all possible paths through nested logic
+- Provide specific feedback for each outcome
+- Validate inputs before complex calculations"
+mcsc,markdown,Which statement is true regarding the concept of **accepting and processing user input**?,,,,,,1,,It is a fundamental feature that enables this specific logic or operation in Python.,It is a visual styling tool for output formatting.,It is a module that must be downloaded via pip before every use.,It is an outdated practice not included in Python 3.,,,,markdown,
+subjective,markdown,,,,,,,,,,,,,,,0,markdown,"```python
+name = ""Alice""
+age = 25
+print(f""My name is {name} and I am {age} years old"")
+```"
+subjective,markdown,,,,,,,,,,,,,,,0,markdown,"```python
+price = 29.99
+quantity = 3
+total = price * quantity
+print(f""Total: ${total:.2f}"")
+```"
+subjective,markdown,"- Ask for Celsius
+- Convert to Fahrenheit
+- Display result",,,,,,,,,,,,,,0.5,markdown,"```python
+import math
+pi = math.pi
+print(f""Pi: {pi:.3f}"")  # 3.142
+```"
+subjective,markdown,"- Name
+- City
+- Age
+- Favorite color
+Print formatted profile.",,,,,,,,,,,,,,0.5,markdown,"```python
+name = ""Alice Johnson""
+math_score = 95
+english_score = 87
+average = (math_score + english_score) / 2
+
+print(f""Student: {name}"")
+print(f""Math: {math_score}"")
+print(f""English: {english_score}"")
+print(f""Average: {average:.1f}"")
+```"
+subjective,markdown,"- Ask ""What is 5 + 3?""
+- Get answer
+- Check if correct
+- Print result",,,,,,,,,,,,,,0.5,markdown,"```python
+print(f""{'Name':<12} | {'Score':>5}"")
+print(f""{'-'*12}-|-{'-'*5}"")
+print(f""{'Alice':<12} | {95:>5}"")
+print(f""{'Bob':<12} | {87:>5}"")
+print(f""{'Charlie':<12} | {92:>5}"")
+```"
+mcsc,markdown,Which statement is true regarding the concept of **formatting output using f-strings**?,,,,,,1,,It is a fundamental feature that enables this specific logic or operation in Python.,It is a visual styling tool for output formatting.,It is a module that must be downloaded via pip before every use.,It is an outdated practice not included in Python 3.,,,,markdown,
+subjective,markdown,"""My name is [name] and I am [age] years old""",,,,,,,,,,,,,,0,markdown,"```python
+name = ""Alice""
+age = 25
+print(f""My name is {name} and I am {age} years old"")
+```"
+subjective,markdown,"```python
+price = 29.99
+quantity = 3
+```",,,,,,,,,,,,,,0,markdown,"```python
+price = 29.99
+quantity = 3
+total = price * quantity
+print(f""Total: ${total:.2f}"")
+```"
+subjective,markdown,,,,,,,,,,,,,,,0.5,markdown,"```python
+import math
+pi = math.pi
+print(f""Pi: {pi:.3f}"")  # 3.142
+```"
+subjective,markdown,"- Name
+- Math score
+- English score
+- Average (calculated)
+All formatted with f-strings.",,,,,,,,,,,,,,0.5,markdown,"```python
+name = ""Alice Johnson""
+math_score = 95
+english_score = 87
+average = (math_score + english_score) / 2
+
+print(f""Student: {name}"")
+print(f""Math: {math_score}"")
+print(f""English: {english_score}"")
+print(f""Average: {average:.1f}"")
+```"
+subjective,markdown,"Name        | Score
+-----------|-------
+Alice      |    95
+Bob        |    87
+Charlie    |    92
+Use proper alignment and width.",,,,,,,,,,,,,,0.5,markdown,"```python
+print(f""{'Name':<12} | {'Score':>5}"")
+print(f""{'-'*12}-|-{'-'*5}"")
+print(f""{'Alice':<12} | {95:>5}"")
+print(f""{'Bob':<12} | {87:>5}"")
+print(f""{'Charlie':<12} | {92:>5}"")
+```"
