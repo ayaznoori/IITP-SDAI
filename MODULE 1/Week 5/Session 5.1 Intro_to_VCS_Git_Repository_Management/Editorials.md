@@ -608,540 +608,264 @@ git log --oneline
 
 ---
 
-## **Q1. What is meant by “isolated development” when using Git branches?**
+## **Q1. When should you use `git restore --staged file.txt`?**
 
 ### **Problem Description**
 
-When multiple developers work on the same project, changes can interfere with each other if not properly separated.
+Sometimes a file is accidentally staged, but you are not ready to commit it yet.
 
 ### **Objective**
 
-Explain the concept of isolated development in the context of Git branches.
+Explain the correct scenario for using `git restore --staged`.
 
 ### **Hint**
 
-Think about working independently without affecting the main code.
+Think about undoing staging, not deleting changes.
 
 ### **Short Explanation**
 
-Isolated development means working on changes separately without impacting the main branch.
+This command is used to remove a file from the staging area while keeping its changes.
 
 ### **Detailed Explanation**
 
-In **Git**, isolated development refers to creating branches where developers can work on features, fixes, or experiments independently. Changes made in a branch do not affect the main codebase until they are explicitly merged. This allows safe experimentation and parallel development.
+`git restore --staged file.txt` is used when a file has been added to the staging area by mistake. It moves the file back to the working directory without discarding any edits. This is helpful when you want to reorganize commits or stage files selectively without losing work.
 
 ### **Constraints / Edge Cases (Optional)**
 
-- Poor merge practices can still introduce conflicts
-- Long-lived branches may drift from main
+- Does not delete file changes
+- Affects only the staging area, not commits
 
 ---
 
-## **Q2. Why is branch cleanup considered a best practice in Git?**
+## **Q2. Why is it unsafe to use `git commit --amend` after pushing to a shared remote?**
 
 ### **Problem Description**
 
-Over time, repositories can accumulate many unused or merged branches.
+Developers may try to edit commit history even after sharing it with others.
 
 ### **Objective**
 
-Explain why deleting unused branches is important.
+Explain the risk of amending pushed commits.
 
 ### **Hint**
 
-Think about clarity, maintenance, and confusion.
+Think about rewritten history and collaboration.
 
 ### **Short Explanation**
 
-Branch cleanup keeps the repository clean and easy to manage.
+Amending a pushed commit rewrites history and can disrupt teammates’ work.
 
 ### **Detailed Explanation**
 
-Branch cleanup is considered a best practice because merged or unused branches no longer serve a purpose. Keeping them can clutter the repository, confuse team members, and make branch management harder. Deleting such branches improves readability, reduces mistakes, and ensures developers focus only on active work.
+Using `git commit --amend` after pushing rewrites the commit hash, causing the local history to differ from the remote repository. Teammates who already pulled the original commit may face merge conflicts or broken histories. This can lead to confusion, forced resets, and loss of work, making amend unsafe in shared branches.
 
 ### **Constraints / Edge Cases (Optional)**
 
-- Branches should be deleted only after successful merge
-- Some teams keep long-lived branches for releases
+- Safe only on private or unshared branches
+- Requires force push to update remote
 
 ---
 
-## **Q3. Create a project and work using branches**
+## **Q3. Discard changes only in `nav.js`**
 
 ### **Problem Description**
 
-Understanding Git branching requires hands-on practice with creating, switching, and committing in branches.
+You want to remove changes from one file while keeping edits in others.
 
 ### **Objective**
 
-Demonstrate creating a repository, working on a feature branch, and committing changes.
+Discard changes selectively from a single file.
 
 ### **Hint**
 
-Follow the standard Git branching workflow.
+Restore only the required file.
 
 ### **Short Explanation**
 
-This task shows how to create and work in a feature branch.
+Git allows discarding changes from individual files.
+
+### **Detailed Explanation**
+
+**Command:**
+
+```bash
+git restore nav.js
+```
+
+This discards changes in `nav.js` and restores it to the last committed version, while keeping edits in `home.js` and `styles.css` intact.
+
+### **Constraints / Edge Cases (Optional)**
+
+- Changes in `nav.js` cannot be recovered unless stashed or committed
+- Works only for uncommitted changes
+
+---
+
+## **Q4. Unstage all files after accidental `git add .`**
+
+### **Problem Description**
+
+All files were staged accidentally, but edits should be preserved.
+
+### **Objective**
+
+Remove all files from staging safely.
+
+### **Hint**
+
+Unstage everything at once.
+
+### **Short Explanation**
+
+You can unstage all files without deleting changes.
+
+### **Detailed Explanation**
+
+**Command:**
+
+```bash
+git restore --staged .
+```
+
+This removes all files from the staging area while keeping their modifications in the working directory.
+
+### **Constraints / Edge Cases (Optional)**
+
+- Does not affect committed files
+- Safer than resetting hard
+
+---
+
+## **Q5. Workflow: Modify, Stage, Amend Commit Message, Add Missing File**
+
+### **Problem Description**
+
+A commit was made too early with a wrong message and missing file.
+
+### **Objective**
+
+Correct the last commit safely using amend.
+
+### **Hint**
+
+Stage files first, then amend.
+
+### **Short Explanation**
+
+`git commit --amend` updates the last commit.
+
+### **Detailed Explanation**
+
+**Commands (in order):**
+
+```bash
+# Modify dashboard.js
+git add dashboard.js
+
+# Add missing file
+git add auth.js
+
+# Amend commit message and include auth.js
+git commit --amend -m "Update dashboard logic"
+```
+
+This updates the previous commit with the correct message and includes `auth.js`.
+
+### **Constraints / Edge Cases (Optional)**
+
+- Should not be used after pushing
+- Only amends the most recent commit
+
+---
+
+## **Q6. Full Workflow: Create, Commit, Modify, Restore**
+
+### **Problem Description**
+
+A file was modified after committing, but changes need to be discarded.
+
+### **Objective**
+
+Restore a file to its last committed state.
+
+### **Hint**
+
+Use restore for working directory cleanup.
+
+### **Short Explanation**
+
+Git can revert files back to the last commit.
 
 ### **Detailed Explanation**
 
 ```bash
-mkdir branch-demo
-cd branch-demo
+echo "console.log('Profile loaded');" > profile.js
+git add profile.js
+git commit -m "Add profile module"
 
-git init
+# Modify the file
+echo "console.log('Extra log');" >> profile.js
 
-echo "Initial content" > app.txt
-git add app.txt
-git commit -m "Initial commit on main"
-
-git branch feature-update
-git switch feature-update
-
-echo "Feature branch update" >> app.txt
-git add app.txt
-git commit -m "Update app.txt in feature branch"
-
-git switch main
+# Discard changes
+git restore profile.js
 ```
+
+This returns `profile.js` to the state of the last commit.
 
 ### **Constraints / Edge Cases (Optional)**
 
-- Git may use `master` instead of `main` in older versions
-- File must be staged before committing
+- Discarded changes cannot be recovered
+- Does not affect commit history
 
 ---
 
-## **Q4. Merge a feature branch and clean it up**
+## **Q7. Workflow with Unstage + Amend**
 
 ### **Problem Description**
 
-After completing feature development, changes must be merged and the branch removed.
+A file was staged too early, edited again, and committed with a wrong message.
 
 ### **Objective**
 
-Demonstrate merging a branch and deleting it safely.
+Demonstrate unstage, recommit, and amend workflow.
 
 ### **Hint**
 
-Merge first, then delete.
+Unstage → edit → stage → commit → amend.
 
 ### **Short Explanation**
 
-Merged branches can be safely deleted to keep the repository clean.
+Git supports flexible correction before pushing.
 
 ### **Detailed Explanation**
 
 ```bash
-git merge feature-update
-git branch -d feature-update
-git branch
+echo "const settings = {};" > settings.js
+git add settings.js
+
+# Unstage to edit again
+git restore --staged settings.js
+
+# Make more edits
+echo "settings.theme = 'dark';" >> settings.js
+
+git add settings.js
+git commit -m "Wrong message"
+
+# Add missing file
+echo "const defaults = {};" > defaults.js
+git add defaults.js
+
+# Amend commit
+git commit --amend -m "Add settings file"
 ```
 
-- `git merge feature-update` merges the feature branch into `main`
-- `git branch -d feature-update` deletes the merged branch
-- `git branch` verifies the remaining branches
+This results in a single corrected commit containing both files.
 
 ### **Constraints / Edge Cases (Optional)**
 
-- `-d` prevents deletion if branch is not fully merged
-- Use `-D` only when you are sure
-
-
----
-
-## **Q1. What is a remote repository, and why is it important for team collaboration?**
-
-### **Problem Description**
-
-In team environments, developers need a shared place to store and access the project code.
-
-### **Objective**
-
-Explain what a remote repository is and why it is essential for collaboration.
-
-### **Hint**
-
-Think of a shared source of truth and teamwork.
-
-### **Short Explanation**
-
-A remote repository is a shared, central version of the project used by all team members.
-
-### **Detailed Explanation**
-
-A **remote repository** is a centrally hosted copy of a project that multiple developers can access and synchronize with. It acts as a **shared source of truth**, ensuring everyone works from the same baseline. Remote repositories enable collaboration, code sharing, reviews, backups, and coordinated development across teams, especially in distributed environments.
-
-### **Constraints / Edge Cases (Optional)**
-
-- Requires internet access to sync changes
-- Conflicts may occur if multiple changes overlap
-
----
-
-## **Q2. How local and remote repositories work together in Git**
-
-### **Problem Description**
-
-Git uses both local and remote repositories, which can confuse beginners.
-
-### **Objective**
-
-Explain how local and remote repositories interact using commit, push, and pull.
-
-### **Hint**
-
-Think of local work first, then sharing.
-
-### **Short Explanation**
-
-Git follows a local-first workflow where changes are shared explicitly.
-
-### **Detailed Explanation**
-
-In **Git**, developers first make changes and create **commits locally**, even without internet access. These commits remain private until explicitly shared using `git push` to the remote repository. To receive updates from teammates, developers use `git pull`, which fetches and merges remote changes into the local repository. This controlled synchronization allows flexibility, safety, and better collaboration.
-
-### **Constraints / Edge Cases (Optional)**
-
-- Forgetting to pull can lead to conflicts
-- Push may fail if remote has newer commits
-
----
-
-## **Q3. “I committed my changes, so my teammates can see them.” — Is this correct?**
-
-### **Problem Description**
-
-There is a common misunderstanding about when changes become visible to others.
-
-### **Objective**
-
-Clarify the difference between committing and sharing changes.
-
-### **Hint**
-
-Where does the commit live?
-
-### **Short Explanation**
-
-No, commits are local until they are pushed to a remote repository.
-
-### **Detailed Explanation**
-
-This statement is **incorrect**. A `git commit` saves changes only in the **local repository**. Teammates cannot see these changes until the developer uses `git push` to send the commits to the remote repository. Until then, the work exists only on the developer’s machine and is invisible to others.
-
-### **Constraints / Edge Cases (Optional)**
-
-- Commits on feature branches are also invisible until pushed
-- Force-push can overwrite shared history if misused
-
----
-
-## **Q4. Typical end-to-end collaboration flow using a remote repository**
-
-### **Problem Description**
-
-Understanding collaboration requires seeing the complete workflow from start to finish.
-
-### **Objective**
-
-List the standard steps involved in collaborative Git development.
-
-### **Hint**
-
-Start from remote and end with merge and sync.
-
-### **Short Explanation**
-
-Collaboration follows a structured flow from cloning to merging.
-
-### **Detailed Explanation**
-
-A typical end-to-end collaboration flow is:
-
-1. Start from a **remote repository**
-2. Clone or fork the repository locally
-3. Create a branch and make local changes
-4. Commit changes locally
-5. Push commits to the remote repository
-6. Create a Pull Request
-7. Review and discuss changes
-8. Merge the Pull Request into the main branch
-9. Pull the latest changes to keep local repository in sync
-
-This workflow ensures safe collaboration, review, and code quality.
-
-### **Constraints / Edge Cases (Optional)**
-
-- Conflicts may occur during merge
-- Review delays can slow down integration
-
-
----
-
-## **Q1. Purpose of setting an upstream branch using `git push -u`**
-
-### **Problem Description**
-
-When pushing a branch to a remote repository for the first time, Git needs to know which remote branch it should track.
-
-### **Objective**
-
-Explain why the `-u` (upstream) flag is used during the first push.
-
-### **Hint**
-
-Think about future `git push` and `git pull` commands.
-
-### **Short Explanation**
-
-Setting an upstream branch links the local branch to a remote branch.
-
-### **Detailed Explanation**
-
-Using `git push -u origin branch-name` sets an **upstream relationship** between the local branch and the remote branch. After this is done, Git knows where to push and pull from by default. This allows developers to use simple commands like `git push` and `git pull` without specifying the remote and branch every time.
-
-### **Constraints / Edge Cases (Optional)**
-
-- Required only for the first push of a branch
-- Upstream can be changed later if needed
-
----
-
-## **Q2. Difference between `git fetch` and `git pull` (and why fetch is safer)**
-
-### **Problem Description**
-
-Developers often need to update their local repository with changes from the remote repository.
-
-### **Objective**
-
-Differentiate between `git fetch` and `git pull` and explain why fetch is safer.
-
-### **Hint**
-
-One updates references only, the other updates code automatically.
-
-### **Short Explanation**
-
-`git fetch` downloads changes without merging, while `git pull` fetches and merges automatically.
-
-### **Detailed Explanation**
-
-`git fetch` retrieves the latest changes from the remote repository and updates remote-tracking branches, but it **does not modify the working directory**. This allows developers to review changes before merging.
-`git pull` performs a fetch followed by an automatic merge, which can introduce conflicts immediately. Fetch is considered safer because it gives developers full control over when and how changes are merged.
-
-### **Constraints / Edge Cases (Optional)**
-
-- Pull can cause unexpected conflicts
-- Fetch requires an extra merge step
-
----
-
-## **Q3. Local to Remote Workflow (First Push)**
-
-### **Problem Description**
-
-A local Git repository must be connected to a remote repository to enable sharing and collaboration.
-
-### **Objective**
-
-Demonstrate the first-time push workflow from local to remote.
-
-### **Hint**
-
-Initialize locally, then link and push to remote.
-
-### **Short Explanation**
-
-The first push connects the local repository to a remote and uploads initial commits.
-
-### **Detailed Explanation**
-
-In this task, a local repository is created and a `README.md` file is committed. A remote repository is then created on **GitHub** and linked using `git remote add origin`. The code is pushed using `git push -u origin main`, which uploads the commit and sets the upstream branch. This establishes the foundation for all future collaboration.
-
-### **Constraints / Edge Cases (Optional)**
-
-- Remote repository must exist before pushing
-- Branch name (`main` vs `master`) must match
-
----
-
-## **Q4. Feature Branch → Push → Pull Request → Merge**
-
-### **Problem Description**
-
-Direct commits to the main branch can introduce unstable code.
-
-### **Objective**
-
-Demonstrate a safe feature-based workflow using branches and Pull Requests.
-
-### **Hint**
-
-Changes flow through a feature branch before reaching main.
-
-### **Short Explanation**
-
-Feature branches isolate work and are merged through Pull Requests.
-
-### **Detailed Explanation**
-
-In this workflow, a new branch `feature-update` is created from `main`. Changes are committed locally and pushed to the remote repository. A Pull Request is then raised to merge the feature branch into `main`. After review and successful merge, the feature branch is deleted to keep the repository clean. This process ensures code review, traceability, and controlled integration.
-
-### **Constraints / Edge Cases (Optional)**
-
-- Merge conflicts may need manual resolution
-- Branch deletion should happen only after merge
-
----
-
-## **Q5. Collaboration Workflow with Pull Requests**
-
-### **Problem Description**
-
-Multiple developers working on the same repository need a structured collaboration process.
-
-### **Objective**
-
-Demonstrate collaboration using Pull Requests, either with a real collaborator or a simulated workflow.
-
-### **Hint**
-
-Think in terms of ownership, review, and controlled merging.
-
-### **Short Explanation**
-
-Pull Requests enable collaboration, review, and safe merging of changes.
-
-### **Detailed Explanation**
-
-In this task, changes are made in a separate branch (`collab-feature`) either by a collaborator or via solo simulation. The branch is pushed to GitHub and a Pull Request is raised against `main`. The Pull Request allows review, discussion, and approval before merging. Once merged, the changes become part of the main branch, demonstrating a real-world collaborative workflow.
-
-### **Constraints / Edge Cases (Optional)**
-
-- Fork-based workflows are used in open-source projects
-- Review delays can slow integration
-
----
-
-
----
-
-## **Q1. Why is merging considered a “decision point” rather than a development activity?**
-
-### **Problem Description**
-
-In collaborative development, code written in branches must eventually be integrated into a shared codebase.
-
-### **Objective**
-
-Explain why merging represents a formal decision rather than ongoing development.
-
-### **Hint**
-
-Think about review, approval, and responsibility.
-
-### **Short Explanation**
-
-Merging is a decision to accept changes into the shared codebase, not to create them.
-
-### **Detailed Explanation**
-
-Merging is considered a **decision point** because it happens after development is complete and reviews are done. At this stage, the team decides whether the changes meet quality standards and are ready to be included in the shared branch. Once merged, the code affects all contributors, making the action accountable and deliberate rather than exploratory development.
-
-### **Constraints / Edge Cases (Optional)**
-
-- Emergency merges may skip full review
-- Admin overrides can bypass normal approvals
-
----
-
-## **Q2. Why testing is important after resolving a merge conflict**
-
-### **Problem Description**
-
-Merge conflicts require manual edits, which can unintentionally introduce errors.
-
-### **Objective**
-
-Explain why testing is required after conflict resolution.
-
-### **Hint**
-
-Think about human error during manual edits.
-
-### **Short Explanation**
-
-Testing ensures that conflict resolution did not introduce hidden bugs.
-
-### **Detailed Explanation**
-
-When resolving merge conflicts, developers manually combine code from different branches. This process can accidentally break logic, remove required code, or introduce syntax errors. Testing the application after resolving conflicts validates that the final merged code works as expected and that no regressions were introduced during manual resolution.
-
-### **Constraints / Edge Cases (Optional)**
-
-- Small changes may still cause major issues
-- Automated tests may not cover all edge cases
-
----
-
-## **Q3. Merge Without Conflict (Basic Workflow) – Editorial**
-
-### **Problem Description**
-
-Not all merges result in conflicts; understanding clean merges is essential for beginners.
-
-### **Objective**
-
-Demonstrate a clean feature-branch merge using Pull Requests.
-
-### **Hint**
-
-Ensure changes do not overlap with main branch edits.
-
-### **Short Explanation**
-
-Non-overlapping changes allow Git to merge branches automatically.
-
-### **Detailed Explanation**
-
-In this workflow, a repository is created and a base commit is pushed to `main`. A feature branch (`feature-a`) is created where additional lines are added to `app.txt` without modifying the same lines changed in `main`. When a Pull Request is raised from `feature-a` to `main`, Git automatically merges the changes without conflict. After merging, the feature branch is deleted to keep the repository clean. This demonstrates the ideal and most common merge scenario in team workflows using **GitHub**.
-
-### **Constraints / Edge Cases (Optional)**
-
-- Even small overlapping edits can cause conflicts
-- Branch deletion should happen only after merge confirmation
-
----
-
-## **Q4. Merge With Conflict (Conflict Resolution Workflow) – Editorial**
-
-### **Problem Description**
-
-Conflicts occur when multiple branches modify the same lines of a file.
-
-### **Objective**
-
-Demonstrate how to identify, resolve, and safely complete a conflicting merge.
-
-### **Hint**
-
-Focus on conflict markers and manual resolution.
-
-### **Short Explanation**
-
-Merge conflicts require manual intervention to decide which changes to keep.
-
-### **Detailed Explanation**
-
-In this workflow, a branch (`feature-b`) modifies the same lines in `app.txt` that were also changed in `main`. When a Pull Request is raised, Git detects conflicting changes and blocks automatic merging. The developer must resolve the conflict either using the command line or GitHub’s UI by choosing or combining changes and removing conflict markers. After resolving the conflict and verifying the final content, the merge is completed. This process ensures correctness and intentional integration of competing changes.
-
-### **Constraints / Edge Cases (Optional)**
-
-- Incorrect conflict resolution can break functionality
-- Conflict markers must be completely removed before merge
+- Unsafe after pushing to shared branches
+- Amend only affects the latest commit
 
 ---
 
