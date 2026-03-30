@@ -1,0 +1,784 @@
+questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
+subjective,markdown,"### **Q1. What is meant by “isolated development” when using Git branches?**
+
+(Answer in 2–3 lines.)",,,,,,,,,,,,,,,markdown,"Developers often notice that commit hashes change after performing a rebase.
+
+
+Explain why rebase creates new commit IDs and why this behavior is important.
+
+
+Think about history rewriting and commit metadata.
+
+
+Rebase rewrites commit history, which results in new commit hashes.
+
+
+In **Git**, each commit ID is generated based on its content and its parent commit. During a rebase, commits are replayed on top of a new base, changing their parent references. This causes Git to generate **new commit IDs**. This matters because rewriting history on shared branches can break collaboration, as other developers may already rely on the old commit history.
+
+
+- Safe only on local or private branches
+- Requires force push if already pushed"
+subjective,markdown,"### **Q2. Why is branch cleanup considered a best practice in Git?**
+
+(Explain briefly.)",,,,,,,,,,,,,,,markdown,"Teams must choose between merge and rebase when synchronizing branches.
+
+
+Identify a real-world scenario where rebase is the better choice.
+
+
+Think about keeping history clean before integration.
+
+
+Rebase is safer when updating a feature branch with the latest main branch changes.
+
+
+Rebase is most appropriate when a developer wants to **update their feature branch with the latest changes from `main`** before creating a Pull Request. Rebasing keeps the commit history linear and clean without introducing merge commits. Since the feature branch is typically private at this stage, rewriting history does not affect other collaborators.
+
+
+- Should not be used on shared branches
+- Conflicts may still occur during rebase"
+subjective,markdown,"### **Q3. Create a project and work using branches**
+
+**Task:**
+Write the Git commands for the following steps:
+
+1. Create a folder named **branch-demo**
+2. Initialize a Git repository inside it
+3. Create a file **app.txt** and add any text
+4. Stage and commit the file with message **""Initial commit on main""**
+5. Create a new branch named **feature-update**
+6. Switch to the **feature-update** branch
+7. Add more text to **app.txt**
+8. Stage and commit the changes with message **""Update app.txt in feature branch""**
+9. Switch back to **main**",,,,,,,,,,,,,,,markdown,"Feature branches can fall behind the main branch as new commits are added.
+
+
+Demonstrate how to rebase a feature branch onto main and verify linear history.
+
+
+Replay feature commits on top of the latest main branch.
+
+
+Rebasing moves feature commits on top of the latest main branch.
+
+
+```bash
+mkdir rebase-demo
+cd rebase-demo
+git init
+
+echo ""Initial content"" > app.txt
+git add app.txt
+git commit -m ""Initial commit on main""
+
+git switch -c feature-login
+echo ""Login feature work"" >> app.txt
+git add app.txt
+git commit -m ""Add login feature""
+
+git switch main
+echo ""Main branch update"" >> app.txt
+git add app.txt
+git commit -m ""Update app on main""
+
+git switch feature-login
+git rebase main
+git log --oneline --graph
+```
+
+After rebasing, the feature branch commits appear **after** the latest main commit, creating a clean, linear history.
+
+
+- Conflicts may arise if files overlap
+- Commit hashes will change after rebase"
+subjective,markdown,"### **Q4. Merge a feature branch and clean it up**
+
+**Task:**
+Continuing from the previous question, write the Git commands to:
+
+1. Merge **feature-update** into **main**
+2. Delete the **feature-update** branch after successful merge
+3. Verify that the branch has been deleted
+
+_(Assume there are no merge conflicts.)_",,,,,,,,,,,,,,,markdown,"Conflicts can occur when rebasing branches that modify the same lines.
+
+
+Demonstrate how to resolve or abort a rebase safely.
+
+
+Use rebase control commands to proceed or stop.
+
+
+Rebase conflicts require manual resolution before continuing.
+
+
+```bash
+git switch -c feature-ui
+echo ""UI change"" >> app.txt
+git add app.txt
+git commit -m ""Update UI""
+
+git switch main
+echo ""Conflicting main change"" >> app.txt
+git add app.txt
+git commit -m ""Main conflicting change""
+
+git switch feature-ui
+git rebase main
+
+git add app.txt
+git rebase --continue
+
+git rebase --abort
+```
+
+During conflict resolution, conflict markers must be removed and the correct content finalized before continuing the rebase.
+
+
+- Forgetting `git rebase --continue` will pause the process
+- Aborting restores branch to pre-rebase state"
+subjective,markdown,"### **Q1. What is a remote repository, and why is it important for team collaboration?**
+
+(Answer in 3–4 lines.)
+
+_Expected focus:_
+Shared source of truth, synchronization, collaboration, backup.",,,,,,,,,,,,,,,markdown,"Developers often notice that commit hashes change after performing a rebase.
+
+
+Explain why rebase creates new commit IDs and why this behavior is important.
+
+
+Think about history rewriting and commit metadata.
+
+
+Rebase rewrites commit history, which results in new commit hashes.
+
+
+In **Git**, each commit ID is generated based on its content and its parent commit. During a rebase, commits are replayed on top of a new base, changing their parent references. This causes Git to generate **new commit IDs**. This matters because rewriting history on shared branches can break collaboration, as other developers may already rely on the old commit history.
+
+
+- Safe only on local or private branches
+- Requires force push if already pushed"
+subjective,markdown,"### **Q2. Explain how local and remote repositories work together in Git.**
+
+(Include the role of commit, push, and pull.)
+
+_Expected focus:_
+Local-first workflow, explicit sharing, controlled synchronization.",,,,,,,,,,,,,,,markdown,"Teams must choose between merge and rebase when synchronizing branches.
+
+
+Identify a real-world scenario where rebase is the better choice.
+
+
+Think about keeping history clean before integration.
+
+
+Rebase is safer when updating a feature branch with the latest main branch changes.
+
+
+Rebase is most appropriate when a developer wants to **update their feature branch with the latest changes from `main`** before creating a Pull Request. Rebasing keeps the commit history linear and clean without introducing merge commits. Since the feature branch is typically private at this stage, rewriting history does not affect other collaborators.
+
+
+- Should not be used on shared branches
+- Conflicts may still occur during rebase"
+subjective,markdown,"### \*\*Q3. A developer says: “I committed my changes, so my teammates can see them.”
+
+Is this statement correct? Justify your answer.\*\*
+
+_Expected focus:_
+Difference between local commits and pushing to remote.",,,,,,,,,,,,,,,markdown,"Feature branches can fall behind the main branch as new commits are added.
+
+
+Demonstrate how to rebase a feature branch onto main and verify linear history.
+
+
+Replay feature commits on top of the latest main branch.
+
+
+Rebasing moves feature commits on top of the latest main branch.
+
+
+```bash
+mkdir rebase-demo
+cd rebase-demo
+git init
+
+echo ""Initial content"" > app.txt
+git add app.txt
+git commit -m ""Initial commit on main""
+
+git switch -c feature-login
+echo ""Login feature work"" >> app.txt
+git add app.txt
+git commit -m ""Add login feature""
+
+git switch main
+echo ""Main branch update"" >> app.txt
+git add app.txt
+git commit -m ""Update app on main""
+
+git switch feature-login
+git rebase main
+git log --oneline --graph
+```
+
+After rebasing, the feature branch commits appear **after** the latest main commit, creating a clean, linear history.
+
+
+- Conflicts may arise if files overlap
+- Commit hashes will change after rebase"
+subjective,markdown,"### **Q4. Describe a typical end-to-end collaboration flow starting from a remote repository to merging changes back.**
+
+(List the steps in order.)
+
+_Expected focus:_
+Remote repo → clone/fork → local work → push → pull request → review → merge → sync.",,,,,,,,,,,,,,,markdown,"Conflicts can occur when rebasing branches that modify the same lines.
+
+
+Demonstrate how to resolve or abort a rebase safely.
+
+
+Use rebase control commands to proceed or stop.
+
+
+Rebase conflicts require manual resolution before continuing.
+
+
+```bash
+git switch -c feature-ui
+echo ""UI change"" >> app.txt
+git add app.txt
+git commit -m ""Update UI""
+
+git switch main
+echo ""Conflicting main change"" >> app.txt
+git add app.txt
+git commit -m ""Main conflicting change""
+
+git switch feature-ui
+git rebase main
+
+git add app.txt
+git rebase --continue
+
+git rebase --abort
+```
+
+During conflict resolution, conflict markers must be removed and the correct content finalized before continuing the rebase.
+
+
+- Forgetting `git rebase --continue` will pause the process
+- Aborting restores branch to pre-rebase state"
+subjective,markdown,"### **Q1. What is the purpose of setting an upstream branch using `git push -u`?**
+
+(Answer in 2–3 lines.)",,,,,,,,,,,,,,,markdown,"Developers often notice that commit hashes change after performing a rebase.
+
+
+Explain why rebase creates new commit IDs and why this behavior is important.
+
+
+Think about history rewriting and commit metadata.
+
+
+Rebase rewrites commit history, which results in new commit hashes.
+
+
+In **Git**, each commit ID is generated based on its content and its parent commit. During a rebase, commits are replayed on top of a new base, changing their parent references. This causes Git to generate **new commit IDs**. This matters because rewriting history on shared branches can break collaboration, as other developers may already rely on the old commit history.
+
+
+- Safe only on local or private branches
+- Requires force push if already pushed"
+subjective,markdown,"### **Q2. Explain the difference between `git fetch` and `git pull`. Why is `fetch` considered safer?**
+
+(Answer briefly.)",,,,,,,,,,,,,,,markdown,"Teams must choose between merge and rebase when synchronizing branches.
+
+
+Identify a real-world scenario where rebase is the better choice.
+
+
+Think about keeping history clean before integration.
+
+
+Rebase is safer when updating a feature branch with the latest main branch changes.
+
+
+Rebase is most appropriate when a developer wants to **update their feature branch with the latest changes from `main`** before creating a Pull Request. Rebasing keeps the commit history linear and clean without introducing merge commits. Since the feature branch is typically private at this stage, rewriting history does not affect other collaborators.
+
+
+- Should not be used on shared branches
+- Conflicts may still occur during rebase"
+subjective,markdown,"### **Q3. Local to Remote Workflow (First Push)**
+
+**Task:**
+Perform the following steps and submit the repository link:
+
+1. Create a new local repository named **remote-demo**
+2. Create a file **README.md** and add some content
+3. Commit the file with message **""Initial commit""**
+4. Create a remote repository on GitHub
+5. Connect the local repository to GitHub using `origin`
+6. Push the code to GitHub and set the upstream branch
+
+**Expected Evidence:**
+
+- GitHub repo exists
+- `main` branch contains at least one commit",,,,,,,,,,,,,,,markdown,"Feature branches can fall behind the main branch as new commits are added.
+
+
+Demonstrate how to rebase a feature branch onto main and verify linear history.
+
+
+Replay feature commits on top of the latest main branch.
+
+
+Rebasing moves feature commits on top of the latest main branch.
+
+
+```bash
+mkdir rebase-demo
+cd rebase-demo
+git init
+
+echo ""Initial content"" > app.txt
+git add app.txt
+git commit -m ""Initial commit on main""
+
+git switch -c feature-login
+echo ""Login feature work"" >> app.txt
+git add app.txt
+git commit -m ""Add login feature""
+
+git switch main
+echo ""Main branch update"" >> app.txt
+git add app.txt
+git commit -m ""Update app on main""
+
+git switch feature-login
+git rebase main
+git log --oneline --graph
+```
+
+After rebasing, the feature branch commits appear **after** the latest main commit, creating a clean, linear history.
+
+
+- Conflicts may arise if files overlap
+- Commit hashes will change after rebase"
+subjective,markdown,"### **Q4. Feature Branch → Push → Pull Request → Merge**
+
+**Task:**
+Using the repository from Q6, perform the following:
+
+1. Clone the repository (if not already cloned)
+2. Create a new branch named **feature-update**
+3. Modify **README.md** by adding more content
+4. Commit the changes with a meaningful message
+5. Push the branch to GitHub
+6. Raise a Pull Request from **feature-update → main**
+7. Merge the Pull Request
+8. Delete the feature branch after merge
+
+**Submission:**
+
+- GitHub repository link
+- Pull Request must be visible and merged",,,,,,,,,,,,,,,markdown,"Conflicts can occur when rebasing branches that modify the same lines.
+
+
+Demonstrate how to resolve or abort a rebase safely.
+
+
+Use rebase control commands to proceed or stop.
+
+
+Rebase conflicts require manual resolution before continuing.
+
+
+```bash
+git switch -c feature-ui
+echo ""UI change"" >> app.txt
+git add app.txt
+git commit -m ""Update UI""
+
+git switch main
+echo ""Conflicting main change"" >> app.txt
+git add app.txt
+git commit -m ""Main conflicting change""
+
+git switch feature-ui
+git rebase main
+
+git add app.txt
+git rebase --continue
+
+git rebase --abort
+```
+
+During conflict resolution, conflict markers must be removed and the correct content finalized before continuing the rebase.
+
+
+- Forgetting `git rebase --continue` will pause the process
+- Aborting restores branch to pre-rebase state"
+subjective,markdown,"### **Q5. Collaboration Workflow with Pull Requests**
+
+**Task:**
+Perform **one of the following two approaches** (based on availability):
+
+---
+
+#### **Option A: With Collaborator (Preferred)**
+
+1. Add a collaborator to your GitHub repository (Write access)
+2. Collaborator clones the repository
+3. Collaborator creates a new branch **collab-feature**
+4. Collaborator adds a file **collab.txt**, commits, and pushes
+5. Collaborator raises a Pull Request to `main`
+6. You review and merge the collaborator’s Pull Request
+
+---
+
+#### **Option B: Solo Simulation (If No Collaborator Available)**
+
+1. Create a new branch **collab-feature**
+2. Add a file **collab.txt** and commit changes
+3. Push the branch to GitHub
+4. Raise a Pull Request from **collab-feature → main**
+5. Merge the Pull Request yourself
+
+---
+
+**Submission:**
+
+- GitHub repository link
+- At least one merged Pull Request must be visible",,,,,,,,,,,,,,,markdown,"Multiple developers working on the same repository need a structured collaboration process.
+
+
+Demonstrate collaboration using Pull Requests, either with a real collaborator or a simulated workflow.
+
+
+Think in terms of ownership, review, and controlled merging.
+
+
+Pull Requests enable collaboration, review, and safe merging of changes.
+
+
+In this task, changes are made in a separate branch (`collab-feature`) either by a collaborator or via solo simulation. The branch is pushed to GitHub and a Pull Request is raised against `main`. The Pull Request allows review, discussion, and approval before merging. Once merged, the changes become part of the main branch, demonstrating a real-world collaborative workflow.
+
+
+- Fork-based workflows are used in open-source projects
+- Review delays can slow integration"
+subjective,markdown,"### **Q1. Why is merging considered a “decision point” rather than a development activity?**
+
+(Answer in 3–4 lines.)
+
+_Expected focus:_
+Approval, review completion, acceptance into shared codebase, accountability.",,,,,,,,,,,,,,,markdown,"Developers often notice that commit hashes change after performing a rebase.
+
+
+Explain why rebase creates new commit IDs and why this behavior is important.
+
+
+Think about history rewriting and commit metadata.
+
+
+Rebase rewrites commit history, which results in new commit hashes.
+
+
+In **Git**, each commit ID is generated based on its content and its parent commit. During a rebase, commits are replayed on top of a new base, changing their parent references. This causes Git to generate **new commit IDs**. This matters because rewriting history on shared branches can break collaboration, as other developers may already rely on the old commit history.
+
+
+- Safe only on local or private branches
+- Requires force push if already pushed"
+subjective,markdown,"### **Q2. After resolving a merge conflict, why is testing the application important before finalizing the merge?**
+
+(Explain briefly.)
+
+_Expected focus:_
+Avoiding hidden bugs, validation after manual changes.",,,,,,,,,,,,,,,markdown,"Teams must choose between merge and rebase when synchronizing branches.
+
+
+Identify a real-world scenario where rebase is the better choice.
+
+
+Think about keeping history clean before integration.
+
+
+Rebase is safer when updating a feature branch with the latest main branch changes.
+
+
+Rebase is most appropriate when a developer wants to **update their feature branch with the latest changes from `main`** before creating a Pull Request. Rebasing keeps the commit history linear and clean without introducing merge commits. Since the feature branch is typically private at this stage, rewriting history does not affect other collaborators.
+
+
+- Should not be used on shared branches
+- Conflicts may still occur during rebase"
+subjective,markdown,"### **Q3. Merge Without Conflict (Basic Workflow)**
+
+**Task:**
+Perform the following steps and submit the GitHub repository link:
+
+1. Create a new GitHub repository
+2. Clone it locally
+3. Add a file **app.txt** with some content
+4. Commit and push to `main`
+5. Create a branch **feature-a**
+6. Modify **app.txt** by adding new lines (no overlapping changes)
+7. Commit and push the branch
+8. Raise a Pull Request from **feature-a → main**
+9. Merge the Pull Request
+10. Delete the feature branch after merge
+
+> ⚠️ **Submission Instruction:**
+> Submit the **GitHub repository link** clearly showing:
+>
+> - Branches
+> - Commits
+> - Pull Requests
+> - Merge (with or without conflict)",,,,,,,,,,,,,,,markdown,"Feature branches can fall behind the main branch as new commits are added.
+
+
+Demonstrate how to rebase a feature branch onto main and verify linear history.
+
+
+Replay feature commits on top of the latest main branch.
+
+
+Rebasing moves feature commits on top of the latest main branch.
+
+
+```bash
+mkdir rebase-demo
+cd rebase-demo
+git init
+
+echo ""Initial content"" > app.txt
+git add app.txt
+git commit -m ""Initial commit on main""
+
+git switch -c feature-login
+echo ""Login feature work"" >> app.txt
+git add app.txt
+git commit -m ""Add login feature""
+
+git switch main
+echo ""Main branch update"" >> app.txt
+git add app.txt
+git commit -m ""Update app on main""
+
+git switch feature-login
+git rebase main
+git log --oneline --graph
+```
+
+After rebasing, the feature branch commits appear **after** the latest main commit, creating a clean, linear history.
+
+
+- Conflicts may arise if files overlap
+- Commit hashes will change after rebase"
+subjective,markdown,"### **Q4. Merge With Conflict (Conflict Resolution Workflow)**
+
+**Task:**
+Using the same repository or a new one:
+
+1. Create a branch **feature-b**
+2. Modify the **same lines** in **app.txt** that were modified in `main`
+3. Commit and push the branch
+4. Raise a Pull Request from **feature-b → main**
+5. Encounter a merge conflict
+6. Resolve the conflict **(CLI or GitHub UI)**
+7. Ensure conflict markers are removed
+8. Complete the merge
+9. Verify the final content is correct
+
+**Submission:**
+
+- GitHub repository link
+- Pull Request showing conflict and resolution",,,,,,,,,,,,,,,markdown,"Conflicts can occur when rebasing branches that modify the same lines.
+
+
+Demonstrate how to resolve or abort a rebase safely.
+
+
+Use rebase control commands to proceed or stop.
+
+
+Rebase conflicts require manual resolution before continuing.
+
+
+```bash
+git switch -c feature-ui
+echo ""UI change"" >> app.txt
+git add app.txt
+git commit -m ""Update UI""
+
+git switch main
+echo ""Conflicting main change"" >> app.txt
+git add app.txt
+git commit -m ""Main conflicting change""
+
+git switch feature-ui
+git rebase main
+
+git add app.txt
+git rebase --continue
+
+git rebase --abort
+```
+
+During conflict resolution, conflict markers must be removed and the correct content finalized before continuing the rebase.
+
+
+- Forgetting `git rebase --continue` will pause the process
+- Aborting restores branch to pre-rebase state"
+subjective,markdown,"### **Q1. Why does rebase generate new commit IDs, and why does this matter?**
+
+(Answer in 3–4 lines.)
+
+_Expected focus:_
+History rewriting, commit hash change, impact on shared branches.",,,,,,,,,,,,,,,markdown,"Developers often notice that commit hashes change after performing a rebase.
+
+
+Explain why rebase creates new commit IDs and why this behavior is important.
+
+
+Think about history rewriting and commit metadata.
+
+
+Rebase rewrites commit history, which results in new commit hashes.
+
+
+In **Git**, each commit ID is generated based on its content and its parent commit. During a rebase, commits are replayed on top of a new base, changing their parent references. This causes Git to generate **new commit IDs**. This matters because rewriting history on shared branches can break collaboration, as other developers may already rely on the old commit history.
+
+
+- Safe only on local or private branches
+- Requires force push if already pushed"
+subjective,markdown,"### **Q2. In what real-world scenario is rebase safer and more appropriate than merge?**
+
+(Explain briefly.)
+
+_Expected focus:_
+Updating feature branch with latest main before merge.",,,,,,,,,,,,,,,markdown,"Teams must choose between merge and rebase when synchronizing branches.
+
+
+Identify a real-world scenario where rebase is the better choice.
+
+
+Think about keeping history clean before integration.
+
+
+Rebase is safer when updating a feature branch with the latest main branch changes.
+
+
+Rebase is most appropriate when a developer wants to **update their feature branch with the latest changes from `main`** before creating a Pull Request. Rebasing keeps the commit history linear and clean without introducing merge commits. Since the feature branch is typically private at this stage, rewriting history does not affect other collaborators.
+
+
+- Should not be used on shared branches
+- Conflicts may still occur during rebase"
+subjective,markdown,"### **Q3. Rebase a Feature Branch onto Main (No Conflicts)**
+
+**Task:**
+Perform the following steps and write the Git commands used:
+
+1. Create a repository named **rebase-demo**
+2. Create a file **app.txt** and commit it on `main`
+3. Create a branch **feature-login**
+4. Add new content to **app.txt** and commit it
+5. Switch back to `main` and make another commit on **app.txt**
+6. Switch to **feature-login**
+7. Rebase **feature-login** onto `main`
+8. Verify that the commit history is linear
+
+> ⚠️ **Instruction:**
+> Perform these tasks locally using Git.
+> Submit the **terminal commands used** or a **repository link** if required by your course.",,,,,,,,,,,,,,,markdown,"Feature branches can fall behind the main branch as new commits are added.
+
+
+Demonstrate how to rebase a feature branch onto main and verify linear history.
+
+
+Replay feature commits on top of the latest main branch.
+
+
+Rebasing moves feature commits on top of the latest main branch.
+
+
+```bash
+mkdir rebase-demo
+cd rebase-demo
+git init
+
+echo ""Initial content"" > app.txt
+git add app.txt
+git commit -m ""Initial commit on main""
+
+git switch -c feature-login
+echo ""Login feature work"" >> app.txt
+git add app.txt
+git commit -m ""Add login feature""
+
+git switch main
+echo ""Main branch update"" >> app.txt
+git add app.txt
+git commit -m ""Update app on main""
+
+git switch feature-login
+git rebase main
+git log --oneline --graph
+```
+
+After rebasing, the feature branch commits appear **after** the latest main commit, creating a clean, linear history.
+
+
+- Conflicts may arise if files overlap
+- Commit hashes will change after rebase"
+subjective,markdown,"### **Q4. Handle a Rebase Conflict**
+
+**Task:**
+Using the same repository or a new one:
+
+1. Create a conflict by modifying the same lines in **app.txt** on both `main` and **feature-ui**
+2. Start rebasing **feature-ui** onto `main`
+3. Encounter a conflict
+4. Resolve the conflict manually
+5. Stage the resolved file
+6. Continue the rebase
+7. Abort the rebase if required
+
+Write the Git commands used at each step.
+
+> ⚠️ **Instruction:**
+> Perform these tasks locally using Git.
+> Submit the **terminal commands used** or a **repository link** if required by your course.",,,,,,,,,,,,,,,markdown,"Conflicts can occur when rebasing branches that modify the same lines.
+
+
+Demonstrate how to resolve or abort a rebase safely.
+
+
+Use rebase control commands to proceed or stop.
+
+
+Rebase conflicts require manual resolution before continuing.
+
+
+```bash
+git switch -c feature-ui
+echo ""UI change"" >> app.txt
+git add app.txt
+git commit -m ""Update UI""
+
+git switch main
+echo ""Conflicting main change"" >> app.txt
+git add app.txt
+git commit -m ""Main conflicting change""
+
+git switch feature-ui
+git rebase main
+
+git add app.txt
+git rebase --continue
+
+git rebase --abort
+```
+
+During conflict resolution, conflict markers must be removed and the correct content finalized before continuing the rebase.
+
+
+- Forgetting `git rebase --continue` will pause the process
+- Aborting restores branch to pre-rebase state"
