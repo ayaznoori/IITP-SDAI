@@ -1,0 +1,3338 @@
+questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
+subjective,markdown,"### **Create strings for:**
+
+- Your name
+- Your city
+- Your email
+Combine them into a sentence.",,,,,,,,,,,,,,,markdown,"```python
+data = (10, 20, 30, 40, 50)
+
+print(""Attempting data[2] = 999:"")
+try:
+    data[2] = 999
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting data.append(60):"")
+try:
+    data.append(60)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+print(""\nAttempting data.remove(30):"")
+try:
+    data.remove(30)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+new_data = data + (60, 70)
+print(f""\nConcatenation: {new_data}"")
+print(f""Original unchanged: {data}"")
+
+modified = data[:2] + (999,) + data[3:]
+print(f""\nModified copy: {modified}"")
+print(f""Original still: {data}"")
+```
+
+**Key Concepts:**
+- Tuples don't have modify methods (append, remove, etc.)
+- Cannot assign to indices
+- Can create NEW tuples through concatenation
+- Slicing and concatenation preserve original"
+subjective,markdown,"### **Question 2**
+
+```python
+word = ""Python""
+```
+Print it:
+- In uppercase
+- In lowercase
+- 3 times in a row",,,,,,,,,,,,,,,markdown,"```python
+container = (1, 2, [3, 4, 5], 6)
+
+print(""Attempting container[0] = 100:"")
+try:
+    container[0] = 100
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting container[2] = [7, 8, 9]:"")
+try:
+    container[2] = [7, 8, 9]
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAppending to container[2]:"")
+container[2].append(6)
+print(f""  Success! container[2].append(6) works"")
+print(f""  Container is now: {container}"")
+
+print(""\nModifying container[2][0]:"")
+container[2][0] = 999
+print(f""  Success! container[2][0] = 999 works"")
+print(f""  Container is now: {container}"")
+
+print(""\nExplanation: The tuple structure is immutable (cannot reassign elements),"")
+print(""but the mutable objects INSIDE can still be modified."")
+```
+
+**Key Concept:**
+- Tuple's structure is immutable
+- Objects inside can be mutable
+- Can modify mutable objects, just can't reassign tuple elements"
+subjective,markdown,"### **Create full name from parts:**
+
+```python
+first = ""Alice""
+middle = ""Marie""
+last = ""Johnson""
+# Output: ""Alice Marie Johnson""
+```",,,,,,,,,,,,,,,markdown,"```python
+game_map = {
+    (0, 0): 'Start',
+    (5, 3): 'Enemy',
+    (10, 7): 'Treasure',
+    (3, 9): 'Trap'
+}
+print(f""Game Map created with {len(game_map)} locations\n"")
+
+def move_player(position, direction):
+    x, y = position
+    if direction == 'up':
+        return (x, y + 1)
+    elif direction == 'down':
+        return (x, y - 1)
+    elif direction == 'left':
+        return (x - 1, y)
+    elif direction == 'right':
+        return (x + 1, y)
+    return position
+
+position = (0, 0)
+print(f""Starting at {position}: {game_map.get(position, 'Empty')}\n"")
+
+moves = ['right', 'right', 'up', 'up', 'up', 'right', 'right', 'right']
+for move in moves:
+    position = move_player(position, move)
+    location = game_map.get(position, 'Empty')
+    print(f""Move {move} to {position}: {location}"")
+
+print(f""\nPath complete! Found: {game_map.get(position)} at {position}\n"")
+
+print(""Attempting to use list as key:"")
+try:
+    test_map = {[0, 0]: 'value'}
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""Lists cannot be dictionary keys because they are mutable."")
+    print(""Tuples work because they are immutable and hashable."")
+```
+
+**Key Points:**
+- Tuples are hashable → can be dict keys
+- Perfect for coordinates, composite keys
+- Lists are unhashable → cannot be dict keys"
+subjective,markdown,"### **Check if email is valid:**
+
+- Contains ""@""
+- Ends with "".com""
+```python
+email = ""user@example.com""
+```",,,,,,,,,,,,,,,markdown,"```python
+DB_CONFIG = (
+    'postgresql',     # db_type
+    'localhost',      # host
+    5432,             # port
+    'production_db',  # database
+    True              # ssl_enabled
+)
+
+def get_connection_string(config):
+    db_type, host, port, database, ssl_enabled = config
+    ssl = ""?ssl=true"" if ssl_enabled else """"
+    return f""{db_type}://{host}:{port}/{database}{ssl}""
+
+def update_config(config, **kwargs):
+    db_type, host, port, database, ssl_enabled = config
+
+    db_type = kwargs.get('db_type', db_type)
+    host = kwargs.get('host', host)
+    port = kwargs.get('port', port)
+    database = kwargs.get('database', database)
+    ssl_enabled = kwargs.get('ssl_enabled', ssl_enabled)
+
+    return (db_type, host, port, database, ssl_enabled)
+
+print(f""Original config: {DB_CONFIG}"")
+print(f""Connection string: {get_connection_string(DB_CONFIG)}\n"")
+
+new_config = update_config(DB_CONFIG, host='db.example.com')
+print(f""Updated config (new host): {new_config}"")
+print(f""Original unchanged: {DB_CONFIG}\n"")
+
+new_config2 = update_config(DB_CONFIG, port=3306, database='test_db')
+print(f""Updated config (port and db): {new_config2}"")
+print(f""Original still unchanged: {DB_CONFIG}\n"")
+
+print(""Attempting to modify original:"")
+try:
+    DB_CONFIG[1] = 'wrong_host'
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""✓ Original config is protected!\n"")
+
+print(""Danger with mutable list:"")
+list_config = list(DB_CONFIG)
+print(f""List config: {list_config}"")
+list_config[0] = 'WRONG'
+print(f""Accidental modification: {list_config}"")
+print(""✗ Original config was corrupted!\n"")
+
+print(""Conclusion: Immutable tuples prevent accidental config corruption."")
+```
+
+**Benefits:**
+- Configuration cannot be accidentally modified
+- Updates create new config (functional programming)
+- Original always preserved
+- Thread-safe"
+subjective,markdown,"### **Create a box around text:**
+
+```python
+text = ""Hello""
+# Output:
+# *******
+# *Hello*
+# *******
+```
+Use string operations!",,,,,,,,,,,,,,,markdown,"```python
+cache = {}
+stats = {'hits': 0, 'misses': 0}
+
+def expensive_calculation(a, b, c):
+    """"""Simulates expensive computation""""""
+    return (a ** 2) + (b ** 3) + (c ** 4)
+
+def cached_calculation(a, b, c):
+    key = (a, b, c)  # Tuple as cache key
+
+    if key in cache:
+        stats['hits'] += 1
+        print(f""  Cache HIT! Returning cached value"")
+        return cache[key]
+    else:
+        stats['misses'] += 1
+        print(f""  Cache MISS - computing..."")
+        result = expensive_calculation(a, b, c)
+        cache[key] = result
+        return result
+
+def cache_stats_display():
+    total = stats['hits'] + stats['misses']
+    hit_rate = (stats['hits'] / total * 100) if total > 0 else 0
+    print(f""\nCache Statistics:"")
+    print(f""  Total calls: {total}"")
+    print(f""  Cache hits: {stats['hits']}"")
+    print(f""  Cache misses: {stats['misses']}"")
+    print(f""  Hit rate: {hit_rate:.1f}%"")
+
+print(""Cache initialized\n"")
+
+test_cases = [
+    (2, 3, 4),
+    (1, 2, 3),
+    (2, 3, 4),  # Should hit
+    (1, 2, 3),  # Should hit
+    (5, 6, 7)
+]
+
+for args in test_cases:
+    print(f""Call cached_calculation{args}:"")
+    result = cached_calculation(*args)
+    print(f""  Result: {result}"")
+    print(f""  Cache now has {len(cache)} {'entry' if len(cache) == 1 else 'entries'}\n"")
+
+cache_stats_display()
+
+print(""\nAttempting to use list [2, 3, 4] as cache key:"")
+try:
+    test_cache = {}
+    test_cache[[2, 3, 4]] = 'value'
+except TypeError as e:
+    print(f""TypeError: {e}\n"")
+    print(""Explanation: Lists cannot be dictionary keys because:"")
+    print(""  1. Lists are mutable (can change)"")
+    print(""  2. Mutable objects cannot be hashed"")
+    print(""  3. Dictionary keys must be hashable"")
+    print(""  4. Tuples are immutable and hashable - perfect for caching!"")
+```
+
+**Caching Pattern:**
+- Use tuple of arguments as key
+- Immutable = safe cache key
+- Hashable = can be dict key
+- Common in memoization, dynamic programming
+
+**Key Takeaways:**
+- Immutability enables safe caching
+- Tuples perfect for composite keys
+- Lists fail as keys (unhashable)
+- Pattern used in real optimization"
+subjective,markdown,"### **Use f-string to print:**
+
+""My name is [name] and I am [age] years old""",,,,,,,,,,,,,,,markdown,"```python
+data = (10, 20, 30, 40, 50)
+
+print(""Attempting data[2] = 999:"")
+try:
+    data[2] = 999
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting data.append(60):"")
+try:
+    data.append(60)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+print(""\nAttempting data.remove(30):"")
+try:
+    data.remove(30)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+new_data = data + (60, 70)
+print(f""\nConcatenation: {new_data}"")
+print(f""Original unchanged: {data}"")
+
+modified = data[:2] + (999,) + data[3:]
+print(f""\nModified copy: {modified}"")
+print(f""Original still: {data}"")
+```
+
+**Key Concepts:**
+- Tuples don't have modify methods (append, remove, etc.)
+- Cannot assign to indices
+- Can create NEW tuples through concatenation
+- Slicing and concatenation preserve original"
+subjective,markdown,"### **Calculate and print with f-string:**
+
+```python
+price = 29.99
+quantity = 3
+# Print: ""Total: $89.97""
+```",,,,,,,,,,,,,,,markdown,"```python
+container = (1, 2, [3, 4, 5], 6)
+
+print(""Attempting container[0] = 100:"")
+try:
+    container[0] = 100
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting container[2] = [7, 8, 9]:"")
+try:
+    container[2] = [7, 8, 9]
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAppending to container[2]:"")
+container[2].append(6)
+print(f""  Success! container[2].append(6) works"")
+print(f""  Container is now: {container}"")
+
+print(""\nModifying container[2][0]:"")
+container[2][0] = 999
+print(f""  Success! container[2][0] = 999 works"")
+print(f""  Container is now: {container}"")
+
+print(""\nExplanation: The tuple structure is immutable (cannot reassign elements),"")
+print(""but the mutable objects INSIDE can still be modified."")
+```
+
+**Key Concept:**
+- Tuple's structure is immutable
+- Objects inside can be mutable
+- Can modify mutable objects, just can't reassign tuple elements"
+subjective,markdown,### **Format pi to 3 decimal places using f-string.**,,,,,,,,,,,,,,,markdown,"```python
+game_map = {
+    (0, 0): 'Start',
+    (5, 3): 'Enemy',
+    (10, 7): 'Treasure',
+    (3, 9): 'Trap'
+}
+print(f""Game Map created with {len(game_map)} locations\n"")
+
+def move_player(position, direction):
+    x, y = position
+    if direction == 'up':
+        return (x, y + 1)
+    elif direction == 'down':
+        return (x, y - 1)
+    elif direction == 'left':
+        return (x - 1, y)
+    elif direction == 'right':
+        return (x + 1, y)
+    return position
+
+position = (0, 0)
+print(f""Starting at {position}: {game_map.get(position, 'Empty')}\n"")
+
+moves = ['right', 'right', 'up', 'up', 'up', 'right', 'right', 'right']
+for move in moves:
+    position = move_player(position, move)
+    location = game_map.get(position, 'Empty')
+    print(f""Move {move} to {position}: {location}"")
+
+print(f""\nPath complete! Found: {game_map.get(position)} at {position}\n"")
+
+print(""Attempting to use list as key:"")
+try:
+    test_map = {[0, 0]: 'value'}
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""Lists cannot be dictionary keys because they are mutable."")
+    print(""Tuples work because they are immutable and hashable."")
+```
+
+**Key Points:**
+- Tuples are hashable → can be dict keys
+- Perfect for coordinates, composite keys
+- Lists are unhashable → cannot be dict keys"
+subjective,markdown,"### **Create a student report card:**
+
+- Name
+- Math score
+- English score  
+- Average (calculated)
+All formatted with f-strings.",,,,,,,,,,,,,,,markdown,"```python
+DB_CONFIG = (
+    'postgresql',     # db_type
+    'localhost',      # host
+    5432,             # port
+    'production_db',  # database
+    True              # ssl_enabled
+)
+
+def get_connection_string(config):
+    db_type, host, port, database, ssl_enabled = config
+    ssl = ""?ssl=true"" if ssl_enabled else """"
+    return f""{db_type}://{host}:{port}/{database}{ssl}""
+
+def update_config(config, **kwargs):
+    db_type, host, port, database, ssl_enabled = config
+
+    db_type = kwargs.get('db_type', db_type)
+    host = kwargs.get('host', host)
+    port = kwargs.get('port', port)
+    database = kwargs.get('database', database)
+    ssl_enabled = kwargs.get('ssl_enabled', ssl_enabled)
+
+    return (db_type, host, port, database, ssl_enabled)
+
+print(f""Original config: {DB_CONFIG}"")
+print(f""Connection string: {get_connection_string(DB_CONFIG)}\n"")
+
+new_config = update_config(DB_CONFIG, host='db.example.com')
+print(f""Updated config (new host): {new_config}"")
+print(f""Original unchanged: {DB_CONFIG}\n"")
+
+new_config2 = update_config(DB_CONFIG, port=3306, database='test_db')
+print(f""Updated config (port and db): {new_config2}"")
+print(f""Original still unchanged: {DB_CONFIG}\n"")
+
+print(""Attempting to modify original:"")
+try:
+    DB_CONFIG[1] = 'wrong_host'
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""✓ Original config is protected!\n"")
+
+print(""Danger with mutable list:"")
+list_config = list(DB_CONFIG)
+print(f""List config: {list_config}"")
+list_config[0] = 'WRONG'
+print(f""Accidental modification: {list_config}"")
+print(""✗ Original config was corrupted!\n"")
+
+print(""Conclusion: Immutable tuples prevent accidental config corruption."")
+```
+
+**Benefits:**
+- Configuration cannot be accidentally modified
+- Updates create new config (functional programming)
+- Original always preserved
+- Thread-safe"
+subjective,markdown,"### **Create a table with f-strings:**
+
+Name        | Score
+-----------|-------
+Alice      |    95
+Bob        |    87
+Charlie    |    92
+Use proper alignment and width.",,,,,,,,,,,,,,,markdown,"```python
+cache = {}
+stats = {'hits': 0, 'misses': 0}
+
+def expensive_calculation(a, b, c):
+    """"""Simulates expensive computation""""""
+    return (a ** 2) + (b ** 3) + (c ** 4)
+
+def cached_calculation(a, b, c):
+    key = (a, b, c)  # Tuple as cache key
+
+    if key in cache:
+        stats['hits'] += 1
+        print(f""  Cache HIT! Returning cached value"")
+        return cache[key]
+    else:
+        stats['misses'] += 1
+        print(f""  Cache MISS - computing..."")
+        result = expensive_calculation(a, b, c)
+        cache[key] = result
+        return result
+
+def cache_stats_display():
+    total = stats['hits'] + stats['misses']
+    hit_rate = (stats['hits'] / total * 100) if total > 0 else 0
+    print(f""\nCache Statistics:"")
+    print(f""  Total calls: {total}"")
+    print(f""  Cache hits: {stats['hits']}"")
+    print(f""  Cache misses: {stats['misses']}"")
+    print(f""  Hit rate: {hit_rate:.1f}%"")
+
+print(""Cache initialized\n"")
+
+test_cases = [
+    (2, 3, 4),
+    (1, 2, 3),
+    (2, 3, 4),  # Should hit
+    (1, 2, 3),  # Should hit
+    (5, 6, 7)
+]
+
+for args in test_cases:
+    print(f""Call cached_calculation{args}:"")
+    result = cached_calculation(*args)
+    print(f""  Result: {result}"")
+    print(f""  Cache now has {len(cache)} {'entry' if len(cache) == 1 else 'entries'}\n"")
+
+cache_stats_display()
+
+print(""\nAttempting to use list [2, 3, 4] as cache key:"")
+try:
+    test_cache = {}
+    test_cache[[2, 3, 4]] = 'value'
+except TypeError as e:
+    print(f""TypeError: {e}\n"")
+    print(""Explanation: Lists cannot be dictionary keys because:"")
+    print(""  1. Lists are mutable (can change)"")
+    print(""  2. Mutable objects cannot be hashed"")
+    print(""  3. Dictionary keys must be hashable"")
+    print(""  4. Tuples are immutable and hashable - perfect for caching!"")
+```
+
+**Caching Pattern:**
+- Use tuple of arguments as key
+- Immutable = safe cache key
+- Hashable = can be dict key
+- Common in memoization, dynamic programming
+
+**Key Takeaways:**
+- Immutability enables safe caching
+- Tuples perfect for composite keys
+- Lists fail as keys (unhashable)
+- Pattern used in real optimization"
+subjective,markdown,"### Create Different Types of Lists (3 minutes, Low Difficulty)
+
+**Problem:**
+Create the following lists and print each one:
+1. Empty list
+2. List of integers from 1 to 5
+3. List of three strings: ""red"", ""green"", ""blue""
+4. List of three floats: 1.5, 2.5, 3.5
+5. Mixed list with a string, integer, float, and boolean
+
+**Expected Output:**
+Empty list: []
+Integers: [1, 2, 3, 4, 5]
+Colors: ['red', 'green', 'blue']
+Floats: [1.5, 2.5, 3.5]
+Mixed: ['Python', 42, 3.14, True]
+
+**Category:** Implementation  
+**Prerequisite LOs:** 9.1.1, 9.1.2",,,,,,,,,,,,,,,markdown,"```python
+data = (10, 20, 30, 40, 50)
+
+print(""Attempting data[2] = 999:"")
+try:
+    data[2] = 999
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting data.append(60):"")
+try:
+    data.append(60)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+print(""\nAttempting data.remove(30):"")
+try:
+    data.remove(30)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+new_data = data + (60, 70)
+print(f""\nConcatenation: {new_data}"")
+print(f""Original unchanged: {data}"")
+
+modified = data[:2] + (999,) + data[3:]
+print(f""\nModified copy: {modified}"")
+print(f""Original still: {data}"")
+```
+
+**Key Concepts:**
+- Tuples don't have modify methods (append, remove, etc.)
+- Cannot assign to indices
+- Can create NEW tuples through concatenation
+- Slicing and concatenation preserve original"
+subjective,markdown,"### Create Lists from Range and String (3 minutes, Low Difficulty)
+
+**Problem:**
+1. Create a list of numbers from 0 to 9 using range()
+2. Create a list of even numbers from 2 to 20 using range()
+3. Convert the string ""PYTHON"" to a list of characters
+4. Split the sentence ""I love programming"" into a list of words
+
+**Expected Output:**
+Numbers 0-9: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Even numbers 2-20: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+Characters: ['P', 'Y', 'T', 'H', 'O', 'N']
+Words: ['I', 'love', 'programming']
+
+**Category:** Implementation  
+**Prerequisite LOs:** 9.1.1, 9.1.2",,,,,,,,,,,,,,,markdown,"```python
+container = (1, 2, [3, 4, 5], 6)
+
+print(""Attempting container[0] = 100:"")
+try:
+    container[0] = 100
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting container[2] = [7, 8, 9]:"")
+try:
+    container[2] = [7, 8, 9]
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAppending to container[2]:"")
+container[2].append(6)
+print(f""  Success! container[2].append(6) works"")
+print(f""  Container is now: {container}"")
+
+print(""\nModifying container[2][0]:"")
+container[2][0] = 999
+print(f""  Success! container[2][0] = 999 works"")
+print(f""  Container is now: {container}"")
+
+print(""\nExplanation: The tuple structure is immutable (cannot reassign elements),"")
+print(""but the mutable objects INSIDE can still be modified."")
+```
+
+**Key Concept:**
+- Tuple's structure is immutable
+- Objects inside can be mutable
+- Can modify mutable objects, just can't reassign tuple elements"
+subjective,markdown,"### Create and Work with Nested Lists (5 minutes, Medium Difficulty)
+
+**Problem:**
+Create a 3x3 matrix (nested list) representing a tic-tac-toe board with the following layout:
+X | O | X
+---------
+O | X | O
+---------
+X | O | X
+Then:
+1. Print the entire board
+2. Print the center element
+3. Print the top row
+4. Print the bottom-right element
+
+**Expected Output:**
+Board: [['X', 'O', 'X'], ['O', 'X', 'O'], ['X', 'O', 'X']]
+Center: X
+Top row: ['X', 'O', 'X']
+Bottom-right: X
+
+**Category:** Implementation  
+**Prerequisite LOs:** 9.1.1, 9.1.2",,,,,,,,,,,,,,,markdown,"```python
+game_map = {
+    (0, 0): 'Start',
+    (5, 3): 'Enemy',
+    (10, 7): 'Treasure',
+    (3, 9): 'Trap'
+}
+print(f""Game Map created with {len(game_map)} locations\n"")
+
+def move_player(position, direction):
+    x, y = position
+    if direction == 'up':
+        return (x, y + 1)
+    elif direction == 'down':
+        return (x, y - 1)
+    elif direction == 'left':
+        return (x - 1, y)
+    elif direction == 'right':
+        return (x + 1, y)
+    return position
+
+position = (0, 0)
+print(f""Starting at {position}: {game_map.get(position, 'Empty')}\n"")
+
+moves = ['right', 'right', 'up', 'up', 'up', 'right', 'right', 'right']
+for move in moves:
+    position = move_player(position, move)
+    location = game_map.get(position, 'Empty')
+    print(f""Move {move} to {position}: {location}"")
+
+print(f""\nPath complete! Found: {game_map.get(position)} at {position}\n"")
+
+print(""Attempting to use list as key:"")
+try:
+    test_map = {[0, 0]: 'value'}
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""Lists cannot be dictionary keys because they are mutable."")
+    print(""Tuples work because they are immutable and hashable."")
+```
+
+**Key Points:**
+- Tuples are hashable → can be dict keys
+- Perfect for coordinates, composite keys
+- Lists are unhashable → cannot be dict keys"
+subjective,markdown,"### Student Grade Management (5 minutes, Medium Difficulty)
+
+**Problem:**
+Create a list to store information for 4 students. Each student should be a nested list containing: [name, math_grade, science_grade, english_grade].
+
+Students:
+- Alice: 85, 90, 88
+- Bob: 78, 82, 86  
+- Charlie: 92, 89, 94
+- Diana: 88, 91, 87
+
+Then:
+1. Print all students
+2. Calculate and print the average for each student
+3. Find the student with the highest math grade
+
+**Expected Output:**
+All students:
+[['Alice', 85, 90, 88], ['Bob', 78, 82, 86], ['Charlie', 92, 89, 94], ['Diana', 88, 91, 87]]
+
+Student Averages:
+Alice: 87.67
+Bob: 82.00
+Charlie: 91.67
+Diana: 88.67
+
+Highest math grade: Charlie with 92
+
+**Category:** Application  
+**Prerequisite LOs:** 9.1.1, 9.1.2",,,,,,,,,,,,,,,markdown,"```python
+DB_CONFIG = (
+    'postgresql',     # db_type
+    'localhost',      # host
+    5432,             # port
+    'production_db',  # database
+    True              # ssl_enabled
+)
+
+def get_connection_string(config):
+    db_type, host, port, database, ssl_enabled = config
+    ssl = ""?ssl=true"" if ssl_enabled else """"
+    return f""{db_type}://{host}:{port}/{database}{ssl}""
+
+def update_config(config, **kwargs):
+    db_type, host, port, database, ssl_enabled = config
+
+    db_type = kwargs.get('db_type', db_type)
+    host = kwargs.get('host', host)
+    port = kwargs.get('port', port)
+    database = kwargs.get('database', database)
+    ssl_enabled = kwargs.get('ssl_enabled', ssl_enabled)
+
+    return (db_type, host, port, database, ssl_enabled)
+
+print(f""Original config: {DB_CONFIG}"")
+print(f""Connection string: {get_connection_string(DB_CONFIG)}\n"")
+
+new_config = update_config(DB_CONFIG, host='db.example.com')
+print(f""Updated config (new host): {new_config}"")
+print(f""Original unchanged: {DB_CONFIG}\n"")
+
+new_config2 = update_config(DB_CONFIG, port=3306, database='test_db')
+print(f""Updated config (port and db): {new_config2}"")
+print(f""Original still unchanged: {DB_CONFIG}\n"")
+
+print(""Attempting to modify original:"")
+try:
+    DB_CONFIG[1] = 'wrong_host'
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""✓ Original config is protected!\n"")
+
+print(""Danger with mutable list:"")
+list_config = list(DB_CONFIG)
+print(f""List config: {list_config}"")
+list_config[0] = 'WRONG'
+print(f""Accidental modification: {list_config}"")
+print(""✗ Original config was corrupted!\n"")
+
+print(""Conclusion: Immutable tuples prevent accidental config corruption."")
+```
+
+**Benefits:**
+- Configuration cannot be accidentally modified
+- Updates create new config (functional programming)
+- Original always preserved
+- Thread-safe"
+subjective,markdown,"### Shopping Cart System (5 minutes, Medium Difficulty)
+
+**Problem:**
+Create a shopping cart system where each item is represented as a list: [product_name, price, quantity].
+
+Add these items to the cart:
+- Laptop: $999.99, quantity 1
+- Mouse: $29.99, quantity 2
+- Keyboard: $79.99, quantity 1
+- USB Cable: $9.99, quantity 3
+
+Calculate and display:
+1. Total number of unique items
+2. Total number of individual products (sum of quantities)
+3. Subtotal for each item (price × quantity)
+4. Grand total
+
+**Expected Output:**
+Shopping Cart:
+Item 1: Laptop - $999.99 x 1 = $999.99
+Item 2: Mouse - $29.99 x 2 = $59.98
+Item 3: Keyboard - $79.99 x 1 = $79.99
+Item 4: USB Cable - $9.99 x 3 = $29.97
+
+Unique items: 4
+Total products: 7
+Grand Total: $1169.93
+
+**Category:** Application  
+**Prerequisite LOs:** 9.1.1, 9.1.2",,,,,,,,,,,,,,,markdown,"```python
+cache = {}
+stats = {'hits': 0, 'misses': 0}
+
+def expensive_calculation(a, b, c):
+    """"""Simulates expensive computation""""""
+    return (a ** 2) + (b ** 3) + (c ** 4)
+
+def cached_calculation(a, b, c):
+    key = (a, b, c)  # Tuple as cache key
+
+    if key in cache:
+        stats['hits'] += 1
+        print(f""  Cache HIT! Returning cached value"")
+        return cache[key]
+    else:
+        stats['misses'] += 1
+        print(f""  Cache MISS - computing..."")
+        result = expensive_calculation(a, b, c)
+        cache[key] = result
+        return result
+
+def cache_stats_display():
+    total = stats['hits'] + stats['misses']
+    hit_rate = (stats['hits'] / total * 100) if total > 0 else 0
+    print(f""\nCache Statistics:"")
+    print(f""  Total calls: {total}"")
+    print(f""  Cache hits: {stats['hits']}"")
+    print(f""  Cache misses: {stats['misses']}"")
+    print(f""  Hit rate: {hit_rate:.1f}%"")
+
+print(""Cache initialized\n"")
+
+test_cases = [
+    (2, 3, 4),
+    (1, 2, 3),
+    (2, 3, 4),  # Should hit
+    (1, 2, 3),  # Should hit
+    (5, 6, 7)
+]
+
+for args in test_cases:
+    print(f""Call cached_calculation{args}:"")
+    result = cached_calculation(*args)
+    print(f""  Result: {result}"")
+    print(f""  Cache now has {len(cache)} {'entry' if len(cache) == 1 else 'entries'}\n"")
+
+cache_stats_display()
+
+print(""\nAttempting to use list [2, 3, 4] as cache key:"")
+try:
+    test_cache = {}
+    test_cache[[2, 3, 4]] = 'value'
+except TypeError as e:
+    print(f""TypeError: {e}\n"")
+    print(""Explanation: Lists cannot be dictionary keys because:"")
+    print(""  1. Lists are mutable (can change)"")
+    print(""  2. Mutable objects cannot be hashed"")
+    print(""  3. Dictionary keys must be hashable"")
+    print(""  4. Tuples are immutable and hashable - perfect for caching!"")
+```
+
+**Caching Pattern:**
+- Use tuple of arguments as key
+- Immutable = safe cache key
+- Hashable = can be dict key
+- Common in memoization, dynamic programming
+
+**Key Takeaways:**
+- Immutability enables safe caching
+- Tuples perfect for composite keys
+- Lists fail as keys (unhashable)
+- Pattern used in real optimization"
+subjective,markdown,"### Basic Positive and Negative Indexing (3 minutes, Low Difficulty)
+
+**Problem:**
+Given the list `colors = ['red', 'green', 'blue', 'yellow', 'purple']`, access and print:
+1. First element
+2. Third element
+3. Last element using positive index
+4. Last element using negative index
+5. Second to last element
+
+**Expected Output:**
+First: red
+Third: blue
+Last (positive): purple
+Last (negative): purple
+Second to last: yellow
+
+**Category:** Implementation  
+**Prerequisite LOs:** 9.2.1",,,,,,,,,,,,,,,markdown,"```python
+data = (10, 20, 30, 40, 50)
+
+print(""Attempting data[2] = 999:"")
+try:
+    data[2] = 999
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting data.append(60):"")
+try:
+    data.append(60)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+print(""\nAttempting data.remove(30):"")
+try:
+    data.remove(30)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+new_data = data + (60, 70)
+print(f""\nConcatenation: {new_data}"")
+print(f""Original unchanged: {data}"")
+
+modified = data[:2] + (999,) + data[3:]
+print(f""\nModified copy: {modified}"")
+print(f""Original still: {data}"")
+```
+
+**Key Concepts:**
+- Tuples don't have modify methods (append, remove, etc.)
+- Cannot assign to indices
+- Can create NEW tuples through concatenation
+- Slicing and concatenation preserve original"
+subjective,markdown,"### Accessing Nested List Elements (3 minutes, Low Difficulty)
+
+**Problem:**
+Given this matrix:
+```python
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+```
+Access and print:
+1. The entire first row
+2. The element at row 1, column 2
+3. The center element (row 1, column 1)
+4. The last element of the last row
+5. The first element of the last row
+
+**Expected Output:**
+First row: [10, 20, 30]
+Row 1, Col 2: 60
+Center: 50
+Last element: 90
+Last row, first element: 70
+
+**Category:** Implementation  
+**Prerequisite LOs:** 9.2.1",,,,,,,,,,,,,,,markdown,"```python
+container = (1, 2, [3, 4, 5], 6)
+
+print(""Attempting container[0] = 100:"")
+try:
+    container[0] = 100
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting container[2] = [7, 8, 9]:"")
+try:
+    container[2] = [7, 8, 9]
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAppending to container[2]:"")
+container[2].append(6)
+print(f""  Success! container[2].append(6) works"")
+print(f""  Container is now: {container}"")
+
+print(""\nModifying container[2][0]:"")
+container[2][0] = 999
+print(f""  Success! container[2][0] = 999 works"")
+print(f""  Container is now: {container}"")
+
+print(""\nExplanation: The tuple structure is immutable (cannot reassign elements),"")
+print(""but the mutable objects INSIDE can still be modified."")
+```
+
+**Key Concept:**
+- Tuple's structure is immutable
+- Objects inside can be mutable
+- Can modify mutable objects, just can't reassign tuple elements"
+subjective,markdown,"### Safe Element Access with Error Handling (5 minutes, Medium Difficulty)
+
+**Problem:**
+Create a function `safe_access(lst, index)` that:
+1. Returns the element if index is valid
+2. Returns ""Index out of range"" if invalid
+3. Test with a list `[10, 20, 30, 40, 50]` using indices: 0, 3, -1, 10, -10
+
+**Expected Output:**
+Index 0: 10
+Index 3: 40
+Index -1: 50
+Index 10: Index out of range
+Index -10: Index out of range
+
+**Category:** Implementation  
+**Prerequisite LOs:** 9.2.1",,,,,,,,,,,,,,,markdown,"```python
+game_map = {
+    (0, 0): 'Start',
+    (5, 3): 'Enemy',
+    (10, 7): 'Treasure',
+    (3, 9): 'Trap'
+}
+print(f""Game Map created with {len(game_map)} locations\n"")
+
+def move_player(position, direction):
+    x, y = position
+    if direction == 'up':
+        return (x, y + 1)
+    elif direction == 'down':
+        return (x, y - 1)
+    elif direction == 'left':
+        return (x - 1, y)
+    elif direction == 'right':
+        return (x + 1, y)
+    return position
+
+position = (0, 0)
+print(f""Starting at {position}: {game_map.get(position, 'Empty')}\n"")
+
+moves = ['right', 'right', 'up', 'up', 'up', 'right', 'right', 'right']
+for move in moves:
+    position = move_player(position, move)
+    location = game_map.get(position, 'Empty')
+    print(f""Move {move} to {position}: {location}"")
+
+print(f""\nPath complete! Found: {game_map.get(position)} at {position}\n"")
+
+print(""Attempting to use list as key:"")
+try:
+    test_map = {[0, 0]: 'value'}
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""Lists cannot be dictionary keys because they are mutable."")
+    print(""Tuples work because they are immutable and hashable."")
+```
+
+**Key Points:**
+- Tuples are hashable → can be dict keys
+- Perfect for coordinates, composite keys
+- Lists are unhashable → cannot be dict keys"
+subjective,markdown,"### Student Grade Lookup System (5 minutes, Medium Difficulty)
+
+**Problem:**
+You have two parallel lists:
+```python
+students = ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve']
+grades = [85, 92, 78, 88, 95]
+```
+
+Create a program that:
+1. Takes a student name as input
+2. Finds their grade
+3. Displays their rank (1st, 2nd, 3rd, etc. based on position)
+4. Shows if they scored above 85
+
+Test with: 'Charlie' and 'Frank'
+
+**Expected Output:**
+Student: Charlie
+Grade: 78
+Rank: 3rd
+Above 85: No
+
+Student: Frank
+Student not found
+
+**Category:** Application  
+**Prerequisite LOs:** 9.2.1",,,,,,,,,,,,,,,markdown,"```python
+DB_CONFIG = (
+    'postgresql',     # db_type
+    'localhost',      # host
+    5432,             # port
+    'production_db',  # database
+    True              # ssl_enabled
+)
+
+def get_connection_string(config):
+    db_type, host, port, database, ssl_enabled = config
+    ssl = ""?ssl=true"" if ssl_enabled else """"
+    return f""{db_type}://{host}:{port}/{database}{ssl}""
+
+def update_config(config, **kwargs):
+    db_type, host, port, database, ssl_enabled = config
+
+    db_type = kwargs.get('db_type', db_type)
+    host = kwargs.get('host', host)
+    port = kwargs.get('port', port)
+    database = kwargs.get('database', database)
+    ssl_enabled = kwargs.get('ssl_enabled', ssl_enabled)
+
+    return (db_type, host, port, database, ssl_enabled)
+
+print(f""Original config: {DB_CONFIG}"")
+print(f""Connection string: {get_connection_string(DB_CONFIG)}\n"")
+
+new_config = update_config(DB_CONFIG, host='db.example.com')
+print(f""Updated config (new host): {new_config}"")
+print(f""Original unchanged: {DB_CONFIG}\n"")
+
+new_config2 = update_config(DB_CONFIG, port=3306, database='test_db')
+print(f""Updated config (port and db): {new_config2}"")
+print(f""Original still unchanged: {DB_CONFIG}\n"")
+
+print(""Attempting to modify original:"")
+try:
+    DB_CONFIG[1] = 'wrong_host'
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""✓ Original config is protected!\n"")
+
+print(""Danger with mutable list:"")
+list_config = list(DB_CONFIG)
+print(f""List config: {list_config}"")
+list_config[0] = 'WRONG'
+print(f""Accidental modification: {list_config}"")
+print(""✗ Original config was corrupted!\n"")
+
+print(""Conclusion: Immutable tuples prevent accidental config corruption."")
+```
+
+**Benefits:**
+- Configuration cannot be accidentally modified
+- Updates create new config (functional programming)
+- Original always preserved
+- Thread-safe"
+subjective,markdown,"### Product Inventory Access (5 minutes, Medium Difficulty)
+
+**Problem:**
+Given this inventory (each item: [name, quantity, price]):
+```python
+inventory = [
+    ['Laptop', 5, 999.99],
+    ['Mouse', 50, 29.99],
+    ['Keyboard', 30, 79.99],
+    ['Monitor', 10, 299.99],
+    ['USB Cable', 100, 9.99]
+]
+```
+
+Write code to:
+1. Display first product's details
+2. Display last product's details
+3. Find and display the product at position 3 (1-based)
+4. Calculate total value of first product (qty × price)
+5. Display all product names only
+
+**Expected Output:**
+First product:
+  Name: Laptop
+  Quantity: 5
+  Price: $999.99
+
+Last product:
+  Name: USB Cable
+  Quantity: 100
+  Price: $9.99
+
+Position 3: Keyboard
+
+First product total value: $4999.95
+
+All products: Laptop, Mouse, Keyboard, Monitor, USB Cable
+
+**Category:** Application  
+**Prerequisite LOs:** 9.2.1",,,,,,,,,,,,,,,markdown,"```python
+cache = {}
+stats = {'hits': 0, 'misses': 0}
+
+def expensive_calculation(a, b, c):
+    """"""Simulates expensive computation""""""
+    return (a ** 2) + (b ** 3) + (c ** 4)
+
+def cached_calculation(a, b, c):
+    key = (a, b, c)  # Tuple as cache key
+
+    if key in cache:
+        stats['hits'] += 1
+        print(f""  Cache HIT! Returning cached value"")
+        return cache[key]
+    else:
+        stats['misses'] += 1
+        print(f""  Cache MISS - computing..."")
+        result = expensive_calculation(a, b, c)
+        cache[key] = result
+        return result
+
+def cache_stats_display():
+    total = stats['hits'] + stats['misses']
+    hit_rate = (stats['hits'] / total * 100) if total > 0 else 0
+    print(f""\nCache Statistics:"")
+    print(f""  Total calls: {total}"")
+    print(f""  Cache hits: {stats['hits']}"")
+    print(f""  Cache misses: {stats['misses']}"")
+    print(f""  Hit rate: {hit_rate:.1f}%"")
+
+print(""Cache initialized\n"")
+
+test_cases = [
+    (2, 3, 4),
+    (1, 2, 3),
+    (2, 3, 4),  # Should hit
+    (1, 2, 3),  # Should hit
+    (5, 6, 7)
+]
+
+for args in test_cases:
+    print(f""Call cached_calculation{args}:"")
+    result = cached_calculation(*args)
+    print(f""  Result: {result}"")
+    print(f""  Cache now has {len(cache)} {'entry' if len(cache) == 1 else 'entries'}\n"")
+
+cache_stats_display()
+
+print(""\nAttempting to use list [2, 3, 4] as cache key:"")
+try:
+    test_cache = {}
+    test_cache[[2, 3, 4]] = 'value'
+except TypeError as e:
+    print(f""TypeError: {e}\n"")
+    print(""Explanation: Lists cannot be dictionary keys because:"")
+    print(""  1. Lists are mutable (can change)"")
+    print(""  2. Mutable objects cannot be hashed"")
+    print(""  3. Dictionary keys must be hashable"")
+    print(""  4. Tuples are immutable and hashable - perfect for caching!"")
+```
+
+**Caching Pattern:**
+- Use tuple of arguments as key
+- Immutable = safe cache key
+- Hashable = can be dict key
+- Common in memoization, dynamic programming
+
+**Key Takeaways:**
+- Immutability enables safe caching
+- Tuples perfect for composite keys
+- Lists fail as keys (unhashable)
+- Pattern used in real optimization"
+subjective,markdown,"### Basic Slicing Operations (3 minutes, Low Difficulty)
+
+**Problem:**
+Given the list `numbers = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]`, use slicing to extract:
+1. The first 4 elements
+2. Elements from index 3 to 7
+3. The last 3 elements
+4. All elements except the first and last
+5. Every element from index 5 to the end
+
+**Expected Output:**
+First 4: [10, 20, 30, 40]
+Index 3 to 7: [40, 50, 60, 70]
+Last 3: [80, 90, 100]
+Except first and last: [20, 30, 40, 50, 60, 70, 80, 90]
+From index 5: [60, 70, 80, 90, 100]
+
+**Category:** Implementation
+**Prerequisite LOs:** 9.2.1, 9.2.2",,,,,,,,,,,,,,,markdown,"```python
+data = (10, 20, 30, 40, 50)
+
+print(""Attempting data[2] = 999:"")
+try:
+    data[2] = 999
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting data.append(60):"")
+try:
+    data.append(60)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+print(""\nAttempting data.remove(30):"")
+try:
+    data.remove(30)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+new_data = data + (60, 70)
+print(f""\nConcatenation: {new_data}"")
+print(f""Original unchanged: {data}"")
+
+modified = data[:2] + (999,) + data[3:]
+print(f""\nModified copy: {modified}"")
+print(f""Original still: {data}"")
+```
+
+**Key Concepts:**
+- Tuples don't have modify methods (append, remove, etc.)
+- Cannot assign to indices
+- Can create NEW tuples through concatenation
+- Slicing and concatenation preserve original"
+subjective,markdown,"### Using Step in Slicing (3 minutes, Low Difficulty)
+
+**Problem:**
+Given `data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]`, extract:
+1. Every second element
+2. Every third element
+3. Every second element starting from index 1
+4. The entire list reversed
+5. Every second element in reverse
+
+**Expected Output:**
+Every 2nd: [0, 2, 4, 6, 8, 10, 12, 14]
+Every 3rd: [0, 3, 6, 9, 12, 15]
+Every 2nd from index 1: [1, 3, 5, 7, 9, 11, 13, 15]
+Reversed: [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+Every 2nd reversed: [15, 13, 11, 9, 7, 5, 3, 1]
+
+**Category:** Implementation
+**Prerequisite LOs:** 9.2.1, 9.2.2",,,,,,,,,,,,,,,markdown,"```python
+container = (1, 2, [3, 4, 5], 6)
+
+print(""Attempting container[0] = 100:"")
+try:
+    container[0] = 100
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting container[2] = [7, 8, 9]:"")
+try:
+    container[2] = [7, 8, 9]
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAppending to container[2]:"")
+container[2].append(6)
+print(f""  Success! container[2].append(6) works"")
+print(f""  Container is now: {container}"")
+
+print(""\nModifying container[2][0]:"")
+container[2][0] = 999
+print(f""  Success! container[2][0] = 999 works"")
+print(f""  Container is now: {container}"")
+
+print(""\nExplanation: The tuple structure is immutable (cannot reassign elements),"")
+print(""but the mutable objects INSIDE can still be modified."")
+```
+
+**Key Concept:**
+- Tuple's structure is immutable
+- Objects inside can be mutable
+- Can modify mutable objects, just can't reassign tuple elements"
+subjective,markdown,"### Slice Assignment and Modification (5 minutes, Medium Difficulty)
+
+**Problem:**
+Start with `items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
+
+Perform these operations in sequence (each modifies the list):
+1. Replace elements at indices 2-5 with `[30, 40, 50]`
+2. Delete elements at indices 5-7
+3. Insert `[100, 200]` at index 3
+4. Replace every second element (starting from index 0) with zeros
+5. Show the final list
+
+**Expected Output:**
+After replacing 2-5 with [30,40,50]: [1, 2, 30, 40, 50, 6, 7, 8, 9, 10]
+After deleting 5-7: [1, 2, 30, 40, 50, 8, 9, 10]
+After inserting at 3: [1, 2, 30, 100, 200, 40, 50, 8, 9, 10]
+After replacing evens with 0: [0, 2, 0, 100, 0, 40, 0, 8, 0, 10]
+
+**Category:** Implementation
+**Prerequisite LOs:** 9.2.1, 9.2.2",,,,,,,,,,,,,,,markdown,"```python
+game_map = {
+    (0, 0): 'Start',
+    (5, 3): 'Enemy',
+    (10, 7): 'Treasure',
+    (3, 9): 'Trap'
+}
+print(f""Game Map created with {len(game_map)} locations\n"")
+
+def move_player(position, direction):
+    x, y = position
+    if direction == 'up':
+        return (x, y + 1)
+    elif direction == 'down':
+        return (x, y - 1)
+    elif direction == 'left':
+        return (x - 1, y)
+    elif direction == 'right':
+        return (x + 1, y)
+    return position
+
+position = (0, 0)
+print(f""Starting at {position}: {game_map.get(position, 'Empty')}\n"")
+
+moves = ['right', 'right', 'up', 'up', 'up', 'right', 'right', 'right']
+for move in moves:
+    position = move_player(position, move)
+    location = game_map.get(position, 'Empty')
+    print(f""Move {move} to {position}: {location}"")
+
+print(f""\nPath complete! Found: {game_map.get(position)} at {position}\n"")
+
+print(""Attempting to use list as key:"")
+try:
+    test_map = {[0, 0]: 'value'}
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""Lists cannot be dictionary keys because they are mutable."")
+    print(""Tuples work because they are immutable and hashable."")
+```
+
+**Key Points:**
+- Tuples are hashable → can be dict keys
+- Perfect for coordinates, composite keys
+- Lists are unhashable → cannot be dict keys"
+subjective,markdown,"### Temperature Data Analysis (5 minutes, Medium Difficulty)
+
+**Problem:**
+You have hourly temperature readings for 24 hours:
+```python
+temps = [65, 66, 64, 63, 62, 61, 62, 64, 68, 72, 75, 78,
+         80, 82, 83, 81, 79, 76, 73, 70, 68, 67, 66, 65]
+```
+
+Using slicing, extract and calculate:
+1. Morning temperatures (hours 6-12, indices 6-12)
+2. Afternoon temperatures (hours 12-18, indices 12-18)
+3. Evening temperatures (hours 18-24, indices 18-24)
+4. Peak hours (temperatures above 75 degrees - you'll need to identify these first)
+5. Every 3rd hour reading for a summary report
+
+For each, print the slice and its average temperature (rounded to 1 decimal).
+
+**Expected Output:**
+Morning (6-12): [62, 64, 68, 72, 75, 78]
+  Average: 69.8°F
+
+Afternoon (12-18): [80, 82, 83, 81, 79, 76]
+  Average: 80.2°F
+
+Evening (18-24): [73, 70, 68, 67, 66, 65]
+  Average: 68.2°F
+
+Every 3rd hour: [65, 63, 62, 72, 80, 81, 73, 66]
+  Average: 70.2°F
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.1, 9.2.2",,,,,,,,,,,,,,,markdown,"```python
+DB_CONFIG = (
+    'postgresql',     # db_type
+    'localhost',      # host
+    5432,             # port
+    'production_db',  # database
+    True              # ssl_enabled
+)
+
+def get_connection_string(config):
+    db_type, host, port, database, ssl_enabled = config
+    ssl = ""?ssl=true"" if ssl_enabled else """"
+    return f""{db_type}://{host}:{port}/{database}{ssl}""
+
+def update_config(config, **kwargs):
+    db_type, host, port, database, ssl_enabled = config
+
+    db_type = kwargs.get('db_type', db_type)
+    host = kwargs.get('host', host)
+    port = kwargs.get('port', port)
+    database = kwargs.get('database', database)
+    ssl_enabled = kwargs.get('ssl_enabled', ssl_enabled)
+
+    return (db_type, host, port, database, ssl_enabled)
+
+print(f""Original config: {DB_CONFIG}"")
+print(f""Connection string: {get_connection_string(DB_CONFIG)}\n"")
+
+new_config = update_config(DB_CONFIG, host='db.example.com')
+print(f""Updated config (new host): {new_config}"")
+print(f""Original unchanged: {DB_CONFIG}\n"")
+
+new_config2 = update_config(DB_CONFIG, port=3306, database='test_db')
+print(f""Updated config (port and db): {new_config2}"")
+print(f""Original still unchanged: {DB_CONFIG}\n"")
+
+print(""Attempting to modify original:"")
+try:
+    DB_CONFIG[1] = 'wrong_host'
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""✓ Original config is protected!\n"")
+
+print(""Danger with mutable list:"")
+list_config = list(DB_CONFIG)
+print(f""List config: {list_config}"")
+list_config[0] = 'WRONG'
+print(f""Accidental modification: {list_config}"")
+print(""✗ Original config was corrupted!\n"")
+
+print(""Conclusion: Immutable tuples prevent accidental config corruption."")
+```
+
+**Benefits:**
+- Configuration cannot be accidentally modified
+- Updates create new config (functional programming)
+- Original always preserved
+- Thread-safe"
+subjective,markdown,"### Sales Data Processing (5 minutes, Medium Difficulty)
+
+**Problem:**
+A store's daily sales for a month (30 days) are stored in a list:
+```python
+sales = [120, 135, 142, 128, 156, 189, 201, 145, 132, 128,
+         167, 178, 192, 205, 198, 176, 188, 194, 203, 210,
+         189, 176, 182, 195, 208, 215, 198, 187, 179, 165]
+```
+
+Using slicing:
+1. Extract Week 1 (days 0-7) and Week 4 (days 21-28)
+2. Get all weekend sales (assuming Sat-Sun are at positions 5-6, 12-13, 19-20, 26-27)
+3. Create a weekly summary showing every 7th day
+4. Find the second half of the month
+5. Reverse the last 10 days to see recent trend backwards
+
+For each, show the slice and calculate total sales.
+
+**Expected Output:**
+Week 1 sales: [120, 135, 142, 128, 156, 189, 201]
+  Total: $1071
+
+Week 4 sales: [176, 182, 195, 208, 215, 198, 187]
+  Total: $1361
+
+Weekend sales: [189, 201, 178, 192, 194, 203, 182, 195]
+  Total: $1534
+
+Weekly summary (every 7th): [120, 145, 188, 189]
+  Total: $642
+
+Second half: [176, 188, 194, 203, 210, 189, 176, 182, 195, 208, 215, 198, 187, 179, 165]
+  Total: $2865
+
+Last 10 days reversed: [165, 179, 187, 198, 215, 208, 195, 182, 176, 189]
+  Total: $1894
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.1, 9.2.2",,,,,,,,,,,,,,,markdown,"```python
+cache = {}
+stats = {'hits': 0, 'misses': 0}
+
+def expensive_calculation(a, b, c):
+    """"""Simulates expensive computation""""""
+    return (a ** 2) + (b ** 3) + (c ** 4)
+
+def cached_calculation(a, b, c):
+    key = (a, b, c)  # Tuple as cache key
+
+    if key in cache:
+        stats['hits'] += 1
+        print(f""  Cache HIT! Returning cached value"")
+        return cache[key]
+    else:
+        stats['misses'] += 1
+        print(f""  Cache MISS - computing..."")
+        result = expensive_calculation(a, b, c)
+        cache[key] = result
+        return result
+
+def cache_stats_display():
+    total = stats['hits'] + stats['misses']
+    hit_rate = (stats['hits'] / total * 100) if total > 0 else 0
+    print(f""\nCache Statistics:"")
+    print(f""  Total calls: {total}"")
+    print(f""  Cache hits: {stats['hits']}"")
+    print(f""  Cache misses: {stats['misses']}"")
+    print(f""  Hit rate: {hit_rate:.1f}%"")
+
+print(""Cache initialized\n"")
+
+test_cases = [
+    (2, 3, 4),
+    (1, 2, 3),
+    (2, 3, 4),  # Should hit
+    (1, 2, 3),  # Should hit
+    (5, 6, 7)
+]
+
+for args in test_cases:
+    print(f""Call cached_calculation{args}:"")
+    result = cached_calculation(*args)
+    print(f""  Result: {result}"")
+    print(f""  Cache now has {len(cache)} {'entry' if len(cache) == 1 else 'entries'}\n"")
+
+cache_stats_display()
+
+print(""\nAttempting to use list [2, 3, 4] as cache key:"")
+try:
+    test_cache = {}
+    test_cache[[2, 3, 4]] = 'value'
+except TypeError as e:
+    print(f""TypeError: {e}\n"")
+    print(""Explanation: Lists cannot be dictionary keys because:"")
+    print(""  1. Lists are mutable (can change)"")
+    print(""  2. Mutable objects cannot be hashed"")
+    print(""  3. Dictionary keys must be hashable"")
+    print(""  4. Tuples are immutable and hashable - perfect for caching!"")
+```
+
+**Caching Pattern:**
+- Use tuple of arguments as key
+- Immutable = safe cache key
+- Hashable = can be dict key
+- Common in memoization, dynamic programming
+
+**Key Takeaways:**
+- Immutability enables safe caching
+- Tuples perfect for composite keys
+- Lists fail as keys (unhashable)
+- Pattern used in real optimization"
+subjective,markdown,"### Basic List Method Operations (3 minutes, Low Difficulty)
+
+**Problem:**
+Start with an empty list and perform these operations in sequence:
+1. Append the values 10, 20, 30
+2. Insert 15 at index 1
+3. Extend with [40, 50]
+4. Remove the value 20
+5. Print the final list
+
+**Expected Output:**
+After append 10, 20, 30: [10, 20, 30]
+After insert 15 at index 1: [10, 15, 20, 30]
+After extend [40, 50]: [10, 15, 20, 30, 40, 50]
+After remove 20: [10, 15, 30, 40, 50]
+Final list: [10, 15, 30, 40, 50]
+
+**Category:** Implementation
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3",,,,,,,,,,,,,,,markdown,"```python
+data = (10, 20, 30, 40, 50)
+
+print(""Attempting data[2] = 999:"")
+try:
+    data[2] = 999
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting data.append(60):"")
+try:
+    data.append(60)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+print(""\nAttempting data.remove(30):"")
+try:
+    data.remove(30)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+new_data = data + (60, 70)
+print(f""\nConcatenation: {new_data}"")
+print(f""Original unchanged: {data}"")
+
+modified = data[:2] + (999,) + data[3:]
+print(f""\nModified copy: {modified}"")
+print(f""Original still: {data}"")
+```
+
+**Key Concepts:**
+- Tuples don't have modify methods (append, remove, etc.)
+- Cannot assign to indices
+- Can create NEW tuples through concatenation
+- Slicing and concatenation preserve original"
+subjective,markdown,"### Pop and Sort Operations (3 minutes, Low Difficulty)
+
+**Problem:**
+Given `numbers = [45, 23, 67, 12, 89, 34, 56]`:
+1. Pop the last element and print it
+2. Pop the element at index 2 and print it
+3. Sort the remaining list in ascending order
+4. Sort the list in descending order
+5. Reverse the list
+
+Print the list after each operation.
+
+**Expected Output:**
+After pop last: [45, 23, 67, 12, 89, 34]
+Popped: 56
+After pop index 2: [45, 23, 12, 89, 34]
+Popped: 67
+After sort ascending: [12, 23, 34, 45, 89]
+After sort descending: [89, 45, 34, 23, 12]
+After reverse: [12, 23, 34, 45, 89]
+
+**Category:** Implementation
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3",,,,,,,,,,,,,,,markdown,"```python
+container = (1, 2, [3, 4, 5], 6)
+
+print(""Attempting container[0] = 100:"")
+try:
+    container[0] = 100
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting container[2] = [7, 8, 9]:"")
+try:
+    container[2] = [7, 8, 9]
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAppending to container[2]:"")
+container[2].append(6)
+print(f""  Success! container[2].append(6) works"")
+print(f""  Container is now: {container}"")
+
+print(""\nModifying container[2][0]:"")
+container[2][0] = 999
+print(f""  Success! container[2][0] = 999 works"")
+print(f""  Container is now: {container}"")
+
+print(""\nExplanation: The tuple structure is immutable (cannot reassign elements),"")
+print(""but the mutable objects INSIDE can still be modified."")
+```
+
+**Key Concept:**
+- Tuple's structure is immutable
+- Objects inside can be mutable
+- Can modify mutable objects, just can't reassign tuple elements"
+subjective,markdown,"### Shopping Cart Manager (5 minutes, Medium Difficulty)
+
+**Problem:**
+Create a shopping cart system using lists:
+
+1. Start with empty cart
+2. Add these items (as strings): ""Laptop"", ""Mouse"", ""Keyboard""
+3. Insert ""Monitor"" at position 1
+4. Add ""USB Cable"" to the end
+5. Customer changes mind - remove ""Mouse""
+6. Sort items alphabetically
+7. Count how many items start with 'M'
+8. Find the index of ""Laptop""
+
+Print the cart and results after each significant operation.
+
+**Expected Output:**
+Initial cart: []
+After adding items: ['Laptop', 'Mouse', 'Keyboard']
+After insert Monitor: ['Laptop', 'Monitor', 'Mouse', 'Keyboard']
+After adding USB Cable: ['Laptop', 'Monitor', 'Mouse', 'Keyboard', 'USB Cable']
+After removing Mouse: ['Laptop', 'Monitor', 'Keyboard', 'USB Cable']
+After sorting: ['Keyboard', 'Laptop', 'Monitor', 'USB Cable']
+Items starting with M: 1
+Index of Laptop: 1
+Final cart: ['Keyboard', 'Laptop', 'Monitor', 'USB Cable']
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3",,,,,,,,,,,,,,,markdown,"```python
+game_map = {
+    (0, 0): 'Start',
+    (5, 3): 'Enemy',
+    (10, 7): 'Treasure',
+    (3, 9): 'Trap'
+}
+print(f""Game Map created with {len(game_map)} locations\n"")
+
+def move_player(position, direction):
+    x, y = position
+    if direction == 'up':
+        return (x, y + 1)
+    elif direction == 'down':
+        return (x, y - 1)
+    elif direction == 'left':
+        return (x - 1, y)
+    elif direction == 'right':
+        return (x + 1, y)
+    return position
+
+position = (0, 0)
+print(f""Starting at {position}: {game_map.get(position, 'Empty')}\n"")
+
+moves = ['right', 'right', 'up', 'up', 'up', 'right', 'right', 'right']
+for move in moves:
+    position = move_player(position, move)
+    location = game_map.get(position, 'Empty')
+    print(f""Move {move} to {position}: {location}"")
+
+print(f""\nPath complete! Found: {game_map.get(position)} at {position}\n"")
+
+print(""Attempting to use list as key:"")
+try:
+    test_map = {[0, 0]: 'value'}
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""Lists cannot be dictionary keys because they are mutable."")
+    print(""Tuples work because they are immutable and hashable."")
+```
+
+**Key Points:**
+- Tuples are hashable → can be dict keys
+- Perfect for coordinates, composite keys
+- Lists are unhashable → cannot be dict keys"
+subjective,markdown,"### Student Grade Management (5 minutes, Medium Difficulty)
+
+**Problem:**
+You have a list of student scores:
+```python
+scores = [78, 92, 85, 78, 90, 88, 78, 95, 82, 78]
+```
+
+Perform these operations:
+1. Count how many students scored 78
+2. Find the index of the first score of 90
+3. Remove the first occurrence of 78
+4. Add a new score of 88 to the end
+5. Sort scores in descending order
+6. Pop the highest score (first element after sorting)
+7. Calculate and print:
+   - Total number of students
+   - Average score (rounded to 1 decimal)
+   - Highest remaining score
+   - Lowest remaining score
+
+**Expected Output:**
+Count of 78: 4
+Index of first 90: 4
+After removing first 78: [92, 85, 78, 90, 88, 78, 95, 82, 78]
+After adding 88: [92, 85, 78, 90, 88, 78, 95, 82, 78, 88]
+After sorting descending: [95, 92, 90, 88, 88, 85, 82, 78, 78, 78]
+Popped highest: 95
+Final scores: [92, 90, 88, 88, 85, 82, 78, 78, 78]
+
+Statistics:
+Total students: 9
+Average score: 84.3
+Highest score: 92
+Lowest score: 78
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3",,,,,,,,,,,,,,,markdown,"```python
+DB_CONFIG = (
+    'postgresql',     # db_type
+    'localhost',      # host
+    5432,             # port
+    'production_db',  # database
+    True              # ssl_enabled
+)
+
+def get_connection_string(config):
+    db_type, host, port, database, ssl_enabled = config
+    ssl = ""?ssl=true"" if ssl_enabled else """"
+    return f""{db_type}://{host}:{port}/{database}{ssl}""
+
+def update_config(config, **kwargs):
+    db_type, host, port, database, ssl_enabled = config
+
+    db_type = kwargs.get('db_type', db_type)
+    host = kwargs.get('host', host)
+    port = kwargs.get('port', port)
+    database = kwargs.get('database', database)
+    ssl_enabled = kwargs.get('ssl_enabled', ssl_enabled)
+
+    return (db_type, host, port, database, ssl_enabled)
+
+print(f""Original config: {DB_CONFIG}"")
+print(f""Connection string: {get_connection_string(DB_CONFIG)}\n"")
+
+new_config = update_config(DB_CONFIG, host='db.example.com')
+print(f""Updated config (new host): {new_config}"")
+print(f""Original unchanged: {DB_CONFIG}\n"")
+
+new_config2 = update_config(DB_CONFIG, port=3306, database='test_db')
+print(f""Updated config (port and db): {new_config2}"")
+print(f""Original still unchanged: {DB_CONFIG}\n"")
+
+print(""Attempting to modify original:"")
+try:
+    DB_CONFIG[1] = 'wrong_host'
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""✓ Original config is protected!\n"")
+
+print(""Danger with mutable list:"")
+list_config = list(DB_CONFIG)
+print(f""List config: {list_config}"")
+list_config[0] = 'WRONG'
+print(f""Accidental modification: {list_config}"")
+print(""✗ Original config was corrupted!\n"")
+
+print(""Conclusion: Immutable tuples prevent accidental config corruption."")
+```
+
+**Benefits:**
+- Configuration cannot be accidentally modified
+- Updates create new config (functional programming)
+- Original always preserved
+- Thread-safe"
+subjective,markdown,"### Playlist Manager (5 minutes, Medium Difficulty)
+
+**Problem:**
+Create a music playlist manager with these features:
+
+```python
+playlist = []
+```
+
+Implement these operations:
+1. Add songs: ""Song A"", ""Song B"", ""Song C"", ""Song D"", ""Song E""
+2. Insert ""Song X"" at position 2
+3. User dislikes ""Song B"" - remove it
+4. Add ""Song F"" and ""Song G"" using extend
+5. Shuffle by reversing the playlist
+6. Create a backup copy of the playlist
+7. In the backup, remove last 2 songs using pop
+8. Sort original playlist alphabetically
+9. Show both playlists
+
+Then answer:
+- How many songs in original playlist?
+- How many times does ""Song X"" appear?
+- What's the index of ""Song D"" in original playlist?
+
+**Expected Output:**
+After adding initial songs: ['Song A', 'Song B', 'Song C', 'Song D', 'Song E']
+After insert Song X: ['Song A', 'Song B', 'Song X', 'Song C', 'Song D', 'Song E']
+After removing Song B: ['Song A', 'Song X', 'Song C', 'Song D', 'Song E']
+After extending: ['Song A', 'Song X', 'Song C', 'Song D', 'Song E', 'Song F', 'Song G']
+After reversing: ['Song G', 'Song F', 'Song E', 'Song D', 'Song C', 'Song X', 'Song A']
+Backup created
+
+Backup after removing last 2:
+['Song G', 'Song F', 'Song E', 'Song D', 'Song C']
+
+Original after sorting:
+['Song A', 'Song C', 'Song D', 'Song E', 'Song F', 'Song G', 'Song X']
+
+Backup playlist:
+['Song G', 'Song F', 'Song E', 'Song D', 'Song C']
+
+Original playlist:
+['Song A', 'Song C', 'Song D', 'Song E', 'Song F', 'Song G', 'Song X']
+
+Analysis:
+Total songs in original: 7
+Occurrences of 'Song X': 1
+Index of 'Song D': 2
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3",,,,,,,,,,,,,,,markdown,"```python
+cache = {}
+stats = {'hits': 0, 'misses': 0}
+
+def expensive_calculation(a, b, c):
+    """"""Simulates expensive computation""""""
+    return (a ** 2) + (b ** 3) + (c ** 4)
+
+def cached_calculation(a, b, c):
+    key = (a, b, c)  # Tuple as cache key
+
+    if key in cache:
+        stats['hits'] += 1
+        print(f""  Cache HIT! Returning cached value"")
+        return cache[key]
+    else:
+        stats['misses'] += 1
+        print(f""  Cache MISS - computing..."")
+        result = expensive_calculation(a, b, c)
+        cache[key] = result
+        return result
+
+def cache_stats_display():
+    total = stats['hits'] + stats['misses']
+    hit_rate = (stats['hits'] / total * 100) if total > 0 else 0
+    print(f""\nCache Statistics:"")
+    print(f""  Total calls: {total}"")
+    print(f""  Cache hits: {stats['hits']}"")
+    print(f""  Cache misses: {stats['misses']}"")
+    print(f""  Hit rate: {hit_rate:.1f}%"")
+
+print(""Cache initialized\n"")
+
+test_cases = [
+    (2, 3, 4),
+    (1, 2, 3),
+    (2, 3, 4),  # Should hit
+    (1, 2, 3),  # Should hit
+    (5, 6, 7)
+]
+
+for args in test_cases:
+    print(f""Call cached_calculation{args}:"")
+    result = cached_calculation(*args)
+    print(f""  Result: {result}"")
+    print(f""  Cache now has {len(cache)} {'entry' if len(cache) == 1 else 'entries'}\n"")
+
+cache_stats_display()
+
+print(""\nAttempting to use list [2, 3, 4] as cache key:"")
+try:
+    test_cache = {}
+    test_cache[[2, 3, 4]] = 'value'
+except TypeError as e:
+    print(f""TypeError: {e}\n"")
+    print(""Explanation: Lists cannot be dictionary keys because:"")
+    print(""  1. Lists are mutable (can change)"")
+    print(""  2. Mutable objects cannot be hashed"")
+    print(""  3. Dictionary keys must be hashable"")
+    print(""  4. Tuples are immutable and hashable - perfect for caching!"")
+```
+
+**Caching Pattern:**
+- Use tuple of arguments as key
+- Immutable = safe cache key
+- Hashable = can be dict key
+- Common in memoization, dynamic programming
+
+**Key Takeaways:**
+- Immutability enables safe caching
+- Tuples perfect for composite keys
+- Lists fail as keys (unhashable)
+- Pattern used in real optimization"
+subjective,markdown,"### Basic List Iteration (3 minutes, Low Difficulty)
+
+**Problem:**
+Given `numbers = [5, 10, 15, 20, 25, 30, 35, 40]`:
+
+1. Print all numbers
+2. Print only numbers greater than 20
+3. Calculate and print the sum of all numbers
+4. Count how many numbers are divisible by 10
+5. Find and print the maximum number
+
+**Expected Output:**
+All numbers: 5 10 15 20 25 30 35 40
+Numbers > 20: 25 30 35 40
+Sum: 180
+Count divisible by 10: 4
+Maximum: 40
+
+**Category:** Implementation
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3, 9.2.4",,,,,,,,,,,,,,,markdown,"```python
+data = (10, 20, 30, 40, 50)
+
+print(""Attempting data[2] = 999:"")
+try:
+    data[2] = 999
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting data.append(60):"")
+try:
+    data.append(60)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+print(""\nAttempting data.remove(30):"")
+try:
+    data.remove(30)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+new_data = data + (60, 70)
+print(f""\nConcatenation: {new_data}"")
+print(f""Original unchanged: {data}"")
+
+modified = data[:2] + (999,) + data[3:]
+print(f""\nModified copy: {modified}"")
+print(f""Original still: {data}"")
+```
+
+**Key Concepts:**
+- Tuples don't have modify methods (append, remove, etc.)
+- Cannot assign to indices
+- Can create NEW tuples through concatenation
+- Slicing and concatenation preserve original"
+subjective,markdown,"### Using enumerate() (3 minutes, Low Difficulty)
+
+**Problem:**
+Given `fruits = ['apple', 'banana', 'orange', 'mango', 'grape']`:
+
+1. Print each fruit with its index (0-based)
+2. Print each fruit with position number (1-based)
+3. Find and print indices of all fruits with more than 5 letters
+4. Print fruits at even indices only
+5. Create a dictionary mapping index to fruit name
+
+**Expected Output:**
+With index:
+0: apple
+1: banana
+2: orange
+3: mango
+4: grape
+
+With position:
+1. apple
+2. banana
+3. orange
+4. mango
+5. grape
+
+Long fruits (>5 letters):
+Index 1: banana (6 letters)
+Index 2: orange (6 letters)
+
+Fruits at even indices:
+0: apple
+2: orange
+4: grape
+
+Dictionary: {0: 'apple', 1: 'banana', 2: 'orange', 3: 'mango', 4: 'grape'}
+
+**Category:** Implementation
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3, 9.2.4",,,,,,,,,,,,,,,markdown,"```python
+container = (1, 2, [3, 4, 5], 6)
+
+print(""Attempting container[0] = 100:"")
+try:
+    container[0] = 100
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting container[2] = [7, 8, 9]:"")
+try:
+    container[2] = [7, 8, 9]
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAppending to container[2]:"")
+container[2].append(6)
+print(f""  Success! container[2].append(6) works"")
+print(f""  Container is now: {container}"")
+
+print(""\nModifying container[2][0]:"")
+container[2][0] = 999
+print(f""  Success! container[2][0] = 999 works"")
+print(f""  Container is now: {container}"")
+
+print(""\nExplanation: The tuple structure is immutable (cannot reassign elements),"")
+print(""but the mutable objects INSIDE can still be modified."")
+```
+
+**Key Concept:**
+- Tuple's structure is immutable
+- Objects inside can be mutable
+- Can modify mutable objects, just can't reassign tuple elements"
+subjective,markdown,"### Parallel List Processing with zip() (5 minutes, Medium Difficulty)
+
+**Problem:**
+You have three parallel lists:
+```python
+products = ['Laptop', 'Mouse', 'Keyboard', 'Monitor', 'USB Cable']
+prices = [999.99, 29.99, 79.99, 299.99, 9.99]
+quantities = [5, 50, 30, 10, 100]
+```
+
+Using zip(), create a program that:
+1. Prints each product with its price and quantity
+2. Calculates total value for each product (price × quantity)
+3. Finds the product with highest total value
+4. Calculates total inventory value (sum of all product values)
+5. Creates a list of tuples: (product, price, quantity, total_value)
+
+**Expected Output:**
+Inventory:
+Laptop: $999.99 × 5 = $4999.95
+Mouse: $29.99 × 50 = $1499.50
+Keyboard: $79.99 × 30 = $2399.70
+Monitor: $299.99 × 10 = $2999.90
+USB Cable: $9.99 × 100 = $999.00
+
+Highest value product: Laptop ($4999.95)
+Total inventory value: $12898.05
+
+Product details:
+[('Laptop', 999.99, 5, 4999.95),
+ ('Mouse', 29.99, 50, 1499.50),
+ ('Keyboard', 79.99, 30, 2399.70),
+ ('Monitor', 299.99, 10, 2999.90),
+ ('USB Cable', 9.99, 100, 999.00)]
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3, 9.2.4",,,,,,,,,,,,,,,markdown,"```python
+game_map = {
+    (0, 0): 'Start',
+    (5, 3): 'Enemy',
+    (10, 7): 'Treasure',
+    (3, 9): 'Trap'
+}
+print(f""Game Map created with {len(game_map)} locations\n"")
+
+def move_player(position, direction):
+    x, y = position
+    if direction == 'up':
+        return (x, y + 1)
+    elif direction == 'down':
+        return (x, y - 1)
+    elif direction == 'left':
+        return (x - 1, y)
+    elif direction == 'right':
+        return (x + 1, y)
+    return position
+
+position = (0, 0)
+print(f""Starting at {position}: {game_map.get(position, 'Empty')}\n"")
+
+moves = ['right', 'right', 'up', 'up', 'up', 'right', 'right', 'right']
+for move in moves:
+    position = move_player(position, move)
+    location = game_map.get(position, 'Empty')
+    print(f""Move {move} to {position}: {location}"")
+
+print(f""\nPath complete! Found: {game_map.get(position)} at {position}\n"")
+
+print(""Attempting to use list as key:"")
+try:
+    test_map = {[0, 0]: 'value'}
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""Lists cannot be dictionary keys because they are mutable."")
+    print(""Tuples work because they are immutable and hashable."")
+```
+
+**Key Points:**
+- Tuples are hashable → can be dict keys
+- Perfect for coordinates, composite keys
+- Lists are unhashable → cannot be dict keys"
+subjective,markdown,"### Temperature Analysis (5 minutes, Medium Difficulty)
+
+**Problem:**
+You have daily high temperatures for a week:
+```python
+days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+temps = [72, 68, 75, 80, 78, 82, 79]
+```
+
+Write a program that:
+1. Prints each day with its temperature
+2. Finds the hottest and coldest days
+3. Calculates the average temperature
+4. Counts how many days were above average
+5. Creates a ""comfort rating"" for each day:
+   - ""Cold"" if temp < 70
+   - ""Comfortable"" if 70 ≤ temp ≤ 78
+   - ""Hot"" if temp > 78
+
+Print a formatted report.
+
+**Expected Output:**
+Weekly Temperatures:
+Monday: 72°F
+Tuesday: 68°F
+Wednesday: 75°F
+Thursday: 80°F
+Friday: 78°F
+Saturday: 82°F
+Sunday: 79°F
+
+Analysis:
+Hottest: Saturday (82°F)
+Coldest: Tuesday (68°F)
+Average: 76.3°F
+Days above average: 4
+
+Comfort Ratings:
+Monday: 72°F - Comfortable
+Tuesday: 68°F - Cold
+Wednesday: 75°F - Comfortable
+Thursday: 80°F - Hot
+Friday: 78°F - Comfortable
+Saturday: 82°F - Hot
+Sunday: 79°F - Hot
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3, 9.2.4",,,,,,,,,,,,,,,markdown,"```python
+DB_CONFIG = (
+    'postgresql',     # db_type
+    'localhost',      # host
+    5432,             # port
+    'production_db',  # database
+    True              # ssl_enabled
+)
+
+def get_connection_string(config):
+    db_type, host, port, database, ssl_enabled = config
+    ssl = ""?ssl=true"" if ssl_enabled else """"
+    return f""{db_type}://{host}:{port}/{database}{ssl}""
+
+def update_config(config, **kwargs):
+    db_type, host, port, database, ssl_enabled = config
+
+    db_type = kwargs.get('db_type', db_type)
+    host = kwargs.get('host', host)
+    port = kwargs.get('port', port)
+    database = kwargs.get('database', database)
+    ssl_enabled = kwargs.get('ssl_enabled', ssl_enabled)
+
+    return (db_type, host, port, database, ssl_enabled)
+
+print(f""Original config: {DB_CONFIG}"")
+print(f""Connection string: {get_connection_string(DB_CONFIG)}\n"")
+
+new_config = update_config(DB_CONFIG, host='db.example.com')
+print(f""Updated config (new host): {new_config}"")
+print(f""Original unchanged: {DB_CONFIG}\n"")
+
+new_config2 = update_config(DB_CONFIG, port=3306, database='test_db')
+print(f""Updated config (port and db): {new_config2}"")
+print(f""Original still unchanged: {DB_CONFIG}\n"")
+
+print(""Attempting to modify original:"")
+try:
+    DB_CONFIG[1] = 'wrong_host'
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""✓ Original config is protected!\n"")
+
+print(""Danger with mutable list:"")
+list_config = list(DB_CONFIG)
+print(f""List config: {list_config}"")
+list_config[0] = 'WRONG'
+print(f""Accidental modification: {list_config}"")
+print(""✗ Original config was corrupted!\n"")
+
+print(""Conclusion: Immutable tuples prevent accidental config corruption."")
+```
+
+**Benefits:**
+- Configuration cannot be accidentally modified
+- Updates create new config (functional programming)
+- Original always preserved
+- Thread-safe"
+subjective,markdown,"### Grade Book Manager (5 minutes, Medium Difficulty)
+
+**Problem:**
+You have a grade book with students and their scores in three subjects:
+```python
+students = ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve']
+math_scores = [85, 92, 78, 88, 95]
+science_scores = [90, 88, 82, 91, 89]
+english_scores = [88, 85, 90, 87, 92]
+```
+
+Create a program that:
+1. Calculates each student's average score
+2. Determines letter grade (A: ≥90, B: ≥80, C: ≥70, D: ≥60, F: <60)
+3. Finds the student with highest overall average
+4. Finds which subject has the highest class average
+5. Creates a report card for each student
+
+Print a comprehensive report.
+
+**Expected Output:**
+Student Averages:
+Alice: 87.7 (B)
+Bob: 88.3 (B)
+Charlie: 83.3 (B)
+Diana: 88.7 (B)
+Eve: 92.0 (A)
+
+Top student: Eve (92.0)
+
+Subject Averages:
+Math: 87.6
+Science: 88.0
+English: 88.4
+Highest class average: English (88.4)
+
+Report Cards:
+===== Alice =====
+Math: 85
+Science: 90
+English: 88
+Average: 87.7
+Grade: B
+
+===== Bob =====
+Math: 92
+Science: 88
+English: 85
+Average: 88.3
+Grade: B
+
+[... and so on for each student]
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3, 9.2.4",,,,,,,,,,,,,,,markdown,"```python
+cache = {}
+stats = {'hits': 0, 'misses': 0}
+
+def expensive_calculation(a, b, c):
+    """"""Simulates expensive computation""""""
+    return (a ** 2) + (b ** 3) + (c ** 4)
+
+def cached_calculation(a, b, c):
+    key = (a, b, c)  # Tuple as cache key
+
+    if key in cache:
+        stats['hits'] += 1
+        print(f""  Cache HIT! Returning cached value"")
+        return cache[key]
+    else:
+        stats['misses'] += 1
+        print(f""  Cache MISS - computing..."")
+        result = expensive_calculation(a, b, c)
+        cache[key] = result
+        return result
+
+def cache_stats_display():
+    total = stats['hits'] + stats['misses']
+    hit_rate = (stats['hits'] / total * 100) if total > 0 else 0
+    print(f""\nCache Statistics:"")
+    print(f""  Total calls: {total}"")
+    print(f""  Cache hits: {stats['hits']}"")
+    print(f""  Cache misses: {stats['misses']}"")
+    print(f""  Hit rate: {hit_rate:.1f}%"")
+
+print(""Cache initialized\n"")
+
+test_cases = [
+    (2, 3, 4),
+    (1, 2, 3),
+    (2, 3, 4),  # Should hit
+    (1, 2, 3),  # Should hit
+    (5, 6, 7)
+]
+
+for args in test_cases:
+    print(f""Call cached_calculation{args}:"")
+    result = cached_calculation(*args)
+    print(f""  Result: {result}"")
+    print(f""  Cache now has {len(cache)} {'entry' if len(cache) == 1 else 'entries'}\n"")
+
+cache_stats_display()
+
+print(""\nAttempting to use list [2, 3, 4] as cache key:"")
+try:
+    test_cache = {}
+    test_cache[[2, 3, 4]] = 'value'
+except TypeError as e:
+    print(f""TypeError: {e}\n"")
+    print(""Explanation: Lists cannot be dictionary keys because:"")
+    print(""  1. Lists are mutable (can change)"")
+    print(""  2. Mutable objects cannot be hashed"")
+    print(""  3. Dictionary keys must be hashable"")
+    print(""  4. Tuples are immutable and hashable - perfect for caching!"")
+```
+
+**Caching Pattern:**
+- Use tuple of arguments as key
+- Immutable = safe cache key
+- Hashable = can be dict key
+- Common in memoization, dynamic programming
+
+**Key Takeaways:**
+- Immutability enables safe caching
+- Tuples perfect for composite keys
+- Lists fail as keys (unhashable)
+- Pattern used in real optimization"
+subjective,markdown,"### Basic Tuple Creation and Access (3 minutes, Low Difficulty)
+
+**Problem:**
+Create and manipulate tuples:
+1. Create a tuple with numbers 10, 20, 30, 40, 50
+2. Access the first and last elements
+3. Get a slice from index 1 to 3
+4. Create a single-element tuple with value 100
+5. Convert the list [1, 2, 3] to a tuple
+
+**Expected Output:**
+Tuple: (10, 20, 30, 40, 50)
+First: 10
+Last: 50
+Slice [1:3]: (20, 30)
+Single element: (100,)
+From list: (1, 2, 3)
+
+**Category:** Implementation
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3",,,,,,,,,,,,,,,markdown,"```python
+data = (10, 20, 30, 40, 50)
+
+print(""Attempting data[2] = 999:"")
+try:
+    data[2] = 999
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting data.append(60):"")
+try:
+    data.append(60)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+print(""\nAttempting data.remove(30):"")
+try:
+    data.remove(30)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+new_data = data + (60, 70)
+print(f""\nConcatenation: {new_data}"")
+print(f""Original unchanged: {data}"")
+
+modified = data[:2] + (999,) + data[3:]
+print(f""\nModified copy: {modified}"")
+print(f""Original still: {data}"")
+```
+
+**Key Concepts:**
+- Tuples don't have modify methods (append, remove, etc.)
+- Cannot assign to indices
+- Can create NEW tuples through concatenation
+- Slicing and concatenation preserve original"
+subjective,markdown,"### Tuple Methods and Operations (3 minutes, Low Difficulty)
+
+**Problem:**
+Given `numbers = (5, 10, 15, 10, 20, 10, 25)`:
+1. Count how many times 10 appears
+2. Find the index of the first occurrence of 15
+3. Find the index of the second occurrence of 10 (hint: use start parameter)
+4. Check if 20 is in the tuple
+5. Calculate the sum and length of the tuple
+
+**Expected Output:**
+Count of 10: 3
+Index of 15: 2
+Second occurrence of 10 at index: 3
+20 in tuple: True
+Sum: 105
+Length: 7
+
+**Category:** Implementation
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3",,,,,,,,,,,,,,,markdown,"```python
+container = (1, 2, [3, 4, 5], 6)
+
+print(""Attempting container[0] = 100:"")
+try:
+    container[0] = 100
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting container[2] = [7, 8, 9]:"")
+try:
+    container[2] = [7, 8, 9]
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAppending to container[2]:"")
+container[2].append(6)
+print(f""  Success! container[2].append(6) works"")
+print(f""  Container is now: {container}"")
+
+print(""\nModifying container[2][0]:"")
+container[2][0] = 999
+print(f""  Success! container[2][0] = 999 works"")
+print(f""  Container is now: {container}"")
+
+print(""\nExplanation: The tuple structure is immutable (cannot reassign elements),"")
+print(""but the mutable objects INSIDE can still be modified."")
+```
+
+**Key Concept:**
+- Tuple's structure is immutable
+- Objects inside can be mutable
+- Can modify mutable objects, just can't reassign tuple elements"
+subjective,markdown,"### Coordinate System (5 minutes, Medium Difficulty)
+
+**Problem:**
+Create a coordinate system using tuples:
+
+1. Define points as tuples: origin (0, 0), point_a (3, 4), point_b (-2, 5)
+2. Write a function `distance_from_origin(point)` that calculates distance using: √(x² + y²)
+3. Write a function `translate_point(point, dx, dy)` that returns new point (x+dx, y+dy)
+4. Create a list of 5 random points (as tuples)
+5. Find which point is farthest from origin
+
+Print all results with clear labels.
+
+**Expected Output:**
+Origin: (0, 0)
+Point A: (3, 4)
+Point B: (-2, 5)
+
+Distance from origin:
+  Point A: 5.0
+  Point B: 5.39
+
+Translate Point A by (2, -1): (5, 3)
+
+Random points: [(1, 2), (4, 1), (-3, 2), (2, -4), (5, 5)]
+Farthest point: (5, 5) at distance 7.07
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3",,,,,,,,,,,,,,,markdown,"```python
+game_map = {
+    (0, 0): 'Start',
+    (5, 3): 'Enemy',
+    (10, 7): 'Treasure',
+    (3, 9): 'Trap'
+}
+print(f""Game Map created with {len(game_map)} locations\n"")
+
+def move_player(position, direction):
+    x, y = position
+    if direction == 'up':
+        return (x, y + 1)
+    elif direction == 'down':
+        return (x, y - 1)
+    elif direction == 'left':
+        return (x - 1, y)
+    elif direction == 'right':
+        return (x + 1, y)
+    return position
+
+position = (0, 0)
+print(f""Starting at {position}: {game_map.get(position, 'Empty')}\n"")
+
+moves = ['right', 'right', 'up', 'up', 'up', 'right', 'right', 'right']
+for move in moves:
+    position = move_player(position, move)
+    location = game_map.get(position, 'Empty')
+    print(f""Move {move} to {position}: {location}"")
+
+print(f""\nPath complete! Found: {game_map.get(position)} at {position}\n"")
+
+print(""Attempting to use list as key:"")
+try:
+    test_map = {[0, 0]: 'value'}
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""Lists cannot be dictionary keys because they are mutable."")
+    print(""Tuples work because they are immutable and hashable."")
+```
+
+**Key Points:**
+- Tuples are hashable → can be dict keys
+- Perfect for coordinates, composite keys
+- Lists are unhashable → cannot be dict keys"
+subjective,markdown,"### RGB Color Manager (5 minutes, Medium Difficulty)
+
+**Problem:**
+Create a color management system using tuples for RGB values:
+
+```python
+colors = {
+    'red': (255, 0, 0),
+    'green': (0, 255, 0),
+    'blue': (0, 0, 255),
+    'white': (255, 255, 255),
+    'black': (0, 0, 0),
+    'yellow': (255, 255, 0),
+    'cyan': (0, 255, 255),
+    'magenta': (255, 0, 255)
+}
+```
+
+Implement:
+1. Function `brightness(rgb)` that returns average of R, G, B values
+2. Function `invert_color(rgb)` that returns (255-R, 255-G, 255-B)
+3. Find the brightest and darkest colors
+4. Create a list of all colors with brightness > 150
+5. Invert all primary colors (red, green, blue)
+
+**Expected Output:**
+Color brightness:
+  red: 85.0
+  green: 85.0
+  blue: 85.0
+  white: 255.0
+  black: 0.0
+  yellow: 170.0
+  cyan: 170.0
+  magenta: 170.0
+
+Brightest: white (255.0)
+Darkest: black (0.0)
+
+Bright colors (>150): ['white', 'yellow', 'cyan', 'magenta']
+
+Inverted colors:
+  red (255, 0, 0) → (0, 255, 255)
+  green (0, 255, 0) → (255, 0, 255)
+  blue (0, 0, 255) → (255, 255, 0)
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3",,,,,,,,,,,,,,,markdown,"```python
+DB_CONFIG = (
+    'postgresql',     # db_type
+    'localhost',      # host
+    5432,             # port
+    'production_db',  # database
+    True              # ssl_enabled
+)
+
+def get_connection_string(config):
+    db_type, host, port, database, ssl_enabled = config
+    ssl = ""?ssl=true"" if ssl_enabled else """"
+    return f""{db_type}://{host}:{port}/{database}{ssl}""
+
+def update_config(config, **kwargs):
+    db_type, host, port, database, ssl_enabled = config
+
+    db_type = kwargs.get('db_type', db_type)
+    host = kwargs.get('host', host)
+    port = kwargs.get('port', port)
+    database = kwargs.get('database', database)
+    ssl_enabled = kwargs.get('ssl_enabled', ssl_enabled)
+
+    return (db_type, host, port, database, ssl_enabled)
+
+print(f""Original config: {DB_CONFIG}"")
+print(f""Connection string: {get_connection_string(DB_CONFIG)}\n"")
+
+new_config = update_config(DB_CONFIG, host='db.example.com')
+print(f""Updated config (new host): {new_config}"")
+print(f""Original unchanged: {DB_CONFIG}\n"")
+
+new_config2 = update_config(DB_CONFIG, port=3306, database='test_db')
+print(f""Updated config (port and db): {new_config2}"")
+print(f""Original still unchanged: {DB_CONFIG}\n"")
+
+print(""Attempting to modify original:"")
+try:
+    DB_CONFIG[1] = 'wrong_host'
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""✓ Original config is protected!\n"")
+
+print(""Danger with mutable list:"")
+list_config = list(DB_CONFIG)
+print(f""List config: {list_config}"")
+list_config[0] = 'WRONG'
+print(f""Accidental modification: {list_config}"")
+print(""✗ Original config was corrupted!\n"")
+
+print(""Conclusion: Immutable tuples prevent accidental config corruption."")
+```
+
+**Benefits:**
+- Configuration cannot be accidentally modified
+- Updates create new config (functional programming)
+- Original always preserved
+- Thread-safe"
+subjective,markdown,"### Student Records System (5 minutes, Medium Difficulty)
+
+**Problem:**
+Create a student management system using tuples for immutable student records:
+
+```python
+# Each record: (id, name, age, grade, gpa)
+students = [
+    (101, 'Alice', 20, 'A', 3.8),
+    (102, 'Bob', 21, 'B', 3.2),
+    (103, 'Charlie', 19, 'A', 3.9),
+    (104, 'Diana', 20, 'C', 2.8),
+    (105, 'Eve', 22, 'B', 3.5)
+]
+```
+
+Implement:
+1. Function `find_by_id(students, student_id)` that returns student tuple
+2. Function `get_honors_students(students)` for GPA ≥ 3.5
+3. Calculate average GPA of all students
+4. Create a dictionary mapping student IDs to names
+5. Find the youngest and oldest students
+
+**Expected Output:**
+Student 103: (103, 'Charlie', 19, 'A', 3.9)
+
+Honors students (GPA ≥ 3.5):
+  Alice: 3.8
+  Charlie: 3.9
+  Eve: 3.5
+
+Average GPA: 3.44
+
+ID to Name mapping:
+  {101: 'Alice', 102: 'Bob', 103: 'Charlie', 104: 'Diana', 105: 'Eve'}
+
+Youngest: Charlie (19 years)
+Oldest: Eve (22 years)
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.1, 9.2.2, 9.2.3",,,,,,,,,,,,,,,markdown,"```python
+cache = {}
+stats = {'hits': 0, 'misses': 0}
+
+def expensive_calculation(a, b, c):
+    """"""Simulates expensive computation""""""
+    return (a ** 2) + (b ** 3) + (c ** 4)
+
+def cached_calculation(a, b, c):
+    key = (a, b, c)  # Tuple as cache key
+
+    if key in cache:
+        stats['hits'] += 1
+        print(f""  Cache HIT! Returning cached value"")
+        return cache[key]
+    else:
+        stats['misses'] += 1
+        print(f""  Cache MISS - computing..."")
+        result = expensive_calculation(a, b, c)
+        cache[key] = result
+        return result
+
+def cache_stats_display():
+    total = stats['hits'] + stats['misses']
+    hit_rate = (stats['hits'] / total * 100) if total > 0 else 0
+    print(f""\nCache Statistics:"")
+    print(f""  Total calls: {total}"")
+    print(f""  Cache hits: {stats['hits']}"")
+    print(f""  Cache misses: {stats['misses']}"")
+    print(f""  Hit rate: {hit_rate:.1f}%"")
+
+print(""Cache initialized\n"")
+
+test_cases = [
+    (2, 3, 4),
+    (1, 2, 3),
+    (2, 3, 4),  # Should hit
+    (1, 2, 3),  # Should hit
+    (5, 6, 7)
+]
+
+for args in test_cases:
+    print(f""Call cached_calculation{args}:"")
+    result = cached_calculation(*args)
+    print(f""  Result: {result}"")
+    print(f""  Cache now has {len(cache)} {'entry' if len(cache) == 1 else 'entries'}\n"")
+
+cache_stats_display()
+
+print(""\nAttempting to use list [2, 3, 4] as cache key:"")
+try:
+    test_cache = {}
+    test_cache[[2, 3, 4]] = 'value'
+except TypeError as e:
+    print(f""TypeError: {e}\n"")
+    print(""Explanation: Lists cannot be dictionary keys because:"")
+    print(""  1. Lists are mutable (can change)"")
+    print(""  2. Mutable objects cannot be hashed"")
+    print(""  3. Dictionary keys must be hashable"")
+    print(""  4. Tuples are immutable and hashable - perfect for caching!"")
+```
+
+**Caching Pattern:**
+- Use tuple of arguments as key
+- Immutable = safe cache key
+- Hashable = can be dict key
+- Common in memoization, dynamic programming
+
+**Key Takeaways:**
+- Immutability enables safe caching
+- Tuples perfect for composite keys
+- Lists fail as keys (unhashable)
+- Pattern used in real optimization"
+subjective,markdown,"### Testing Immutability (3 minutes, Low Difficulty)
+
+**Problem:**
+Given `data = (10, 20, 30, 40, 50)`, attempt these operations and explain what happens:
+1. Try to change element at index 2 to 999
+2. Try to append 60 to the tuple
+3. Try to remove 30 from the tuple
+4. Create a new tuple by concatenating with (60, 70)
+5. Create a new tuple with element at index 2 changed to 999 (using slicing)
+
+**Expected Output:**
+Attempting data[2] = 999:
+  TypeError: 'tuple' object does not support item assignment
+
+Attempting data.append(60):
+  AttributeError: 'tuple' object has no attribute 'append'
+
+Attempting data.remove(30):
+  AttributeError: 'tuple' object has no attribute 'remove'
+
+Concatenation: (10, 20, 30, 40, 50, 60, 70)
+Original unchanged: (10, 20, 30, 40, 50)
+
+Modified copy: (10, 20, 999, 40, 50)
+Original still: (10, 20, 30, 40, 50)
+
+**Category:** Implementation
+**Prerequisite LOs:** 9.2.7",,,,,,,,,,,,,,,markdown,"```python
+data = (10, 20, 30, 40, 50)
+
+print(""Attempting data[2] = 999:"")
+try:
+    data[2] = 999
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting data.append(60):"")
+try:
+    data.append(60)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+print(""\nAttempting data.remove(30):"")
+try:
+    data.remove(30)
+except AttributeError as e:
+    print(f""  AttributeError: {e}"")
+
+new_data = data + (60, 70)
+print(f""\nConcatenation: {new_data}"")
+print(f""Original unchanged: {data}"")
+
+modified = data[:2] + (999,) + data[3:]
+print(f""\nModified copy: {modified}"")
+print(f""Original still: {data}"")
+```
+
+**Key Concepts:**
+- Tuples don't have modify methods (append, remove, etc.)
+- Cannot assign to indices
+- Can create NEW tuples through concatenation
+- Slicing and concatenation preserve original"
+subjective,markdown,"### Shallow Immutability (3 minutes, Low Difficulty)
+
+**Problem:**
+Given `container = (1, 2, [3, 4, 5], 6)`:
+1. Try to change container[0] to 100
+2. Try to replace container[2] with [7, 8, 9]
+3. Modify the list at container[2] by appending 6
+4. Modify the list at container[2] by changing first element to 999
+5. Print the final state and explain what happened
+
+**Expected Output:**
+Attempting container[0] = 100:
+  TypeError: 'tuple' object does not support item assignment
+
+Attempting container[2] = [7, 8, 9]:
+  TypeError: 'tuple' object does not support item assignment
+
+Appending to container[2]:
+  Success! container[2].append(6) works
+  Container is now: (1, 2, [3, 4, 5, 6], 6)
+
+Modifying container[2][0]:
+  Success! container[2][0] = 999 works
+  Container is now: (1, 2, [999, 4, 5, 6], 6)
+
+Explanation: The tuple structure is immutable (cannot reassign elements),
+but the mutable objects INSIDE can still be modified.
+
+**Category:** Implementation
+**Prerequisite LOs:** 9.2.7",,,,,,,,,,,,,,,markdown,"```python
+container = (1, 2, [3, 4, 5], 6)
+
+print(""Attempting container[0] = 100:"")
+try:
+    container[0] = 100
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAttempting container[2] = [7, 8, 9]:"")
+try:
+    container[2] = [7, 8, 9]
+except TypeError as e:
+    print(f""  TypeError: {e}"")
+
+print(""\nAppending to container[2]:"")
+container[2].append(6)
+print(f""  Success! container[2].append(6) works"")
+print(f""  Container is now: {container}"")
+
+print(""\nModifying container[2][0]:"")
+container[2][0] = 999
+print(f""  Success! container[2][0] = 999 works"")
+print(f""  Container is now: {container}"")
+
+print(""\nExplanation: The tuple structure is immutable (cannot reassign elements),"")
+print(""but the mutable objects INSIDE can still be modified."")
+```
+
+**Key Concept:**
+- Tuple's structure is immutable
+- Objects inside can be mutable
+- Can modify mutable objects, just can't reassign tuple elements"
+subjective,markdown,"### Hashability and Dictionary Keys (5 minutes, Medium Difficulty)
+
+**Problem:**
+Create a coordinate-based game system using tuples as dictionary keys:
+
+1. Create a `game_map` dictionary with these locations:
+   - (0, 0): 'Start'
+   - (5, 3): 'Enemy'
+   - (10, 7): 'Treasure'
+   - (3, 9): 'Trap'
+
+2. Write a function `move_player(position, direction)` that:
+   - Takes current position tuple and direction ('up', 'down', 'left', 'right')
+   - Returns new position tuple
+   - up: y+1, down: y-1, left: x-1, right: x+1
+
+3. Start at (0, 0) and move: right, right, up, up, up, right, right, right
+4. Print what's at each position along the way
+5. Try to use a list [0, 0] as a dictionary key and show the error
+
+**Expected Output:**
+Game Map created with 4 locations
+
+Starting at (0, 0): Start
+
+Move right to (1, 0): Empty
+Move right to (2, 0): Empty
+Move up to (2, 1): Empty
+Move up to (2, 2): Empty
+Move up to (2, 3): Empty
+Move right to (3, 3): Empty
+Move right to (4, 3): Empty
+Move right to (5, 3): Enemy
+
+Path complete! Found: Enemy at (5, 3)
+
+Attempting to use list as key:
+TypeError: unhashable type: 'list'
+Lists cannot be dictionary keys because they are mutable.
+Tuples work because they are immutable and hashable.
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.7",,,,,,,,,,,,,,,markdown,"```python
+game_map = {
+    (0, 0): 'Start',
+    (5, 3): 'Enemy',
+    (10, 7): 'Treasure',
+    (3, 9): 'Trap'
+}
+print(f""Game Map created with {len(game_map)} locations\n"")
+
+def move_player(position, direction):
+    x, y = position
+    if direction == 'up':
+        return (x, y + 1)
+    elif direction == 'down':
+        return (x, y - 1)
+    elif direction == 'left':
+        return (x - 1, y)
+    elif direction == 'right':
+        return (x + 1, y)
+    return position
+
+position = (0, 0)
+print(f""Starting at {position}: {game_map.get(position, 'Empty')}\n"")
+
+moves = ['right', 'right', 'up', 'up', 'up', 'right', 'right', 'right']
+for move in moves:
+    position = move_player(position, move)
+    location = game_map.get(position, 'Empty')
+    print(f""Move {move} to {position}: {location}"")
+
+print(f""\nPath complete! Found: {game_map.get(position)} at {position}\n"")
+
+print(""Attempting to use list as key:"")
+try:
+    test_map = {[0, 0]: 'value'}
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""Lists cannot be dictionary keys because they are mutable."")
+    print(""Tuples work because they are immutable and hashable."")
+```
+
+**Key Points:**
+- Tuples are hashable → can be dict keys
+- Perfect for coordinates, composite keys
+- Lists are unhashable → cannot be dict keys"
+subjective,markdown,"### Configuration Management (5 minutes, Medium Difficulty)
+
+**Problem:**
+Create an immutable configuration system:
+
+```python
+# Database configuration tuple
+DB_CONFIG = (
+    'postgresql',  # db_type
+    'localhost',   # host
+    5432,          # port
+    'production_db',  # database
+    True           # ssl_enabled
+)
+```
+
+Write functions:
+1. `get_connection_string(config)` - returns formatted connection string
+2. `update_config(config, **kwargs)` - returns NEW tuple with updated values
+   - Takes keyword args: db_type, host, port, database, ssl_enabled
+   - Only updates provided values
+3. Demonstrate that original config never changes
+4. Show the benefit: try to accidentally modify the original config
+5. Compare with a mutable list version and show the danger
+
+**Expected Output:**
+Original config: ('postgresql', 'localhost', 5432, 'production_db', True)
+Connection string: postgresql://localhost:5432/production_db?ssl=true
+
+Updated config (new host): ('postgresql', 'db.example.com', 5432, 'production_db', True)
+Original unchanged: ('postgresql', 'localhost', 5432, 'production_db', True)
+
+Updated config (port and db): ('postgresql', 'localhost', 3306, 'test_db', True)
+Original still unchanged: ('postgresql', 'localhost', 5432, 'production_db', True)
+
+Attempting to modify original:
+TypeError: 'tuple' object does not support item assignment
+✓ Original config is protected!
+
+Danger with mutable list:
+List config: ['postgresql', 'localhost', 5432, 'production_db', True]
+Accidental modification: ['WRONG', 'localhost', 5432, 'production_db', True]
+✗ Original config was corrupted!
+
+Conclusion: Immutable tuples prevent accidental config corruption.
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.7",,,,,,,,,,,,,,,markdown,"```python
+DB_CONFIG = (
+    'postgresql',     # db_type
+    'localhost',      # host
+    5432,             # port
+    'production_db',  # database
+    True              # ssl_enabled
+)
+
+def get_connection_string(config):
+    db_type, host, port, database, ssl_enabled = config
+    ssl = ""?ssl=true"" if ssl_enabled else """"
+    return f""{db_type}://{host}:{port}/{database}{ssl}""
+
+def update_config(config, **kwargs):
+    db_type, host, port, database, ssl_enabled = config
+
+    db_type = kwargs.get('db_type', db_type)
+    host = kwargs.get('host', host)
+    port = kwargs.get('port', port)
+    database = kwargs.get('database', database)
+    ssl_enabled = kwargs.get('ssl_enabled', ssl_enabled)
+
+    return (db_type, host, port, database, ssl_enabled)
+
+print(f""Original config: {DB_CONFIG}"")
+print(f""Connection string: {get_connection_string(DB_CONFIG)}\n"")
+
+new_config = update_config(DB_CONFIG, host='db.example.com')
+print(f""Updated config (new host): {new_config}"")
+print(f""Original unchanged: {DB_CONFIG}\n"")
+
+new_config2 = update_config(DB_CONFIG, port=3306, database='test_db')
+print(f""Updated config (port and db): {new_config2}"")
+print(f""Original still unchanged: {DB_CONFIG}\n"")
+
+print(""Attempting to modify original:"")
+try:
+    DB_CONFIG[1] = 'wrong_host'
+except TypeError as e:
+    print(f""TypeError: {e}"")
+    print(""✓ Original config is protected!\n"")
+
+print(""Danger with mutable list:"")
+list_config = list(DB_CONFIG)
+print(f""List config: {list_config}"")
+list_config[0] = 'WRONG'
+print(f""Accidental modification: {list_config}"")
+print(""✗ Original config was corrupted!\n"")
+
+print(""Conclusion: Immutable tuples prevent accidental config corruption."")
+```
+
+**Benefits:**
+- Configuration cannot be accidentally modified
+- Updates create new config (functional programming)
+- Original always preserved
+- Thread-safe"
+subjective,markdown,"### Caching with Tuples (5 minutes, Medium Difficulty)
+
+**Problem:**
+Implement a memoization system using tuples as cache keys:
+
+```python
+# Function to compute expensive operation
+def expensive_calculation(a, b, c):
+    """"""Simulates expensive computation""""""
+    result = (a ** 2) + (b ** 3) + (c ** 4)
+    return result
+```
+
+Create a caching system:
+1. Create a `cache` dictionary
+2. Write `cached_calculation(a, b, c)` that:
+   - Uses (a, b, c) tuple as cache key
+   - Returns cached result if exists
+   - Otherwise computes, caches, and returns
+3. Write `cache_stats()` to show hits and misses
+4. Test with these calls and show cache working:
+   - (2, 3, 4) - miss
+   - (1, 2, 3) - miss
+   - (2, 3, 4) - hit!
+   - (1, 2, 3) - hit!
+   - (5, 6, 7) - miss
+5. Try to use [2, 3, 4] as key and explain why it fails
+
+**Expected Output:**
+Cache initialized
+
+Call cached_calculation(2, 3, 4):
+  Cache MISS - computing...
+  Result: 287
+  Cache now has 1 entry
+
+Call cached_calculation(1, 2, 3):
+  Cache MISS - computing...
+  Result: 90
+  Cache now has 2 entries
+
+Call cached_calculation(2, 3, 4):
+  Cache HIT! Returning cached value
+  Result: 287
+  Cache still has 2 entries
+
+Call cached_calculation(1, 2, 3):
+  Cache HIT! Returning cached value
+  Result: 90
+  Cache still has 2 entries
+
+Call cached_calculation(5, 6, 7):
+  Cache MISS - computing...
+  Result: 2642
+  Cache now has 3 entries
+
+Cache Statistics:
+  Total calls: 5
+  Cache hits: 2
+  Cache misses: 3
+  Hit rate: 40.0%
+
+Attempting to use list [2, 3, 4] as cache key:
+TypeError: unhashable type: 'list'
+
+Explanation: Lists cannot be dictionary keys because:
+  1. Lists are mutable (can change)
+  2. Mutable objects cannot be hashed
+  3. Dictionary keys must be hashable
+  4. Tuples are immutable and hashable - perfect for caching!
+
+**Category:** Application
+**Prerequisite LOs:** 9.2.7",,,,,,,,,,,,,,,markdown,"```python
+cache = {}
+stats = {'hits': 0, 'misses': 0}
+
+def expensive_calculation(a, b, c):
+    """"""Simulates expensive computation""""""
+    return (a ** 2) + (b ** 3) + (c ** 4)
+
+def cached_calculation(a, b, c):
+    key = (a, b, c)  # Tuple as cache key
+
+    if key in cache:
+        stats['hits'] += 1
+        print(f""  Cache HIT! Returning cached value"")
+        return cache[key]
+    else:
+        stats['misses'] += 1
+        print(f""  Cache MISS - computing..."")
+        result = expensive_calculation(a, b, c)
+        cache[key] = result
+        return result
+
+def cache_stats_display():
+    total = stats['hits'] + stats['misses']
+    hit_rate = (stats['hits'] / total * 100) if total > 0 else 0
+    print(f""\nCache Statistics:"")
+    print(f""  Total calls: {total}"")
+    print(f""  Cache hits: {stats['hits']}"")
+    print(f""  Cache misses: {stats['misses']}"")
+    print(f""  Hit rate: {hit_rate:.1f}%"")
+
+print(""Cache initialized\n"")
+
+test_cases = [
+    (2, 3, 4),
+    (1, 2, 3),
+    (2, 3, 4),  # Should hit
+    (1, 2, 3),  # Should hit
+    (5, 6, 7)
+]
+
+for args in test_cases:
+    print(f""Call cached_calculation{args}:"")
+    result = cached_calculation(*args)
+    print(f""  Result: {result}"")
+    print(f""  Cache now has {len(cache)} {'entry' if len(cache) == 1 else 'entries'}\n"")
+
+cache_stats_display()
+
+print(""\nAttempting to use list [2, 3, 4] as cache key:"")
+try:
+    test_cache = {}
+    test_cache[[2, 3, 4]] = 'value'
+except TypeError as e:
+    print(f""TypeError: {e}\n"")
+    print(""Explanation: Lists cannot be dictionary keys because:"")
+    print(""  1. Lists are mutable (can change)"")
+    print(""  2. Mutable objects cannot be hashed"")
+    print(""  3. Dictionary keys must be hashable"")
+    print(""  4. Tuples are immutable and hashable - perfect for caching!"")
+```
+
+**Caching Pattern:**
+- Use tuple of arguments as key
+- Immutable = safe cache key
+- Hashable = can be dict key
+- Common in memoization, dynamic programming
+
+**Key Takeaways:**
+- Immutability enables safe caching
+- Tuples perfect for composite keys
+- Lists fail as keys (unhashable)
+- Pattern used in real optimization"
