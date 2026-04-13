@@ -1,0 +1,1750 @@
+questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
+subjective,markdown,"# Q2 — Implementation Coding Task
+
+**Difficulty**: Medium
+**Type**: Coding
+**Category**: Implementation
+
+---
+
+## Question
+
+Create a product card component that clearly demonstrates all four layers of the CSS box model. The card should:
+
+- Have `width: 280px`
+- **Content**: An `<img>` (use any placeholder or describe it), an `<h3>` product name, and a `<p>` short description
+- **Padding**: `24px` on all sides (so content doesn't touch the border)
+- **Border**: `2px solid #e2e8f0`
+- **Margin**: `16px` on all sides (so cards have space between them)
+- Background: `#ffffff`
+- Add `border-radius: 12px` for rounded corners
+
+Also add `* { box-sizing: border-box; }` to ensure the card's width of 280px is the total rendered width.
+
+After completing the CSS, answer in a comment: ""Without box-sizing: border-box, what would the total rendered width of this card be?""
+(Calculate: 280px content + 24px×2 padding + 2px×2 border = ?)",,,,,,,,,,,,,,,markdown,"```html
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Product Card Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f5f5f5; padding: 24px; padding-bottom: 80px; }
+
+    h1 { font-size: 22px; margin-bottom: 20px; color: #333; }
+
+    /* CARD: position: relative = positioning context for badge */
+    .product-card {
+      position: relative;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 280px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .product-image {
+      height: 200px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .product-body {
+      padding: 16px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2d3748;
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 22px;
+      color: #e53935;
+      font-weight: bold;
+    }
+
+    .original-price {
+      font-size: 14px;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+
+    /* BADGE: position: absolute = anchors to card's corner */
+    .sale-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #e53935;
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* FIXED BUTTON: stays at bottom of viewport */
+    .fixed-action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #e0e0e0;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .view-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .spacer-content {
+      margin-top: 32px;
+      color: #666;
+    }
+
+    .spacer-content p { margin-bottom: 12px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h1>Featured Product</h1>
+
+  <!-- Product Card with relative + absolute -->
+  <div class=""product-card"">
+    <div class=""product-image""></div>
+    <span class=""sale-badge"">SALE</span>
+    <div class=""product-body"">
+      <p class=""product-name"">Wireless Headphones Pro</p>
+      <p>
+        <span class=""product-price"">$79.99</span>
+        <span class=""original-price"">$129.99</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Extra content to enable scrolling -->
+  <div class=""spacer-content"">
+    <p>Scroll down to see the fixed ""View Details"" bar stay at the bottom of the viewport.</p>
+    <p>These headphones feature active noise cancellation, 30-hour battery life, and premium audio quality.</p>
+    <p>Compatible with all Bluetooth 5.0 devices. Foldable design for easy travel.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+  </div>
+
+  <!-- Fixed action bar at viewport bottom -->
+  <div class=""fixed-action-bar"">
+    <button class=""view-btn"">View Details</button>
+  </div>
+</body>
+</html>
+```
+
+
+**`position: relative` on `.product-card`**: Makes the card a positioning context. The SALE badge will anchor to this card's boundaries.
+
+**`position: absolute` on `.sale-badge`**: Removes the badge from flow and places it at `top: 12px; right: 12px` relative to the `.product-card`. Because the card is the nearest non-static ancestor, the badge corners correctly appear within the card.
+
+**`position: fixed` on `.fixed-action-bar`**: Anchors the bar to the bottom of the viewport (`bottom: 0`). As the user scrolls through the product description, the ""View Details"" button stays visible at the bottom. `padding-bottom: 80px` on `body` prevents page content from being hidden behind the fixed bar."
+mcmc,markdown,"**Difficulty**: Medium
+**Type**: MSQ (Multiple Select Question)
+**Category**: Application
+
+---
+
+
+A developer creates a `<div>` with the following CSS. Assume `box-sizing` is NOT set (default `content-box`):
+
+```css
+div {
+  width: 400px;
+  height: 200px;
+  padding: 30px;
+  border: 4px solid #333;
+  margin: 20px;
+  background-color: #e8f4fd;
+}
+```
+
+Which of the following statements are **correct**? Select ALL that apply.",,,,,,,,The total rendered width of the element (not counting margin) is 468px.,The element's background color (`#e8f4fd`) fills both the content area and the padding area.,The 20px margin is included in the element's rendered width of 468px.,Switching to `box-sizing: border-box` would change the content area to 332px (400 - 60 padding - 8 border) while keeping the total rendered width at 400px.,"1,2,4",,,markdown,
+mcsc,markdown,"**Difficulty**: Low
+**Type**: MCQ
+**Category**: Knowledge
+
+---
+
+
+In the CSS box model, which layer creates space between elements and is always transparent (never filled with a background color)?",,,,,,4,,Padding,Border,Content,Margin,,,,markdown,"A sticky navigation bar that remains at the top of the screen during scrolling is the classic `position: fixed` use case.
+
+```css
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #2c3e50;
+  z-index: 1000;
+  padding: 16px 24px;
+}
+```
+
+With `position: fixed`, the navbar is removed from normal document flow and anchored to the viewport. As the user scrolls, the page content moves beneath the navbar while it stays in place.
+
+**Important note**: Because fixed elements are removed from flow, the page content may slide under the navbar at the top. Fix this by adding `margin-top` or `padding-top` equal to the navbar height to the page body.
+
+**Why other options are wrong:**
+- `relative` — moves from its normal position but still scrolls with the page
+- `absolute` — removed from flow but anchors to a non-static ancestor and scrolls with that ancestor
+- `sticky` — sticks to the viewport only after scrolling past a threshold. If the navbar starts at the top, `sticky` would work similarly, but `fixed` is the definitive ""always at the same viewport position"" solution
+
+**`sticky` vs `fixed` for nav bars**: Both can create a persistent top navbar. The difference: `sticky` starts in flow and ""activates"" when scrolled to its threshold. `fixed` is always in its specified viewport position from the start."
+subjective,markdown,"# Q2 — Implementation Coding Task
+
+**Difficulty**: Medium
+**Type**: Coding
+**Category**: Implementation
+
+---
+
+## Question
+
+Build a simple UI that contains three different box types demonstrating the use of `width`, `height`, and `border`:
+
+**Box 1 — Header Bar**
+- Full width (`width: 100%`), `height: 70px`
+- Background: `#2d3748`, border-bottom: `3px solid #63b3ed`
+- Text ""Website Header"" centered vertically and horizontally (tip: use `line-height: 70px` and `text-align: center`)
+
+**Box 2 — Content Card**
+- `width: 350px`, `min-height: 180px`
+- Background: `#ffffff`, `border: 1px solid #cbd5e0`
+- `border-radius: 16px`, `border-top: 5px solid #48bb78`
+- Centered on page with `margin: 20px auto`
+- Padding `24px`, color `#2d3748`
+- Contains text ""Content Card""
+
+**Box 3 — Avatar Circle**
+- `width: 72px`, `height: 72px`
+- Background: `#9b59b6`, `border: 4px solid #6c3483`
+- `border-radius: 50%`
+- Centered with `margin: 20px auto`
+
+Use `* { box-sizing: border-box; }`. Create `index.html` and `styles.css`.",,,,,,,,,,,,,,,markdown,"```html
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Product Card Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f5f5f5; padding: 24px; padding-bottom: 80px; }
+
+    h1 { font-size: 22px; margin-bottom: 20px; color: #333; }
+
+    /* CARD: position: relative = positioning context for badge */
+    .product-card {
+      position: relative;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 280px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .product-image {
+      height: 200px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .product-body {
+      padding: 16px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2d3748;
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 22px;
+      color: #e53935;
+      font-weight: bold;
+    }
+
+    .original-price {
+      font-size: 14px;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+
+    /* BADGE: position: absolute = anchors to card's corner */
+    .sale-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #e53935;
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* FIXED BUTTON: stays at bottom of viewport */
+    .fixed-action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #e0e0e0;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .view-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .spacer-content {
+      margin-top: 32px;
+      color: #666;
+    }
+
+    .spacer-content p { margin-bottom: 12px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h1>Featured Product</h1>
+
+  <!-- Product Card with relative + absolute -->
+  <div class=""product-card"">
+    <div class=""product-image""></div>
+    <span class=""sale-badge"">SALE</span>
+    <div class=""product-body"">
+      <p class=""product-name"">Wireless Headphones Pro</p>
+      <p>
+        <span class=""product-price"">$79.99</span>
+        <span class=""original-price"">$129.99</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Extra content to enable scrolling -->
+  <div class=""spacer-content"">
+    <p>Scroll down to see the fixed ""View Details"" bar stay at the bottom of the viewport.</p>
+    <p>These headphones feature active noise cancellation, 30-hour battery life, and premium audio quality.</p>
+    <p>Compatible with all Bluetooth 5.0 devices. Foldable design for easy travel.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+  </div>
+
+  <!-- Fixed action bar at viewport bottom -->
+  <div class=""fixed-action-bar"">
+    <button class=""view-btn"">View Details</button>
+  </div>
+</body>
+</html>
+```
+
+
+**`position: relative` on `.product-card`**: Makes the card a positioning context. The SALE badge will anchor to this card's boundaries.
+
+**`position: absolute` on `.sale-badge`**: Removes the badge from flow and places it at `top: 12px; right: 12px` relative to the `.product-card`. Because the card is the nearest non-static ancestor, the badge corners correctly appear within the card.
+
+**`position: fixed` on `.fixed-action-bar`**: Anchors the bar to the bottom of the viewport (`bottom: 0`). As the user scrolls through the product description, the ""View Details"" button stays visible at the bottom. `padding-bottom: 80px` on `body` prevents page content from being hidden behind the fixed bar."
+mcmc,markdown,"**Difficulty**: Medium
+**Type**: MSQ (Multiple Select Question)
+**Category**: Application
+
+---
+
+
+A developer is planning a product listing page layout. They sketch the following structure:
+
+- A full-width header bar (60px tall)
+- A hero section (400px tall, full width)
+- A grid of product cards (each 280px wide, 350px tall)
+- A full-width footer
+
+Which of the following CSS decisions are **correct and appropriate** for this layout? Select ALL that apply.",,,,,,,,Set the header with `width: 100%` and `height: 60px` to create a fixed-height full-width bar.,"Use `min-height: 350px` instead of `height: 350px` for product cards, so cards can grow if a product has a longer description.",Setting `height: 400px` on the hero section is always unsafe and should never be done.,Using `border-radius: 12px` on product cards improves their visual appearance without changing their width or height.,"1,2,4",,,markdown,
+mcsc,markdown,"**Difficulty**: Low
+**Type**: MCQ
+**Category**: Knowledge
+
+---
+
+
+Which CSS property creates a visible line around an element and requires three values: width, style, and color?",,,,,,3,,`outline`,`box-shadow`,`border`,`background`,,,,markdown,"A sticky navigation bar that remains at the top of the screen during scrolling is the classic `position: fixed` use case.
+
+```css
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #2c3e50;
+  z-index: 1000;
+  padding: 16px 24px;
+}
+```
+
+With `position: fixed`, the navbar is removed from normal document flow and anchored to the viewport. As the user scrolls, the page content moves beneath the navbar while it stays in place.
+
+**Important note**: Because fixed elements are removed from flow, the page content may slide under the navbar at the top. Fix this by adding `margin-top` or `padding-top` equal to the navbar height to the page body.
+
+**Why other options are wrong:**
+- `relative` — moves from its normal position but still scrolls with the page
+- `absolute` — removed from flow but anchors to a non-static ancestor and scrolls with that ancestor
+- `sticky` — sticks to the viewport only after scrolling past a threshold. If the navbar starts at the top, `sticky` would work similarly, but `fixed` is the definitive ""always at the same viewport position"" solution
+
+**`sticky` vs `fixed` for nav bars**: Both can create a persistent top navbar. The difference: `sticky` starts in flow and ""activates"" when scrolled to its threshold. `fixed` is always in its specified viewport position from the start."
+mcmc,markdown,"**Difficulty**: Medium
+**Type**: MSQ (Multiple Select Question)
+**Category**: Application
+
+---
+
+
+A developer is building a blog page. Which of the following statements about block and inline element behavior are **correct**? Select ALL that apply.",,,,,,,,"Setting `height: 200px` on a `<p>` element will make the paragraph 200px tall, because `<p>` is a block element.","Three `<span>` elements placed one after another will appear on the same line (flowing inline), as long as there is enough horizontal space.","An `<a>` (anchor) link is an inline element by default, meaning setting `width: 150px` on it will have no effect unless `display` is changed.",A `<div>` element with no content and no CSS `height` property will be visible on the page because all `<div>` elements have a minimum height.,"1,2,3",,,markdown,
+subjective,markdown,"# Q2 — Implementation Coding Task
+
+**Difficulty**: Medium
+**Type**: Coding
+**Category**: Implementation
+
+---
+
+## Question
+
+Create an HTML page that visually demonstrates the difference between block and inline elements. The page must include:
+
+1. A section with the heading ""Block Elements Demo"":
+   - Three `<div>` elements with class `.block-demo`, each with different background colors (`#dbeafe`, `#dcfce7`, `#fef3c7`), `height: 50px`, and text content showing they are block elements
+   - Show visually that they stack vertically
+
+2. A section with the heading ""Inline Elements Demo"":
+   - A `<p>` that contains three `<span>` elements with class `.inline-demo`, each with different background colors, flowing within the paragraph text
+
+3. A section with the heading ""width/height on Inline — No Effect"":
+   - A `<span class=""ignored"">` with `width: 300px` and `height: 80px` — show with a comment that these values are ignored
+   - Show the same span after `display: inline-block` is applied and the dimensions take effect
+
+Style everything clearly with appropriate `font-family`, `padding`, and `margin`. Use external CSS.",,,,,,,,,,,,,,,markdown,"```html
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Product Card Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f5f5f5; padding: 24px; padding-bottom: 80px; }
+
+    h1 { font-size: 22px; margin-bottom: 20px; color: #333; }
+
+    /* CARD: position: relative = positioning context for badge */
+    .product-card {
+      position: relative;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 280px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .product-image {
+      height: 200px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .product-body {
+      padding: 16px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2d3748;
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 22px;
+      color: #e53935;
+      font-weight: bold;
+    }
+
+    .original-price {
+      font-size: 14px;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+
+    /* BADGE: position: absolute = anchors to card's corner */
+    .sale-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #e53935;
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* FIXED BUTTON: stays at bottom of viewport */
+    .fixed-action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #e0e0e0;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .view-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .spacer-content {
+      margin-top: 32px;
+      color: #666;
+    }
+
+    .spacer-content p { margin-bottom: 12px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h1>Featured Product</h1>
+
+  <!-- Product Card with relative + absolute -->
+  <div class=""product-card"">
+    <div class=""product-image""></div>
+    <span class=""sale-badge"">SALE</span>
+    <div class=""product-body"">
+      <p class=""product-name"">Wireless Headphones Pro</p>
+      <p>
+        <span class=""product-price"">$79.99</span>
+        <span class=""original-price"">$129.99</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Extra content to enable scrolling -->
+  <div class=""spacer-content"">
+    <p>Scroll down to see the fixed ""View Details"" bar stay at the bottom of the viewport.</p>
+    <p>These headphones feature active noise cancellation, 30-hour battery life, and premium audio quality.</p>
+    <p>Compatible with all Bluetooth 5.0 devices. Foldable design for easy travel.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+  </div>
+
+  <!-- Fixed action bar at viewport bottom -->
+  <div class=""fixed-action-bar"">
+    <button class=""view-btn"">View Details</button>
+  </div>
+</body>
+</html>
+```
+
+
+**`position: relative` on `.product-card`**: Makes the card a positioning context. The SALE badge will anchor to this card's boundaries.
+
+**`position: absolute` on `.sale-badge`**: Removes the badge from flow and places it at `top: 12px; right: 12px` relative to the `.product-card`. Because the card is the nearest non-static ancestor, the badge corners correctly appear within the card.
+
+**`position: fixed` on `.fixed-action-bar`**: Anchors the bar to the bottom of the viewport (`bottom: 0`). As the user scrolls through the product description, the ""View Details"" button stays visible at the bottom. `padding-bottom: 80px` on `body` prevents page content from being hidden behind the fixed bar."
+mcsc,markdown,"**Difficulty**: Low
+**Type**: MCQ
+**Category**: Knowledge
+
+---
+
+
+Which statement correctly describes the difference between block and inline elements?",,,,,,2,,Block elements flow side by side; inline elements stack vertically,Block elements take up full width and start on a new line; inline elements flow within text content,Block elements are only used for structural HTML; inline elements are only used for styling,Block elements cannot have CSS applied to them; inline elements can,,,,markdown,"A sticky navigation bar that remains at the top of the screen during scrolling is the classic `position: fixed` use case.
+
+```css
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #2c3e50;
+  z-index: 1000;
+  padding: 16px 24px;
+}
+```
+
+With `position: fixed`, the navbar is removed from normal document flow and anchored to the viewport. As the user scrolls, the page content moves beneath the navbar while it stays in place.
+
+**Important note**: Because fixed elements are removed from flow, the page content may slide under the navbar at the top. Fix this by adding `margin-top` or `padding-top` equal to the navbar height to the page body.
+
+**Why other options are wrong:**
+- `relative` — moves from its normal position but still scrolls with the page
+- `absolute` — removed from flow but anchors to a non-static ancestor and scrolls with that ancestor
+- `sticky` — sticks to the viewport only after scrolling past a threshold. If the navbar starts at the top, `sticky` would work similarly, but `fixed` is the definitive ""always at the same viewport position"" solution
+
+**`sticky` vs `fixed` for nav bars**: Both can create a persistent top navbar. The difference: `sticky` starts in flow and ""activates"" when scrolled to its threshold. `fixed` is always in its specified viewport position from the start."
+mcsc,markdown,"**Difficulty:** Low
+**Type:** MCQ
+
+
+Which layer of the CSS box model is always transparent and sits outside the border?",,,,,,4,,Content,Padding,Border,Margin,,,,markdown,"A sticky navigation bar that remains at the top of the screen during scrolling is the classic `position: fixed` use case.
+
+```css
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #2c3e50;
+  z-index: 1000;
+  padding: 16px 24px;
+}
+```
+
+With `position: fixed`, the navbar is removed from normal document flow and anchored to the viewport. As the user scrolls, the page content moves beneath the navbar while it stays in place.
+
+**Important note**: Because fixed elements are removed from flow, the page content may slide under the navbar at the top. Fix this by adding `margin-top` or `padding-top` equal to the navbar height to the page body.
+
+**Why other options are wrong:**
+- `relative` — moves from its normal position but still scrolls with the page
+- `absolute` — removed from flow but anchors to a non-static ancestor and scrolls with that ancestor
+- `sticky` — sticks to the viewport only after scrolling past a threshold. If the navbar starts at the top, `sticky` would work similarly, but `fixed` is the definitive ""always at the same viewport position"" solution
+
+**`sticky` vs `fixed` for nav bars**: Both can create a persistent top navbar. The difference: `sticky` starts in flow and ""activates"" when scrolled to its threshold. `fixed` is always in its specified viewport position from the start."
+subjective,markdown,"# Q2: Margin vs Padding — Implementation Coding
+
+**Difficulty:** Medium
+**Type:** Coding
+
+## Question
+
+Build a profile card component using the HTML provided below. Apply CSS to meet all requirements:
+
+```html
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <title>Profile Card</title>
+  <link rel=""stylesheet"" href=""style.css"">
+</head>
+<body>
+  <div class=""card"">
+    <img src=""https://via.placeholder.com/80"" alt=""Avatar"" class=""avatar"">
+    <h2 class=""name"">Jane Smith</h2>
+    <p class=""role"">Frontend Developer</p>
+    <button class=""btn"">View Profile</button>
+  </div>
+</body>
+</html>
+```
+
+**CSS Requirements:**
+1. `.card` — white background, `1px solid #e2e8f0` border, 24px of inside space on all sides, 32px of outside space below the card, centered horizontally (max-width 320px)
+2. `.avatar` — displayed as a block, centered using auto margin, 16px space below it
+3. `.name` — 0 outside space top, 4px outside space below
+4. `.role` — 0 outside space top, 16px outside space below, gray color (#64748b)
+5. `.btn` — blue background (#3b82f6), white text, no border, 12px inside space top/bottom, 24px inside space left/right, 4px border-radius
+
+**Write the complete `style.css` file.**",,,,,,,,,,,,,,,markdown,"```html
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Product Card Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f5f5f5; padding: 24px; padding-bottom: 80px; }
+
+    h1 { font-size: 22px; margin-bottom: 20px; color: #333; }
+
+    /* CARD: position: relative = positioning context for badge */
+    .product-card {
+      position: relative;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 280px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .product-image {
+      height: 200px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .product-body {
+      padding: 16px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2d3748;
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 22px;
+      color: #e53935;
+      font-weight: bold;
+    }
+
+    .original-price {
+      font-size: 14px;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+
+    /* BADGE: position: absolute = anchors to card's corner */
+    .sale-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #e53935;
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* FIXED BUTTON: stays at bottom of viewport */
+    .fixed-action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #e0e0e0;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .view-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .spacer-content {
+      margin-top: 32px;
+      color: #666;
+    }
+
+    .spacer-content p { margin-bottom: 12px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h1>Featured Product</h1>
+
+  <!-- Product Card with relative + absolute -->
+  <div class=""product-card"">
+    <div class=""product-image""></div>
+    <span class=""sale-badge"">SALE</span>
+    <div class=""product-body"">
+      <p class=""product-name"">Wireless Headphones Pro</p>
+      <p>
+        <span class=""product-price"">$79.99</span>
+        <span class=""original-price"">$129.99</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Extra content to enable scrolling -->
+  <div class=""spacer-content"">
+    <p>Scroll down to see the fixed ""View Details"" bar stay at the bottom of the viewport.</p>
+    <p>These headphones feature active noise cancellation, 30-hour battery life, and premium audio quality.</p>
+    <p>Compatible with all Bluetooth 5.0 devices. Foldable design for easy travel.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+  </div>
+
+  <!-- Fixed action bar at viewport bottom -->
+  <div class=""fixed-action-bar"">
+    <button class=""view-btn"">View Details</button>
+  </div>
+</body>
+</html>
+```
+
+
+**`position: relative` on `.product-card`**: Makes the card a positioning context. The SALE badge will anchor to this card's boundaries.
+
+**`position: absolute` on `.sale-badge`**: Removes the badge from flow and places it at `top: 12px; right: 12px` relative to the `.product-card`. Because the card is the nearest non-static ancestor, the badge corners correctly appear within the card.
+
+**`position: fixed` on `.fixed-action-bar`**: Anchors the bar to the bottom of the viewport (`bottom: 0`). As the user scrolls through the product description, the ""View Details"" button stays visible at the bottom. `padding-bottom: 80px` on `body` prevents page content from being hidden behind the fixed bar."
+mcmc,markdown,"**Difficulty:** Medium
+**Type:** MSQ (Multiple Select Question)
+
+
+Which of the following statements about margin and padding are CORRECT? Select ALL that apply.",,,,,,,,Padding creates space inside the element; the background color fills the padding area.,Margin creates space outside the element; the margin area is always transparent.,`margin: 0 auto` on a block element with a defined width centers it horizontally.,Padding accepts negative values to pull content inward.,"1,2,3",,,markdown,
+mcmc,markdown,Which of the following are valid and appropriate uses of media queries in responsive web design? Select ALL that apply.,,,,,,,,Changing the font size from 18px to 14px on screens narrower than 480px,Hiding a decorative sidebar image on screens narrower than 768px to save space,Using a media query to fetch different data from a server based on screen width,Switching a two-column grid to a one-column layout on mobile screens,"1,2,4",,,markdown,
+mcsc,markdown,"What is a ""breakpoint"" in the context of responsive web design?",,,,,,2,,A JavaScript error that stops the page from loading on certain devices,A screen width value at which the layout changes because a media query activates,A CSS property that breaks text onto a new line,The maximum file size a web page can have before it breaks,,,,markdown,"A sticky navigation bar that remains at the top of the screen during scrolling is the classic `position: fixed` use case.
+
+```css
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #2c3e50;
+  z-index: 1000;
+  padding: 16px 24px;
+}
+```
+
+With `position: fixed`, the navbar is removed from normal document flow and anchored to the viewport. As the user scrolls, the page content moves beneath the navbar while it stays in place.
+
+**Important note**: Because fixed elements are removed from flow, the page content may slide under the navbar at the top. Fix this by adding `margin-top` or `padding-top` equal to the navbar height to the page body.
+
+**Why other options are wrong:**
+- `relative` — moves from its normal position but still scrolls with the page
+- `absolute` — removed from flow but anchors to a non-static ancestor and scrolls with that ancestor
+- `sticky` — sticks to the viewport only after scrolling past a threshold. If the navbar starts at the top, `sticky` would work similarly, but `fixed` is the definitive ""always at the same viewport position"" solution
+
+**`sticky` vs `fixed` for nav bars**: Both can create a persistent top navbar. The difference: `sticky` starts in flow and ""activates"" when scrolled to its threshold. `fixed` is always in its specified viewport position from the start."
+subjective,markdown,"# Q2 — Implementation Coding (Medium Difficulty)
+
+## Question
+
+Create an HTML page with a navigation bar that contains three links side by side. Use a media query so that on screens 600px or narrower, the links stack vertically instead of horizontally. The navigation should have a dark background color.
+
+**Requirements:**
+1. Navigation bar with `display: flex` and horizontal links by default
+2. On screens 600px or narrower, links stack vertically (column direction)
+3. Navigation has a dark background (e.g., `#333`)
+4. Links are white and have no underline
+5. Add appropriate padding for readability
+
+**Difficulty:** Medium
+**Type:** Implementation Coding
+**Category:** Responsive Navigation",,,,,,,,,,,,,,,markdown,"```html
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Product Card Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f5f5f5; padding: 24px; padding-bottom: 80px; }
+
+    h1 { font-size: 22px; margin-bottom: 20px; color: #333; }
+
+    /* CARD: position: relative = positioning context for badge */
+    .product-card {
+      position: relative;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 280px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .product-image {
+      height: 200px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .product-body {
+      padding: 16px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2d3748;
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 22px;
+      color: #e53935;
+      font-weight: bold;
+    }
+
+    .original-price {
+      font-size: 14px;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+
+    /* BADGE: position: absolute = anchors to card's corner */
+    .sale-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #e53935;
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* FIXED BUTTON: stays at bottom of viewport */
+    .fixed-action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #e0e0e0;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .view-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .spacer-content {
+      margin-top: 32px;
+      color: #666;
+    }
+
+    .spacer-content p { margin-bottom: 12px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h1>Featured Product</h1>
+
+  <!-- Product Card with relative + absolute -->
+  <div class=""product-card"">
+    <div class=""product-image""></div>
+    <span class=""sale-badge"">SALE</span>
+    <div class=""product-body"">
+      <p class=""product-name"">Wireless Headphones Pro</p>
+      <p>
+        <span class=""product-price"">$79.99</span>
+        <span class=""original-price"">$129.99</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Extra content to enable scrolling -->
+  <div class=""spacer-content"">
+    <p>Scroll down to see the fixed ""View Details"" bar stay at the bottom of the viewport.</p>
+    <p>These headphones feature active noise cancellation, 30-hour battery life, and premium audio quality.</p>
+    <p>Compatible with all Bluetooth 5.0 devices. Foldable design for easy travel.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+  </div>
+
+  <!-- Fixed action bar at viewport bottom -->
+  <div class=""fixed-action-bar"">
+    <button class=""view-btn"">View Details</button>
+  </div>
+</body>
+</html>
+```
+
+
+**`position: relative` on `.product-card`**: Makes the card a positioning context. The SALE badge will anchor to this card's boundaries.
+
+**`position: absolute` on `.sale-badge`**: Removes the badge from flow and places it at `top: 12px; right: 12px` relative to the `.product-card`. Because the card is the nearest non-static ancestor, the badge corners correctly appear within the card.
+
+**`position: fixed` on `.fixed-action-bar`**: Anchors the bar to the bottom of the viewport (`bottom: 0`). As the user scrolls through the product description, the ""View Details"" button stays visible at the bottom. `padding-bottom: 80px` on `body` prevents page content from being hidden behind the fixed bar."
+mcmc,markdown,Which of the following statements about how media queries conditionally apply CSS are TRUE? Select ALL that apply.,,,,,,,,The browser evaluates media queries once when the page loads and never again,A media query with `(max-width: 800px)` will apply its styles when the viewport is exactly 800px wide,Properties not mentioned inside a media query block continue to use their base stylesheet values,Multiple media queries can be active at the same time if all their conditions are true,"2,3,4",,,markdown,
+subjective,markdown,"# Q2 — Implementation Coding (Medium Difficulty)
+
+## Question
+
+Create an HTML page demonstrating how a media query conditionally applies CSS. The page should have a `<div>` with class `box` that:
+
+- On wide screens (wider than 600px): is 300px × 300px, blue background, white text saying ""Desktop View""
+- On screens 600px or narrower: is 100% width, 150px tall, red background, white text saying ""Mobile View""
+
+Use CSS to change the text content using the `::before` pseudo-element or by showing/hiding two separate elements.
+
+**Requirements:**
+1. Demonstrate clear visual difference between desktop and mobile
+2. Use a media query with `max-width: 600px`
+3. Include appropriate padding and centered text
+4. Use two different elements with `display: none`/`display: block` toggling
+
+**Difficulty:** Medium
+**Type:** Implementation Coding
+**Category:** Visual Media Query Demonstration",,,,,,,,,,,,,,,markdown,"```html
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Product Card Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f5f5f5; padding: 24px; padding-bottom: 80px; }
+
+    h1 { font-size: 22px; margin-bottom: 20px; color: #333; }
+
+    /* CARD: position: relative = positioning context for badge */
+    .product-card {
+      position: relative;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 280px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .product-image {
+      height: 200px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .product-body {
+      padding: 16px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2d3748;
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 22px;
+      color: #e53935;
+      font-weight: bold;
+    }
+
+    .original-price {
+      font-size: 14px;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+
+    /* BADGE: position: absolute = anchors to card's corner */
+    .sale-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #e53935;
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* FIXED BUTTON: stays at bottom of viewport */
+    .fixed-action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #e0e0e0;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .view-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .spacer-content {
+      margin-top: 32px;
+      color: #666;
+    }
+
+    .spacer-content p { margin-bottom: 12px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h1>Featured Product</h1>
+
+  <!-- Product Card with relative + absolute -->
+  <div class=""product-card"">
+    <div class=""product-image""></div>
+    <span class=""sale-badge"">SALE</span>
+    <div class=""product-body"">
+      <p class=""product-name"">Wireless Headphones Pro</p>
+      <p>
+        <span class=""product-price"">$79.99</span>
+        <span class=""original-price"">$129.99</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Extra content to enable scrolling -->
+  <div class=""spacer-content"">
+    <p>Scroll down to see the fixed ""View Details"" bar stay at the bottom of the viewport.</p>
+    <p>These headphones feature active noise cancellation, 30-hour battery life, and premium audio quality.</p>
+    <p>Compatible with all Bluetooth 5.0 devices. Foldable design for easy travel.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+  </div>
+
+  <!-- Fixed action bar at viewport bottom -->
+  <div class=""fixed-action-bar"">
+    <button class=""view-btn"">View Details</button>
+  </div>
+</body>
+</html>
+```
+
+
+**`position: relative` on `.product-card`**: Makes the card a positioning context. The SALE badge will anchor to this card's boundaries.
+
+**`position: absolute` on `.sale-badge`**: Removes the badge from flow and places it at `top: 12px; right: 12px` relative to the `.product-card`. Because the card is the nearest non-static ancestor, the badge corners correctly appear within the card.
+
+**`position: fixed` on `.fixed-action-bar`**: Anchors the bar to the bottom of the viewport (`bottom: 0`). As the user scrolls through the product description, the ""View Details"" button stays visible at the bottom. `padding-bottom: 80px` on `body` prevents page content from being hidden behind the fixed bar."
+mcsc,markdown,When does the browser apply the CSS rules inside a media query block?,,,,,,3,,"Always, regardless of the condition",Only when the page first loads,Only when the condition in the media query evaluates to true,Only when the user clicks on an element,,,,markdown,"A sticky navigation bar that remains at the top of the screen during scrolling is the classic `position: fixed` use case.
+
+```css
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #2c3e50;
+  z-index: 1000;
+  padding: 16px 24px;
+}
+```
+
+With `position: fixed`, the navbar is removed from normal document flow and anchored to the viewport. As the user scrolls, the page content moves beneath the navbar while it stays in place.
+
+**Important note**: Because fixed elements are removed from flow, the page content may slide under the navbar at the top. Fix this by adding `margin-top` or `padding-top` equal to the navbar height to the page body.
+
+**Why other options are wrong:**
+- `relative` — moves from its normal position but still scrolls with the page
+- `absolute` — removed from flow but anchors to a non-static ancestor and scrolls with that ancestor
+- `sticky` — sticks to the viewport only after scrolling past a threshold. If the navbar starts at the top, `sticky` would work similarly, but `fixed` is the definitive ""always at the same viewport position"" solution
+
+**`sticky` vs `fixed` for nav bars**: Both can create a persistent top navbar. The difference: `sticky` starts in flow and ""activates"" when scrolled to its threshold. `fixed` is always in its specified viewport position from the start."
+mcsc,markdown,Which media query applies styles when the viewport width is 480 pixels or narrower?,,,,,,2,,`@media (min-width: 480px)`,`@media (max-width: 480px)`,`@media (width: narrow 480px)`,`@media (screen-size: 480px)`,,,,markdown,"A sticky navigation bar that remains at the top of the screen during scrolling is the classic `position: fixed` use case.
+
+```css
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #2c3e50;
+  z-index: 1000;
+  padding: 16px 24px;
+}
+```
+
+With `position: fixed`, the navbar is removed from normal document flow and anchored to the viewport. As the user scrolls, the page content moves beneath the navbar while it stays in place.
+
+**Important note**: Because fixed elements are removed from flow, the page content may slide under the navbar at the top. Fix this by adding `margin-top` or `padding-top` equal to the navbar height to the page body.
+
+**Why other options are wrong:**
+- `relative` — moves from its normal position but still scrolls with the page
+- `absolute` — removed from flow but anchors to a non-static ancestor and scrolls with that ancestor
+- `sticky` — sticks to the viewport only after scrolling past a threshold. If the navbar starts at the top, `sticky` would work similarly, but `fixed` is the definitive ""always at the same viewport position"" solution
+
+**`sticky` vs `fixed` for nav bars**: Both can create a persistent top navbar. The difference: `sticky` starts in flow and ""activates"" when scrolled to its threshold. `fixed` is always in its specified viewport position from the start."
+subjective,markdown,"# Q2 — Implementation Coding (Medium Difficulty)
+
+## Question
+
+Create a webpage with a hero section that uses mobile-first design with `min-width` media queries. The hero section should display differently at three breakpoints:
+
+- **Mobile (default, < 600px)**: Dark blue background, white text, centered, padding 24px, font-size 20px
+- **Tablet (600px+)**: Same background, font-size 30px, padding 48px
+- **Desktop (1024px+)**: Add a max-width of 900px centered, font-size 44px, padding 80px
+
+Include a heading and a short paragraph in the hero section.
+
+**Requirements:**
+1. Use `min-width` queries (mobile-first approach)
+2. Three distinct visual states at different widths
+3. Test by resizing browser window
+
+**Difficulty:** Medium
+**Type:** Implementation Coding
+**Category:** Mobile-First Media Queries",,,,,,,,,,,,,,,markdown,"```html
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Product Card Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f5f5f5; padding: 24px; padding-bottom: 80px; }
+
+    h1 { font-size: 22px; margin-bottom: 20px; color: #333; }
+
+    /* CARD: position: relative = positioning context for badge */
+    .product-card {
+      position: relative;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 280px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .product-image {
+      height: 200px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .product-body {
+      padding: 16px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2d3748;
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 22px;
+      color: #e53935;
+      font-weight: bold;
+    }
+
+    .original-price {
+      font-size: 14px;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+
+    /* BADGE: position: absolute = anchors to card's corner */
+    .sale-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #e53935;
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* FIXED BUTTON: stays at bottom of viewport */
+    .fixed-action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #e0e0e0;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .view-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .spacer-content {
+      margin-top: 32px;
+      color: #666;
+    }
+
+    .spacer-content p { margin-bottom: 12px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h1>Featured Product</h1>
+
+  <!-- Product Card with relative + absolute -->
+  <div class=""product-card"">
+    <div class=""product-image""></div>
+    <span class=""sale-badge"">SALE</span>
+    <div class=""product-body"">
+      <p class=""product-name"">Wireless Headphones Pro</p>
+      <p>
+        <span class=""product-price"">$79.99</span>
+        <span class=""original-price"">$129.99</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Extra content to enable scrolling -->
+  <div class=""spacer-content"">
+    <p>Scroll down to see the fixed ""View Details"" bar stay at the bottom of the viewport.</p>
+    <p>These headphones feature active noise cancellation, 30-hour battery life, and premium audio quality.</p>
+    <p>Compatible with all Bluetooth 5.0 devices. Foldable design for easy travel.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+  </div>
+
+  <!-- Fixed action bar at viewport bottom -->
+  <div class=""fixed-action-bar"">
+    <button class=""view-btn"">View Details</button>
+  </div>
+</body>
+</html>
+```
+
+
+**`position: relative` on `.product-card`**: Makes the card a positioning context. The SALE badge will anchor to this card's boundaries.
+
+**`position: absolute` on `.sale-badge`**: Removes the badge from flow and places it at `top: 12px; right: 12px` relative to the `.product-card`. Because the card is the nearest non-static ancestor, the badge corners correctly appear within the card.
+
+**`position: fixed` on `.fixed-action-bar`**: Anchors the bar to the bottom of the viewport (`bottom: 0`). As the user scrolls through the product description, the ""View Details"" button stays visible at the bottom. `padding-bottom: 80px` on `body` prevents page content from being hidden behind the fixed bar."
+mcmc,markdown,Which of the following statements about `min-width` and `max-width` in media queries are TRUE? Select ALL that apply.,,,,,,,,`@media (max-width: 600px)` applies styles when the viewport is narrower than OR equal to 600px,`@media (min-width: 600px)` applies styles when the viewport is wider than 600px (600px itself does NOT qualify),Using `max-width` for all breakpoints follows a desktop-first approach,Using `min-width` for all breakpoints follows a mobile-first approach,"1,3,4",,,markdown,
+subjective,markdown,"# Q2 — Implementation Coding (Medium Difficulty)
+
+## Question
+
+Build a complete three-tier responsive webpage for a restaurant. The page should include:
+
+- A header with restaurant name and navigation
+- A ""Today's Specials"" section with food cards
+
+**Mobile layout (default, < 768px):**
+- Navigation links stacked vertically
+- One food card per row
+- Smaller font sizes
+
+**Tablet layout (768px to 1023px):**
+- Navigation links in a horizontal row
+- Two food cards per row
+
+**Desktop layout (1024px+):**
+- Navigation with more spacing
+- Three food cards per row
+- Maximum content width of 1100px centered
+
+Use mobile-first approach with `min-width` media queries. Include at least 3 food cards with a title and short description each.
+
+**Difficulty:** Medium
+**Type:** Implementation Coding
+**Category:** Three-Tier Responsive Layout",,,,,,,,,,,,,,,markdown,"```html
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Product Card Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f5f5f5; padding: 24px; padding-bottom: 80px; }
+
+    h1 { font-size: 22px; margin-bottom: 20px; color: #333; }
+
+    /* CARD: position: relative = positioning context for badge */
+    .product-card {
+      position: relative;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 280px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .product-image {
+      height: 200px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .product-body {
+      padding: 16px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2d3748;
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 22px;
+      color: #e53935;
+      font-weight: bold;
+    }
+
+    .original-price {
+      font-size: 14px;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+
+    /* BADGE: position: absolute = anchors to card's corner */
+    .sale-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #e53935;
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* FIXED BUTTON: stays at bottom of viewport */
+    .fixed-action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #e0e0e0;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .view-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .spacer-content {
+      margin-top: 32px;
+      color: #666;
+    }
+
+    .spacer-content p { margin-bottom: 12px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h1>Featured Product</h1>
+
+  <!-- Product Card with relative + absolute -->
+  <div class=""product-card"">
+    <div class=""product-image""></div>
+    <span class=""sale-badge"">SALE</span>
+    <div class=""product-body"">
+      <p class=""product-name"">Wireless Headphones Pro</p>
+      <p>
+        <span class=""product-price"">$79.99</span>
+        <span class=""original-price"">$129.99</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Extra content to enable scrolling -->
+  <div class=""spacer-content"">
+    <p>Scroll down to see the fixed ""View Details"" bar stay at the bottom of the viewport.</p>
+    <p>These headphones feature active noise cancellation, 30-hour battery life, and premium audio quality.</p>
+    <p>Compatible with all Bluetooth 5.0 devices. Foldable design for easy travel.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+  </div>
+
+  <!-- Fixed action bar at viewport bottom -->
+  <div class=""fixed-action-bar"">
+    <button class=""view-btn"">View Details</button>
+  </div>
+</body>
+</html>
+```
+
+
+**`position: relative` on `.product-card`**: Makes the card a positioning context. The SALE badge will anchor to this card's boundaries.
+
+**`position: absolute` on `.sale-badge`**: Removes the badge from flow and places it at `top: 12px; right: 12px` relative to the `.product-card`. Because the card is the nearest non-static ancestor, the badge corners correctly appear within the card.
+
+**`position: fixed` on `.fixed-action-bar`**: Anchors the bar to the bottom of the viewport (`bottom: 0`). As the user scrolls through the product description, the ""View Details"" button stays visible at the bottom. `padding-bottom: 80px` on `body` prevents page content from being hidden behind the fixed bar."
+mcsc,markdown,"In a mobile-first responsive layout, which CSS rule is written WITHOUT a media query?",,,,,,3,,Desktop styles,Tablet styles,Mobile styles (base styles),Print styles,,,,markdown,"A sticky navigation bar that remains at the top of the screen during scrolling is the classic `position: fixed` use case.
+
+```css
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #2c3e50;
+  z-index: 1000;
+  padding: 16px 24px;
+}
+```
+
+With `position: fixed`, the navbar is removed from normal document flow and anchored to the viewport. As the user scrolls, the page content moves beneath the navbar while it stays in place.
+
+**Important note**: Because fixed elements are removed from flow, the page content may slide under the navbar at the top. Fix this by adding `margin-top` or `padding-top` equal to the navbar height to the page body.
+
+**Why other options are wrong:**
+- `relative` — moves from its normal position but still scrolls with the page
+- `absolute` — removed from flow but anchors to a non-static ancestor and scrolls with that ancestor
+- `sticky` — sticks to the viewport only after scrolling past a threshold. If the navbar starts at the top, `sticky` would work similarly, but `fixed` is the definitive ""always at the same viewport position"" solution
+
+**`sticky` vs `fixed` for nav bars**: Both can create a persistent top navbar. The difference: `sticky` starts in flow and ""activates"" when scrolled to its threshold. `fixed` is always in its specified viewport position from the start."
+mcmc,markdown,"Which of the following practices correctly apply different styles for large, medium, and small screens? Select ALL that apply.",,,,,,,,"Writing mobile styles in `@media (max-width: 767px)`, tablet in `@media (min-width: 768px) and (max-width: 1023px)`, and desktop in `@media (min-width: 1024px)` — with no base styles — is valid but leaves screens without clear defaults","In mobile-first design, the `@media (min-width: 768px)` block adds styles that only apply to tablets and above, building on the mobile base","Changing `grid-template-columns` from `1fr` to `1fr 1fr` to `repeat(3, 1fr)` across mobile, tablet, and desktop breakpoints is a valid responsive pattern",Setting `max-width: 1200px` and `margin: 0 auto` on the container is only useful on mobile screens,"2,3",,,markdown,
+subjective,markdown,"# Q2 — Implementation Coding (Medium Difficulty)
+
+## Question
+
+Build a product card that uses three different position values:
+
+1. The card container uses `position: relative`
+2. A ""SALE"" badge in the top-right corner of the card uses `position: absolute`
+3. A ""View Details"" button that is visible in the bottom bar of the page uses `position: fixed`
+
+The product card should include:
+- A colored placeholder for the product image (200px tall)
+- A product name and price
+- The red ""SALE"" badge absolutely positioned at the top-right corner
+- The fixed ""View Details"" button at the bottom of the viewport
+
+Make the page tall enough to scroll (add some text content below the card) to demonstrate the fixed button staying in place.
+
+**Difficulty:** Medium
+**Type:** Implementation Coding
+**Category:** Multiple Position Values",,,,,,,,,,,,,,,markdown,"```html
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Product Card Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f5f5f5; padding: 24px; padding-bottom: 80px; }
+
+    h1 { font-size: 22px; margin-bottom: 20px; color: #333; }
+
+    /* CARD: position: relative = positioning context for badge */
+    .product-card {
+      position: relative;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 280px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .product-image {
+      height: 200px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .product-body {
+      padding: 16px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2d3748;
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 22px;
+      color: #e53935;
+      font-weight: bold;
+    }
+
+    .original-price {
+      font-size: 14px;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+
+    /* BADGE: position: absolute = anchors to card's corner */
+    .sale-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #e53935;
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* FIXED BUTTON: stays at bottom of viewport */
+    .fixed-action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #e0e0e0;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .view-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .spacer-content {
+      margin-top: 32px;
+      color: #666;
+    }
+
+    .spacer-content p { margin-bottom: 12px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h1>Featured Product</h1>
+
+  <!-- Product Card with relative + absolute -->
+  <div class=""product-card"">
+    <div class=""product-image""></div>
+    <span class=""sale-badge"">SALE</span>
+    <div class=""product-body"">
+      <p class=""product-name"">Wireless Headphones Pro</p>
+      <p>
+        <span class=""product-price"">$79.99</span>
+        <span class=""original-price"">$129.99</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Extra content to enable scrolling -->
+  <div class=""spacer-content"">
+    <p>Scroll down to see the fixed ""View Details"" bar stay at the bottom of the viewport.</p>
+    <p>These headphones feature active noise cancellation, 30-hour battery life, and premium audio quality.</p>
+    <p>Compatible with all Bluetooth 5.0 devices. Foldable design for easy travel.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+  </div>
+
+  <!-- Fixed action bar at viewport bottom -->
+  <div class=""fixed-action-bar"">
+    <button class=""view-btn"">View Details</button>
+  </div>
+</body>
+</html>
+```
+
+
+**`position: relative` on `.product-card`**: Makes the card a positioning context. The SALE badge will anchor to this card's boundaries.
+
+**`position: absolute` on `.sale-badge`**: Removes the badge from flow and places it at `top: 12px; right: 12px` relative to the `.product-card`. Because the card is the nearest non-static ancestor, the badge corners correctly appear within the card.
+
+**`position: fixed` on `.fixed-action-bar`**: Anchors the bar to the bottom of the viewport (`bottom: 0`). As the user scrolls through the product description, the ""View Details"" button stays visible at the bottom. `padding-bottom: 80px` on `body` prevents page content from being hidden behind the fixed bar."
+mcmc,markdown,Which of the following correctly describe the behaviors of the five CSS position values? Select ALL that apply.,,,,,,,,`position: static` is the default value and prevents offset properties from working,"`position: relative` removes the element from document flow, allowing other elements to fill its original space",`position: absolute` positions an element relative to the nearest ancestor that has a non-static position,`position: fixed` elements remain visible in the same viewport position regardless of how far the page is scrolled,"1,3,4",,,markdown,
+mcsc,markdown,Which CSS position value should be used to keep a navigation bar visible at the top of the screen even when the user scrolls down the page?,,,,,,4,,`position: relative`,`position: absolute`,`position: sticky`,`position: fixed`,,,,markdown,"A sticky navigation bar that remains at the top of the screen during scrolling is the classic `position: fixed` use case.
+
+```css
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #2c3e50;
+  z-index: 1000;
+  padding: 16px 24px;
+}
+```
+
+With `position: fixed`, the navbar is removed from normal document flow and anchored to the viewport. As the user scrolls, the page content moves beneath the navbar while it stays in place.
+
+**Important note**: Because fixed elements are removed from flow, the page content may slide under the navbar at the top. Fix this by adding `margin-top` or `padding-top` equal to the navbar height to the page body.
+
+**Why other options are wrong:**
+- `relative` — moves from its normal position but still scrolls with the page
+- `absolute` — removed from flow but anchors to a non-static ancestor and scrolls with that ancestor
+- `sticky` — sticks to the viewport only after scrolling past a threshold. If the navbar starts at the top, `sticky` would work similarly, but `fixed` is the definitive ""always at the same viewport position"" solution
+
+**`sticky` vs `fixed` for nav bars**: Both can create a persistent top navbar. The difference: `sticky` starts in flow and ""activates"" when scrolled to its threshold. `fixed` is always in its specified viewport position from the start."
