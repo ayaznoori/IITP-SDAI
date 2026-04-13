@@ -1,9 +1,38 @@
-questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,option.5,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
-mcsc,markdown,"Why do developers use Version Control Systems?",,120,,,,"To track changes and restore older versions",,"To improve code execution speed","To track changes and restore older versions","To automatically write code","To avoid using IDEs","Topic not covered",,version-control,0,markdown,"Version Control Systems help track code changes and allow restoring previous versions when needed."
-mcsc,markdown,"How does Version Control help in team collaboration?",,120,,,,"Prevents overwriting others’ work and manages conflicts",,"Blocks changes from all developers","Deletes old versions automatically","Prevents overwriting others’ work and manages conflicts","Removes developer names from commits","Topic not covered",,version-control|team-collaboration,0,markdown,"It allows multiple developers to work safely by handling conflicts and tracking contributions."
-mcsc,markdown,"Which of the following is a Distributed Version Control System (DVCS)?",,120,,,,"Git",,"SVN","Perforce","Git","None of the above","Topic not covered",,git,0,markdown,"Git is a distributed system where every developer has a complete repository copy."
-mcsc,markdown,"What is Git mainly used for?",,120,,,,"Tracking changes and managing versions locally",,"Hosting code in the cloud","Tracking changes and managing versions locally","Compiling and running code","Improving computer hardware speed","Topic not covered",,git,0,markdown,"Git is used for local version control and tracking code changes."
-mcsc,markdown,"What additional capability does GitHub provide over Git?",,120,,,,"Cloud-based collaboration like pull requests & code reviews",,"Local commit creation","Cloud-based collaboration like pull requests & code reviews","Offline development","Replacing Git entirely","Topic not covered",,git|github,0,markdown,"GitHub enables collaboration features like PRs, reviews, and remote repositories."
-mcsc,markdown,"Which Git area stores the permanent snapshots of your project?",,120,,,,"Local Repository",,"Working Directory","Staging Area","Local Repository","Git Workspace","Topic not covered",,git|repository,0,markdown,"The local repository stores all committed project history permanently."
-mcsc,markdown,"Why is the Staging Area important in Git?",,120,,,,"It helps review and choose what goes into the next commit",,"It stores deleted commits","It creates automatic backups","It helps review and choose what goes into the next commit","It replaces the need for commit messages","Topic not covered",,git|staging-area,0,markdown,"The staging area allows selecting specific changes before committing."
-mcsc,markdown,"Which command is used to unstage a file without removing its modifications?",,120,,,,"git restore --staged file.txt",,"git commit --amend","git restore .","git restore --staged file.txt","git diff --staged","Topic not covered",,git|commands,1,markdown,"This command removes the file from staging but keeps the changes in the working directory."
+questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
+
+mcsc,markdown,"What is the output?
+
+s = ""Python""
+print(s[:4])",,,,,,,"Pyth",,"Pyth","ytho","Pyt","Python",,,0,markdown,"Slicing s[:4] returns characters from index 0 to 3 → 'Pyth'."
+
+mcsc,markdown,"Which method is used to split a string into a list?",,,,,,,"split()",,"join()","split()","break()","divide()",,,0,markdown,"split() converts a string into a list based on a delimiter."
+
+mcsc,markdown,"Which statement is correct about strings?",,,,,,,"Strings are immutable",,"Strings are mutable","Strings are immutable","Strings cannot be indexed","Strings only store numbers",,,0,markdown,"Strings cannot be changed after creation, so they are immutable."
+
+mcsc,markdown,"What is the output?
+
+list(map(int, [""1"",""2"",""3""]))",,,,,,,"[1,2,3]",,"[""1"",""2"",""3""]","[1,2,3]","(1,2,3)","Error",,,0,markdown,"map(int, ...) converts each string to integer, and list() makes it a list."
+
+mcsc,markdown,"What does filter() do in Python?",,,,,,,"Filters elements based on condition",,"Sorts elements","Modifies elements","Filters elements based on condition","Converts list to string",,,0,markdown,"filter() keeps elements that satisfy a given condition."
+
+mcsc,markdown,"Which method avoids error if a dictionary key is missing?",,,,,,,"get()",,"find()","get()","search()","value()",,,0,markdown,"dict.get(key) returns None (or default) instead of error if key is missing."
+
+mcsc,markdown,"Which of the following is TRUE about dictionaries?",,,,,,,"Keys must be immutable",,"Keys can be duplicate","Keys must be immutable","Values must be strings","Dictionaries do not allow updates",,,0,markdown,"Dictionary keys must be immutable (e.g., string, tuple)."
+
+mcsc,markdown,"Which function is used to sort elements in Python?",,,,,,,"sort()",,"arrange()","sort()","order()","filter()",,,0,markdown,"list.sort() sorts the list in-place."
+
+subjective,markdown,"Write a Python program that:
+
+1. Takes a string as input
+2. Counts the frequency of each character using a dictionary
+3. Prints only characters that appear more than once
+
+Example:
+Input: ""programming""
+Output: {'r':2, 'g':2, 'm':2}
+
+Instructions:
+- Use dictionary
+- Use loop
+- Print only repeated characters
+- Write clean and readable code",,600,,,,,,,"",,,,,,0.5,markdown,"Student should demonstrate understanding of strings, dictionaries, and iteration. Expected approach: loop through string, count frequency, then filter values > 1."

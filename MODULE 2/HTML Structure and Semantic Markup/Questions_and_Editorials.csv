@@ -1,0 +1,693 @@
+questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
+subjective,markdown,"A junior developer is assigned various tasks for a new company website. They need to determine which technology (HTML, CSS, or JavaScript) is appropriate for each task.
+
+Review the following tasks and select all that are correctly matched to their technology:",,,,,,,,"HTML — ""Add a navigation bar with links to Home, About, and Contact pages""","CSS — ""Make the page title red and increase its font size to 48 pixels""","JavaScript — ""Add a paragraph of text describing the company history""","HTML — ""Show a popup message when the user clicks the Subscribe button""",,,,markdown,"**Option A — Correct:** `.classname { }` is the correct CSS syntax. The `.` prefix is what tells the browser ""look for elements with this value in their `class` attribute.""
+
+**Option B — Incorrect:** Classes do NOT have a uniqueness requirement. Any number of elements on a page can share the same class value. This is the entire point — classes enable styling a group of elements with one rule.
+
+**Option C — Correct:** Classes are tag-agnostic. A class like `.highlight` can be applied to a `<p>`, a `<div>`, a `<span>`, an `<li>`, or any other HTML element. The same CSS rule applies to all of them.
+
+**Option D — Correct:** This is the primary use case for class selectors — creating a named, reusable style that can be applied to any group of elements that should share that visual appearance.
+
+**Option E — Incorrect:** An element can have multiple classes. They are listed in the `class` attribute separated by spaces: `class=""task task-high featured""`. Each class in the list is applied independently.
+
+**Option F — Correct:** In HTML, `class=""class-name""` is how you assign a class to an element. The CSS selector `.class-name { }` matches elements where `class-name` is present in the `class` attribute.
+
+**Correct Answers: A, C, D, F**"
+subjective,markdown,"# Q2: Building the HTML Structure for a Profile Card
+
+## Problem Description
+
+Create the HTML structure (content only, no styling) for a user profile card. This practices the HTML role: defining what elements exist on the page.
+
+## Requirements
+
+Create HTML that includes:
+1. A heading with the user's name: `Priya Sharma`
+2. A paragraph with their role: `Full Stack Developer`
+3. A paragraph with their location: `Bangalore, India`
+4. A paragraph with their bio: `Passionate about building accessible web applications.`
+5. A button with the text: `View Portfolio`
+6. A hyperlink with text `Connect on LinkedIn` pointing to `https://linkedin.com`
+
+Note: Do not add any CSS styling. Focus only on the HTML structure.
+
+## Expected Output
+
+When rendered in a browser (with browser default styling), the page should show:
+- A bold heading ""Priya Sharma""
+- ""Full Stack Developer"" as a paragraph
+- ""Bangalore, India"" as a paragraph
+- The bio text as a paragraph
+- A clickable button labeled ""View Portfolio""
+- A hyperlink labeled ""Connect on LinkedIn""
+
+## Difficulty
+Medium
+
+## Category
+Implementation
+
+## Type
+Coding",,,,,,,,,,,,,,,markdown,"Use `.task { }` for shared layout properties, then write separate rules for `.task-high`, `.task-medium`, and `.task-low` for the distinct border and background colors."
+subjective,markdown,"A web developer says: ""I need to make the navigation menu slide down smoothly when the user hovers over it."" Which technology is primarily responsible for implementing this behavior?",,,,,,,,"HTML, because navigation menus are defined in HTML","CSS, because hover effects are CSS transitions","JavaScript, because smooth sliding requires programming logic","Both CSS and JavaScript can achieve this, but neither HTML",,,,markdown,"**Why A (`#`) is wrong:** The `#` prefix is used for ID selectors. `#hero { }` targets the element with `id=""hero""`. The `id` must be unique; the `#` selector is its counterpart in CSS.
+
+**Why B (`@`) is wrong:** The `@` symbol is reserved for CSS at-rules: `@media`, `@import`, `@keyframes`, `@font-face`, etc. These are not selectors — they are directives that configure CSS behavior.
+
+**Why C (`.`) is correct:** The dot is the class selector prefix. `.highlight { }` targets every element with `class=""highlight""` (or any element where `highlight` is one of the classes in the `class` attribute). This is the most commonly used selector type in practical CSS.
+
+**Why D (`~`) is wrong:** The tilde (`~`) is used in CSS as the general sibling combinator, which selects elements that share the same parent and follow a specified element. It is a combinator, not a prefix for attribute-based selectors.
+
+**Memory tip:** Class = `.` Think of ""dot com"" — `.com` is a domain. A class is like a category or domain that many elements can belong to."
+subjective,markdown,"# Q2: Create a Complete Valid HTML Document
+
+## Problem Description
+
+Create a complete, valid HTML5 document for a simple ""About Me"" page.
+
+## Requirements
+
+The document must include:
+1. The DOCTYPE declaration
+2. An `<html>` element with `lang=""en""`
+3. A `<head>` section containing:
+   - A charset meta tag (`UTF-8`)
+   - A viewport meta tag
+   - A `<title>` with text: `About Me — Arjun Patel`
+4. A `<body>` section containing:
+   - An `<h1>` heading: `Hi, I'm Arjun Patel`
+   - A `<p>`: `I am a second-year computer science student passionate about web development.`
+   - A `<p>`: `I enjoy building projects and learning new technologies.`
+   - An `<a>` link with text `View My Projects` pointing to `projects.html`
+
+## Expected Output
+
+A browser tab showing ""About Me — Arjun Patel"" as the tab title, and the page displaying the heading, two paragraphs, and a link.
+
+## Difficulty
+Medium
+
+## Category
+Implementation
+
+## Type
+Coding",,,,,,,,,,,,,,,markdown,"Use `.task { }` for shared layout properties, then write separate rules for `.task-high`, `.task-medium`, and `.task-low` for the distinct border and background colors."
+subjective,markdown,"# Q3: Evaluating HTML Document Structures
+
+## Problem Description / Scenario
+
+Four students submit HTML documents for review. A validator checks them for correctness. Select all documents that are correctly structured valid HTML5 documents.
+
+## Options
+
+A)
+```html
+<html lang=""en"">
+  <head>
+    <title>My Page</title>
+  </head>
+  <body>
+    <h1>Hello</h1>
+  </body>
+</html>
+```
+
+B)
+```html
+<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"">
+    <title>My Page</title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+  </body>
+</html>
+```
+
+C)
+```html
+<!DOCTYPE html>
+<html lang=""en"">
+  <body>
+    <h1>Welcome</h1>
+  </body>
+  <head>
+    <title>My Page</title>
+  </head>
+</html>
+```
+
+D)
+```html
+<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Portfolio</title>
+  </head>
+  <body>
+    <h1>My Portfolio</h1>
+    <p>Welcome to my page.</p>
+  </body>
+</html>
+```
+
+## Correct Answers
+
+**B and D**
+
+## Difficulty
+Medium
+
+## Category
+Application
+
+## Type
+MSQ",,,,,,,,,,,,,,,markdown,"**Option A — Correct:** `.classname { }` is the correct CSS syntax. The `.` prefix is what tells the browser ""look for elements with this value in their `class` attribute.""
+
+**Option B — Incorrect:** Classes do NOT have a uniqueness requirement. Any number of elements on a page can share the same class value. This is the entire point — classes enable styling a group of elements with one rule.
+
+**Option C — Correct:** Classes are tag-agnostic. A class like `.highlight` can be applied to a `<p>`, a `<div>`, a `<span>`, an `<li>`, or any other HTML element. The same CSS rule applies to all of them.
+
+**Option D — Correct:** This is the primary use case for class selectors — creating a named, reusable style that can be applied to any group of elements that should share that visual appearance.
+
+**Option E — Incorrect:** An element can have multiple classes. They are listed in the `class` attribute separated by spaces: `class=""task task-high featured""`. Each class in the list is applied independently.
+
+**Option F — Correct:** In HTML, `class=""class-name""` is how you assign a class to an element. The CSS selector `.class-name { }` matches elements where `class-name` is present in the `class` attribute.
+
+**Correct Answers: A, C, D, F**"
+subjective,markdown,Which of the following correctly describes the purpose of the `<head>` element in an HTML document?,,,,,,,,It displays a large heading at the top of the visible page,It contains metadata about the page that is not displayed to users,"It is an alternative way to write `<header>`, a visible page header","It stores the page's CSS and JavaScript only, not HTML content",,,,markdown,"**Why A (`#`) is wrong:** The `#` prefix is used for ID selectors. `#hero { }` targets the element with `id=""hero""`. The `id` must be unique; the `#` selector is its counterpart in CSS.
+
+**Why B (`@`) is wrong:** The `@` symbol is reserved for CSS at-rules: `@media`, `@import`, `@keyframes`, `@font-face`, etc. These are not selectors — they are directives that configure CSS behavior.
+
+**Why C (`.`) is correct:** The dot is the class selector prefix. `.highlight { }` targets every element with `class=""highlight""` (or any element where `highlight` is one of the classes in the `class` attribute). This is the most commonly used selector type in practical CSS.
+
+**Why D (`~`) is wrong:** The tilde (`~`) is used in CSS as the general sibling combinator, which selects elements that share the same parent and follow a specified element. It is a combinator, not a prefix for attribute-based selectors.
+
+**Memory tip:** Class = `.` Think of ""dot com"" — `.com` is a domain. A class is like a category or domain that many elements can belong to."
+subjective,markdown,"A student argues: ""I use `<h3>` for my page titles because it looks the right size. There is no difference between the heading tags except their default size."" Which response best corrects this misunderstanding?",,,,,,,,The student is correct — heading tags are purely visual tools for controlling text size,"The student is wrong — heading tags communicate semantic importance. h1 signals the most important heading, and both search engines and screen readers interpret heading levels to understand page structure",The student is partially right — only h1 and h2 have any semantic meaning; h3 through h6 are just visual,"The student should use CSS font-size on `<h1>` tags only, never any other heading levels",,,,markdown,"**Why A (`#`) is wrong:** The `#` prefix is used for ID selectors. `#hero { }` targets the element with `id=""hero""`. The `id` must be unique; the `#` selector is its counterpart in CSS.
+
+**Why B (`@`) is wrong:** The `@` symbol is reserved for CSS at-rules: `@media`, `@import`, `@keyframes`, `@font-face`, etc. These are not selectors — they are directives that configure CSS behavior.
+
+**Why C (`.`) is correct:** The dot is the class selector prefix. `.highlight { }` targets every element with `class=""highlight""` (or any element where `highlight` is one of the classes in the `class` attribute). This is the most commonly used selector type in practical CSS.
+
+**Why D (`~`) is wrong:** The tilde (`~`) is used in CSS as the general sibling combinator, which selects elements that share the same parent and follow a specified element. It is a combinator, not a prefix for attribute-based selectors.
+
+**Memory tip:** Class = `.` Think of ""dot com"" — `.com` is a domain. A class is like a category or domain that many elements can belong to."
+subjective,markdown,"# Q2: Writing a Correct Heading Hierarchy
+
+## Problem Description
+
+Write the HTML headings (only — no paragraph content needed) for an online cooking course catalog with the following outline structure:
+
+```
+I. Online Cooking Courses (page title)
+  A. Beginner Courses
+    1. Knife Skills
+    2. Basic Sauces
+  B. Advanced Courses
+    1. French Cuisine
+      a. Classic Techniques
+    2. Asian Fusion
+```
+
+## Requirements
+
+Translate the outline into HTML headings only:
+- Level I items → `<h1>`
+- Level A items → `<h2>`
+- Level 1 items under A/B → `<h3>`
+- Level a items under 1 → `<h4>`
+
+Use the exact text from the outline above.
+
+## Expected Output
+
+Seven heading elements in the correct hierarchical order with the correct heading level for each item.
+
+## Difficulty
+Medium
+
+## Category
+Implementation
+
+## Type
+Coding",,,,,,,,,,,,,,,markdown,"Use `.task { }` for shared layout properties, then write separate rules for `.task-high`, `.task-medium`, and `.task-low` for the distinct border and background colors."
+subjective,markdown,"A content manager reviews two versions of the same article page. Version A uses a proper heading hierarchy. Version B uses only `<p>` tags with CSS to make text appear larger for ""headings.""
+
+Select all statements that are true about the differences between these two approaches:",,,,,,,,Version A with proper headings allows screen reader users to navigate between sections using heading keyboard shortcuts,Search engines can better understand the structure and topic of Version A's content because h1 through h6 have semantic meaning,Version B with large `<p>` text achieves the same SEO benefit as Version A with heading tags,A developer reading Version A's HTML code can understand the page's information hierarchy without a browser,,,,markdown,"**Option A — Correct:** `.classname { }` is the correct CSS syntax. The `.` prefix is what tells the browser ""look for elements with this value in their `class` attribute.""
+
+**Option B — Incorrect:** Classes do NOT have a uniqueness requirement. Any number of elements on a page can share the same class value. This is the entire point — classes enable styling a group of elements with one rule.
+
+**Option C — Correct:** Classes are tag-agnostic. A class like `.highlight` can be applied to a `<p>`, a `<div>`, a `<span>`, an `<li>`, or any other HTML element. The same CSS rule applies to all of them.
+
+**Option D — Correct:** This is the primary use case for class selectors — creating a named, reusable style that can be applied to any group of elements that should share that visual appearance.
+
+**Option E — Incorrect:** An element can have multiple classes. They are listed in the `class` attribute separated by spaces: `class=""task task-high featured""`. Each class in the list is applied independently.
+
+**Option F — Correct:** In HTML, `class=""class-name""` is how you assign a class to an element. The CSS selector `.class-name { }` matches elements where `class-name` is present in the `class` attribute.
+
+**Correct Answers: A, C, D, F**"
+subjective,markdown,"# Q2: Build a Simple Login Form
+
+## Problem Description
+
+Build the HTML structure for a login form without using a `<form>` wrapper.
+
+## Requirements
+
+Create the following input elements with appropriate attributes:
+
+1. An `<h2>` heading: `Sign in to Your Account`
+2. An email input with:
+   - `type=""email""`, `name=""email""`, `id=""login-email""`, `placeholder=""Email address""`, `required`
+3. A password input with:
+   - `type=""password""`, `name=""password""`, `id=""login-password""`, `placeholder=""Password""`, `required`
+4. A checkbox input for ""Remember me"":
+   - `type=""checkbox""`, `name=""remember""`, `id=""remember-me""`
+   - A `<label>` for the checkbox with `for=""remember-me""` and text: `Remember me on this device`
+5. A submit button:
+   - `type=""submit""`, `class=""btn btn-login""`, button text: `Sign In`
+6. An `<a>` link below the button:
+   - `href=""forgot-password.html""`, link text: `Forgot your password?`
+
+## Expected Output
+
+A login form with email field, password field, ""remember me"" checkbox with label, a sign-in button, and a forgot password link.
+
+## Difficulty
+Medium
+
+## Category
+Implementation
+
+## Type
+Coding",,,,,,,,,,,,,,,markdown,"Use `.task { }` for shared layout properties, then write separate rules for `.task-high`, `.task-medium`, and `.task-low` for the distinct border and background colors."
+subjective,markdown,A product manager describes features for a new e-learning platform. Select all features that REQUIRE user input HTML elements to function.,,,,,,,,"A ""Course Catalog"" page listing all available courses with descriptions and images",A search bar that allows users to filter courses by topic or difficulty level,A quiz system where users answer multiple-choice questions and receive a score,"An ""About the Instructor"" page with the instructor's bio and photo",,,,markdown,"**Option A — Correct:** `.classname { }` is the correct CSS syntax. The `.` prefix is what tells the browser ""look for elements with this value in their `class` attribute.""
+
+**Option B — Incorrect:** Classes do NOT have a uniqueness requirement. Any number of elements on a page can share the same class value. This is the entire point — classes enable styling a group of elements with one rule.
+
+**Option C — Correct:** Classes are tag-agnostic. A class like `.highlight` can be applied to a `<p>`, a `<div>`, a `<span>`, an `<li>`, or any other HTML element. The same CSS rule applies to all of them.
+
+**Option D — Correct:** This is the primary use case for class selectors — creating a named, reusable style that can be applied to any group of elements that should share that visual appearance.
+
+**Option E — Incorrect:** An element can have multiple classes. They are listed in the `class` attribute separated by spaces: `class=""task task-high featured""`. Each class in the list is applied independently.
+
+**Option F — Correct:** In HTML, `class=""class-name""` is how you assign a class to an element. The CSS selector `.class-name { }` matches elements where `class-name` is present in the `class` attribute.
+
+**Correct Answers: A, C, D, F**"
+subjective,markdown,Which of the following web pages would NOT require user input to function?,,,,,,,,An online banking dashboard showing your account balance and transactions,"A static company ""About Us"" page displaying team member bios",A product search page on an e-commerce site,A social media post creation feature,,,,markdown,"**Why A (`#`) is wrong:** The `#` prefix is used for ID selectors. `#hero { }` targets the element with `id=""hero""`. The `id` must be unique; the `#` selector is its counterpart in CSS.
+
+**Why B (`@`) is wrong:** The `@` symbol is reserved for CSS at-rules: `@media`, `@import`, `@keyframes`, `@font-face`, etc. These are not selectors — they are directives that configure CSS behavior.
+
+**Why C (`.`) is correct:** The dot is the class selector prefix. `.highlight { }` targets every element with `class=""highlight""` (or any element where `highlight` is one of the classes in the `class` attribute). This is the most commonly used selector type in practical CSS.
+
+**Why D (`~`) is wrong:** The tilde (`~`) is used in CSS as the general sibling combinator, which selects elements that share the same parent and follow a specified element. It is a combinator, not a prefix for attribute-based selectors.
+
+**Memory tip:** Class = `.` Think of ""dot com"" — `.com` is a domain. A class is like a category or domain that many elements can belong to."
+subjective,markdown,"# Q2 — Implementation Coding Task
+
+**Difficulty**: Medium
+**Type**: Coding
+**Category**: Implementation
+
+---
+
+## Question
+
+Create a simple web page that demonstrates the three methods of adding CSS. The page should have:
+1. An `<h1>` heading styled with **inline CSS** — color set to `crimson`
+2. A `<p>` paragraph styled with **internal CSS** (inside a `<style>` tag) — font-size set to `18px` and color set to `#444444`
+3. A `<div>` with the class `box` styled with **external CSS** in a file called `styles.css` — background-color set to `#f0f4f8`, padding `20px`, and a border of `2px solid #cccccc`
+
+Your submission should include both an `index.html` file and a `styles.css` file.
+
+---
+
+## Requirements
+
+- The HTML file must be valid and include `<!DOCTYPE html>`, `<html>`, `<head>`, and `<body>` tags.
+- The `<link>` tag for the external CSS file must be inside `<head>`.
+- All three styling methods must be present and visible in the rendered output.",,,,,,,,,,,,,,,markdown,"Use `.task { }` for shared layout properties, then write separate rules for `.task-high`, `.task-medium`, and `.task-low` for the distinct border and background colors."
+mcmc,markdown,"**Difficulty**: Medium
+**Type**: MSQ (Multiple Select Question)
+**Category**: Application
+
+---
+
+
+Which of the following are **true benefits** of using external CSS files over inline styles? Select ALL that apply.",,,,,,,,"External CSS files can be cached by the browser, improving page load speed on repeat visits.",External CSS allows you to change the appearance of an entire website by editing a single file.,External CSS makes the HTML file larger because it adds more code to it.,External CSS enables designers and developers to work on separate files simultaneously without conflict.,"1,2,4",,,markdown,"**Option A — Correct:** `.classname { }` is the correct CSS syntax. The `.` prefix is what tells the browser ""look for elements with this value in their `class` attribute.""
+
+**Option B — Incorrect:** Classes do NOT have a uniqueness requirement. Any number of elements on a page can share the same class value. This is the entire point — classes enable styling a group of elements with one rule.
+
+**Option C — Correct:** Classes are tag-agnostic. A class like `.highlight` can be applied to a `<p>`, a `<div>`, a `<span>`, an `<li>`, or any other HTML element. The same CSS rule applies to all of them.
+
+**Option D — Correct:** This is the primary use case for class selectors — creating a named, reusable style that can be applied to any group of elements that should share that visual appearance.
+
+**Option E — Incorrect:** An element can have multiple classes. They are listed in the `class` attribute separated by spaces: `class=""task task-high featured""`. Each class in the list is applied independently.
+
+**Option F — Correct:** In HTML, `class=""class-name""` is how you assign a class to an element. The CSS selector `.class-name { }` matches elements where `class-name` is present in the `class` attribute.
+
+**Correct Answers: A, C, D, F**"
+mcsc,markdown,"**Difficulty**: Low
+**Type**: MCQ
+**Category**: Knowledge
+
+---
+
+
+In what year was the first version of CSS (CSS1) officially published as a W3C recommendation?",,,,,,3,,1991,1994,1996,2001,,,,markdown,"**Why A (`#`) is wrong:** The `#` prefix is used for ID selectors. `#hero { }` targets the element with `id=""hero""`. The `id` must be unique; the `#` selector is its counterpart in CSS.
+
+**Why B (`@`) is wrong:** The `@` symbol is reserved for CSS at-rules: `@media`, `@import`, `@keyframes`, `@font-face`, etc. These are not selectors — they are directives that configure CSS behavior.
+
+**Why C (`.`) is correct:** The dot is the class selector prefix. `.highlight { }` targets every element with `class=""highlight""` (or any element where `highlight` is one of the classes in the `class` attribute). This is the most commonly used selector type in practical CSS.
+
+**Why D (`~`) is wrong:** The tilde (`~`) is used in CSS as the general sibling combinator, which selects elements that share the same parent and follow a specified element. It is a combinator, not a prefix for attribute-based selectors.
+
+**Memory tip:** Class = `.` Think of ""dot com"" — `.com` is a domain. A class is like a category or domain that many elements can belong to."
+mcsc,markdown,"**Difficulty**: Low
+**Type**: MCQ
+**Category**: Knowledge
+
+---
+
+
+What is the default value of `text-align` for paragraphs in a web page written in English (a left-to-right language)?",,,,,,4,,`center`,`justify`,`right`,`left`,,,,markdown,"**Why A (`#`) is wrong:** The `#` prefix is used for ID selectors. `#hero { }` targets the element with `id=""hero""`. The `id` must be unique; the `#` selector is its counterpart in CSS.
+
+**Why B (`@`) is wrong:** The `@` symbol is reserved for CSS at-rules: `@media`, `@import`, `@keyframes`, `@font-face`, etc. These are not selectors — they are directives that configure CSS behavior.
+
+**Why C (`.`) is correct:** The dot is the class selector prefix. `.highlight { }` targets every element with `class=""highlight""` (or any element where `highlight` is one of the classes in the `class` attribute). This is the most commonly used selector type in practical CSS.
+
+**Why D (`~`) is wrong:** The tilde (`~`) is used in CSS as the general sibling combinator, which selects elements that share the same parent and follow a specified element. It is a combinator, not a prefix for attribute-based selectors.
+
+**Memory tip:** Class = `.` Think of ""dot com"" — `.com` is a domain. A class is like a category or domain that many elements can belong to."
+mcmc,markdown,"**Difficulty**: Medium
+**Type**: MSQ (Multiple Select Question)
+**Category**: Application
+
+---
+
+
+A developer is building a restaurant website and writes the following CSS. Which statements about this code are **correct**? Select ALL that apply.
+
+```css
+.restaurant-header {
+  text-align: center;
+}
+
+.menu-section h2 {
+  text-align: left;
+}
+
+.menu-section p {
+  text-align: justify;
+}
+
+.price {
+  text-align: right;
+}
+
+footer p {
+  text-align: center;
+}
+```",,,,,,,,"The restaurant name (inside `.restaurant-header`) will be centered, along with any other text or inline elements placed inside that container.","`text-align: justify` on `.menu-section p` will center-align the paragraph text because ""justify"" means ""centered"" in design terminology.",The `.price` class applies `text-align: right` — appropriate for a price column because it makes numerical values align on their right edge for easy comparison.,"If an `<h3>` is added inside `.restaurant-header`, it will automatically be centered without needing its own `text-align` rule, because it inherits from `.restaurant-header`.","1,3,4",,,markdown,"**Option A — Correct:** `.classname { }` is the correct CSS syntax. The `.` prefix is what tells the browser ""look for elements with this value in their `class` attribute.""
+
+**Option B — Incorrect:** Classes do NOT have a uniqueness requirement. Any number of elements on a page can share the same class value. This is the entire point — classes enable styling a group of elements with one rule.
+
+**Option C — Correct:** Classes are tag-agnostic. A class like `.highlight` can be applied to a `<p>`, a `<div>`, a `<span>`, an `<li>`, or any other HTML element. The same CSS rule applies to all of them.
+
+**Option D — Correct:** This is the primary use case for class selectors — creating a named, reusable style that can be applied to any group of elements that should share that visual appearance.
+
+**Option E — Incorrect:** An element can have multiple classes. They are listed in the `class` attribute separated by spaces: `class=""task task-high featured""`. Each class in the list is applied independently.
+
+**Option F — Correct:** In HTML, `class=""class-name""` is how you assign a class to an element. The CSS selector `.class-name { }` matches elements where `class-name` is present in the `class` attribute.
+
+**Correct Answers: A, C, D, F**"
+subjective,markdown,"# Q2 — Implementation Coding Task
+
+**Difficulty**: Medium
+**Type**: Coding
+**Category**: Implementation
+
+---
+
+## Question
+
+Build a simple webpage layout that demonstrates all four `text-align` values in context. The page should contain:
+
+1. A `<header>` with an `<h1>` ""My Portfolio"" — center aligned
+2. A `<nav>` with a `<p>` containing navigation links ""Home | About | Work | Contact"" — right aligned
+3. A `<section class=""about"">` with:
+   - An `<h2>` ""About Me"" — left aligned
+   - A `<p>` with 2-3 sentences of bio text — justify aligned
+4. A `<div class=""stats"">` with a `<p>` showing ""Projects: 24 | Clients: 12 | Years: 3"" — right aligned
+5. A `<footer>` with `<p>` ""© 2025 My Portfolio. All rights reserved."" — center aligned
+
+Use an external `styles.css` file. Apply appropriate font, color, and basic spacing to make the page look presentable.",,,,,,,,,,,,,,,markdown,"Use `.task { }` for shared layout properties, then write separate rules for `.task-high`, `.task-medium`, and `.task-low` for the distinct border and background colors."
+mcmc,markdown,**Select ALL statements that correctly describe why CSS selectors are preferred over inline styles:**,,,,,,,,CSS selectors allow one rule to apply styles to multiple elements simultaneously.,Inline styles are easier to maintain when a design change affects many elements.,Using selectors in an external `.css` file allows multiple HTML pages to share the same styles.,Selectors help separate the structure of HTML from the visual presentation in CSS.,"1,3,4",,,markdown,"**Option A — Correct:** `.classname { }` is the correct CSS syntax. The `.` prefix is what tells the browser ""look for elements with this value in their `class` attribute.""
+
+**Option B — Incorrect:** Classes do NOT have a uniqueness requirement. Any number of elements on a page can share the same class value. This is the entire point — classes enable styling a group of elements with one rule.
+
+**Option C — Correct:** Classes are tag-agnostic. A class like `.highlight` can be applied to a `<p>`, a `<div>`, a `<span>`, an `<li>`, or any other HTML element. The same CSS rule applies to all of them.
+
+**Option D — Correct:** This is the primary use case for class selectors — creating a named, reusable style that can be applied to any group of elements that should share that visual appearance.
+
+**Option E — Incorrect:** An element can have multiple classes. They are listed in the `class` attribute separated by spaces: `class=""task task-high featured""`. Each class in the list is applied independently.
+
+**Option F — Correct:** In HTML, `class=""class-name""` is how you assign a class to an element. The CSS selector `.class-name { }` matches elements where `class-name` is present in the `class` attribute.
+
+**Correct Answers: A, C, D, F**"
+mcsc,markdown,What is the primary purpose of a CSS selector?,,,,,,2,,To define the structure of an HTML document,To specify which HTML elements a CSS rule should be applied to,To link JavaScript functions to HTML buttons,To set the title of a webpage,,,,markdown,"**Why A (`#`) is wrong:** The `#` prefix is used for ID selectors. `#hero { }` targets the element with `id=""hero""`. The `id` must be unique; the `#` selector is its counterpart in CSS.
+
+**Why B (`@`) is wrong:** The `@` symbol is reserved for CSS at-rules: `@media`, `@import`, `@keyframes`, `@font-face`, etc. These are not selectors — they are directives that configure CSS behavior.
+
+**Why C (`.`) is correct:** The dot is the class selector prefix. `.highlight { }` targets every element with `class=""highlight""` (or any element where `highlight` is one of the classes in the `class` attribute). This is the most commonly used selector type in practical CSS.
+
+**Why D (`~`) is wrong:** The tilde (`~`) is used in CSS as the general sibling combinator, which selects elements that share the same parent and follow a specified element. It is a combinator, not a prefix for attribute-based selectors.
+
+**Memory tip:** Class = `.` Think of ""dot com"" — `.com` is a domain. A class is like a category or domain that many elements can belong to."
+subjective,markdown,"# Q2 – Implementation Coding (Medium Difficulty)
+
+## Question
+
+**Task:** Convert the following inline-styled HTML to use an internal CSS stylesheet with a selector instead.
+
+**Starting code:**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Page</title>
+</head>
+<body>
+  <p style=""color: navy; font-size: 20px; line-height: 1.6;"">First paragraph.</p>
+  <p style=""color: navy; font-size: 20px; line-height: 1.6;"">Second paragraph.</p>
+  <p style=""color: navy; font-size: 20px; line-height: 1.6;"">Third paragraph.</p>
+</body>
+</html>
+```
+
+**Requirements:**
+1. Remove all `style` attributes from the `<p>` elements.
+2. Add a `<style>` block inside `<head>`.
+3. Write a CSS rule using a selector that applies the same styles to all three paragraphs.
+4. The visual result in the browser must be identical to the original.
+
+**Difficulty:** Medium
+**Type:** Coding
+**Category:** Implementation",,,,,,,,,,,,,,,markdown,"Use `.task { }` for shared layout properties, then write separate rules for `.task-high`, `.task-medium`, and `.task-low` for the distinct border and background colors."
+mcmc,markdown,"Given the following CSS:
+
+```css
+a {
+  color: purple;
+  text-decoration: underline;
+}
+```
+
+And the following HTML:
+
+```html
+<p>Visit our <a href=""#"">website</a> for more info.</p>
+<nav>
+  <a href=""#"">Home</a>
+  <a href=""#"">About</a>
+  <a href=""#"">Contact</a>
+</nav>
+<footer>
+  <a href=""#"">Privacy Policy</a>
+</footer>
+```
+
+**Select ALL true statements about what the CSS rule will do:**",,,,,,,,The link inside `<p>` will be styled purple with an underline.,"Only the links inside `<nav>` will be styled, because `a` only targets navigation links.",All five `<a>` elements on the page will be styled purple with an underline.,The link in `<footer>` will also be styled because the tag selector applies regardless of where the element is nested.,"1,3,4",,,markdown,"**Option A — Correct:** `.classname { }` is the correct CSS syntax. The `.` prefix is what tells the browser ""look for elements with this value in their `class` attribute.""
+
+**Option B — Incorrect:** Classes do NOT have a uniqueness requirement. Any number of elements on a page can share the same class value. This is the entire point — classes enable styling a group of elements with one rule.
+
+**Option C — Correct:** Classes are tag-agnostic. A class like `.highlight` can be applied to a `<p>`, a `<div>`, a `<span>`, an `<li>`, or any other HTML element. The same CSS rule applies to all of them.
+
+**Option D — Correct:** This is the primary use case for class selectors — creating a named, reusable style that can be applied to any group of elements that should share that visual appearance.
+
+**Option E — Incorrect:** An element can have multiple classes. They are listed in the `class` attribute separated by spaces: `class=""task task-high featured""`. Each class in the list is applied independently.
+
+**Option F — Correct:** In HTML, `class=""class-name""` is how you assign a class to an element. The CSS selector `.class-name { }` matches elements where `class-name` is present in the `class` attribute.
+
+**Correct Answers: A, C, D, F**"
+mcsc,markdown,What does a CSS tag selector use to identify which elements to style?,,,,,,3,,The element's `id` attribute value,The element's `class` attribute value,"The HTML tag name (e.g., `p`, `h1`, `a`)","The element's position in the page (first, second, third)",,,,markdown,"**Why A (`#`) is wrong:** The `#` prefix is used for ID selectors. `#hero { }` targets the element with `id=""hero""`. The `id` must be unique; the `#` selector is its counterpart in CSS.
+
+**Why B (`@`) is wrong:** The `@` symbol is reserved for CSS at-rules: `@media`, `@import`, `@keyframes`, `@font-face`, etc. These are not selectors — they are directives that configure CSS behavior.
+
+**Why C (`.`) is correct:** The dot is the class selector prefix. `.highlight { }` targets every element with `class=""highlight""` (or any element where `highlight` is one of the classes in the `class` attribute). This is the most commonly used selector type in practical CSS.
+
+**Why D (`~`) is wrong:** The tilde (`~`) is used in CSS as the general sibling combinator, which selects elements that share the same parent and follow a specified element. It is a combinator, not a prefix for attribute-based selectors.
+
+**Memory tip:** Class = `.` Think of ""dot com"" — `.com` is a domain. A class is like a category or domain that many elements can belong to."
+subjective,markdown,"# Q2 – Implementation Coding (Medium Difficulty)
+
+## Question
+
+Build a simple blog post page using HTML and style it entirely with tag selectors. Do not use any inline styles, class attributes, or ID attributes.
+
+**Requirements:**
+
+Create an HTML page that includes:
+- An `<h1>` with the text ""My Travel Blog""
+- Two `<h2>` elements (e.g., ""Day 1: Arrival"", ""Day 2: Exploration"")
+- Three `<p>` elements with placeholder text under the headings
+- A `<ul>` with at least 3 `<li>` items representing places visited
+
+Apply the following styles using tag selectors:
+- `body`: `font-family: Arial, sans-serif; margin: 40px;`
+- `h1`: `color: darkgreen; text-align: center; font-size: 40px;`
+- `h2`: `color: #2c5f2e; font-size: 24px; margin-top: 30px;`
+- `p`: `color: #444; font-size: 16px; line-height: 1.7;`
+- `ul`: `background-color: #f0f0f0; padding: 20px; border-radius: 6px;`
+- `li`: `color: #333; margin-bottom: 8px; font-size: 15px;`
+
+**Difficulty:** Medium
+**Type:** Coding
+**Category:** Implementation",,,,,,,,,,,,,,,markdown,"Use `.task { }` for shared layout properties, then write separate rules for `.task-high`, `.task-medium`, and `.task-low` for the distinct border and background colors."
+mcsc,markdown,What symbol is used in CSS to denote an ID selector?,,,,,,4,,`.` (dot),`*` (asterisk),`@` (at sign),`#` (hash),,,,markdown,"**Why A (`#`) is wrong:** The `#` prefix is used for ID selectors. `#hero { }` targets the element with `id=""hero""`. The `id` must be unique; the `#` selector is its counterpart in CSS.
+
+**Why B (`@`) is wrong:** The `@` symbol is reserved for CSS at-rules: `@media`, `@import`, `@keyframes`, `@font-face`, etc. These are not selectors — they are directives that configure CSS behavior.
+
+**Why C (`.`) is correct:** The dot is the class selector prefix. `.highlight { }` targets every element with `class=""highlight""` (or any element where `highlight` is one of the classes in the `class` attribute). This is the most commonly used selector type in practical CSS.
+
+**Why D (`~`) is wrong:** The tilde (`~`) is used in CSS as the general sibling combinator, which selects elements that share the same parent and follow a specified element. It is a combinator, not a prefix for attribute-based selectors.
+
+**Memory tip:** Class = `.` Think of ""dot com"" — `.com` is a domain. A class is like a category or domain that many elements can belong to."
+subjective,markdown,"# Q2 – Implementation Coding (Medium Difficulty)
+
+## Question
+
+Build a personal profile page using ID selectors to style each section uniquely.
+
+**Requirements:**
+
+Create an HTML page with the following structure and IDs:
+
+```html
+<div id=""profile-wrapper"">
+  <div id=""profile-header"">
+    <h1 id=""profile-name"">Alex Johnson</h1>
+    <p id=""profile-tagline"">Front-End Developer | UI Enthusiast</p>
+  </div>
+  <div id=""profile-bio"">
+    <p>I love building clean, accessible, and beautiful web experiences.</p>
+  </div>
+  <div id=""profile-skills"">
+    <h2>Skills</h2>
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+    </ul>
+  </div>
+</div>
+```
+
+Apply these styles using only ID selectors:
+
+- `#profile-wrapper`: `max-width: 600px; margin: 40px auto; font-family: Arial, sans-serif; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;`
+- `#profile-header`: `background-color: #1a1a2e; color: white; padding: 30px;`
+- `#profile-name`: `margin: 0; font-size: 28px;`
+- `#profile-tagline`: `margin: 6px 0 0; font-size: 14px; color: #aaa;`
+- `#profile-bio`: `padding: 20px 30px; background-color: #f9f9f9;`
+- `#profile-skills`: `padding: 20px 30px;`
+
+**Difficulty:** Medium
+**Type:** Coding
+**Category:** Implementation",,,,,,,,,,,,,,,markdown,"Use `.task { }` for shared layout properties, then write separate rules for `.task-high`, `.task-medium`, and `.task-low` for the distinct border and background colors."
+mcmc,markdown,**Select ALL statements that are TRUE about ID selectors:**,,,,,,,,An ID selector in CSS is written using the `#` prefix followed by the ID value.,"Multiple elements can share the same `id` attribute value, and the CSS will apply to all of them.","ID selectors target a single, unique element on the page.",The `id` attribute in HTML must match the ID name used in the CSS selector (without the `#`).,"1,3,4",,,markdown,"**Option A — Correct:** `.classname { }` is the correct CSS syntax. The `.` prefix is what tells the browser ""look for elements with this value in their `class` attribute.""
+
+**Option B — Incorrect:** Classes do NOT have a uniqueness requirement. Any number of elements on a page can share the same class value. This is the entire point — classes enable styling a group of elements with one rule.
+
+**Option C — Correct:** Classes are tag-agnostic. A class like `.highlight` can be applied to a `<p>`, a `<div>`, a `<span>`, an `<li>`, or any other HTML element. The same CSS rule applies to all of them.
+
+**Option D — Correct:** This is the primary use case for class selectors — creating a named, reusable style that can be applied to any group of elements that should share that visual appearance.
+
+**Option E — Incorrect:** An element can have multiple classes. They are listed in the `class` attribute separated by spaces: `class=""task task-high featured""`. Each class in the list is applied independently.
+
+**Option F — Correct:** In HTML, `class=""class-name""` is how you assign a class to an element. The CSS selector `.class-name { }` matches elements where `class-name` is present in the `class` attribute.
+
+**Correct Answers: A, C, D, F**"
+subjective,markdown,"# Q2 – Implementation Coding (Medium Difficulty)
+
+## Question
+
+Build a task list application UI using class selectors to differentiate tasks by priority level.
+
+**Requirements:**
+
+Create an HTML page with a list of tasks. Each `<li>` element represents a task. Assign classes to indicate priority:
+- `class=""task-high""` — red left border, light red background
+- `class=""task-medium""` — orange left border, light orange background
+- `class=""task-low""` — green left border, light green background
+
+**Base styles for all tasks (use a `.task` class on every `<li>`):**
+- `padding: 12px 16px`
+- `margin-bottom: 8px`
+- `border-radius: 4px`
+- `font-size: 15px`
+- `list-style: none`
+
+**Priority styles:**
+- `.task-high`: `border-left: 4px solid crimson; background-color: #fde8e8;`
+- `.task-medium`: `border-left: 4px solid darkorange; background-color: #fdf3e8;`
+- `.task-low`: `border-left: 4px solid green; background-color: #e8fde8;`
+
+**Sample tasks:**
+- ""Fix critical login bug"" (high)
+- ""Update documentation"" (low)
+- ""Review pull request"" (medium)
+- ""Patch security vulnerability"" (high)
+- ""Write unit tests"" (medium)
+
+**Difficulty:** Medium
+**Type:** Coding
+**Category:** Implementation",,,,,,,,,,,,,,,markdown,"Use `.task { }` for shared layout properties, then write separate rules for `.task-high`, `.task-medium`, and `.task-low` for the distinct border and background colors."
+mcsc,markdown,Which symbol is used in CSS to write a class selector?,,,,,,3,,`#`,`@`,`.`,`~`,,,,markdown,"**Why A (`#`) is wrong:** The `#` prefix is used for ID selectors. `#hero { }` targets the element with `id=""hero""`. The `id` must be unique; the `#` selector is its counterpart in CSS.
+
+**Why B (`@`) is wrong:** The `@` symbol is reserved for CSS at-rules: `@media`, `@import`, `@keyframes`, `@font-face`, etc. These are not selectors — they are directives that configure CSS behavior.
+
+**Why C (`.`) is correct:** The dot is the class selector prefix. `.highlight { }` targets every element with `class=""highlight""` (or any element where `highlight` is one of the classes in the `class` attribute). This is the most commonly used selector type in practical CSS.
+
+**Why D (`~`) is wrong:** The tilde (`~`) is used in CSS as the general sibling combinator, which selects elements that share the same parent and follow a specified element. It is a combinator, not a prefix for attribute-based selectors.
+
+**Memory tip:** Class = `.` Think of ""dot com"" — `.com` is a domain. A class is like a category or domain that many elements can belong to."
+mcmc,markdown,**Select ALL true statements about CSS class selectors:**,,,,,,,,A class selector in CSS begins with a `.` (dot) character.,Only one HTML element per page can use a given class value.,"The same class can be applied to elements of different tag types (e.g., `<p>`, `<div>`, `<span>`).",Class selectors are ideal for styling a group of elements that share a common visual style.,"1,3,4",,,markdown,"**Option A — Correct:** `.classname { }` is the correct CSS syntax. The `.` prefix is what tells the browser ""look for elements with this value in their `class` attribute.""
+
+**Option B — Incorrect:** Classes do NOT have a uniqueness requirement. Any number of elements on a page can share the same class value. This is the entire point — classes enable styling a group of elements with one rule.
+
+**Option C — Correct:** Classes are tag-agnostic. A class like `.highlight` can be applied to a `<p>`, a `<div>`, a `<span>`, an `<li>`, or any other HTML element. The same CSS rule applies to all of them.
+
+**Option D — Correct:** This is the primary use case for class selectors — creating a named, reusable style that can be applied to any group of elements that should share that visual appearance.
+
+**Option E — Incorrect:** An element can have multiple classes. They are listed in the `class` attribute separated by spaces: `class=""task task-high featured""`. Each class in the list is applied independently.
+
+**Option F — Correct:** In HTML, `class=""class-name""` is how you assign a class to an element. The CSS selector `.class-name { }` matches elements where `class-name` is present in the `class` attribute.
+
+**Correct Answers: A, C, D, F**"
