@@ -1,0 +1,19 @@
+questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
+
+mcsc,markdown,"Which part of the CSS box model is always transparent and creates space between elements?",4,60,,,,,,"Content","Padding","Border","Margin",,,easy,markdown,"Margin is always transparent and creates space outside the element."
+
+mcsc,markdown,"What does the 'box-sizing: border-box' property do?",2,60,,,,,,"Adds margin to width","Includes padding and border inside width","Removes border","Expands content size",,,medium,markdown,"border-box ensures total width includes padding and border."
+
+mcsc,markdown,"Which property is best used when you want an element to grow with content instead of fixing its height?",3,60,,,,,,"height","width","min-height","max-width",,,easy,markdown,"min-height allows flexible growth based on content."
+
+mcmc,markdown,"Which of the following are characteristics of block elements? Select ALL that apply.",,90,,,,,,"Take full width","Start on new line","Ignore height property","Respect margin and padding","1,2,4",,medium,markdown,"Block elements take full width, start new line, and respect spacing properties."
+
+mcsc,markdown,"Which of the following statements correctly differentiates padding and margin?",1,60,,,,,,"Padding is inside, margin is outside","Margin is inside, padding is outside","Both are outside","Both are inside",,,easy,markdown,"Padding is inside the border; margin is outside."
+
+mcsc,markdown,"What is the purpose of media queries in CSS?",3,60,,,,,,"To define HTML structure","To store data","To apply styles based on screen size","To execute JavaScript",,,easy,markdown,"Media queries enable responsive design by adapting styles."
+
+mcmc,markdown,"Which statements about media queries are correct? Select ALL that apply.",,90,,,,,,"They act like if conditions","They apply styles conditionally","They only work for desktop","They respond to screen size changes","1,2,4",,medium,markdown,"Media queries evaluate conditions and apply styles dynamically."
+
+mcsc,markdown,"Which CSS position value keeps an element fixed relative to the viewport?",4,60,,,,,,"relative","absolute","sticky","fixed",,,easy,markdown,"fixed positioning keeps element attached to viewport even on scroll."
+
+subjective,markdown,"Build a responsive layout using CSS:\n1. Create a card component using box model (padding, border, margin)\n2. Apply box-sizing: border-box\n3. Use media queries to change layout:\n   - Mobile: stacked layout\n   - Tablet: two columns\n   - Desktop: centered layout with max-width\n4. Add a fixed button at bottom-right using position property",,300,,,,,,,,,,,medium,markdown,"Tests understanding of box model, responsive design, and positioning together."
