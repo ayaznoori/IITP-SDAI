@@ -1,19 +1,61 @@
 questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
 
-mcsc,markdown,"Which part of the CSS box model is always transparent and creates space between elements?",4,60,,,,,,"Content","Padding","Border","Margin",,,easy,markdown,"Margin is always transparent and creates space outside the element."
+mcsc,markdown,"You have many HTML pages that should all use the **same** colors and fonts. What is usually the **best** way to write CSS?",3,60,,,,,,"Put `style=""...""` on every element","Put CSS only inside one page’s `<style>` tag","Use **one external** `.css` file and link it from each page","Do not use CSS files",,,easy,markdown,"Correct answer: C"
 
-mcsc,markdown,"What does the 'box-sizing: border-box' property do?",2,60,,,,,,"Adds margin to width","Includes padding and border inside width","Removes border","Expands content size",,,medium,markdown,"border-box ensures total width includes padding and border."
+mcsc,markdown,"Which CSS selector selects **every** `<h2>` on the page?",3,60,,,,,,"`#h2`","`.h2`","`h2`","`*h2`",,,easy,markdown,"Correct answer: C"
 
-mcsc,markdown,"Which property is best used when you want an element to grow with content instead of fixing its height?",3,60,,,,,,"height","width","min-height","max-width",,,easy,markdown,"min-height allows flexible growth based on content."
+mcsc,markdown,"You have **five** product cards that should look the same. What do you put in the HTML?",2,60,,,,,,"The same `id` on all five (e.g. `id=""card""`)","The same **`class`** on all five (e.g. `class=""card""`)","Only inline styles on the first card","Five different tag names",,,easy,markdown,"Correct answer: B"
 
-mcmc,markdown,"Which of the following are characteristics of block elements? Select ALL that apply.",,90,,,,,,"Take full width","Start on new line","Ignore height property","Respect margin and padding","1,2,4",,medium,markdown,"Block elements take full width, start new line, and respect spacing properties."
+mcsc,markdown,"Which HTML matches this CSS: `.sale { color: red; }`?",2,60,,,,,,"`<p id=""sale"">Text</p>`","`<p class=""sale"">Text</p>`","`<p sale>Text</p>`","`<sale>Text</sale>`",,,easy,markdown,"Correct answer: B"
 
-mcsc,markdown,"Which of the following statements correctly differentiates padding and margin?",1,60,,,,,,"Padding is inside, margin is outside","Margin is inside, padding is outside","Both are outside","Both are inside",,,easy,markdown,"Padding is inside the border; margin is outside."
+mcsc,markdown,"A `<p>` has `style=""color: red;""` **and** your `style.css` has `p { color: blue; }`. What color is that paragraph? *(Use the simple rule from class: inline vs external.)*",2,60,,,,,,"Blue","Red","Both at once","Black only",,,medium,markdown,"Correct answer: B"
 
-mcsc,markdown,"What is the purpose of media queries in CSS?",3,60,,,,,,"To define HTML structure","To store data","To apply styles based on screen size","To execute JavaScript",,,easy,markdown,"Media queries enable responsive design by adapting styles."
+mcsc,markdown,"In the box model, the space **between the content and the border** is called:",2,60,,,,,,"Margin","Padding","Width","Border",,,easy,markdown,"Correct answer: B"
 
-mcmc,markdown,"Which statements about media queries are correct? Select ALL that apply.",,90,,,,,,"They act like if conditions","They apply styles conditionally","They only work for desktop","They respond to screen size changes","1,2,4",,medium,markdown,"Media queries evaluate conditions and apply styles dynamically."
+mcsc,markdown,"**Margin** is best described as:",2,60,,,,,,"Space **inside** the box, around the text","Space **outside** the box, between this element and others","The line around the box","The text inside the box",,,easy,markdown,"Correct answer: B"
 
-mcsc,markdown,"Which CSS position value keeps an element fixed relative to the viewport?",4,60,,,,,,"relative","absolute","sticky","fixed",,,easy,markdown,"fixed positioning keeps element attached to viewport even on scroll."
+mcsc,markdown,"**Padding** is best described as:",2,60,,,,,,"Space **outside** the border","Space **inside** the border, around the content","The same as margin","Only the text itself",,,easy,markdown,"Correct answer: B"
 
-subjective,markdown,"Build a responsive layout using CSS:\n1. Create a card component using box model (padding, border, margin)\n2. Apply box-sizing: border-box\n3. Use media queries to change layout:\n   - Mobile: stacked layout\n   - Tablet: two columns\n   - Desktop: centered layout with max-width\n4. Add a fixed button at bottom-right using position property",,300,,,,,,,,,,,medium,markdown,"Tests understanding of box model, responsive design, and positioning together."
+subjective,markdown,"### Task: refactor messy cards + build `styles.css`
+
+You are given **broken** HTML below. It uses **inline styles** and **wrong** use of `id`. Your job is to **fix it** and supply a **separate** stylesheet.
+
+**Requirements (checklist — your solution must satisfy all):**
+
+1. Remove **all** `style=""...""` attributes from the three boxes.  
+2. Use **one class** named **`card`** on all three `<div>`s (same class, not the same `id`).  
+3. Only **one** `<div>` may keep a **unique** `id`: change the middle box to `id=""featured-card""` (the other two have **no** `id`).  
+4. Create **`styles.css`** linked with `<link rel=""stylesheet"" href=""styles.css"">` inside `<head>`.  
+5. In **`styles.css`**, style **`.card`** so every card has:
+   - `background-color: #e3f2fd;`  
+   - `padding: 18px;`  
+   - `margin-bottom: 14px;`  
+   - `border: 2px solid #1565c0;`  
+   - `max-width: 320px;`  
+6. Style **`#featured-card`** so **only the middle** card gets **`border: 4px solid #ff6f00;`** (keep other `.card` rules still applying where they don’t conflict — you may override only the border width/color on the featured one).
+
+**Starting HTML (copy and fix this):**
+
+```html
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <title>Cards</title>
+  <!-- TODO: link styles.css here -->
+</head>
+<body>
+  <h2>Our services</h2>
+
+  <div id=""card"" style=""background: yellow; padding: 10px;"">
+    <p>Design</p>
+  </div>
+  <div id=""card"" style=""background: yellow; padding: 10px;"">
+    <p>Development</p>
+  </div>
+  <div id=""card"" style=""background: yellow; padding: 10px;"">
+    <p>Support</p>
+  </div>
+</body>
+</html>
+```",,300,,,,,,,,,,,medium,markdown,"Matches original practical task exactly."
