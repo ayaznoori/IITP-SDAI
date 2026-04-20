@@ -1,6 +1,5 @@
 
-# Module 1: Mastering File Handling & Exception Handling
-`Student_Guide_File_Exceptions.md`
+# File Operations and Exception Handling
 
 ## 1. File Handling: The Persistence Layer
 ### What is it?
