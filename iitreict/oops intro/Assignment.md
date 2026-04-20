@@ -32,7 +32,7 @@
 **4. Which special method is used to initialize an object's data when it is first created?**
 - A) `__start__`
 - B) `__init__`
-- C) `__new__`
+- C) `__str__`
 - D) `__create__`
 **Correct Option: B**
 
