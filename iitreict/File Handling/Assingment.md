@@ -20,7 +20,7 @@
 
 ---
 
-**3. In the Python Box Model of file handling, which method is used to move the file cursor to a specific position?**
+**3. Which method is used to move the file cursor to a specific position?**
 - A) `tell()`
 - B) `move()`
 - C) `locate()`
