@@ -1,61 +1,45 @@
 questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
 
-mcsc,markdown,"You have many HTML pages that should all use the **same** colors and fonts. What is usually the **best** way to write CSS?",3,60,,,,,,"Put `style=""...""` on every element","Put CSS only inside one page’s `<style>` tag","Use **one external** `.css` file and link it from each page","Do not use CSS files",,,easy,markdown,"Correct answer: C"
+mcsc,markdown,"Which mode should be used to add new data to the end of an existing text file without deleting its current content?",3,60,,,,,,"`r`","`w`","`a`","`r+`",,,easy,markdown,"Correct Option: C"
 
-mcsc,markdown,"Which CSS selector selects **every** `<h2>` on the page?",3,60,,,,,,"`#h2`","`.h2`","`h2`","`*h2`",,,easy,markdown,"Correct answer: C"
+mcsc,markdown,"What happens if you try to open a non-existent file in `r` (read) mode?",2,60,,,,,,"A new file is automatically created.","The program crashes with a `FileNotFoundError`.","The file opens as an empty object.","Python ignores the command and moves to the next line.",,,easy,markdown,"Correct Option: B"
 
-mcsc,markdown,"You have **five** product cards that should look the same. What do you put in the HTML?",2,60,,,,,,"The same `id` on all five (e.g. `id=""card""`)","The same **`class`** on all five (e.g. `class=""card""`)","Only inline styles on the first card","Five different tag names",,,easy,markdown,"Correct answer: B"
+mcsc,markdown,"In the Python Box Model of file handling, which method is used to move the file cursor to a specific position?",4,60,,,,,,"`tell()`","`move()`","`locate()`","`seek()`",,,medium,markdown,"Correct Option: D"
 
-mcsc,markdown,"Which HTML matches this CSS: `.sale { color: red; }`?",2,60,,,,,,"`<p id=""sale"">Text</p>`","`<p class=""sale"">Text</p>`","`<p sale>Text</p>`","`<sale>Text</sale>`",,,easy,markdown,"Correct answer: B"
+mcsc,markdown,"Which block in an exception handling construct is guaranteed to execute regardless of whether an error occurred or not?",3,60,,,,,,"`try`","`except`","`finally`","`else`",,,easy,markdown,"Correct Option: C"
 
-mcsc,markdown,"A `<p>` has `style=""color: red;""` **and** your `style.css` has `p { color: blue; }`. What color is that paragraph? *(Use the simple rule from class: inline vs external.)*",2,60,,,,,,"Blue","Red","Both at once","Black only",,,medium,markdown,"Correct answer: B"
+mcsc,markdown,"What is the main difference between a Syntax Error and a Runtime Error?",2,60,,,,,,"Syntax errors are logical; Runtime errors are grammatical.","Syntax errors are caught before execution; Runtime errors occur during execution.","Syntax errors can be handled with `try-except`; Runtime errors cannot.","There is no difference; both crash the program the same way.",,,medium,markdown,"Correct Option: B"
 
-mcsc,markdown,"In the box model, the space **between the content and the border** is called:",2,60,,,,,,"Margin","Padding","Width","Border",,,easy,markdown,"Correct answer: B"
+mcsc,markdown,"Which statement is used to manually trigger an exception for business logic validation (e.g., checking if a user's age is below 18)?",3,60,,,,,,"`throw`","`error`","`raise`","`except`",,,easy,markdown,"Correct Option: C"
 
-mcsc,markdown,"**Margin** is best described as:",2,60,,,,,,"Space **inside** the box, around the text","Space **outside** the box, between this element and others","The line around the box","The text inside the box",,,easy,markdown,"Correct answer: B"
+mcsc,markdown,"Why is it considered ""Defensive Programming"" to use `for line in f:` when reading large files?",3,60,,,,,,"It encrypts the data for security.","It prevents `SyntaxError`.","It is more memory-efficient than reading the whole file at once.","It automatically handles `ZeroDivisionError`.",,,medium,markdown,"Correct Option: C"
 
-mcsc,markdown,"**Padding** is best described as:",2,60,,,,,,"Space **outside** the border","Space **inside** the border, around the content","The same as margin","Only the text itself",,,easy,markdown,"Correct answer: B"
+mcsc,markdown,"When using multiple `except` blocks, which exception would catch an error caused by trying to access a dictionary key that doesn't exist?",2,60,,,,,,"`ValueError`","`KeyError`","`IndexError`","`NameError`",,,easy,markdown,"Correct Option: B"
 
-subjective,markdown,"### Task: refactor messy cards + build `styles.css`
+subjective,markdown,"### Task: Robust Log File Processor
 
-You are given **broken** HTML below. It uses **inline styles** and **wrong** use of `id`. Your job is to **fix it** and supply a **separate** stylesheet.
+**Scenario:**
+You are building a system that reads a list of numbers from a file named `data.txt`, calculates their reciprocal ($1/x$), and writes the results to a new file named `results.txt`. You must ensure the program does not crash even if the input file is missing or contains invalid data (like zeros or text).
 
-**Requirements (checklist — your solution must satisfy all):**
+**Requirements:**
+1. **File Input:** Open `data.txt` in read mode. Use exception handling to catch a `FileNotFoundError` and print a user-friendly message if it doesn't exist.
+2. **Processing:**
+   - Read the file line by line.
+   - Convert each line to an integer. Handle `ValueError` if a line contains a string or non-numeric character.
+   - Calculate $1$ divided by that number. Handle `ZeroDivisionError` if a line contains $0$.
+3. **File Output:** Append the valid results to `results.txt`. 
+4. **Cleanup:** Use a `finally` block to ensure that all open file objects are properly closed, regardless of any errors encountered during processing.
+5. **Custom Validation:** Use the `raise` keyword to trigger an exception if a number in the file is negative, as your system only supports positive values.
 
-1. Remove **all** `style=""...""` attributes from the three boxes.  
-2. Use **one class** named **`card`** on all three `<div>`s (same class, not the same `id`).  
-3. Only **one** `<div>` may keep a **unique** `id`: change the middle box to `id=""featured-card""` (the other two have **no** `id`).  
-4. Create **`styles.css`** linked with `<link rel=""stylesheet"" href=""styles.css"">` inside `<head>`.  
-5. In **`styles.css`**, style **`.card`** so every card has:
-   - `background-color: #e3f2fd;`  
-   - `padding: 18px;`  
-   - `margin-bottom: 14px;`  
-   - `border: 2px solid #1565c0;`  
-   - `max-width: 320px;`  
-6. Style **`#featured-card`** so **only the middle** card gets **`border: 4px solid #ff6f00;`** (keep other `.card` rules still applying where they don’t conflict — you may override only the border width/color on the featured one).
-
-**Starting HTML (copy and fix this):**
-
-```html
-<!DOCTYPE html>
-<html lang=""en"">
-<head>
-  <meta charset=""UTF-8"">
-  <title>Cards</title>
-  <!-- TODO: link styles.css here -->
-</head>
-<body>
-  <h2>Our services</h2>
-
-  <div id=""card"" style=""background: yellow; padding: 10px;"">
-    <p>Design</p>
-  </div>
-  <div id=""card"" style=""background: yellow; padding: 10px;"">
-    <p>Development</p>
-  </div>
-  <div id=""card"" style=""background: yellow; padding: 10px;"">
-    <p>Support</p>
-  </div>
-</body>
-</html>
-```",,300,,,,,,,,,,,medium,markdown,"Matches original practical task exactly."
+### Submission Guidelines:
+- **File Name:** Submit your solution as `file_handler_task.py`.
+- **Code Structure:** Ensure your code is modular. Use a clear `try-except-else-finally` structure.
+- **Comments:** Include comments explaining which specific exception is being handled in each `except` block.
+- **Verification:** Create a dummy `data.txt` with the following content to test your code:
+  ```text
+  10
+  0
+  abc
+  -5
+  20
+  ```",,300,,,,,,,,,,,hard,markdown,"Matches original question exactly"

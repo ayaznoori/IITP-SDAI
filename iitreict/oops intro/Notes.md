@@ -1,6 +1,5 @@
 
-# Module 2: Basic Object-Oriented Programming (OOP)
-`Student_Guide_Basic_OOP.md`
+# Introduction to Object-Oriented Programming
 
 ## 1. Class vs. Object: The Architect's Vision
 ### What is it?
