@@ -56,12 +56,17 @@
 
 ---
 
-**7. Why is it considered "Defensive Programming" to use `for line in f:` when reading large files?**
-- A) It encrypts the data for security.
-- B) It prevents `SyntaxError`.
-- C) It is more memory-efficient than reading the whole file at once.
-- D) It automatically handles `ZeroDivisionError`.
-**Correct Option: C**
+When using the syntax for line in f:, how does Python process the file?
+
+A) It reads the entire file into a single long string at once.
+
+B) It reads the file line-by-line, allowing for string-level operations like find and replace.
+
+C) It skips every other line to save time.
+
+D) It automatically converts the text into a list of integers.
+
+Correct Option: B
 
 ---
 
