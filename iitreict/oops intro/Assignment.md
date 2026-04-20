@@ -20,7 +20,7 @@
 
 ---
 
-**3. What does the `self` keyword represent?**
+**3. What does the `self` parameter (by convention, the first parameter of an instance method) represent?**
 - A) The Python interpreter.
 - B) The next object to be created.
 - C) The current instance of the object calling the method.
@@ -71,6 +71,24 @@
 - C) `student1.name`
 - D) `student1(name)`
 **Correct Option: C**
+
+---
+
+**9. A variable is defined directly in the class body (not as `self.something` inside `__init__`). Another variable is assigned only inside `__init__` as `self.student_id`. Which pair best describes them?**
+- A) Both are class variables.
+- B) Both are instance variables.
+- C) The one in the class body is typically a **class variable** (shared); `self.student_id` is an **instance variable** (per object).
+- D) The one in the class body cannot be read from an instance.
+**Correct Option: C**
+
+---
+
+**10. What does `id(obj)` return?**
+- A) The name of the object's class as a string.
+- B) An integer identifier for that object while it exists (in CPython, often related to its memory address).
+- C) The same value as `self` inside a method.
+- D) Always `0` for newly created objects.
+**Correct Option: B**
 
 ---
 

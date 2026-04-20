@@ -1,45 +1,36 @@
 questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
 
-mcsc,markdown,"Which mode should be used to add new data to the end of an existing text file without deleting its current content?",3,60,,,,,,"`r`","`w`","`a`","`r+`",,,easy,markdown,"Correct Option: C"
+mcsc,markdown,"A ""Class"" is best described as:",2,60,,,,,,"A physical folder on your hard drive.","A blueprint or skeleton that defines attributes and behaviors.","A specific person like ""Alice"" or ""Bob.""","A list of numbers.",,,easy,markdown,"Correct Option: B"
 
-mcsc,markdown,"What happens if you try to open a non-existent file in `r` (read) mode?",2,60,,,,,,"A new file is automatically created.","The program crashes with a `FileNotFoundError`.","The file opens as an empty object.","Python ignores the command and moves to the next line.",,,easy,markdown,"Correct Option: B"
+mcsc,markdown,"What is an ""Object"" in the context of OOP?",3,60,,,,,,"The code written inside the editor.","An error message.","A real, concrete instance created from a class blueprint.","A type of loop.",,,easy,markdown,"Correct Option: C"
 
-mcsc,markdown,"In the Python Box Model of file handling, which method is used to move the file cursor to a specific position?",4,60,,,,,,"`tell()`","`move()`","`locate()`","`seek()`",,,medium,markdown,"Correct Option: D"
+mcsc,markdown,"What does the `self` keyword represent?",3,60,,,,,,"The Python interpreter.","The next object to be created.","The current instance of the object calling the method.","A private variable that cannot be changed.",,,medium,markdown,"Correct Option: C"
 
-mcsc,markdown,"Which block in an exception handling construct is guaranteed to execute regardless of whether an error occurred or not?",3,60,,,,,,"`try`","`except`","`finally`","`else`",,,easy,markdown,"Correct Option: C"
+mcsc,markdown,"Which special method is used to initialize an object's data when it is first created?",2,60,,,,,,"`__start__`","`__init__`","`__str__`","`__create__`",,,easy,markdown,"Correct Option: B"
 
-mcsc,markdown,"What is the main difference between a Syntax Error and a Runtime Error?",2,60,,,,,,"Syntax errors are logical; Runtime errors are grammatical.","Syntax errors are caught before execution; Runtime errors occur during execution.","Syntax errors can be handled with `try-except`; Runtime errors cannot.","There is no difference; both crash the program the same way.",,,medium,markdown,"Correct Option: B"
+mcsc,markdown,"If you have a class `Person` and you want to create an instance of it named `p1`, which syntax is correct?",3,60,,,,,,"`p1 = new Person()`","`p1 = Person`","`p1 = Person()`","`create p1 as Person`",,,easy,markdown,"Correct Option: C"
 
-mcsc,markdown,"Which statement is used to manually trigger an exception for business logic validation (e.g., checking if a user's age is below 18)?",3,60,,,,,,"`throw`","`error`","`raise`","`except`",,,easy,markdown,"Correct Option: C"
+mcsc,markdown,"What is ""Encapsulation""?",2,60,,,,,,"Running code line-by-line.","Bundling data (attributes) and methods (functions) together into a class.","Deleting old variables to save memory.","Importing external libraries.",,,medium,markdown,"Correct Option: B"
 
-mcsc,markdown,"Why is it considered ""Defensive Programming"" to use `for line in f:` when reading large files?",3,60,,,,,,"It encrypts the data for security.","It prevents `SyntaxError`.","It is more memory-efficient than reading the whole file at once.","It automatically handles `ZeroDivisionError`.",,,medium,markdown,"Correct Option: C"
+mcsc,markdown,"Which of these is an example of an ""Attribute"" for a `Car` class?",3,60,,,,,,"`drive()`","`stop()`","`color`","`park()`",,,easy,markdown,"Correct Option: C"
 
-mcsc,markdown,"When using multiple `except` blocks, which exception would catch an error caused by trying to access a dictionary key that doesn't exist?",2,60,,,,,,"`ValueError`","`KeyError`","`IndexError`","`NameError`",,,easy,markdown,"Correct Option: B"
+mcsc,markdown,"How do you access an attribute called `name` on an object named `student1`?",3,60,,,,,,"`student1->name`","`student1[name]`","`student1.name`","`student1(name)`",,,easy,markdown,"Correct Option: C"
 
-subjective,markdown,"### Task: Robust Log File Processor
+subjective,markdown,"### Task: Simple Student Management System
 
 **Scenario:**
-You are building a system that reads a list of numbers from a file named `data.txt`, calculates their reciprocal ($1/x$), and writes the results to a new file named `results.txt`. You must ensure the program does not crash even if the input file is missing or contains invalid data (like zeros or text).
+You need to organize student data. Instead of using separate lists for names and ages, you will create a `Student` blueprint to keep the data bundled together.
 
 **Requirements:**
-1. **File Input:** Open `data.txt` in read mode. Use exception handling to catch a `FileNotFoundError` and print a user-friendly message if it doesn't exist.
-2. **Processing:**
-   - Read the file line by line.
-   - Convert each line to an integer. Handle `ValueError` if a line contains a string or non-numeric character.
-   - Calculate $1$ divided by that number. Handle `ZeroDivisionError` if a line contains $0$.
-3. **File Output:** Append the valid results to `results.txt`. 
-4. **Cleanup:** Use a `finally` block to ensure that all open file objects are properly closed, regardless of any errors encountered during processing.
-5. **Custom Validation:** Use the `raise` keyword to trigger an exception if a number in the file is negative, as your system only supports positive values.
+1. **Define a Class:** Create a class named `Student`.
+2. **Constructor:** Create an `__init__` method that accepts `name` and `grade`. Assign these to `self.name` and `self.grade`.
+3. **Display Method:** Create a method named `show_details` that prints: ""Student: [name], Grade: [grade]"".
+4. **Logic:**
+   - Create two different objects (e.g., `s1` and `s2`) with different names and grades.
+   - Call the `show_details()` method for both objects to verify the data is stored correctly.
+5. **Bonus Logic:** Create a method named `is_passing()` that returns `True` if the grade is 40 or higher, and `False` otherwise.
 
 ### Submission Guidelines:
-- **File Name:** Submit your solution as `file_handler_task.py`.
-- **Code Structure:** Ensure your code is modular. Use a clear `try-except-else-finally` structure.
-- **Comments:** Include comments explaining which specific exception is being handled in each `except` block.
-- **Verification:** Create a dummy `data.txt` with the following content to test your code:
-  ```text
-  10
-  0
-  abc
-  -5
-  20
-  ```",,300,,,,,,,,,,,hard,markdown,"Matches original question exactly"
+- **File Name:** `basic_oop.py`.
+- **Code Structure:** Keep it simple. Define the class at the top and the object creation at the bottom.
+- **Comments:** Label your **Class**, your **Attributes**, and your **Methods**.",,300,,,,,,,,,,,medium,markdown,"Matches original question exactly"

@@ -1,5 +1,16 @@
 # Introduction to Object-Oriented Programming
 
+## 0. The Four Pillars of OOP (Theory)
+Object-oriented programming is often summarized around four ideas:
+* **Data abstraction** — Work with meaningful types and interfaces, not raw scattered data.
+* **Encapsulation** — Keep data and the methods that use it **together** in one class (see Section 3).
+* **Inheritance** — Derive new classes from existing ones (covered in later sessions).
+* **Polymorphism** — The same interface (e.g. a method name) can behave differently for different types (covered later).
+
+This set gives the **theoretical foundation** for why OOP is structured the way it is.
+
+---
+
 ## 1. Class vs. Object: The Architect's Vision
 ### What is it?
 * **Class:** A user-defined data type. It is the **Blueprint**.
@@ -15,13 +26,27 @@ The **Class** is the blueprints for a 3-bedroom house. The **Object** is the act
 
 ---
 
-## 2. Constructors (`__init__`) and the `self` Mystery
+## 2. Constructors (`__init__`) and the `self` Convention
 ### What is it?
 * **`__init__`**: The "Birth" of an object. It runs the moment you call `ClassName()`.
-* **`self`**: The **reference to the current instance**—the particular object whose method is running. Python passes it automatically as the first argument of normal instance methods. (If you need a numeric identity for debugging, use `id(some_object)`; that is different from `self`.)
+* **`self`**: The **first parameter of an instance method**, bound to the **object instance** whose method was called. In practice it behaves like a **reference** to that object (in CPython you can think of it as tied to the object's identity in memory). The **`id()`** built-in returns a separate numeric identifier for an object—do **not** confuse `id(obj)` with `self`.
+* **`self` is not a Python keyword.** It is only a **naming convention**; you *could* name the first parameter something else, but everyone uses `self` so code stays readable.
 
 ### Why do we need it?
 Without `self`, Python wouldn't know which data belongs to whom. If you have two `Dog` objects, `self` ensures that when you call `bark()`, the correct dog's name is printed.
+
+### Default parameters in `__init__` (and any function)
+Parameters **without** default values must come **before** parameters **with** defaults. Otherwise Python raises a **`SyntaxError`**.
+
+```python
+# Valid
+def __init__(self, name, grade=0):
+    ...
+
+# Invalid — SyntaxError
+def __init__(self, grade=0, name):
+    ...
+```
 
 ### Working Example: The "Game Character"
 ```python
@@ -44,16 +69,20 @@ warrior.take_damage(20) # Only Aragon's health drops, Gandalf stays at 60.
 
 ---
 
-## 3. Encapsulation: The "Black Box" Principle
+## 3. Encapsulation: Bundling Data and Methods
 ### What is it?
-Encapsulation is the practice of **hiding the internal workings** of an object and only exposing what is necessary. It also means **bundling** data (attributes) and the methods that work on that data into one class.
+**Encapsulation** means **bundling** data (attributes) and the methods (functions) that operate on that data **inside one class**—"mixing all those things together" into a single unit.
+
+### How this relates to "hiding" and abstraction
+When you use a class, you often interact through a small **interface** (the methods you call). The **internal** details can stay private or at least organized inside the class. That **black-box** / information-hiding style is a **benefit** that builds on encapsulation and overlaps with **data abstraction**; it is **not** a separate replacement for the definition above. **Hiding alone** (without bundling) would be incomplete as a definition of encapsulation.
 
 ### Why do we need it?
-1.  **Security:** Protects data from being changed in a way that breaks the system (e.g., setting a `bank_balance` to a negative number manually).
-2.  **Simplicity:** You don't need to know how an internal combustion engine works to drive a car; you just need the steering wheel and pedals (the Methods).
+1. **Organization:** State and behavior live in one place instead of loose global variables.
+2. **Safety and rules:** Methods can enforce valid changes (e.g. no negative balance after withdrawal).
+3. **Simplicity for callers:** Callers use simple methods without managing every internal detail.
 
 ### Real-World Example: A Smart Phone
-You use the screen (Interface) to send a text. You don't manually manipulate the voltage in the CPU or the radio waves in the antenna. The complexity is **encapsulated** inside the phone's case.
+You use the screen (Interface) to send a text. You don't manually manipulate the voltage in the CPU or the radio waves in the antenna. The complexity is organized **inside** the phone's case.
 
 ### Working Example: The "Bank Account"
 ```python
@@ -79,7 +108,7 @@ my_account = BankAccount(1000)
 my_account.withdraw(1200)  # The method enforces the rule; balance does not go negative.
 ```
 
-Here the **behavior** (when a withdrawal is allowed) is encapsulated in methods. Stronger "hiding" (e.g. naming conventions or accessors) is a topic you can add as you advance.
+Here data and behavior are **bundled** in one class; the **withdraw** method is the controlled **interface** for changing balance.
 
 ---
 
@@ -96,23 +125,38 @@ Read or update a class variable **through the class name** when you mean the sha
 
 ---
 
-## 5. Destructor (`__del__`)
+## 5. Destructor (`__del__`) and Object Lifetime
 ### What is it?
-`__del__` is a special method Python may call when an object is about to be destroyed (e.g. no more references to it, or at shutdown). You rarely need it for beginners; `__init__` is what you use day to day.
+`__del__` is a special method Python **may** call when an object is about to be destroyed—typically when there are **no more references** to it, or during interpreter shutdown.
+
+### Manual vs automatic cleanup
+* You can **remove a reference** with **`del obj`** (if nothing else points to that object, it may become eligible for destruction).
+* You do **not** call `__del__` yourself like a normal method; Python invokes it as part of teardown when appropriate.
+* Compared to **`__init__`**, which runs in a predictable way for every new object, relying on **`__del__`** for important cleanup (closing files, releasing locks) is **fragile**. Prefer explicit **`close()`** methods or **`with`** / context managers for resources.
 
 ### Rules of thumb
 * **`__init__`:** Initializes the object. It does **not** return a value (it must not use `return` with a value).
-* **`__del__`:** Takes only `self` (plus what Python passes internally for the hook). Do not rely on `__del__` for critical cleanup; prefer explicit `close()` methods or context managers for files and resources.
+* **`__del__`:** Defined like `def __del__(self): ...`. Do not depend on it for critical cleanup.
 
 ---
 
-## 6. Class Methods and Static Methods
+## 6. `id()` and Object Identity
+Along with **state** (attributes) and **behavior** (methods), every object has **identity**.
+* **`id(x)`** returns an integer that is unique for the **lifetime** of that object (in CPython it is often the memory address).
+* If **`a = b`** and both refer to the **same** mutable object, **`id(a) == id(b)`**.
+* Two **separate** lists with the same contents are still **two objects**: **`id`** will differ.
+
+Use **`is`** (same object) vs **`==`** (same value) accordingly.
+
+---
+
+## 7. Class Methods and Static Methods
 ### Class method (`@classmethod`)
 * First parameter is **`cls`** (the class itself), not `self`.
 * Use it when the logic belongs to the **class** (factory methods, counting instances, reading/writing class variables) rather than one instance.
 
 ### Static method (`@staticmethod`)
-* No `self` and no `cls`. It is a plain function namespaced inside the class for organization (e.g. a small helper that does not need instance or class state).
+* No `self` and no `cls`. It is a plain function namespaced inside the class for organization (e.g. a small helper that does not need instance or class state). It can avoid passing unused `self` and keeps helpers near the class.
 
 ```python
 class Person:
@@ -132,17 +176,13 @@ class Person:
 
 ---
 
-## 7. Memory, Identity, and `id()`
-Every object lives at an address in memory. **`id(obj)`** returns an integer identifier that is unique for that object **while it exists** (CPython often uses the memory address). **Immutable** values that compare equal might share one stored object; **mutable** objects (lists, dicts, your own class instances) are usually distinct even if their contents look similar. Knowing `id()` helps when debugging "are these the same object or just equal values?"
-
----
-
-## 8. Dynamic Attributes: `getattr`, `setattr`, `delattr`
+## 8. Dynamic Attributes: `getattr`, `setattr`, `hasattr`, `delattr`
 Sometimes the attribute name is only known at **runtime** (e.g. from user input). Built-ins:
 
 * **`getattr(obj, "name", default)`** — read attribute; optional default if missing.
 * **`setattr(obj, "name", value)`** — assign `obj.name = value`.
-* **`delattr(obj, "name")`** — delete the attribute if it exists.
+* **`hasattr(obj, "name")`** — `True` if the object has that attribute.
+* **`delattr(obj, "name")`** — delete the attribute on **that object** (first argument is the instance or the class object, depending on what you are modifying; for a **class-level** attribute you pass the **class** as the first argument, e.g. `delattr(MyClass, "shared")`).
 
 Use with care: typos in names become runtime errors instead of editor-checked code.
 
@@ -173,9 +213,10 @@ c.display()  # 4 + 6i
 ---
 
 ## Summary of Key Points
-* OOP models entities with **classes** (blueprints) and **objects** (instances).
-* **Encapsulation** bundles data and methods; **`self`** is the current instance in instance methods.
-* **`__init__`** initializes new objects; **`__del__`** exists but is not the main tool for cleanup in most programs.
-* **Instance variables** are per-object; **class variables** are shared—avoid **shadowing** by using the class name when you mean the shared field.
-* **`@classmethod`** / **`@staticmethod`** organize behavior that is not tied to one instance the same way.
-* **`id()`**, **getattr** / **setattr** / **delattr** help with identity and dynamic attribute access.
+* OOP theory often lists **abstraction, encapsulation, inheritance, polymorphism**; this session focuses on encapsulation (bundling) and related ideas.
+* **Encapsulation** = **bundling** attributes and methods in a class; a clean **interface** and hiding detail are important **benefits**.
+* **`self`** is the conventional **first parameter** for instance methods, bound to the **instance**; it is **not** a reserved keyword. **`id()`** reports identity.
+* **`__init__`** initializes objects; follow **default-parameter ordering** rules. **`__del__`** exists but is not your main cleanup tool.
+* **Instance variables** are per-object; **class variables** are shared—watch **shadowing**; use **`ClassName.attr`** when you mean the shared field.
+* **`@classmethod`** / **`@staticmethod`** organize class-level or helper logic.
+* **`getattr` / `setattr` / `hasattr` / `delattr`** support **dynamic** attribute access and deletion (on an instance or on the class for class attributes).
