@@ -1,36 +1,46 @@
 questionType,contentType,contentBody,intAnswer,prepTime(in_seconds),floatAnswer.max,floatAnswer.min,fitbAnswer,mcscAnswer,subjectiveAnswer,option.1,option.2,option.3,option.4,mcmcAnswer,tagRelationships,difficultyLevel,answerExplanationType,answerExplanation
 
-mcsc,markdown,"A ""Class"" is best described as:",2,60,,,,,,"A physical folder on your hard drive.","A blueprint or skeleton that defines attributes and behaviors.","A specific person like ""Alice"" or ""Bob.""","A list of numbers.",,,easy,markdown,"Correct Option: B"
+mcsc,markdown,"Which part of the CSS box model is always transparent and creates space between elements?",4,60,,,,,,"Content","Padding","Border","Margin",,,easy,markdown,"Margin sits outside the border, separates elements, and is always transparent. Padding and content can show background; the border is visible if styled."
 
-mcsc,markdown,"What is an ""Object"" in the context of OOP?",3,60,,,,,,"The code written inside the editor.","An error message.","A real, concrete instance created from a class blueprint.","A type of loop.",,,easy,markdown,"Correct Option: C"
+mcsc,markdown,"What does `box-sizing: border-box` do?",2,60,,,,,,"Adds margin to the declared width","Includes padding and border inside the element’s declared width and height","Removes the border from layout calculations","Forces the content area to expand beyond the declared width",,,medium,markdown,"With `border-box`, the width and height you set include padding and border, so the box is easier to reason about than the default `content-box` behavior."
 
-mcsc,markdown,"What does the `self` keyword represent?",3,60,,,,,,"The Python interpreter.","The next object to be created.","The current instance of the object calling the method.","A private variable that cannot be changed.",,,medium,markdown,"Correct Option: C"
+mcsc,markdown,"What is the default `position` value for all elements in normal document flow?",3,60,,,,,,"`relative`","`absolute`","`static`","`fixed`",,,easy,markdown,"`static` is the default. Top/right/bottom/left do not apply until you use a non-static position. This matches the learning objective on the five position types and what “normal flow” means."
 
-mcsc,markdown,"Which special method is used to initialize an object's data when it is first created?",2,60,,,,,,"`__start__`","`__init__`","`__str__`","`__create__`",,,easy,markdown,"Correct Option: B"
+mcsc,markdown,"Which statement correctly differentiates padding and margin?",1,60,,,,,,"Padding is inside the border; margin is outside the border","Margin is inside the border; padding is outside the border","Both padding and margin are always outside the border","Both padding and margin are always inside the border",,,easy,markdown,"Padding is the inner spacing between content and border (background shows there). Margin is outer spacing between this element’s border and neighboring elements."
 
-mcsc,markdown,"If you have a class `Person` and you want to create an instance of it named `p1`, which syntax is correct?",3,60,,,,,,"`p1 = new Person()`","`p1 = Person`","`p1 = Person()`","`create p1 as Person`",,,easy,markdown,"Correct Option: C"
+mcsc,markdown,"What is the main purpose of CSS media queries in responsive design?",3,60,,,,,,"To define the HTML document structure","To store application data","To apply CSS rules conditionally (for example based on viewport width)","To run JavaScript when the page loads",,,medium,markdown,"Media queries let the browser pick different styles for large, medium, or small screens using conditions such as `min-width` and `max-width`."
 
-mcsc,markdown,"What is ""Encapsulation""?",2,60,,,,,,"Running code line-by-line.","Bundling data (attributes) and methods (functions) together into a class.","Deleting old variables to save memory.","Importing external libraries.",,,medium,markdown,"Correct Option: B"
+mcsc,markdown,"Which `position` value removes an element from normal document flow and positions it relative to its nearest *positioned* ancestor (or the viewport if there is none)?",2,60,,,,,,"`relative`","`absolute`","`sticky`","`static`",,,medium,markdown,"`absolute` takes the element out of flow. It is positioned against the closest ancestor that is not `static`, which is why parents often use `position: relative` as an anchor."
 
-mcsc,markdown,"Which of these is an example of an ""Attribute"" for a `Car` class?",3,60,,,,,,"`drive()`","`stop()`","`color`","`park()`",,,easy,markdown,"Correct Option: C"
+mcmc,markdown,"MSQ-1. Which statements about media queries are correct? Select ALL that apply.",,90,,,,,,"They behave like conditional rules: if the condition is true, the CSS inside applies","They can apply different styles when the viewport width crosses a threshold","They only work on desktop browsers","They are written with the `@media` at-rule","1,2,4",,medium,markdown,"Media queries are conditional CSS. They work on any device where the condition makes sense (mobile, tablet, desktop). Option 3 is false."
 
-mcsc,markdown,"How do you access an attribute called `name` on an object named `student1`?",3,60,,,,,,"`student1->name`","`student1[name]`","`student1.name`","`student1(name)`",,,easy,markdown,"Correct Option: C"
+mcmc,markdown,"MSQ-2. Which statements describe block-level elements (such as `<div>` or `<p>`)? Select ALL that apply.",,90,,,,,,"They typically start on a new line","They typically stretch to the full width of their parent container","They ignore `width` and `height` like plain inline text","They respect `margin` and `padding` on all sides in typical cases","1,2,4",,medium,markdown,"Option 3 describes **inline** elements (and is a common interview trick). Block boxes respect width and height. **`inline-block`** is separate: it flows inline but still respects width and height—do not confuse that with “block ignores height.”"
 
-subjective,markdown,"### Task: Simple Student Management System
+mcmc,markdown,"MSQ-3. Which statements correctly compare `position: relative` and `position: absolute`? Select ALL that apply.",,90,,,,,,"`relative` keeps the element in normal flow; its original space is still reserved","`absolute` removes the element from normal flow; other elements behave as if it were not there","Both always position relative only to the viewport","`relative` offsets from where the element would have been; `absolute` offsets from a positioned ancestor (or the viewport if none)","1,2,4,5",,medium,markdown,"Option 3 is false: viewport-relative behavior is characteristic of `fixed`, not of `relative`/`absolute` in general."
 
-**Scenario:**
-You need to organize student data. Instead of using separate lists for names and ages, you will create a `Student` blueprint to keep the data bundled together.
+mcmc,markdown,"MSQ-4. Which statements accurately describe `position: sticky`? Select ALL that apply.",,90,,,,,,"It is identical to `fixed` for all scrolling behavior","The element scrolls with the page until a threshold (for example `top: 0`) is reached, then it sticks","It is still in normal flow until it becomes “stuck” (unlike `absolute`, which is removed from flow)","It ignores `top`, `bottom`, `left`, and `right` entirely","2,3,5",,medium,markdown,"Sticky is a hybrid of relative and fixed-like behavior, not the same as `fixed`. Option 1 is false. Option 4 is false: offsets define where it sticks."
 
-**Requirements:**
-1. **Define a Class:** Create a class named `Student`.
-2. **Constructor:** Create an `__init__` method that accepts `name` and `grade`. Assign these to `self.name` and `self.grade`.
-3. **Display Method:** Create a method named `show_details` that prints: ""Student: [name], Grade: [grade]"".
-4. **Logic:**
-   - Create two different objects (e.g., `s1` and `s2`) with different names and grades.
-   - Call the `show_details()` method for both objects to verify the data is stored correctly.
-5. **Bonus Logic:** Create a method named `is_passing()` that returns `True` if the grade is 40 or higher, and `False` otherwise.
+subjective,markdown,"### Task: Responsive box layout
 
-### Submission Guidelines:
-- **File Name:** `basic_oop.py`.
-- **Code Structure:** Keep it simple. Define the class at the top and the object creation at the bottom.
-- **Comments:** Label your **Class**, your **Attributes**, and your **Methods**.",,300,,,,,,,,,,,medium,markdown,"Matches original question exactly"
+Build a simple responsive page using **HTML** and an **external stylesheet** (`style.css`).
+
+#### Requirements
+
+**1. HTML**
+
+- Valid HTML5 document  
+- Viewport meta tag in `<head>`  
+- Link to `style.css`  
+
+**2. Content**
+
+- A section with **three** boxes  
+- Each box: heading + paragraph  
+- Each box uses **padding**, **border**, and **margin**  
+- Use `box-sizing: border-box` so widths stay predictable  
+
+**3. Responsive behavior (mobile-first, use `min-width`)**
+
+- **Default (small screens):** stack the three boxes in **one column**; each box uses **100%** width of its container  
+- **From 769px width and up:** show the boxes **in one row** (side by side) with a sensible fixed width per box (for example `250px`)  
+- Implement this with `@media (min-width: …)` (not only `max-width`), matching the lecture’s mobile-first pattern  ",,300,,,,,,,,,,,medium,markdown,"Matches original question exactly"
