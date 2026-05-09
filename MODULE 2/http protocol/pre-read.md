@@ -113,7 +113,7 @@ fetch('https://api.example.com/users', {
   headers: {
     'Content-Type': 'application/json'
   },
-  body: JSON.stringify({ name: 'Alice', email: 'alice@example.com' }
+  body: JSON.stringify({ name: 'Alice', email: 'alice@example.com' })
 })
   .then(response => response.json())
   .then(data => console.log('Created:', data));
