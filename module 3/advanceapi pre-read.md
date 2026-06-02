@@ -1,3 +1,4 @@
+```mermaid
 %%{init: {
   "flowchart": {
     "nodeSpacing": 40,
@@ -58,3 +59,4 @@ class CV,RV value;
 class U1,U2,U3 future;
 
 linkStyle default stroke-width:3px
+```
