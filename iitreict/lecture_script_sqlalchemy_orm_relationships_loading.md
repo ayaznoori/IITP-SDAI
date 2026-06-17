@@ -7,13 +7,12 @@
 
 | Block | Topic | Time |
 |---|---|---|
-| 1 | Why Does This Matter? | 8 min |
-| 2 | SQLAlchemy ORM Introduction | 15 min |
+| 1 | Why Does This Matter? | 10 min |
+| 2 | SQLAlchemy ORM Introduction | 20 min |
 | 3 | Defining Models and Relationships | 25 min |
-| 4 | One-to-Many and Many-to-Many Relationships | 30 min |
-| 5 | Querying with SQLAlchemy | 20 min |
-| 6 | Lazy Loading vs Eager Loading | 17 min |
-| 7 | Lecture Summary and Recap | 5 min |
+| 4 | One-to-Many and Many-to-Many Relationships | 35 min |
+| 5 | Querying with SQLAlchemy | 15 min |
+| 6 | Lecture Summary and Recap | 5 min |
 
 ---
 
@@ -31,7 +30,7 @@ Now imagine a many-to-many situation — students and courses, or products and t
 
 SQLAlchemy ORM lets you define these relationships once, as Python code, and then navigate them as object attributes. `student.courses` gives you the list. `order.user.name` gives you the name. No JOIN written by hand in the route. No manual row-tuple conversion. The relationship is defined once; every place in your application that needs it just uses the attribute.
 
-Today: how the ORM maps classes to tables, how to define one-to-many and many-to-many relationships in Python, how to query with the ORM's interface, and the critical difference between loading related data automatically versus loading it efficiently in bulk."
+Today: how the ORM maps classes to tables, how to define one-to-many and many-to-many relationships in Python, and how to query with the ORM's interface once those relationships exist."
 
 ---
 
@@ -58,9 +57,11 @@ One instance = one row
 
 **[Script:]**
 
-"When you create a `User` instance and save it, SQLAlchemy generates the INSERT, executes it with parameterized values — same SQL injection protection as the parameterized queries you already used with `sqlite3` — and returns the object with its database-assigned ID filled in. When you query, SQLAlchemy generates the SELECT and hands you back Python objects, not raw tuples.
+"When you create a `User` instance and save it, SQLAlchemy generates the INSERT, executes it with parameterized values — the same SQL injection protection as parameterized queries you would write directly — and returns the object with its database-assigned ID filled in. When you query, SQLAlchemy generates the SELECT and hands you back Python objects, not raw tuples.
 
 The database still runs SQL underneath all of this. SQLAlchemy is generating that SQL correctly and safely, every time, so you do not write it by hand for routine operations."
+
+> 🎯 **Instructor Note:** Ask: "What would the equivalent of creating and saving a User instance have looked like in raw SQL?" Answer: an INSERT statement with parameterized placeholders for name and email, executed through a cursor. Confirming this out loud establishes that SQLAlchemy is automating something learners already know how to do by hand — not replacing it with something unfamiliar.
 
 ---
 
@@ -68,7 +69,7 @@ The database still runs SQL underneath all of this. SQLAlchemy is generating tha
 
 **[Script:]**
 
-"Three pieces of setup appear at the top of every SQLAlchemy application. The engine holds the database connection configuration. The session is what you use to run queries and save changes — think of it as the equivalent of the `connection` and `cursor` you used directly with `sqlite3`, except the session works with Python objects instead of raw rows. The declarative base is the class that all your model classes inherit from, which registers them with SQLAlchemy."
+"Three pieces of setup appear at the top of every SQLAlchemy application. The engine holds the database connection configuration. The session is what you use to run queries and save changes. The declarative base is the class that all your model classes inherit from, which registers them with SQLAlchemy."
 
 ```python
 from sqlalchemy import create_engine
@@ -85,16 +86,14 @@ class Base(DeclarativeBase):
 
 **[Script:]**
 
-"`connect_args={'check_same_thread': False}` is SQLite-specific — it allows the connection to be used across the multiple threads that a web framework like FastAPI may use. `autocommit=False` means nothing is saved until you explicitly call `commit()` — the same discipline you practiced with `connection.commit()` in raw Python connectivity work.
+"`connect_args={'check_same_thread': False}` is SQLite-specific — it allows the connection to be used across the multiple threads that a web framework like FastAPI may use. `autocommit=False` means nothing is saved until you explicitly call `commit()` — the same discipline as calling `commit()` directly on a database connection.
 
 These three lines — engine, session factory, declarative base — are infrastructure you write once and reuse throughout the application."
-
-> 🎯 **Instructor Note:** Ask: "How does this map to the connect-cursor-execute pattern from raw Python database work?" Guide learners to: the engine is roughly the connection configuration, the session plays a similar coordinating role to the cursor and connection together, but works with objects instead of raw SQL strings and tuples. This grounding in something they already know speeds up comprehension.
 
 **Recap of Block 2 before moving on:**
 
 - ORM maps Python classes to database tables; instances represent rows
-- SQLAlchemy generates parameterized SQL automatically — the same injection protection as manual parameterized queries
+- SQLAlchemy generates parameterized SQL automatically — the same injection protection as writing parameterized queries by hand
 - The engine holds connection configuration; the session manages queries and saved changes; the declarative base registers model classes
 
 ---
@@ -133,6 +132,8 @@ Base.metadata.create_all(engine)
 
 `Base.metadata.create_all(engine)` is the line that actually creates the table — it reads every class registered through `Base` and runs the corresponding `CREATE TABLE` statements."
 
+> 🎯 **Instructor Note:** Common confusion point: learners think defining the class creates the table. Say explicitly: "Definition and execution are two separate steps in SQLAlchemy, just as `CREATE TABLE` had to actually run as a statement in raw SQL — writing the schema on paper does not create it in the database."
+
 ---
 
 ### 3B — Introducing the relationship() Construct
@@ -143,7 +144,7 @@ Base.metadata.create_all(engine)
 
 The relationship attribute is not a real column in the database. It is a Python-side instruction: when this attribute is accessed, go fetch the related rows using the foreign key. The actual foreign key column lives on whichever table holds it in the schema — same as in raw SQL, the foreign key always lives on the many side of a one-to-many relationship."
 
-> 🎯 **Instructor Note:** This is the conceptual bridge for the entire block. State it clearly: the relationship() call does not change the database schema — `mapped_column` and `ForeignKey` do that. `relationship()` only creates the Python navigation. Two different mechanisms, often appearing in the same class.
+> 🎯 **Instructor Note:** This is the conceptual bridge for the entire block. State it clearly: the relationship() call does not change the database schema — `mapped_column` and `ForeignKey` do that. `relationship()` only creates the Python navigation. Two different mechanisms, often appearing in the same class, and the distinction matters once learners start debugging why a relationship is not behaving as expected.
 
 **Recap of Block 3 before moving on:**
 
@@ -187,6 +188,8 @@ class Order(Base):
 "`user_id` on `Order` is the real foreign key column — this is what is actually written to the database, identical in purpose to the `FOREIGN KEY (user_id) REFERENCES users(id)` you wrote in raw SQL.
 
 `orders` on `User` is a list — one user can have many orders. `user` on `Order` is a single object — one order belongs to one user. `back_populates` names the corresponding attribute on the other side and keeps both synchronized: set one side, SQLAlchemy keeps the other side consistent."
+
+> 🎯 **Instructor Note:** Ask: "Where is the foreign key column? Is it on User or on Order?" Answer: on `Order` — `user_id`. This is identical to the SQL rule already known: the foreign key lives on the many side. The relationship attribute on `User` is not a column — it is a Python navigation shortcut.
 
 **Predict before running: What will happen?**
 
@@ -327,6 +330,8 @@ count = db.query(User).filter(User.name == "Alice").count()
 
 `db.get(User, 1)` is the idiomatic shortcut for retrieving by primary key — equivalent to `filter(User.id == 1).first()` but more direct."
 
+> 🎯 **Instructor Note:** This operator overloading surprises learners. Address it directly: "When you write `User.name == 'Alice'` inside `filter()`, Python is not evaluating that comparison right then — SQLAlchemy has overridden `==` on column attributes to produce an expression object that gets translated into the SQL WHERE clause." Naming this prevents confusion later when learners see expressions that look like plain Python but behave differently.
+
 ---
 
 ### 5B — Querying Across Relationships
@@ -353,7 +358,7 @@ results = (db.query(Order)
 
 "The first approach uses the relationship attribute directly — appropriate when you already have the `User` object and want its orders. The second uses `.join()` explicitly — appropriate when your starting point is `Order` and you need to filter by something on the related `User`. Both are valid; choose based on which object you start from."
 
-> 🎯 **Instructor Note:** Ask: "Why would you ever need `.join()` if relationship attributes already give you navigation?" Guide learners to: relationship attributes are for navigating from an object you already have. `.join()` is for filtering a query by a condition on a related table when you have not yet loaded the object — it is the SQLAlchemy ORM equivalent of writing the JOIN clause directly.
+> 🎯 **Instructor Note:** Ask: "Why would you ever need `.join()` if relationship attributes already give you navigation?" Guide learners to: relationship attributes are for navigating from an object you already have. `.join()` is for filtering a query by a condition on a related table when you have not yet loaded the object — it is the SQLAlchemy ORM equivalent of writing the JOIN clause directly, the same JOIN syntax learners already know from SQL, just expressed through method calls.
 
 **Recap of Block 5 before moving on:**
 
@@ -363,83 +368,9 @@ results = (db.query(Order)
 
 ---
 
-## Block 6 — Lazy Loading vs Eager Loading
+## Block 6 — Lecture Summary
 
-### 6A — Lazy Loading: The Default Behavior
-
-**[Script:]**
-
-"When you load a `User` object, SQLAlchemy does not automatically load its `orders` at the same time. It loads them the first time you access `user.orders` — a separate query, fired at the moment of access. This is lazy loading, and it is the default.
-
-This is efficient when you frequently do not need the related data. It becomes a problem when you load many objects and then access the relationship on every one of them."
-
-> 🎯 **Instructor Note:** Name the N+1 problem explicitly and write the arithmetic on the board. This is the single most important takeaway of the block.
-
-```
-N+1 problem:
-1 query to load N users
-+ N queries — one per user — to load each user's orders
-= N+1 total queries
-
-100 users → 101 database round trips
-```
-
-**Predict before running: What will happen?**
-
-> 🎯 **Instructor Note:** Ask: "If I run `db.query(User).all()` to get 50 users, and then loop through them printing `user.orders` for each, how many total queries hit the database?" Answer: 51 — one for the initial list, one more for each user's orders accessed inside the loop.
-
-**Demo 8 — Lazy loading and the N+1 problem (whiteboard-friendly)**
-
-```python
-users = db.query(User).all()        # 1 query
-
-for user in users:
-    print(user.name, user.orders)   # 1 additional query PER user
-```
-
-**[Script:]**
-
-"This code is correct — it produces the right result. But it is inefficient at scale. Fifty users means fifty-one round trips to the database instead of one or two. This is exactly the kind of slow page a support engineer reports after a table grows."
-
----
-
-### 6B — Eager Loading: joinedload
-
-**[Script:]**
-
-"Eager loading tells SQLAlchemy to fetch the related objects in the same query as the parent, using a JOIN, instead of waiting until the attribute is accessed. You request this with `joinedload`, passed to `.options()` on the query."
-
-**Demo 9 — Eager loading with joinedload (whiteboard-friendly)**
-
-```python
-from sqlalchemy.orm import joinedload
-
-users = db.query(User).options(joinedload(User.orders)).all()
-
-for user in users:
-    print(user.name, user.orders)   # no additional queries — already loaded
-```
-
-**[Script:]**
-
-"`joinedload(User.orders)` — load the `orders` relationship using a JOIN as part of the same query that loads the users. The loop now fires zero additional queries; everything was fetched up front in one combined query.
-
-This is the direct SQLAlchemy expression of the JOIN you already know how to write in SQL — `joinedload` is telling SQLAlchemy to generate exactly that kind of query instead of issuing separate SELECTs per object."
-
-> 🎯 **Instructor Note:** Pause and ask: "When should you use eager loading, and when is lazy loading fine?" Guide learners to: eager loading when you know you will access the relationship on every object in a list — exactly the N+1 scenario. Lazy loading is fine for single-object lookups where you may or may not need the related data, since the cost of one possible extra query is negligible.
-
-**Recap of Block 6 before moving on:**
-
-- Lazy loading is the SQLAlchemy default — related objects load on first attribute access, as a separate query
-- The N+1 problem: loading N objects and accessing a relationship on each generates N additional queries
-- `joinedload(Model.relationship)` passed to `.options()` eager-loads related data in the same query using a JOIN
-- Use eager loading for lists where every item's relationship will be accessed; lazy loading is appropriate for single-object lookups
-
----
-
-## Block 7 — Lecture Summary
-
-> 🎯 **Instructor Note:** Deliver as rapid active recall. "What does relationship() actually create versus what mapped_column creates? Where does the foreign key live in a one-to-many relationship? What does secondary= signal? What is the N+1 problem and what fixes it?"
+> 🎯 **Instructor Note:** Deliver as active recall. "What does relationship() actually create versus what mapped_column creates? Where does the foreign key live in a one-to-many relationship? What does secondary= signal, and why is it needed for many-to-many but not one-to-many? What is the difference between filter() and using a relationship attribute directly?"
 
 **SQLAlchemy ORM Introduction**
 
@@ -465,16 +396,10 @@ This is the direct SQLAlchemy expression of the JOIN you already know how to wri
 - `filter()` uses overloaded column operators; `db.get(Model, pk)` is the primary-key shortcut
 - Navigate loaded objects' relationships via attribute access; use `.join()` when filtering by a related table's column directly in a query
 
-**Lazy Loading vs Eager Loading**
-
-- Lazy loading is the default — a relationship attribute triggers its own query the first time it is accessed
-- The N+1 problem occurs when a relationship is accessed on every item in a loaded list, producing one query per item
-- `joinedload` eager-loads related data in the same query using a JOIN, eliminating N+1 for that access pattern
-
 **Why All of This Matters Together**
 
 - Defining relationships once in Python and navigating them as attributes removes the repeated manual JOIN-writing and row-tuple handling that raw SQL and a plain database driver require for every relationship access
-- Recognizing the difference between lazy and eager loading is what separates ORM code that works correctly from ORM code that performs well at scale — the same correctness with very different numbers of database round trips, and choosing deliberately between them is a core skill for any backend built on an ORM
+- The same one-to-many and many-to-many patterns already known from SQL — foreign keys on the many side, junction tables for many-to-many — carry over directly into SQLAlchemy, expressed as Python rather than SQL syntax, which means understanding the SQL foundation directly accelerates understanding the ORM layer built on top of it
 
 ---
 
