@@ -15,12 +15,12 @@ flowchart TB
         CM_PREV["<b>Current Module Until Previous Session</b><br/><i>Backend Engineering with FastAPI</i><br/>━━━━━━━━━━━━━━<br/>→ FastAPI setup · Pydantic validation<br/>→ Middleware · Dependency injection<br/>→ Relational DB design · SQL basics<br/>→ Keys · Constraints · Normalization"]
     end
 
-    CS["🎯 <b>CURRENT SESSION</b><br/><i>Advanced SQL and Database Connectivity</i><br/>━━━━━━━━━━━━━━━━━━━━<br/>▸ Joins — INNER, LEFT, RIGHT, FULL<br/>▸ Aggregations · GROUP BY<br/>▸ Indexes & query optimization<br/>▸ Transactions · ACID properties<br/>▸ Connecting Python to databases<br/>━━━━━━━━━━━━━━━━━━━━<br/><i>Mental Shift: From querying one table<br/>to reasoning across a full data model</i>"]
+    CS["🎯 <b>CURRENT SESSION</b><br/><i>Advanced SQL and Database Connectivity</i><br/>━━━━━━━━━━━━━━━━━━━━<br/>▸ Joins — INNER, LEFT, RIGHT, FULL<br/>▸ Aggregations · GROUP BY<br/><i>Mental Shift: From querying one table<br/>to reasoning across a full data model</i>"]
 
     subgraph VALUE["💡 Why It Matters"]
         direction LR
         CV["<b>Course Value</b><br/>━━━━━━━━━<br/>Unlocks real multi-table APIs<br/>Prepares for ORM abstractions<br/>Foundation for Auth data logic"]
-        RV["<b>Real-Life Use</b><br/>━━━━━━━━━<br/>Every production DB uses joins<br/>Indexes keep apps fast at scale<br/>Transactions ensure data safety"]
+        RV["<b>Real-Life Use</b><br/>━━━━━━━━━<br/>Every production DB uses joins"]
     end
 
     subgraph FUTURE["🚀 What's Next"]
