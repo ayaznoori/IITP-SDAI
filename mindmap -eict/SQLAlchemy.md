@@ -13,10 +13,10 @@ flowchart TB
         direction TB
         PM1["<b>Previous Module</b><br/><i>Programming Foundations</i><br/>[Python · OOP]<br/>━━━━━━━━━━━━━━<br/>Classes · Objects · Inheritance<br/>Data structures · Modules"]
         PM2["<b>Previous Module</b><br/><i>Web Fundamentals + JS</i><br/>[REST APIs · JSON]<br/>━━━━━━━━━━━━━━<br/>Client-Server · Request cycle<br/>JSON structure & parsing"]
-        CM_PREV["<b>Current Module Until Previous Session</b><br/><i>Backend Engineering with FastAPI</i><br/>━━━━━━━━━━━━━━<br/>→ FastAPI setup · Pydantic validation<br/>→ Middleware · Dependency injection<br/>→ SQL basics · Table design<br/>→ Joins · Indexes · Transactions<br/>→ Connecting Python to databases"]
+        CM_PREV["<b>Current Module Until Previous Session</b><br/><i>Backend Engineering with FastAPI</i><br/>━━━━━━━━━━━━━━<br/>→ FastAPI setup · Pydantic validation<br/>→ Middleware · Dependency injection<br/>→ SQL basics · Table design<br/>→ Joins <br/>→ Connecting Python to databases"]
     end
 
-    CS["🎯 <b>CURRENT SESSION</b><br/><i>SQLAlchemy ORM Fundamentals</i><br/>━━━━━━━━━━━━━━━━━━━━<br/>▸ SQLAlchemy ORM introduction<br/>▸ Defining models & relationships<br/>▸ One-to-many · Many-to-many<br/>▸ Querying with SQLAlchemy<br/>▸ Lazy vs eager loading<br/>━━━━━━━━━━━━━━━━━━━━<br/><i>Mental Shift: From writing raw SQL<br/>to expressing data as Python objects</i>"]
+    CS["🎯 <b>CURRENT SESSION</b><br/><i>SQLAlchemy ORM Fundamentals</i><br/>━━━━━━━━━━━━━━━━━━━━<br/>▸ SQLAlchemy ORM introduction<br/>▸ Defining models & relationships<br/>▸ One-to-many · Many-to-many<br/>▸ Querying with SQLAlchemy<br/>━━━━━━━━━━━━━━━━━━━━<br/><i>Mental Shift: From writing raw SQL<br/>to expressing data as Python objects</i>"]
 
     subgraph VALUE["💡 Why It Matters"]
         direction LR
