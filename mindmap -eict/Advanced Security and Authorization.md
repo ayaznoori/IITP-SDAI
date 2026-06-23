@@ -25,7 +25,7 @@ flowchart TB
 
     subgraph FUTURE["🚀 What's Next"]
         direction TB
-        FM1["<b>Upcoming Module</b><br/><i>LLM Foundations + OpenAI APIs</i><br/>[LLMs · OpenAI]<br/>━━━━━━━━━━━━━━<br/>ML basics · Neural networks<br/>Prompt engineering · OpenAI API<br/>Embeddings · Cost optimization"]
+        FM1["<b>Upcoming Module</b><br/><i>Machine Learning</i><br/>[LLMs · OpenAI]<br/>━━━━━━━━━━━━━━<br/>ML basics · Neural networks<br/>Prompt engineering · OpenAI API<br/>Embeddings · Cost optimization"]
         FM2["<b>Upcoming Module</b><br/><i>AI-First Software Development</i><br/>[Agents · RAG]<br/>━━━━━━━━━━━━━━<br/>Agentic systems · RAG pipelines<br/>LangChain · Tool use · Copilot"]
         FM3["<b>Upcoming Module</b><br/><i>Shipping & Running AI Apps</i><br/>[Docker · Cloud]<br/>━━━━━━━━━━━━━━<br/>Containerization · Cloud deploy<br/>LLMOps · Testing · Cost mgmt"]
     end
