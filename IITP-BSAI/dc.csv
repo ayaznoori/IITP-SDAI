@@ -1,0 +1,219 @@
+Phase,Module,Week,Session,Session Number,Title,Objective,Topics Covered,Detailed Subtopics/Learning Objectives,Proposed Sessions by,Date,Day,Duration
+,,0,,,Virtual Inaugural,Official Inaugural of the Programme,,,,14/08/2026,Friday,
+Phase 1: Foundations,Module 1: Programming Foundations (JavaScript),1,1.1,1,"Variables, Data Types, Operators & Conditionals","Write first JavaScript programs in One Compiler with variables, data types, operators, and if/else","One Compiler setup; let and const; primitives — string, number, boolean, null, undefined; arithmetic comparison logical and assignment operators; expressions; if / else / else if","* Set up and run JavaScript programs in One Compiler
+* Declare variables with let and const and use core primitive data types
+* Apply arithmetic, comparison, logical, and assignment operators
+* Write basic if / else / else if programs for simple decisions
+* Trace variable values for sample inputs",Industry Mentor,19/08/2026,Wednesday,2hrs
+Phase 1: Foundations,Module 1: Programming Foundations (JavaScript),1,1.2,2,Loops & Iterations in JavaScript,Automate repetitive tasks using for and while loops with break and continue,for loops; while loops; break and continue; counting and summing patterns; choosing for vs while; guided loop exercises in One Compiler,"* Write for loops to repeat actions a set number of times
+* Write while loops that repeat until a condition changes
+* Control loop execution using break and continue appropriately
+* Choose the correct loop type for a given repetitive problem
+* Solve beginner loop exercises in One Compiler",Industry Mentor,21/08/2026,Friday,2hrs
+Phase 1: Foundations,Module 1: Programming Foundations (JavaScript),2,2.1,3,"Arrays, Strings & Objects","Store and process data using arrays, strings, and objects with essential methods","Arrays — create, index, push, pop, length, map; strings — indexing, slice, split, join, toUpperCase/toLowerCase/trim; objects — create, read, update properties; when to use each","* Create and manipulate arrays using indexing, push, pop, length, and map
+* Work with strings using indexing, slicing, and common string methods
+* Create objects and read or update their properties
+* Choose array, string, or object for a simple data need
+* Solve short practice problems using these three structures",Industry Mentor,26/08/2026,Wednesday,2hrs
+Phase 1: Foundations,Module 1: Programming Foundations (JavaScript),2,2.2,4,Functions in JavaScript,"Design reusable functions with parameters, return values, and beginner scope rules",Function declarations; parameters and arguments; return values; local vs global scope; arrow function basics; refactoring repeated logic,"* Define and call functions with a clear purpose
+* Pass parameters and use return values in calling code
+* Explain local vs global scope at a beginner level
+* Write simple arrow functions for short logic
+* Refactor repeated code into reusable functions",Industry Mentor,28/08/2026,Friday,2hrs
+Phase 1: Foundations,Module 1: Programming Foundations (JavaScript),2,MC1,MC1,Masterclass: Algorithmic Thinking in JavaScript,Build a simple problem-solving checklist with patterns and plain Big-O intuition,"Problem decomposition; inputs, outputs, edge cases; frequency-counter intuition using objects; two-pointer intuition on arrays; O(1), O(n), O(n²) in plain words","* Break a problem into inputs, steps, outputs, and edge cases
+* Apply frequency-counter intuition on a simple example
+* Apply two-pointer intuition on a simple array example
+* Explain O(1), O(n), and O(n²) with plain language examples
+* Use a short checklist before coding a new problem",Professor,29/08/2026,Saturday,2hrs
+Phase 1: Foundations,Module 2: Web Fundamentals,3,3.1,5,VS Code Setup & HTML Semantic Markup,Configure VS Code and build structured pages with semantic HTML and forms,"VS Code and browser DevTools; HTML document structure; semantic tags; headings paragraphs links images; forms, input types, labels, and buttons","* Open and run HTML files locally in VS Code
+* Write well-structured pages using semantic tags
+* Implement forms with common input elements and labels
+* Apply semantic HTML for clearer page structure
+* Inspect HTML using browser DevTools",Industry Mentor,02/09/2026,Wednesday,2hrs
+Phase 1: Foundations,Module 2: Web Fundamentals,3,3.2,6,CSS Fundamentals & Flexbox,"Style pages with selectors, the box model, and a basic Flexbox layout","Linking CSS (internal and external); element class and id selectors; color typography backgrounds borders; box model; Flexbox basics — flex-direction, justify-content, align-items, gap","* Apply CSS using internal and external stylesheets
+* Use element, class, and id selectors with core properties
+* Explain and apply the CSS box model
+* Build one simple row or column layout with Flexbox
+* Debug basic CSS issues in DevTools",Industry Mentor,04/09/2026,Friday,2hrs
+Phase 1: Foundations,Module 2: Web Fundamentals,4,4.1,7,CSS Grid & Responsive Design,Build a multi-section layout with CSS Grid and one media query for responsiveness,"CSS Grid — rows, columns, gaps, simple grid areas; header/main/footer pattern; one media query; responsive units (% / rem); mobile-first idea","* Define grid rows, columns, and gaps on a container
+* Place header, main, and footer sections on a simple grid
+* Write one media query for phone vs desktop
+* Use basic responsive units in spacing or width
+* Apply a mobile-first approach at a beginner level",Industry Mentor,09/09/2026,Wednesday,2hrs
+Phase 1: Foundations,Module 2: Web Fundamentals,4,4.2,8,DOM Manipulation & Event Handling,"Attach JavaScript to an HTML page, update the DOM, and handle user events",script tag and console in the browser; DOM tree basics; getElementById and querySelector; reading and updating text/attributes; addEventListener; click and input events; one small interactive demo,"* Attach a JavaScript file to an HTML page and use the browser console
+* Select elements with getElementById and querySelector
+* Read and update element content or attributes
+* Attach click and input event listeners
+* Build one small interactive DOM change on user action",Industry Mentor,11/09/2026,Friday,2hrs
+Phase 1: Foundations,Module 2: Web Fundamentals,4,MC2,MC2,Masterclass: Asynchronous JavaScript,"Understand async JavaScript with timers, Promises, and async/await before API fetching",Sync vs async; setTimeout as a simple async example; Promise states; then/catch basics; async/await with try/catch; why fetch needs async,"* Explain synchronous vs asynchronous execution
+* Use setTimeout to demonstrate deferred work
+* Describe Promise pending, fulfilled, and rejected states
+* Write async/await with try/catch for a simple async task
+* Explain why network requests need asynchronous code",Professor,12/09/2026,Saturday,2hrs
+Phase 1: Foundations,Module 3: Version Control & Collaboration,5,5.1,9,Git Basics & GitHub Setup,Track local changes with Git and push a project to GitHub,"Why version control; git init, add, commit, log; local vs remote; GitHub account; push and clone; .gitignore and README basics","* Explain why version control matters
+* Initialize a repo and use init, add, commit, and log
+* Connect a local repo to GitHub and push
+* Clone an existing remote repository
+* Apply basic hygiene — .gitignore, clear commit messages, README",Industry Mentor,16/09/2026,Wednesday,2hrs
+Phase 1: Foundations,Module 3: Version Control & Collaboration,5,5.2,10,"Branching, Merging & Pull Requests","Use branches, merge changes, open a pull request, and fix one basic conflict",git branch and switch; merge into main; pull-before-push; opening and merging a PR; one basic merge conflict; short code-review intro,"* Create and switch branches for a feature
+* Merge a branch into main using a standard workflow
+* Open and merge a pull request on GitHub
+* Resolve one basic merge conflict with mentor guidance
+* Practise pull-before-push on a shared exercise",Industry Mentor,18/09/2026,Friday,2hrs
+Phase 1: Foundations,Module 4: AI as a Coding Partner,6,6.1,11,Cursor / Claude Code Setup & AI Hygiene,"Set up an AI coding tool and practise generating, reviewing, and verifying small code changes",Cursor or Claude Code setup; writing a clear coding prompt; generating a small snippet; reviewing AI output; accept vs reject; small-diff habit,"* Set up Cursor or Claude Code for a first coding task
+* Write a clear prompt with intent and constraints
+* Review AI-generated code before using it
+* Reject unsafe or incorrect suggestions
+* Keep changes small and verify each step",Industry Mentor,23/09/2026,Wednesday,2hrs
+Phase 1: Foundations,Module 5: Frontend Fundamentals (React),6,6.2,12,React Fundamentals,"Set up Vite React and build components with JSX, props, and list rendering",What React is and why components exist; Vite setup; JSX; functional components; props; rendering lists with map and key,"* Explain component-based UI at a beginner level
+* Set up a React project with Vite
+* Write functional components in JSX
+* Pass data between components using props
+* Render a list using map and a key prop",Industry Mentor,25/09/2026,Friday,2hrs
+Phase 1: Foundations,Module 5: Frontend Fundamentals (React),6,MC3,MC3,Masterclass: DSA Problems,Practise beginner searching and sorting with guided walkthroughs,Linear search; binary search intuition on sorted data; trace bubble or selection sort; guided array and string problems; compare approaches with plain complexity language,"* Trace linear search on a sample list
+* Explain when binary search needs sorted data
+* Trace one elementary sort on a small array
+* Solve guided beginner DSA problems with mentor support
+* Compare two approaches using simple complexity language",Professor,26/09/2026,Saturday,2hrs
+Phase 1: Foundations,Module 5: Frontend Fundamentals (React),7,7.1,13,React State Management,"Manage interactive UI with useState, controlled inputs, and conditional rendering",useState; updating state and re-render idea; controlled text inputs; conditional rendering with && and ternary,"* Manage local state with useState
+* Build controlled form inputs bound to state
+* Apply conditional rendering for simple UI states
+* Explain that a state update re-renders the component
+* Build one small interactive screen driven by state",Industry Mentor,30/09/2026,Wednesday,2hrs
+Phase 1: Foundations,Module 5: Frontend Fundamentals (React),7,7.2,14,Tailwind CSS with React,Style React components with Tailwind utilities in a Vite project,"Tailwind setup in Vite React; spacing, color, and typography utilities; flex utilities for simple layout; responsive prefixes sm/md","* Set up Tailwind in a Vite React project
+* Style components with core utility classes
+* Build a simple layout using Tailwind flex utilities
+* Apply responsive prefixes for basic breakpoints
+* Restyle an existing React component using Tailwind only",Industry Mentor,02/10/2026,Friday,2hrs
+Phase 1: Foundations,Module 5: Frontend Fundamentals (React),8,8.1,15,Fetch API — Vanilla JS & React,"Fetch JSON with vanilla JavaScript first, then repeat the same GET in React with useEffect","Part 1 — fetch GET in plain JS, parse JSON, show results in the DOM, basic error handling; Part 2 — same endpoint in React with useEffect, loading state, render list from response (JSONPlaceholder)","* Make a GET request with fetch in plain JavaScript and parse JSON
+* Display fetched data in the DOM and handle a basic error
+* Repeat the same GET inside React using useEffect
+* Show a loading state while the React fetch runs
+* Explain how the vanilla and React versions of the same call differ",Industry Mentor,07/10/2026,Wednesday,2hrs
+Phase 1: Foundations,Module 5: Frontend Fundamentals (React),8,8.2,16,React Router,Build a small multi-page React app with routes and Link navigation,React Router setup; two or three routes; Link navigation; one page component per route,"* Set up React Router in a Vite React project
+* Define routes for two or three pages
+* Navigate between pages using Link
+* Map each route to a page component
+* Keep the route structure simple and readable",Industry Mentor,09/10/2026,Friday,2hrs
+Phase 1: Foundations,Module 5: Frontend Fundamentals (React),8,HO1,HO1,Hands-on: React Build Lab,"Practise React components, state, and Tailwind on a small guided UI",Component composition; props; useState; controlled input; Tailwind utilities; mentor-guided fixes,"* Build a small React UI with components and props
+* Manage state with useState
+* Style the UI with Tailwind utilities
+* Fix common React beginner errors with mentor support
+* Leave a working mini screen by end of lab",TA,10/10/2026,Saturday,1.5hrs
+Phase 1: Foundations,Module 5: Frontend Fundamentals (React),9,9.1,17,End-to-End React Project & Vercel Deploy,Build one small React + Tailwind multi-page app and deploy it to Vercel via GitHub,"Mini-app feature plan; reuse components, state, fetch, and routes; AI-assisted scaffolding with human review; README and commits; GitHub to Vercel deploy","* Build a small multi-page React + Tailwind app end to end
+* Reuse prior skills — components, state, fetch, and routing
+* Review any AI-generated code before accepting it
+* Keep a clean README and meaningful commits
+* Deploy to Vercel from GitHub and verify the live URL",Industry Mentor,14/10/2026,Wednesday,2hrs
+Phase 1: Foundations,,,,,Phase I ( Foundation ) Evaluation,,,,,25/10/2026,Saturday,
+Phase 1: Foundations,,,,,,,,,,,,
+Phase 1: Foundations,Module 6: Backend Fundamentals (Python + FastAPI),9,9.2,18,Python Fundamentals for JavaScript Developers,Write basic Python using JavaScript knowledge and set up a virtual environment,Python vs JS side-by-side; int float str bool list dict; if/elif/else and loops; functions; venv create/activate; pip install basics,"* Map familiar JavaScript ideas to Python syntax
+* Write Python with variables, conditionals, loops, and functions
+* Create and activate a virtual environment
+* Install a package with pip inside the venv
+* Run a short Python script locally",Industry Mentor,16/10/2026,Friday,2hrs
+Phase 1: Foundations,Module 6: Backend Fundamentals (Python + FastAPI),10,10.1,19,FastAPI Setup & GET Endpoints,"Set up FastAPI, write GET endpoints, and test them in Swagger UI",Backend role; FastAPI app and Uvicorn; GET routes; path parameters; query parameters; Swagger UI at /docs; simple in-memory list or dict,"* Create a FastAPI app and run it with Uvicorn
+* Implement a basic GET endpoint that returns JSON
+* Use path parameters and query parameters
+* Test endpoints in Swagger UI
+* Serve data from a simple in-memory store",Industry Mentor,21/10/2026,Wednesday,2hrs
+Phase 1: Foundations,Module 6: Backend Fundamentals (Python + FastAPI),10,10.2,20,Data Validation with Pydantic,Define Pydantic models for request bodies and read validation errors,Pydantic BaseModel; type hints; required vs optional fields; default values; validation error responses; using a model as a FastAPI request body on one POST preview,"* Create a Pydantic BaseModel with typed fields
+* Mark fields as required or optional with defaults
+* Trigger and read a validation error with bad input
+* Attach a Pydantic model as a FastAPI request body
+* Explain why validation belongs at the API boundary",Industry Mentor,23/10/2026,Friday,2hrs
+Phase 1: Foundations,Module 6: Backend Fundamentals (Python + FastAPI),11,11.1,21,"FastAPI CRUD, CORS & React Integration","Complete in-memory CRUD, enable CORS, and call the API from React",POST with Pydantic body; PUT or DELETE for one update path; status codes 200/201/404; HTTPException; CORS middleware; React fetch to local FastAPI for list and create,"* Implement POST and at least one of PUT or DELETE on an in-memory resource
+* Return appropriate status codes and clear error messages
+* Enable CORS for a local React client
+* Call list and create endpoints from React with fetch
+* Trace one full create flow from UI to API response",Industry Mentor,28/10/2026,Wednesday,2hrs
+Phase 2: Core Expertise,Module 7: Database Fundamentals,11,11.2,22,PostgreSQL & Neon Setup,Set up PostgreSQL on Neon and create a first table,Why databases beat in-memory data; tables rows and columns; Neon project setup; CREATE TABLE; common column types; primary key,"* Explain why apps need a persistent database
+* Create a Neon PostgreSQL project
+* Create a table with appropriate column types
+* Define a primary key
+* Inspect the table in the Neon console",Industry Mentor,30/10/2026,Friday,2hrs
+Phase 2: Core Expertise,Module 6: Backend Fundamentals (Python + FastAPI),11,HO2,HO2,Hands-on: FastAPI CRUD Lab,Practise FastAPI GET/POST with Pydantic and Swagger testing,GET and POST endpoints; Pydantic request body; Swagger UI; status codes; common request mistakes,"* Implement or extend GET and POST endpoints
+* Validate a request body with Pydantic
+* Test routes in Swagger UI
+* Return correct status codes for success and not-found
+* Debug one common FastAPI request mistake",TA,31/10/2026,Saturday,1.5hrs
+Phase 2: Core Expertise,Module 7: Database Fundamentals,12,12.1,23,SQL Queries & Joins,Write SQL CRUD queries and one INNER JOIN across two related tables,SELECT INSERT UPDATE DELETE; WHERE; ORDER BY; foreign key idea; INNER JOIN on a simple two-table example,"* Write SELECT, INSERT, UPDATE, and DELETE statements
+* Filter and sort with WHERE and ORDER BY
+* Explain a foreign key relationship between two tables
+* Write one INNER JOIN for a two-table query
+* Practise the queries on sample Neon data",Industry Mentor,04/11/2026,Wednesday,2hrs
+Phase 2: Core Expertise,Module 7: Database Fundamentals,12,12.2,24,"ORM, Neon Connection & Schema Design",Connect FastAPI to Neon with one SQLAlchemy model and run one ORM read,ORM idea vs raw SQL; SQLAlchemy model for one table; database URL to Neon; session basics; simple schema sketch; one GET via ORM,"* Explain why an ORM helps backend development
+* Define a SQLAlchemy model for one table
+* Connect FastAPI to Neon with a database URL
+* Sketch a simple schema for a sample app
+* Run one ORM read through a FastAPI GET route",Industry Mentor,06/11/2026,Friday,2hrs
+Phase 2: Core Expertise,Module 7: Database Fundamentals,13,13.1,25,Simple Backend CRUD with Database,"Replace in-memory storage with PostgreSQL-backed CREATE and READ, plus one update or delete",ORM session in routes; persistent CREATE and READ; one UPDATE or DELETE; verify persistence after restart; test in Swagger,"* Wire FastAPI routes to ORM sessions
+* Implement persistent CREATE and READ endpoints
+* Add one UPDATE or DELETE against the database
+* Verify data remains after server restart
+* Test the flow in Swagger UI",Industry Mentor,11/11/2026,Wednesday,2hrs
+Phase 2: Core Expertise,Module 8: Testing & Code-Review Hygiene,13,13.2,26,Pytest Fundamentals,Write and run basic Pytest checks for FastAPI endpoints,Why tests matter; test pyramid in plain words; Pytest setup; test one GET; test one POST; reading pass/fail output,"* Explain why automated tests matter at a beginner level
+* Describe the test pyramid in plain words
+* Write a Pytest for one GET endpoint
+* Write a Pytest for one POST endpoint
+* Run tests locally and interpret the result",Industry Mentor,13/11/2026,Friday,2hrs
+Phase 2: Core Expertise,Module 8: Testing & Code-Review Hygiene,12,HO3,HO3,Hands-on: Simple Full-Stack CRUD App,Build a simple React CRUD UI wired to matching FastAPI CRUD routes and the same resource schema on the backend,Shared FE/BE schema; FastAPI CRUD routes; React list/create/edit/delete; fetch to backend; end-to-end CRUD for one resource,Define one schema → matching FastAPI CRUD → React CRUD screens → wire fetch → verify FE/BE stay in sync,TA,14/11/2026,Saturday,1.5hrs
+Phase 2: Core Expertise,Module 9: Deployment & Operations,14,14.1,27,Docker Basics & Containerization,Write a Dockerfile for FastAPI and run the container locally,What Docker solves; Dockerfile for FastAPI; build image; run container; smoke-test the API on localhost,"* Explain what problem containers solve
+* Write a simple Dockerfile for a FastAPI app
+* Build a Docker image
+* Run the container locally
+* Smoke-test the containerised API",Industry Mentor,18/11/2026,Wednesday,2hrs
+Phase 2: Core Expertise,Module 9: Deployment & Operations,14,14.2,28,GitHub Actions CI/CD & Cloud Deploy,Add a push-triggered GitHub Actions workflow and deploy to Render or Railway,CI/CD idea; GitHub Actions workflow on push; deploy FastAPI to Render or Railway; environment variables basics; verify live URL,"* Explain CI/CD as push → check → deploy
+* Write a simple GitHub Actions workflow on push
+* Deploy the backend to Render or Railway
+* Configure basic environment variables
+* Verify the live URL responds",Industry Mentor,20/11/2026,Friday,2hrs
+Phase 2: Core Expertise,Module 9: Deployment & Operations,14,MC4,MC4,Masterclass: AWS Deployment,Introduce AWS Free Tier deployment concepts beyond Render or Railway,AWS at a high level; Free Tier; container deploy outline; env vars and secrets; PaaS vs AWS tradeoffs for beginners,"* Explain AWS at a beginner high level
+* Outline deploying a containerised backend on AWS
+* Manage environment variables and secrets safely
+* Compare Render/Railway with AWS for early projects
+* Apply a short production deploy checklist",Industry Mentor/ Professor,21/11/2026,Saturday,2hrs
+Phase 3: Industry Specialization,Module 10: Software 3.0 Essentials,15,15.1,29,Intro to AI & Prompt Engineering,Understand LLM basics and write clear system and user prompts,What an LLM is; tokens and context window in plain words; system vs user messages; clear instructions; zero-shot and few-shot examples,"* Explain what an LLM is at a builder level
+* Describe tokens and context window simply
+* Write a system prompt and a user message
+* Apply zero-shot and few-shot prompting on a sample task
+* Improve a weak prompt into a clearer one",Industry Mentor,25/11/2026,Wednesday,2hrs
+Phase 3: Industry Specialization,Module 10: Software 3.0 Essentials,15,15.2,30,LLM API Integration (Python + React),Call an LLM API from FastAPI and consume it from React,API key setup for OpenAI or Claude; one chat completion from Python; FastAPI endpoint wrapping the call; React fetch to that endpoint; keep secrets off the frontend,"* Call an LLM chat API from Python with authentication
+* Expose the call behind one FastAPI endpoint
+* Call that endpoint from React and show the result
+* Handle a basic API error in the UI
+* Keep prompts and secrets out of the frontend",Industry Mentor,27/11/2026,Friday,2hrs
+Phase 3: Industry Specialization,Module 11: Industry Readiness Spotlight,16,16.1,31,Spec-Driven Product Building,Choose vibe coding vs spec-first and write a short product spec,Vibe coding vs spec-driven development; user stories; acceptance criteria; simple data-model sketch,"* Explain when to prototype fast vs when to specify first
+* Write user stories for one small feature
+* Define acceptance criteria that make done clear
+* Sketch a simple data model
+* Turn a rough idea into a short implementable spec",Industry Mentor,02/12/2026,Wednesday,2hrs
+Phase 3: Industry Specialization,Module 11: Industry Readiness Spotlight,16,16.2,32,Human-AI Workflows & Portfolio Readiness,Apply a verification loop on AI help and polish a portfolio-ready repo,Human verification loops; catching AI mistakes; README; commit hygiene; live deployment URL for hiring conversations,"* Review AI output at each step before moving on
+* Catch and fix at least one AI mistake in a short exercise
+* Polish README and commit history
+* Confirm a live deployment URL works
+* Package the project for a hiring conversation",Industry Mentor,04/12/2026,Friday,2hrs
+Phase 3: Industry Specialization,Module 11: Industry Readiness Spotlight,16,MC5,MC5,Masterclass: RAG Pipeline,Explain why RAG exists and outline a minimal retrieval-augmented flow after LLM basics,LLM knowledge limits; RAG idea; embeddings intuition; vector store idea; load → embed → retrieve → prompt → answer; basic retrieval quality check,"* Explain why RAG is needed when LLMs lack fresh or private context
+* Describe embeddings in plain words
+* Explain what a vector store is used for
+* Outline a minimal RAG pipeline end to end
+* Discuss one basic retrieval quality check at a high level",Professor,05/12/2026,Saturday,2hrs
+Phase 3: Industry Specialization,,,,,,,,,,,,
+Phase 3: Industry Specialization,Module 12: Capstone Project,17,17.1,C1,Capstone Session 1: Frontend–Backend Build,Build core React pages and FastAPI endpoints for the chosen capstone brief,Brief selection; core frontend pages; core backend endpoints; local wiring for main screens; mentor checkpoint,"* Select a capstone brief from the shortlist
+* Build core React pages for the product
+* Implement core FastAPI endpoints for those pages
+* Wire local FE–BE calls for the main screens
+* Complete the build checkpoint with mentor review",Industry Mentor,09/12/2026,Wednesday,2hrs
+Phase 3: Industry Specialization,Module 12: Capstone Project,17,17.2,C2,Capstone Session 2: Integration & Deployment,"Finish end-to-end flows, deploy publicly, and prepare the portfolio submission",End-to-end user flows; public deployment; README and repo hygiene; short demo; quality gate,"* Complete end-to-end user flows across frontend and backend
+* Deploy the product to a public URL
+* Finalise README and repository hygiene
+* Prepare a short product demo
+* Meet the mandatory submission quality gate",Industry Mentor,11/12/2026,Friday,2hrs
+,,,,,Capstone Support Session 1 (TBD),,,,TA,12/12/2026,Saturday,
+,,,,,Capstone Support Session 2 (TBD),,,,TA,16/12/2026,Wednesday,
+,,,,,Capstone Support Session 3 (TBD),,,,TA,19/12/2026,Saturday,
+,,,,,Capstone Support Session 4 (TBD),,,,TA,23/12/2026,Wednesday,
+,,,,,,,,,,,,
+,,,,,Phase II ( Core Expertise ) Evaluation,,,,,13/12/2026,Saturday,
+,,,,,,,,,,,,
+,,,,,End of programme — offline exam,,,,,,,
