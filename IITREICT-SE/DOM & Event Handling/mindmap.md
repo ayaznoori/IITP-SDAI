@@ -1,0 +1,37 @@
+```mermaid
+flowchart TB
+    subgraph foundation ["Foundation"]
+        P1["<b>Previous Module</b><br/>Module 2: Web Fundamentals<br/><i>[HTML · CSS]</i><br/>Structure and style"]
+        P2["<b>Previous Module</b><br/>Module 2: Web Fundamentals<br/><i>[JavaScript]</i><br/>Syntax · async timers"]
+        CM["<b>Current Module Until Previous Session</b><br/>Module 2: Web Fundamentals<br/><i>[JS runtime · async]</i><br/>Page can wait without freezing"]
+    end
+    subgraph current ["Current Session"]
+        CS["<b>Current Session</b><br/>DOM and Event Handling<br/><i>Mental shift:</i> <b>scripts in console</b> → <b>live page verbs</b><br/>select · update · click/input/submit"]
+    end
+    subgraph value ["Course & Real-Life Value"]
+        CV["<b>Course Value</b><br/>Connects HTML/CSS/JS into one app"]
+        RL["<b>Real-Life Use</b><br/>Search boxes · login forms · Add to cart"]
+    end
+    subgraph future ["Upcoming Modules"]
+        U1["<b>Upcoming Module</b><br/>Module 2: Web Fundamentals<br/><i>[Advanced DOM · Fetch]</i><br/>Lists from data"]
+        U2["<b>Upcoming Module</b><br/>Module 3: FastAPI<br/><i>[Forms · JSON]</i><br/>Submit becomes API later"]
+        U3["<b>Upcoming Module</b><br/>Module 4: LLM APIs<br/><i>[Chat UI]</i><br/>Input events to prompts"]
+    end
+    P1 ==>|&nbsp;Foundation&nbsp;| P2
+    P2 ==>|&nbsp;Components&nbsp;| CM
+    CM ==>|&nbsp;Builds on&nbsp;| CS
+    CS ==>|&nbsp;Course Path&nbsp;| CV
+    CS ==>|&nbsp;Real-Life Use&nbsp;| RL
+    CS ==>|&nbsp;Next Module&nbsp;| U1
+    U1 -.-> U2
+    U2 -.-> U3
+    classDef previous fill:#E8F4FD,stroke:#4A90D9,stroke-width:2px,color:#1a1a1a
+    classDef current fill:#FFF3CD,stroke:#E6A817,stroke-width:3px,color:#1a1a1a
+    classDef value fill:#D4EDDA,stroke:#28A745,stroke-width:2px,color:#1a1a1a
+    classDef future fill:#F3E8FF,stroke:#9B59B6,stroke-width:2px,color:#1a1a1a
+    class P1,P2,CM previous
+    class CS current
+    class CV,RL value
+    class U1,U2,U3 future
+    linkStyle default stroke-width:3px
+```
